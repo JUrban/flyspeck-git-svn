@@ -18,7 +18,7 @@ of the Kepler Conjecture.  This page gives some basic facts about this project.
 
 
 The name `flyspeck' comes from matching the pattern {{{/f.*p.*k/}}}
-against a English dictionary.   FPK in turn is an acronym for "The Formal Proof
+against an English dictionary.   FPK in turn is an acronym for "The Formal Proof
 of Kepler."  The term `flyspeck' can mean to
 _examine closely or
 in minute detail; or to scrutinize_
@@ -135,19 +135,14 @@ This is the way of formal proof.
 ==*What is Objective CAML?*==
 
 
-CAML light is a functional programming language in the ML family.
-Tutorials on CAML can be found at the bottom of this page.
-The Objective CAML language was selected for this project
-because HOL light is written in this
-language.
+CAML light is a functional programming language in the ML family. Tutorials on CAML can be found at the bottom of this page. The Objective CAML language was selected for this project because HOL light is written in this language.
 
 
 ==* What is HOL light?*==
 
 
 HOL light is a computer program that produces carefully checked mathematical
-theorems.
-HOL light is John Harrison's reimplementation of HOL in the Objective CAML language. HOL light was selected for the project because
+theorems. HOL light is John Harrison's reimplementation of HOL in the Objective CAML language. HOL light was selected for the project because
 
   * The system is built on a small kernel, and the type
         checking insures that no fatal bugs can occur outside the
@@ -218,8 +213,7 @@ Mathematica.
 == *What is the goal of the flyspeck project?* ==
 
 
-The purpose of the flyspeck project is to produce a value of type `theorem`
-in HOL light that expresses the statement 'The Kepler Conjecture is true.'
+The purpose of the flyspeck project is to produce a value of type `theorem` in HOL light that expresses the statement 'The Kepler Conjecture is true.'
 
 
 == *How large a project is the flyspeck project?*==
@@ -230,26 +224,11 @@ The project may take as many as 20 work-years to complete.
 
 ==*How far along is the project?  Here are some recent developments. (Updated October 2005)*==
 
-  * [http://www.cl.cam.ac.uk/users/jrh/  John Harrison]
-has released [http://www.cl.cam.ac.uk/users/jrh/hol-light/index.html version 2.0]  of HOL Light.  
-It contains
-many significant improvements over the previous version, including
-analysis in Euclidean spaces, and improved handling of the elementary theory
-of the real numbers.
+  * [http://www.cl.cam.ac.uk/users/jrh/  John Harrison] has released [http://www.cl.cam.ac.uk/users/jrh/hol-light/index.html version 2.0]  of HOL Light.  It contains many significant improvements over the previous version, including analysis in Euclidean spaces, and improved handling of the elementary theory of the real numbers.
 
-  * [http://www4.in.tum.de/~bauerg/ Gertrud Bauer's] thesis gives a HOL
-formalization of Hales's java programs for generating tame plane graphs and partially 
-  * [http://www.dagstuhl.de/files/Materials/05/05021/05021.NipkowTobias.Paper.pdf verifies] them.
-She has used the [http://isabelle.in.tum.de Isabelle] theorem proving
-system for this work.
+  * [http://www4.in.tum.de/~bauerg/ Gertrud Bauer's] thesis gives a HOL formalization of Hales's java programs for generating tame plane graphs and partially [http://www.dagstuhl.de/files/Materials/05/05021/05021.NipkowTobias.Paper.pdf verifies] them. She has used the [http://isabelle.in.tum.de Isabelle] theorem proving system for this work.
 
-  * [http://www4.informatik.tu-muenchen.de/~nipkow/ Tobias Nipkow]
-spent the fall semester 2005 at the University of Pittsburgh
-with Tom Hales.  On December 19, 2005, building on the work in Gertrud Bauer's thesis, Nipkow [http://www.in.tum.de/~nipkow/pubs/Flyspeck/ verified the
-enumeration of all tame plane
-graphs.]  
-This completes the formal verification of a major part of the Kepler
-Conjecture.
+  * [http://www4.informatik.tu-muenchen.de/~nipkow/ Tobias Nipkow] spent the fall semester 2005 at the University of Pittsburgh with Tom Hales.  On December 19, 2005, building on the work in Gertrud Bauer's thesis, Nipkow [http://www.in.tum.de/~nipkow/pubs/Flyspeck/ verified the enumeration of all tame plane graphs.]   This completes the formal verification of a major part of the Kepler Conjecture.
 
 
   * [http://www.lix.polytechnique.fr/~zumkeller/ Roland Zumkeller]
@@ -263,30 +242,16 @@ is able to give [http://www4.in.tum.de/~obua/tphol2005_lp.pdf formal verificatio
   * [http://www.math.pitt.edu/~thales/ Tom Hales] has produced a formal proof of the Jordan Curve theorem in HOL Light (included in version 2.0 of HOL Light),
 which is one step of the proof of the Kepler conjecture.
 
-  * As participation in the flyspeck project grows, other formal
-theorem proving systems have been added ([http://coq.inria.fr/ Coq], [http://isabelle.in.tum.de Isabelle]).  
-The eventual aim will be to
-get the different systems to communicate meaningfully, and bring the project
-to a unified conclusion.
-
-
+  * As participation in the flyspeck project grows, other formal theorem proving systems have been added ([http://coq.inria.fr/ Coq], [http://isabelle.in.tum.de Isabelle]).  The eventual aim will be to get the different systems to communicate meaningfully, and bring the project to a unified conclusion.
 
 
 ==*Should I get involved*==
 
-This is an undertaking of that has the potential to develop into
-one of historical proportions.  It is not the
-sort of project that can be completed by a single individual.  Instead
-it will require the collective efforts of a large and dedicated team over
-a long period.  We are actively recruiting collaborators and team members.
+This is an undertaking of that has the potential to develop into one of historical proportions.  It is not the sort of project that can be completed by a single individual.  Instead it will require the collective efforts of a large and dedicated team over a long period.  We are actively recruiting collaborators and team members.
 
-We are looking for mathematicians (from the advanced undergraduate level
-up) who are computer literate, and who are interested in transforming
-the way that mathematics is done.
+We are looking for mathematicians (from the advanced undergraduate level up) who are computer literate, and who are interested in transforming the way that mathematics is done.
 
-Are you excited about the QED manifesto?  Are you interested in applying
-the manifesto to a problem of great historical significance?  Please
-become involved!  We need your help.
+Are you excited about the QED manifesto?  Are you interested in applying the manifesto to a problem of great historical significance?  Please become involved!  We need your help.
 
 
 ==*How do I get involved?*==
