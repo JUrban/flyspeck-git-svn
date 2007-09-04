@@ -96,7 +96,7 @@ that was devoted to understanding the proof.
 A panel of 12 referees was assigned to the task of verifying the correctness
 of the proof.
 
-After four full years, Gabor Fejes T&oacute;th,
+After four full years, Gabor Fejes Toth,
 the chief referee, returned a report
 stating that he was 99% certain of the correctness of the proof, but
 that the team had been unable to completely certify the proof.
@@ -115,42 +115,20 @@ proof, and each time they found that what you claimed was
 in fact correct.  Some of these local checks were highly
 non-obvious at first, and required weeks to see that they
 worked out.  The fact that some of these worked out is the
-basis for the 99% statement of Fejes T&oacute;th that you cite.
+basis for the 99% statement of Fejes Toth that you cite.
 One can speculate whether their process would have
 converged to a definite answer had they had a more clear
 manuscript from the beginning, but this doesn't matter now.</I>
 
 
-    ``Fejes T&oacute;th thinks that this situation will occur more and
-more often in mathematics.  He says it is similar to the
-situation in experimental science - other scientists acting
-as referees can't certify the correctness of an experiment,
-they can only subject the paper to consistency checks.  He
-thinks that the mathematical community will have to get
-used to this state of affairs.</i>
+    ``Fejes Toth thinks that this situation will occur more and more often in mathematics.  He says it is similar to the situation in experimental science - other scientists acting as referees can't certify the correctness of an experiment, they can only subject the paper to consistency checks.  He thinks that the mathematical community will have to get
+used to this state of affairs.
     
-   ``You may ask whether this degree of certification is enough
-checking for a mathematical paper, and whether it's not in
-fact comparable to the level of checking for most
-mathematical papers.  Both the referees and the Editors
-think that it's not enough for complete certification as
-correct, for two reasons.  First, rigor and certainty was
-what this particular problem was about in the first place.
-Second, there are not so many general principles and
-theoretical consistencies as there were, say, in the proof
-of Fermat, so as to make you convinced that even if there
-is a small error, it won't affect the basic structure of
-the proof.''
+   ``You may ask whether this degree of certification is enough checking for a mathematical paper, and whether it's not in fact comparable to the level of checking for most mathematical papers.  Both the referees and the Editors think that it's not enough for complete certification as correct, for two reasons.  First, rigor and certainty was what this particular problem was about in the first place. Second, there are not so many general principles and theoretical consistencies as there were, say, in the proof of Fermat, so as to make you convinced that even if there is a small error, it won't affect the basic structure of the proof.''
 
+The Annals is confident enough in the correctness that they will publish a paper on the proof.  However, this paper has brought about a change in the journal's policy on computer proof.  It will no longer attempt to check the correctness of computer code.
 
-
-The Annals is confident enough in the correctness that they
-will publish a paper on the proof.  However, this paper has brought about a change in
-the journal's policy on computer proof.  It will no longer attempt to check the
-correctness of computer code.
-
-There is a way to proceed that more fully
-preserves the integrity of mathematics.
+There is a way to proceed that more fully preserves the integrity of mathematics.
 This is the way of formal proof.
 
 
@@ -244,7 +222,7 @@ The purpose of the flyspeck project is to produce a value of type `theorem`
 in HOL light that expresses the statement 'The Kepler Conjecture is true.'
 
 
-== *How large a project is the flyspeck project?</b>
+== *How large a project is the flyspeck project?*==
 
 
 The project may take as many as 20 work-years to complete.
@@ -263,7 +241,7 @@ of the real numbers.
 formalization of Hales's java programs for generating tame plane graphs and partially 
   * [http://www.dagstuhl.de/files/Materials/05/05021/05021.NipkowTobias.Paper.pdf verifies] them.
 She has used the [http://isabelle.in.tum.de Isabelle] theorem proving
-system for this work.</li>
+system for this work.
 
   * [http://www4.informatik.tu-muenchen.de/~nipkow/ Tobias Nipkow]
 spent the fall semester 2005 at the University of Pittsburgh
@@ -349,7 +327,7 @@ if you wish to participate.
   * [http://www.math.pitt.edu/~thales/flyspeck/caml2.pdf A Quick Guide to CAML]
   * [http://caml.inria.fr/FAQ/exemples-eng.html  100 Lines of Caml]
   * There are a number of good resources in French, such as the books
-    "Le langage Caml" and "Manual de r&eacute;f&eacute;rence du langage Caml" by X. Leroy and P. Weis
+    "Le langage Caml" and "Manual de reference du langage Caml" by X. Leroy and P. Weis
 
 
 
@@ -380,18 +358,12 @@ if you wish to participate.
 
 The first two books are intended for undergraduates.
 
-  * Euclidean and non-euclidean geometry: an analytic approach, by Patrick Ryan<br>
-   This is an undergraduate level textbook that gives useful background in spherical trigonometry
-  * Euclidean Geometry and Convexity, by Russell Benson<br>
-   An undergraduate level treatment length, plane area, surface area, volume, and convex bodies.
-  * Algorithmic Geometry, by J-D Boissonat and M. Yvinec<br>
-    This book gives algorithms for finding convex hulls, linear programming, triangulations, Voronoi diagrams, Delaunay triangulations
-  * Computational Geometry: algorithms and applications, by M. de Berg et al.<br>
-    This book covers 
-     convex hulls, line segment intersections, polygon triangulations, linear programming, Voronoi diagrams, Delauany triangulations, binary space partitions
-  * Lagerungen in der Ebene, auf der Kugel, und im Raum, by L. Fejes T&oacute;th<br>
-    Ignore my other recommendations, and study this book before all others.
-</ul>
+  * Euclidean and non-euclidean geometry: an analytic approach, by Patrick Ryan. This is an undergraduate level textbook that gives useful background in spherical trigonometry
+  * Euclidean Geometry and Convexity, by Russell Benson. An undergraduate level treatment length, plane area, surface area, volume, and convex bodies.
+  * Algorithmic Geometry, by J-D Boissonat and M. Yvinec. This book gives algorithms for finding convex hulls, linear programming, triangulations, Voronoi diagrams, Delaunay triangulations
+  * Computational Geometry: algorithms and applications, by M. de Berg et al. This book covers convex hulls, line segment intersections, polygon triangulations, linear programming, Voronoi diagrams, Delauany triangulations, binary space partitions.
+  * Lagerungen in der Ebene, auf der Kugel, und im Raum, by L. Fejes Toth  Ignore my other recommendations, and study this book before all others.
+
 
     
 ==*Popular Material On Flyspeck*==
