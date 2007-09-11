@@ -2,5 +2,5 @@
 
 = September 2007 =
 
- * 10/09/07         Posted a new version of "blueprint" to [http://www.math.pitt.edu/~thales/kepler2007/ thales]
+ * 10/09/07         Posted a new version of "blueprint" to [http://www.math.pitt.edu/~thales/kepler2007/index.html thales]
  * 11/09/07 am.  Extracted Tarski content from the "blueprint" chapter on volumes.
