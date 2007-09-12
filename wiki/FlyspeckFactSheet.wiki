@@ -109,7 +109,8 @@ Robert MacPherson, editor of the Annals, wrote a report that states
 He continues with comments to Hales that may well mark a profound change in the
 way that mathematics is done:
 
-     ``The referees put a level of energy into this that is, in my experience, unprecedented.  They ran a seminar on it for a long time.  A number of people were involved, and they
+     ``The referees put a level of energy into this that is, in my experience, unprecedented.  
+They ran a seminar on it for a long time.  A number of people were involved, and they
 worked hard.  They checked many local statements in the
 proof, and each time they found that what you claimed was
 in fact correct.  Some of these local checks were highly
@@ -118,7 +119,7 @@ worked out.  The fact that some of these worked out is the
 basis for the 99% statement of Fejes Toth that you cite.
 One can speculate whether their process would have
 converged to a definite answer had they had a more clear
-manuscript from the beginning, but this doesn't matter now.</I>
+manuscript from the beginning, but this doesn't matter now.
 
 
     ``Fejes Toth thinks that this situation will occur more and more often in mathematics.  He says it is similar to the situation in experimental science - other scientists acting as referees can't certify the correctness of an experiment, they can only subject the paper to consistency checks.  He thinks that the mathematical community will have to get
