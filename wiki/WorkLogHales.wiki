@@ -5,3 +5,6 @@
  * 10/09/07:    Posted a new version of "blueprint" to [http://www.math.pitt.edu/~thales/kepler07/index.html thales]
  * 11/09/07:    Extracted Tarski content from the "blueprint" chapter on volumes.  Fixed broken links in that chapter.
  * 12/09/07:    Fixed known bugs in kep_inequalities.ml.  Started to type corrections to blueprint chapter on hypermap and geometry. 
+ * 13/09/07:    Prepared Flyspeck lecture for Hanoi math institute colloquium on Fri Sept 14.
+ * 14/09/07:    Hanoi Flyspeck colloquium.  Made definitions_kepler.ml compatible with HOL-Light 2.2.
+ 
