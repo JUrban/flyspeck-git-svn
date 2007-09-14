@@ -224,11 +224,9 @@ The project may take as many as 20 work-years to complete.
   * [http://www4.informatik.tu-muenchen.de/~nipkow/ Tobias Nipkow] spent the fall semester 2005 at the University of Pittsburgh with Tom Hales.  On December 19, 2005, building on the work in Gertrud Bauer's thesis, Nipkow [http://www.in.tum.de/~nipkow/pubs/Flyspeck/ verified the enumeration of all tame plane graphs.]   This completes the formal verification of a major part of the Kepler Conjecture.
 
 
-  * [http://www.lix.polytechnique.fr/~zumkeller/ Roland Zumkeller] is working on the formal proof of [http://www.lix.polytechnique.fr/~zumkeller/flyspeck/ nonlinear inequalities] that
-are found in the proof of the Kepler conjecture.
+  * [http://www.lix.polytechnique.fr/~zumkeller/ Roland Zumkeller] is working on the formal proof of [http://www.lix.polytechnique.fr/~zumkeller/flyspeck/ nonlinear inequalities] that are found in the proof of the Kepler conjecture.
 
-  * [http://www4.in.tum.de/~obua/ Steven Obua]  has integrated linear programming with Isabelle/HOL so that he
-is able to give [http://www4.in.tum.de/~obua/tphol2005_lp.pdf formal verification of linear programming bounds.]
+  * [http://www4.in.tum.de/~obua/ Steven Obua]  has integrated linear programming with Isabelle/HOL so that he is able to give [http://www4.in.tum.de/~obua/tphol2005_lp.pdf formal verification of linear programming bounds.]
 
   * [http://www.math.pitt.edu/~thales/ Tom Hales] has produced a formal proof of the Jordan Curve theorem in HOL Light (included in version 2.0 of HOL Light), which is one step of the proof of the Kepler conjecture.
 
@@ -299,6 +297,7 @@ if you wish to participate.
 ==*The Kepler Conjecture*==
 
   * [http://www.ams.org/notices/200004/fea-hales.pdf  "Cannonballs and Honeycombs"] An introduction for a general mathematical audience to the ideas of the proof of the Kepler Conjecture.
+  * The tex files for the most recent version of the proof can be found under the _source_ tab of this project.
   * [http://xxx.lanl.gov/abs/math.MG/9811071 A historical overview] of the Kepler Conjecture, tracing the problem to a pamphlet published by Kepler in 1611.
   * [http://xxx.lanl.gov/abs/math.MG/9811078 The mathematical text of the proof.]
   * Google search for [http://www.google.com/search?sourceid=navclient&amp;q=Hales+Kepler web material] about Hales's 1998 proof.
@@ -318,12 +317,13 @@ The first two books are intended for undergraduates.
 
     
 ==*Popular Material On Flyspeck*==
-  * [proof.txt Proof and Beauty]  (Economist)
-  * [What_in_the_name_of_Euclid.pdf What in the Name of Euclid is Going On Here?]  (Science)
+  * [http://www.math.pitt.edu/~thales/mirror/proof.txt Proof and Beauty]  (Economist)
+  * [http://www.math.pitt.edu/~thales/mirror/What_in_the_name_of_Euclid.pdf What in the Name of Euclid is Going On Here?]  (Science)
   * [http://www.nature.com/cgi-taf/DynaPage.taf?file=/nature/journal/v424/n6944/full/424012a_fs.html Mathematics: Does the Proof Stack up (Nature 3 July 2003)]
   * [http://www.nzz.ch/2003/02/16/ft/page-article8N4JZ.html Twenty Years for the Proof of a Proof (in German)]
-  * [20_Jahre_EN_final.txt English translation of "Twenty Years"] (thanks to Sven Guckes for the translation)
-  * [science_magazine_1513a.pdf Stacking Up the Evidence (Science 7 March 2003)]
+  * [http://www.math.pitt.edu/~thales/mirror/20_Jahre_EN_final.txt English translation of "Twenty Years"] (thanks to Sven Guckes for the translation)
+  * [http://www.math.pitt.edu/~thales/mirror/science_magazine_1513a.pdf Stacking Up the Evidence (Science 7 March 2003)]
+ 
  
  
  
