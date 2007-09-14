@@ -217,9 +217,9 @@ The project may take as many as 20 work-years to complete.
 
 ==*How far along is the project?  Here are some recent developments. (Updated October 2005)*==
 
-  * [http://www.cl.cam.ac.uk/users/jrh/  John Harrison] has released [http://www.cl.cam.ac.uk/users/jrh/hol-light/index.html version 2.0]  of HOL Light.  It contains many significant improvements over the previous version, including analysis in Euclidean spaces, and improved handling of the elementary theory of the real numbers.
+  * [http://www.cl.cam.ac.uk/users/jrh/  John Harrison] has released [http://www.cl.cam.ac.uk/users/jrh/hol-light/index.html version 2.2]  of HOL Light.  It contains many significant improvements over the previous version, including analysis in Euclidean spaces, and improved handling of the elementary theory of the real numbers.
 
-  * [http://www4.in.tum.de/~bauerg/ Gertrud Bauer's] thesis gives a HOL formalization of Hales's java programs for generating tame plane graphs and partially [http://www.dagstuhl.de/files/Materials/05/05021/05021.NipkowTobias.Paper.pdf verifies] them. She has used the [http://isabelle.in.tum.de Isabelle] theorem proving system for this work.
+  * Gertrud Bauer's thesis gives a HOL formalization of Hales's java programs for generating tame plane graphs and partially [http://www.dagstuhl.de/files/Materials/05/05021/05021.NipkowTobias.Paper.pdf verifies] them. She has used the [http://isabelle.in.tum.de Isabelle] theorem proving system for this work.
 
   * [http://www4.informatik.tu-muenchen.de/~nipkow/ Tobias Nipkow] spent the fall semester 2005 at the University of Pittsburgh with Tom Hales.  On December 19, 2005, building on the work in Gertrud Bauer's thesis, Nipkow [http://www.in.tum.de/~nipkow/pubs/Flyspeck/ verified the enumeration of all tame plane graphs.]   This completes the formal verification of a major part of the Kepler Conjecture.
 
@@ -327,4 +327,5 @@ The first two books are intended for undergraduates.
   * [http://www.nzz.ch/2003/02/16/ft/page-article8N4JZ.html Twenty Years for the Proof of a Proof (in German)]
   * [20_Jahre_EN_final.txt English translation of "Twenty Years"] (thanks to Sven Guckes for the translation)
   * [science_magazine_1513a.pdf Stacking Up the Evidence (Science 7 March 2003)]
+ 
  
