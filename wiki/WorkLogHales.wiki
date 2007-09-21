@@ -7,4 +7,6 @@
  * 12/09/07:    Fixed known bugs in kep_inequalities.ml.  Started to type corrections to blueprint chapter on hypermap and geometry. 
  * 13/09/07:    Prepared Flyspeck lecture for Hanoi math institute colloquium on Fri Sept 14.
  * 14/09/07:    Hanoi Flyspeck colloquium.  Made definitions_kepler.ml compatible with HOL-Light 2.2.
+ * 21/09/07:    For the past few days, I started to rework the "assembly" proofs in terms of rooted directed trees.  This should make the formalization of these proofs much easier to carry out.  I expect a huge savings here.
+ 
  
