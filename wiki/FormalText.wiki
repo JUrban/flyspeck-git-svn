@@ -1,0 +1,168 @@
+=Introduction=
+
+
+=The Text=
+
+The purpose of this note is to give an outline of how the formal
+proof of the written text may proceed.
+
+Several revisions of the text have now been made.  A version, prepared especially with
+the Flyspeck project in mind, is under continual revision, viewable as [http://flyspeck.googlecode.com/svn/trunk/kepler_tex/ google code] or
+[http://code.google.com/p/flyspeck/source/browse svn]
+The main file is called flypaper.
+
+The proof has been expanded to about 450 pages of text, divided
+into four parts.  
+
+||   I. Foundational Material  ||   ||  ||
+||    || Trigonometry  ||  20 ||
+||    || Volume  ||  26 ||
+||    || Hypermap  ||  25 ||
+||    || Fan  ||  28  ||
+||   II. Proof of the Kepler Conjecture  ||  ||  ||
+||    || Top-Level Structure  ||  20 ||
+||    || Geometric Detail  ||  26  ||
+||    || Assembly  ||  22 ||
+||    || Tame Hypermap  ||  26  ||
+||   III. Linear Program  ||   ||  42  ||
+||   IV. Computations ||  ||  ||
+||    || Interval Arithmetic || 2 ||
+||    || Dimension Reduction || 8 ||
+||    || Assembly List ||  46 ||
+||    || Elementary Theory of the Reals ||  160 ||
+
+
+==Foundational Material==
+
+The proof is now entirely self-contained,
+
+It is not necessary to know anything about sphere packings
+or the Kepler conjecture to read the foundational chapters.
+
+The chapter on trigonometry is really just trig, with familiar formulas such
+as
+  {{{
+  cos^2 x + sin^2 x = 1.
+  }}}
+However, the chapter progresses quickly beyond this point and includes
+identities such as Euler's formula for the sum of the dihedral angles
+of a spherical triangle.
+
+The chapter on volume covers material from a basic undergraduate course
+in multivariate calculus.   It gives the volume of a ball of radius _r_,
+the volume of a tetrahedron, and the volume of a cone.  It also contains
+volume formulas for more exotic shapes that will later play a role in the
+proof.  Again, it is not necessary to understand anything about sphere packings
+in this chapter, although the purpose of the exotic shapes that arise here
+does not become evident until later in the book.
+
+The chapter on hypermap treats the combinatorial properties of planar graphs.  (A planar hypermap may be viewed as a purely combinatorial description of a planar graph.)  The final foundational chapter treat fans.  In this chapter topology enters the book for the first time in a noticeable way, with
+issues of the connected components of various open subsets of three-dimensional
+Euclidean space.
+
+
+==The Proof Proper==
+
+The second part contains the proof proper with a chapter on the top-level structure of the proof, additional geometric detail, and the assembly of local estimates into bounds.
+
+
+=Formalization=
+
+Although important progress has been made on the formal proof of
+the computer code, the formal proof of the text has not yet begun.
+The most important reason for delay was that the DCG text is not in
+a form suited to formal proof.  Now that the many sections of the
+flypaper are complete, the formal work can begin.
+
+My hope is that several can work independently on the formal proof of the
+text.  This section shows how these efforts are to be coordinated.
+
+==Logical Order==
+
+The logical order of the chapters is not the same as the order presented in
+the text.  Here is the logical order.
+
+
+  ** Interval Arithmetic (together with the definitions on which they depend)
+  ** Elementary Theory of the Reals
+  ** Trigonometry
+  ** Volume
+  ** Hypermap
+  ** Fan
+  ** Top-Level
+  ** Reduction
+  ** Geometric Detail
+  ** Assembly
+  ** Tame Hypermap
+  ** Linear Program
+
+
+Within each chapter, the material follows a linear logical path from beginning to end.
+
+==Dealing with Axioms==
+
+(Thanks to Cezary Kaliszyk for his explanation of how this works)
+
+It is expected that different people will want to jump in and work on different parts of the proof.  You are allowed to assume as an axiom everything that goes before in the logical order given above. As work on the earlier chapters develops, the axioms become replaced with formal proofs.    This needs to be done in a way so that proofs do not break as the status of logically preceding material changes from hypothesis to theorem.
+
+The way I propose doing this is with a collection of interfaces, one for each chapter.  I will use as an example the trig chapter.  The trig module will list all of the identifiers of type thm that are eventually to be proved in the trig chapter.  Everyone should use theorems from the trig chapter through the given interface.   
+
+Before the formalization of the trig chapter is complete, the module will be implemented by creating a new axiom in the system.  In detail, first create a new constant called {{{trig_axiom}}} of type boolean, defined to be the conjunction of all the terms to be proved in the chapter on trig.  Then {{{trig_axiom}}} is entered as a new axiom.  Then all the theorems of the chapter are proved using this axiom to obtain the implementation of the module.
+
+When the formalization of the trig chapter is complete, the module will be implemented directly with the proofs of the theorems and the axiom and constant will disappear from the system.  The definition of {{{trig_axiom}}} should not appear in the trig module interface, because eventually it will disappear from the development.
+
+The same approach can be followed at the level of sections, if someone wishes to jump into the middle of a chapter and start proving theorems.  Each preceding sections of the chapter can be given an interface and implemented with a new axiom. 
+
+
+
+
+==Ratings==
+
+I have rated each lemma according to how difficult it to be to obtain
+its formal proof.  My experience is that the difficulty is not linear
+in the length of the proof.  Accordingly, as a proof doubles in length,
+I more than double its rating.   Proofs that are pure abstract nonsense
+get the lowest rating.  I increase ratings if they pull together facts
+from distant sections of the text, if they involve subtle twists in reasoning,
+or do anything non-obvious.
+
+I have not yet assigned a rating to all lemmas.  My idea is that the
+sum of all the ratings should be about 45,000 or about
+100 per page.  According to Wiedijk's rough guidelines, it should take about
+one week of labor to formalize one page of mathematics.  Thus, a lemma
+with a rating of 100 might take one week of labor.  Of course, I have
+been putting a great deal of effort into making the proofs as simple as
+possible, with the hope that it might be possible to create the formal
+proof of a lemma rated 100 in substantially less than 1 week.
+
+A number of people have volunteered in the past to help with the text
+part of the proof.  However, it hasn't been until now that the text
+was in suitable shape to be able to involved the coordinated efforts of
+various people.    The ratings give a way of assigning credit
+for the various contributors to text portion of the Flyspeck project.
+(This does not include the work of Bauer, Nipkow, Zumkeller, Obua, McLaughlin
+on the computer code; nor does it include all of the fundamental work
+of Harrison and many other researchers who have developed the libraries
+in the systems that are being used.)   For example, somebody who
+accumulates 6000 rating-units over a one-year period will 
+have completed about 13% of the proof text.
+
+==Common material==
+
+A certain amount of material is to be shared among participants in the project.
+The definitions should be entered once for all.  Terms representing all proposed
+lemmas should be entered once for all.
+
+==Naming conventions==
+
+The conventions of HOL-Light should be followed in naming terms and definitions.  That is, use upper case identifiers, with separate parts of the identifiers separated by underscore.  Each lemma carries an internal label in the flypaper of the form  {{{lemma:whatever-name-here}}}.  The corresponding term should be called {{{WHATEVER_NAME_HERE_T}}} and the value of type thm should have the identifier {{{WHATEVER_NAME_HERE}}}.  The terms of type thm giving definitions should have the identifier given by that name.   (You are free to use whatever names you please in your internal work, but make these identifiers available to everyone.)
+
+==Formal Proof System==
+
+The preferred system for the formalization is HOL-Light.  However, several contributions have now been made in Isabelle.  Eventually the aim is to combine the proofs into a single system.  The easiest way to accomplish this may be an automated translation of everything into Isabelle.
+
+==Dealing with Errors==
+
+It is possible that the flypaper contains errors.  I will do my best to correct mistakes as soon as they are discovered.  Please understand that you will not be credited with a theorem that turns out to be incorrectly stated or that is based on incorrect assumptions.  Every attempt will be made to be fair to everyone involved, but please be tolerant of unintentional mistakes.
+
+
