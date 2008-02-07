@@ -12,7 +12,9 @@ the Flyspeck project in mind, is under continual revision, viewable as [http://f
 The main file is called flypaper.
 
 The proof has been expanded to about 450 pages of text, divided
-into four parts.  
+into four parts.   
+
+*The Foundational Material, the chapter on "Top-Level Structure, and the chapter on "Elementary Theory of the Reals" are ready to be formalized.*
 
 ||   I. Foundational Material  ||   ||  ||
 ||    || Trigonometry  ||  20 ||
@@ -164,5 +166,3 @@ The preferred system for the formalization is HOL-Light.  However, several contr
 ==Dealing with Errors==
 
 It is possible that the flypaper contains errors.  I will do my best to correct mistakes as soon as they are discovered.  Please understand that you will not be credited with a theorem that turns out to be incorrectly stated or that is based on incorrect assumptions.  Every attempt will be made to be fair to everyone involved, but please be tolerant of unintentional mistakes.
-
-
