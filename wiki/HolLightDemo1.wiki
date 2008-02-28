@@ -304,6 +304,7 @@ The next tactic will simplify things again.
 ===Next Tactic===
 
 {{{ASM_SIMP_TAC[FORALL_IN_IMAGE; EXISTS_IN_IMAGE; IN_UNIV] )}}}
+
 [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_SIMP_TAC.html ASM_SIMP_TAC]
 
 The tactic {{{ASM_SIMP_TAC}}} is a simplification tactic, using the assumption list and whatever other theorems you give it.  In this case, we use three other theorems.   This is what those theorems say.  
@@ -332,7 +333,37 @@ val it : goalstack = 1 subgoal (1 total)
   ==> (!x. abs (f x) <= k) /\ (!b. (!x. abs (f x) <= b) ==> k <= b))
  ==> (!y. abs (g y) <= &1)`
 }}}
-We see that the definition of {{{k}}} in the assumption list has been substituted into the goal for the messy {{{sup (...)}}}.   From {{{FORALL_IN_IMAGE, EXISTS_IN_IMAGE}}}, everywhere there was an expression in the goal of the form {{{x IN IMAGE}}} with a simpler expression.   The theorem {{{IN_UNIV}}} doesn't do much; it says that every real number is {{{IN}} the set of real numbers.
+This has simplified the goal considerably.  We see that the definition of {{{k}}} in the assumption list has been substituted into the goal for the messy {{{sup (...)}}}.   From {{{FORALL_IN_IMAGE, EXISTS_IN_IMAGE}}}, every term in the goal of the form {{{x IN IMAGE}}} has been replaced with with a simpler expression.   The theorem {{{IN_UNIV}}} doesn't do much; it says that every real number is {{{IN}}} the set of real numbers.
+
+===Next Tactic===
+
+{{{ANTS_TAC}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ANTS_TAC.html ANTS_TAC]
+
+We can only use the properties of the sup of a set X when we know that X is
+nonempty and bounded.  The current goal lists those two things as hypotheses.
+We need to prove a separate goal that shows that X  is nonempty and bounded.
+The tactic {{{ANTS_TAC}}} breaks things down into two subgoals:
+{{{
+# e ( ANTS_TAC );;
+val it : goalstack = 2 subgoals (2 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+
+`(!x. abs (f x) <= k) /\ (!b. (!x. abs (f x) <= b) ==> k <= b)
+ ==> (!y. abs (g y) <= &1)`
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+
+`~(IMAGE (\x. abs (f x)) (:real) = {}) /\ (?b. !x. abs (f x) <= b)`
+}}}
 
 
 
