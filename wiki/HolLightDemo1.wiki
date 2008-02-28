@@ -257,7 +257,7 @@ val it : goalstack = 1 subgoal (1 total)
 
 [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP_TAC.html  MP_TAC]  ---  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC.html  SPEC]
 
-We have defined {{{k}}} to be the {{{sup}}} of a set, but we need to quote a theorem that tells us about the properties of {{{sup}}}.    The theorem {{{SUP}}} says that if we have a nonempty set of real numbers bounded from above, then every element in that set is at most the {{{sup}}}, and it is the smallest number with that property.  Here is the formal statement.   (The symbol {{{?}}} means "there exists", and {{{IN}} is for set membership.)
+We have defined {{{k}}} to be the {{{sup}}} of a set, but we need to quote a theorem that tells us about the properties of {{{sup}}}.    The theorem {{{SUP}}} says that if we have a nonempty set of real numbers bounded from above, then every element in that set is at most the {{{sup}}}, and it is the smallest number with that property.  Here is the formal statement.   (The symbol {{{?}}} means "there exists", and {{{IN}}} is for set membership.)
 {{{
 # SUP;;
 val it : thm =
@@ -265,14 +265,23 @@ val it : thm =
          ==> (!x. x IN s ==> x <= sup s) /\
              (!b. (!x. x IN s ==> x <= b) ==> sup s <= b)
 }}}
+We want to apply this theorem for a specific value of {{{s}}}.  We want to let {{{s}}} be the set {{{IMAGE (\x. abs(f(x)))}}} used in the definition of {{{k}}}.  The command {{{SPEC}}} specializes a theorem.  This is what we get.  It looks much more complicated, but it is exactly the same theorem with {{{IMAGE (...)}}} substituted for each {{{s}}}.
+{{{
+# SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP;;
+val it : thm =
+  |- ~(IMAGE (\x. abs (f x)) (:real) = {}) /\
+     (?b. !x. x IN IMAGE (\x. abs (f x)) (:real) ==> x <= b)
+     ==> (!x. x IN IMAGE (\x. abs (f x)) (:real)
+              ==> x <= sup (IMAGE (\x. abs (f x)) (:real))) /\
+         (!b. (!x. x IN IMAGE (\x. abs (f x)) (:real) ==> x <= b)
+              ==> sup (IMAGE (\x. abs (f x)) (:real)) <= b)
+}}}
 
-The {{{MP_TAC}}} changes the goal from something of the form {{{Q}}} to something of the form {{{P ==> Q}}}, where {{{P}}} is a known theorem.
+The {{{MP_TAC}}} changes the goal from something of the form {{{Q}}} to something of the form {{{P ==> Q}}}, where {{{P}}} is a known theorem.  We want to insert this big messy theorem for {{{P}}}.
 
-We are using the theorem {{{SUP}}} for {{{P}}}.   Actually, we want to apply the theorem to the set {{{IMAGE (\x. abs(f(x)))}}}, so we specialize the {{{s}}} to this particular value, using {{{SPEC}}}, the command for specializing a theorem.
-
-When we run this tactic, the goal looks much more complicated, because everywhere that {{{s}}} appears in {{{SUP}}} it has been expanded out as {{{IMAGE (...)}}}.
-Note that the new goal has the form {{{`P ==>  (!y. abs (g y) <= &1)`}}} where
-{{{P}}} is a special form of the {{{SUP}}} theorem.   
+When we run this tactic, the goal looks much more complicated.  But actually, it has changed in a simple way.
+Note that the new goal has the form {{{P ==>  Q}}} where
+{{{P}}} is the messy theorem we created out of {{{SUP}}} and {{{Q}}} is the old goal.   
 {{{
 # e ( MP_TAC(SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP) );;
 val it : goalstack = 1 subgoal (1 total)
