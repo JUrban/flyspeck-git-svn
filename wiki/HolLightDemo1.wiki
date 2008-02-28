@@ -105,6 +105,9 @@ Start a session of CAML.  Load HOL Light.
 Every formal proof starts with a conventional proof (that is, non-formal proof).  We should study the conventional math proof of the IMO problem (given above) and understand it thoroughly.  With a thorough understanding of the conventional proof, we are ready to move on.
 
 ==Step 1. Load theorems==
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/needs.html needs]
+
 The first step of  the proof is
 {{{
 needs "Multivariate/misc.ml";;
@@ -112,6 +115,9 @@ needs "Multivariate/misc.ml";;
 In his proof of the IMO problem, Harrison uses some theorems that have already been proved in the file {{{"Multivariate/misc.ml"}}}.  This line tells the theorem prover to load those theorems.
 
 ==Step 2. State the theorem to be proved.==
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove.html prove] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/g.html g]
+
 The statement of the problem
 {{{
 f and g are real-valued functions defined on the real line. For all x and y,
@@ -142,6 +148,8 @@ g `!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
 
 ==Step 3.  Work out proof tactics==
 
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THEN.html THEN] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENL.html THENL]
+
 The style of proving in HOL Light is generally "backwards".  This means that you start out with a goal of what you want to prove (in this case the IMO problem), and work backwards until you have reduced the goal to easier statements that are easy to prove.  Each backwards step of the proof is called a tactic.  If you look at the HOL Light proof of the IMO problem,  it has the general form
 {{{
 let IMO = prove
@@ -161,6 +169,8 @@ So for now, we ignore the {{{THEN}}} s and go through the separate tactics of th
 
 {{{let LL = REAL_ARITH `&1 < k ==> &0 < k`}}}
 
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html REAL_ARITH]
+
 HOL Light has some powerful automated theorem proving functions built into it.  One of them is called {{{REAL_ARITH}}}.  It takes simple (backquoted) statements about the real numbers and automatically turns them into theorems.  In this proof, we will later need the simple fact that "if 1 < k then 0 < k".  Harrison starts
 the IMO proof with an automated proof of this result and gives this theorem the name LL for future reference.
 
@@ -171,16 +181,18 @@ the IMO proof with an automated proof of this result and gives this theorem the 
 
 {{{REPEAT STRIP_TAC}}}
 
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_UPPERCASE.html REPEAT] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html STRIP_TAC] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_TAC.html GEN_TAC]
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/e.html e]
+
 The first thing we want to do in the proof is to get rid of the the "for all f and g"  (written as  {{{!f g.}}})
 at the beginning of the goal.
 {{{STRIP_TAC}}} or {{{GEN_TAC}}} gets rid of the "for all".   {{{GEN_TAC}}} only gets rid of the quantifier {{{!f}}}, but {{{STRIP_TAC}}} goes farther in breaking down {{{==>}}}, {{{~}}}, and {{{/\}}}.  Since we have two foralls, we want to repeat this command.  If you write {{{REPEAT}}} before a tactic, that tactic gets repeated as many times as possible.  
-
 
 You can learn about the different tactics such as {{{STRIP_TAC}}}  from the following sources.
 
   * [http://www.cl.cam.ac.uk/~jrh13/hol-light/holchart.pdf tactics] one line summary of each tactic.
   * Type {{{help "STRIP_TAC"}}} in HOL Light to get the documentation on that tactic.
-  * [http://www.cl.cam.ac.uk/~jrh13/hol-light/reference_220.html web index] gives full documentation of each tactic.  Here is the documentation on [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html STRIP_TAC].
+  * [http://www.cl.cam.ac.uk/~jrh13/hol-light/reference_220.html web index] gives full documentation of each tactic.  
 
 What we actually type into the system is this:
 {{{e (REPEAT STRIP_TAC);;}}}
