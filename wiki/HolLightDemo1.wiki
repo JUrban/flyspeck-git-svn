@@ -116,7 +116,7 @@ In his proof of the IMO problem, Harrison uses some theorems that have already b
 
 ==Step 2. State the theorem to be proved.==
 
-[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove.html prove] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/g.html g]
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove.html prove] ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/g.html g]
 
 The statement of the problem
 {{{
@@ -148,7 +148,7 @@ g `!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
 
 ==Step 3.  Work out proof tactics==
 
-[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THEN.html THEN] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENL.html THENL]
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THEN.html THEN]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENL.html THENL]
 
 The style of proving in HOL Light is generally "backwards".  This means that you start out with a goal of what you want to prove (in this case the IMO problem), and work backwards until you have reduced the goal to easier statements that are easy to prove.  Each backwards step of the proof is called a tactic.  If you look at the HOL Light proof of the IMO problem,  it has the general form
 {{{
@@ -181,7 +181,7 @@ the IMO proof with an automated proof of this result and gives this theorem the 
 
 {{{REPEAT STRIP_TAC}}}
 
-[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_UPPERCASE.html REPEAT] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html STRIP_TAC] [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_TAC.html GEN_TAC]
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_UPPERCASE.html REPEAT]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html STRIP_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_TAC.html GEN_TAC]  ----
 [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/e.html e]
 
 The first thing we want to do in the proof is to get rid of the the "for all f and g"  (written as  {{{!f g.}}})
