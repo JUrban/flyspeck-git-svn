@@ -155,14 +155,47 @@ let combined_tactic = tactic1 THEN tactic2 THEN tactic3;;
 
 You join the tactics together into a single tactic after you have finished the proof and want to package the proof into something that other people can use.  When you are writing down the HOL Light proof for the first time, you don't need to use {{{THEN}}} to join the tactics together.  Wait until you have finished working out the formal proof.
 
-So for now, we ignore the {{{THEN}}}s and go through the separate tactics of the proof.
+So for now, we ignore the {{{THEN}}} s and go through the separate tactics of the proof.
 
-===Line : {{{ let LL = REAL_ARITH `&1 < k ==> &0 < k`}}} ===
+===First Line===
+
+{{{let LL = REAL_ARITH `&1 < k ==> &0 < k`}}}
 
 HOL Light has some powerful automated theorem proving functions built into it.  One of them is called {{{REAL_ARITH}}}.  It takes simple (backquoted) statements about the real numbers and automatically turns them into theorems.  In this proof, we will later need the simple fact that "if 1 < k then 0 < k".  Harrison starts
 the IMO proof with an automated proof of this result and gives this theorem the name LL for future reference.
 
 {{{REAL_ARITH}}} is something that you learn in Harrison's HOL Light tutorial.  
+
+
+===Second Line===
+
+{{{REPEAT STRIP_TAC}}}
+
+The first thing we want to do in the proof is to get rid of the the "for all f and g"  (written as  {{{!f g.}}})
+at the beginning of the goal.
+{{{STRIP_TAC}}} or {{{GEN_TAC}}} gets rid of the "for all".   {{{GEN_TAC}}} only gets rid of the quantifier {{{!f}}}, but {{{STRIP_TAC}}} goes farther in breaking down {{{==>}}}, {{{~}}}, and {{{/\}}}.  Since we have two foralls, we want to repeat this command.  If you write {{{REPEAT}}} before a tactic, that tactic gets repeated as many times as possible.  
+
+
+You can learn about the different tactics such as {{{STRIP_TAC}}}  from the following sources.
+
+  * [http://www.cl.cam.ac.uk/~jrh13/hol-light/holchart.pdf tactics] one line summary of each tactic.
+  * Type {{{help "STRIP_TAC"}}} in HOL Light to get the documentation on that tactic.
+  * [http://www.cl.cam.ac.uk/~jrh13/hol-light/reference_220.html web index] gives full documentation of each tactic.  Here is the documentation on [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html STRIP_TAC].
+
+What we actually type into the system is this:
+{{{e (REPEAT STRIP_TAC);;}}}
+The result is that the goal has been simplified into the following form:
+{{{
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+
+`abs (g x) <= &1`
+}}}
+Not only did {{{STRIP_TAC}}} get rid of the quantifiers, but it moved the different assumptions into the assumption list, each on a separate line.  Many proofs start with {{{REPEAT STRIP_TAC}}} as the first tactic.  It is a convenient way to begin.
+
 
 =Further reading=
 
