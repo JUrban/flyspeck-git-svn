@@ -527,6 +527,105 @@ val it : goalstack = 1 subgoal (1 total)
 `(!x. abs (f x) <= k / abs (g y)) /\ ~(k <= k / abs (g y))`
 }}}
 
+===New Tactic===
+
+{{{CONJ_TAC}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_TAC.html CONJ_TAC]
+
+The goal has the form {{{a /\ b}}}.  We use the conjunction tactic to break it into
+two subgoals {{{a}}} and {{{b}}}:
+{{{
+# e ( CONJ_TAC );;
+val it : goalstack = 2 subgoals (2 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`&1 < abs (g y)`]
+
+`~(k <= k / abs (g y))`
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`&1 < abs (g y)`]
+
+`!x. abs (f x) <= k / abs (g y)`
+}}}
+
+===New Tactic===
+
+{{{ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL;
+     REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`];}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html ASM_MESON_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html REAL_ARITH]
+
+We can quickly treat the third sentence of the text proof:  "Then
+2k ≥ |f(x + y)| + |f(x - y)| ≥ |f(x + y) + f(x - y)| = 2 |g(y)||f(x)|,
+so |f(x)| ≤ k/|g(y)|."
+
+In fact, the rest of the proof just follows from basic real arithmetic.  We will treat the two remaining goals one at a time.    We have already discussed {{{REAL_ARITH}}}, which proves basic statements about real arithmetic.  Harrison has it prove {{{u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k}}}.  Notice that the conclusion of this statement is exactly in the form of the goal (after we multiply through by {{{abs(g y)}}} and the hypotheses of this statement are in the form of the Assumptions 1, 4 (used twice).  Thus, all it takes is a bit of logic and a few simple theorems about real numbers to solve the goal from the assumption list.  The tactic {{{ASM_MESON_TAC}}  uses logic, the assumption list, and the list of theorems that follows it to solve a goal completely.  It is one of the most powerful tactics in HOL Light.  
+
+Here are the theorems we use.  (The theorem LL was the first line of the proof.)
+{{{
+# REAL_LE_RDIV_EQ;;
+val it : thm = |- !x y z. &0 < z ==> (x <= y / z <=> x * z <= y)
+# REAL_ABS_MUL;;
+val it : thm = |- !x y. abs (x * y) = abs x * abs y
+}}}
+We are now down to a single goal again:
+{{{
+# e(ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL;
+     REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`]);;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`&1 < abs (g y)`]
+
+`~(k <= k / abs (g y))`
+}}}
+
+===Final Tactic===
+
+{{{ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL;
+     REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html ASM_MESON_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html REAL_ARITH]
+
+This step is similar to the previous step.  We use {{{REAL_ARITH}}} to prove a simple statement in real arithmetic that connects the facts of the assumption list to the goal.  Then we use the powerful {{{ASM_MESON_TAC}}} to apply logic, the assumption list, and a few theorems about real numbers to finish off the goal.
+
+Here are the basic facts about real numbers that get used:
+{{{
+# REAL_LE_RDIV_EQ;;
+val it : thm = |- !x y z. &0 < z ==> (x <= y / z <=> x * z <= y)
+# REAL_ABS_MUL;;
+val it : thm = |- !x y. abs (x * y) = abs x * abs y
+# REAL_NOT_LE;;
+val it : thm = |- !x y. ~(x <= y) <=> y < x
+# REAL_LT_LDIV_EQ;;
+val it : thm = |- !x y z. &0 < z ==> (x / z < y <=> x < y * z)
+# REAL_LT_LMUL;;
+val it : thm = |- !x y z. &0 < x /\ y < z ==> x * y < x * z
+# REAL_MUL_RID;;
+val it : thm = |- !x. x * &1 = x
+}}}
+This step completes the proof of the IMO problem:
+{{{
+# e(ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL;
+     REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]);;
+val it : goalstack = No subgoals
+}}}
+We are done!
+
 
 =Exercise=
 
