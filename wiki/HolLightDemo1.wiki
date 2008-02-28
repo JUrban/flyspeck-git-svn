@@ -1,4 +1,4 @@
-#John Harrison on Using HOL Light
+#John Harrison on using HOL Light
 
 =Video Presentation=
 
