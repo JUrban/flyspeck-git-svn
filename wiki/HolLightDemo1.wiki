@@ -36,11 +36,16 @@ The first part is what he did during the video demo. The second version is anoth
 of the same theorem he did later.  It is not part of the demo.  After the code, I give a line-by-line
 commentary on the code.
 
+As the video and the commentary show, it is hard to read the code just by looking at it.
+To understand it, you "replay" it on the computer step by step.
+
 {{{
 
 (* ------------------------------------------------------------------------- *)
 (* Cleaned-up proof from session.                                            *)
 (* ------------------------------------------------------------------------- *)
+
+needs "Multivariate/misc.ml";;
 
 let IMO = prove
  (`!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
@@ -91,6 +96,73 @@ let IMO = prove
 
 =Commentary=
 
+To get started, install [http://caml.inria.fr/ CAML] and [http://www.cl.cam.ac.uk/~jrh13/hol-light/ HOL Light] on your machine, following the instructions on page 5 of the [http://www.cl.cam.ac.uk/~jrh13/hol-light/tutorial_220.pdf tutorial].  It runs on most computers.
+
+Start a session of CAML.  Load HOL Light.
+
+==Step 0. Understand the conventional Proof==
+
+Every formal proof starts with a conventional proof (that is, non-formal proof).  We should study the conventional math proof of the IMO problem (given above) and understand it thoroughly.  With a thorough understanding of the conventional proof, we are ready to move on.
+
+==Step 1. Load theorems==
+The first step of  the proof is
+{{{
+needs "Multivariate/misc.ml";;
+}}}
+In his proof of the IMO problem, Harrison uses some theorems that have already been proved in the file {{{"Multivariate/misc.ml"}}}.  This line tells the theorem prover to load those theorems.
+
+==Step 2. State the theorem to be proved.==
+The statement of the problem
+{{{
+f and g are real-valued functions defined on the real line. For all x and y,
+
+f(x + y) + f(x - y) = 2 f(x) g(y).
+f is not identically zero and |f(x)| ≤ 1 for all x. Prove that |g(x)| ≤ 1 for all x.
+}}}
+appears in HOL Light as follows:
+{{{
+let IMO = prove
+ (`!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
+        ~(!x. f(x) = &0) /\
+        (!x. abs(f(x)) <= &1)
+        ==> !x. abs(g(x)) <= &1`,  (* TACTIC HERE *)  );;
+}}}
+The notation is explained in the HOL Light tutorial.  Real numbers need to be marked with {{{&}}}.  For instance,
+{{{&0}}} is the real number zero (as opposed to the natural number zero {{{0}}}).  The logical symbol "and" is
+typed as {{{/\}}}, "less than or equal" appears as {{{<=}}}, "the absolute value" as {{{abs}}}.  It is necessary to learn the names of different functions from the tutorial.
+
+The function {{{prove}}} takes two arguments, a backquoted string giving the result that is to be proved, and a tactic that gives the proof.  The {{{prove}}} function is used after the proof is complete to package the proof into something that can be used by other people.  When the proof is being worked out, the desired theorem is stated as a goal.  For this, type {{{g}}} for goal and then the backquoted string.
+
+{{{
+g `!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
+        ~(!x. f(x) = &0) /\
+        (!x. abs(f(x)) <= &1)
+        ==> !x. abs(g(x)) <= &1`;;
+}}}
+
+==Step 3.  Work out proof tactics==
+
+The style of proving in HOL Light is generally "backwards".  This means that you start out with a goal of what you want to prove (in this case the IMO problem), and work backwards until you have reduced the goal to easier statements that are easy to prove.  Each backwards step of the proof is called a tactic.  If you look at the HOL Light proof of the IMO problem,  it has the general form
+{{{
+let IMO = prove
+ (   (* backquoted goal *) ,  (* tactic *)  );;
+}}}
+The tactic, if you look carefully, is a long sequence of separate commands joined together with {{{THEN}}}.
+The {{{THEN}}} function makes a single tactic out of many tactics.  For example, if we have three backwards proof steps called {{{tactic1}}}, {{{tactic2}}}, and {{{tactic3}}}, we can create a single tactic by writing
+{{{
+let combined_tactic = tactic1 THEN tactic2 THEN tactic3;;
+}}}
+
+You join the tactics together into a single tactic after you have finished the proof and want to package the proof into something that other people can use.  When you are writing down the HOL Light proof for the first time, you don't need to use {{{THEN}}} to join the tactics together.  Wait until you have finished working out the formal proof.
+
+So for now, we ignore the {{{THEN}}}s and go through the separate tactics of the proof.
+
+===Line : {{{ let LL = REAL_ARITH `&1 < k ==> &0 < k`}}} ===
+
+HOL Light has some powerful automated theorem proving functions built into it.  One of them is called {{{REAL_ARITH}}}.  It takes simple (backquoted) statements about the real numbers and automatically turns them into theorems.  In this proof, we will later need the simple fact that "if 1 < k then 0 < k".  Harrison starts
+the IMO proof with an automated proof of this result and gives this theorem the name LL for future reference.
+
+{{{REAL_ARITH}}} is something that you learn in Harrison's HOL Light tutorial.  
 
 =Further reading=
 
