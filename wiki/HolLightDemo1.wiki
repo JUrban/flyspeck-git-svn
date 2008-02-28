@@ -390,7 +390,7 @@ val it : goalstack = 1 subgoal (1 total)
 }}}
 
 We have already discussed what {{{STRIP_TAC}}} does.  It moves the
-antecedent in the goal down to the assumption list.  We now have a long
+antecedent in the goal down to the assumption list.  We are up to five assumptions.  We now have a long
 list of assumptions (which is good) and a rather easy goal (which is also good).
 {{{
 # e(STRIP_TAC);;
@@ -405,6 +405,66 @@ val it : goalstack = 1 subgoal (1 total)
 
 `!y. abs (g y) <= &1`
 }}}
+
+
+===New Tactic===
+
+{{{SIMP_TAC[GSYM REAL_NOT_LT; GSYM NOT_EXISTS_THM]}}}
+
+{{{STRIP_TAC}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMP_TAC.html SIMP_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GSYM.html GSYM]
+
+We are ready to move to the next statement "Suppose |g(y)| > 1" of the text proof.
+This step sets up the proof by contradiction.  Our goal is to prove {{{!y. abs (g y) <= &1}}} and we say, suppose for a contradiction that there is a real number that does not satisfy this inequality.
+
+{{{GSYM}}} takes a theorem {{{a = b}}} and replaces it with {{{b=a}}}.  The reason that
+we need to change the order is that the simplification tactic looks in the goal for something that looks like the left-hand side, and replaces it with the right-hand side.
+This is how {{{GSYM}}} transforms the theorem {{{REAL_NOT_LT}}}.  See how the left and right hand sides have been swapped:
+{{{
+# REAL_NOT_LT;;
+val it : thm = |- !x y. ~(x < y) <=> y <= x
+# GSYM REAL_NOT_LT;;
+val it : thm = |- !x y. y <= x <=> ~(x < y)
+}}}
+Another example:
+{{{
+# NOT_EXISTS_THM;;
+val it : thm = |- !P. ~(?x. P x) <=> (!x. ~P x)
+# GSYM NOT_EXISTS_THM;;
+val it : thm = |- !P. (!x. ~P x) <=> ~(?x. P x)
+}}}
+The tactic {{{SIMP_TAC}}} is similar to {{{ASM_SIMP_TAC}}}, which we have used already.
+The difference is that {{{SIMP_TAC}}} is not going to use anything from the assumption list.  It will only use the theorems we give it.  In this case, we use two theorems. 
+Since we currently have {{{abs(g y) <= &1}}} in the goal, we can transform it with {{{GSYM REAL_NOT_LT}}} (but {{{REAL_NOT_LT}}} would have no effect).
+
+{{{
+# e ( SIMP_TAC[GSYM REAL_NOT_LT; GSYM NOT_EXISTS_THM] );;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`!b. (!x. abs (f x) <= b) ==> k <= b`]
+
+`~(?y. &1 < abs (g y))`
+}}}
+
+We have already discussed {{{STRIP_TAC}}}.  It moves the negated down to the hypothesis list and finishes setting up the proof by contradiction.  Notice that {{{STRIP_TAC}}} also gets rid of the existential quantifier on y. 
+# e(STRIP_TAC);;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`!b. (!x. abs (f x) <= b) ==> k <= b`]
+ 6 [`&1 < abs (g y)`]
+
+`F`
 
 
 
