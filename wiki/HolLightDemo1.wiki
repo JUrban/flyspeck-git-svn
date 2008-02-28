@@ -579,8 +579,7 @@ val it : thm = |- !x y. abs (x * y) = abs x * abs y
 }}}
 We are now down to a single goal again:
 {{{
-# e(ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL;
-     REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`]);;
+# e(ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL; REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`]);;
 val it : goalstack = 1 subgoal (1 total)
 
  0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
@@ -618,8 +617,7 @@ val it : thm = |- !x. x * &1 = x
 }}}
 This step completes the proof of the IMO problem:
 {{{
-# e(ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL;
-     REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]);;
+# e(ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL; REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]);;
 val it : goalstack = No subgoals
 }}}
 We are done!
