@@ -96,6 +96,8 @@ let IMO = prove
 
 =Commentary=
 
+This gives a step by step commentary on Harrison's proof.  After seeing the details, you will see how much has been packed into a few lines of computer code.  It is really remarkable that Harrison was able to work out the details of this formal proof in about 30 minutes.
+
 To get started, install [http://caml.inria.fr/ CAML] and [http://www.cl.cam.ac.uk/~jrh13/hol-light/ HOL Light] on your machine, following the instructions on page 5 of the [http://www.cl.cam.ac.uk/~jrh13/hol-light/tutorial_220.pdf tutorial].  It runs on most computers.
 
 Start a session of CAML.  Load HOL Light.
@@ -479,9 +481,9 @@ val it : goalstack = 1 subgoal (1 total)
 We are going to work backwards in the
 proof.  The last statement of the text reads "In other words, k/|g(y)| is an upper bound for |f(x)| which is less than k. Contradiction."  In this step we say it is enough to show that the assumption that k/|g(y)| is an upper bound leads to a contradiction." To do that, we specialize Assumption 5 (which states the least upper bound property for k) with k/|g(y)| as the upper bound.  Then we move this assumption up to the main goal.
 
-We have already seen that {{{SPEC}}} is used to specialize an assumption and that {{{MP_TAC}}} is to take a theorem {{{P}}} and a goal {{{Q}}} and create a new goal {{{P ==> Q}}}.  However, in this case, we want {{{P}}} to be Assumption 5, rather than a theorem.    If we were working with a theorem {{{th}}} rather than the assumption list, the correct tactic would be {{{MP_TAC (SPEC `k/abs(g(y:real))` th)}}}.
+We have already seen that {{{SPEC}}} is used to specialize an assumption.  We have also see that {{{MP_TAC}}} takes a theorem {{{P}}} and a goal {{{Q}}} and create a new goal {{{P ==> Q}}}.  However, in this case, we want {{{P}}} to be Assumption 5, rather than a theorem.    If we were working with a theorem {{{th}}} rather than the assumption list, the correct tactic would be {{{MP_TAC (SPEC `k/abs(g(y:real))` th)}}}.
 
-What we want to do is transform this tactic into another tactic that looks through the assumption list one by one (starting with the highest numbered one first) for a theorem that can be used.   The command that transforms the tactic is {{{FIRST_X_ASSUM}}}.
+What we want to do is transform this tactic into another tactic that looks through the assumption list one by one (starting with the highest numbered one first) for a theorem that can be used.   The command that transforms a tactic that uses a theorem into a tactic that uses the assumption list is {{{FIRST_X_ASSUM}}}.
 First it tries to use Assumption 6, but that assumption cannot be specialized  (it does not have a universal quantifier).  Then it tries Assumption 5, and it works.  So it specializes that assumption and uses {{{MP_TAC}}} to bring it out of the assumption list into the goal:
 {{{
 # e ( FIRST_X_ASSUM(MP_TAC o SPEC `k / abs(g(y:real))`) );;
@@ -497,13 +499,40 @@ val it : goalstack = 1 subgoal (1 total)
 `((!x. abs (f x) <= k / abs (g y)) ==> k <= k / abs (g y)) ==> F`
 }}}
 
+===New Tactic===
+
+{{{SIMP_TAC[NOT_IMP; NOT_FORALL_THM]}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMP_TAC.html SIMP_TAC]
+
+This step is a rather basic simplification of the goal using the following two theorems.
+{{{
+# NOT_IMP;;
+val it : thm = |- !t1 t2. ~(t1 ==> t2) <=> t1 /\ ~t2
+# NOT_FORALL_THM;;
+val it : thm = |- !P. ~(!x. P x) <=> (?x. ~P x)
+}}}
+We simply express the goal in a logically equivalent way that no longer involves proving a contradiction:
+{{{
+# e ( SIMP_TAC[NOT_IMP; NOT_FORALL_THM] );;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`&1 < abs (g y)`]
+
+`(!x. abs (f x) <= k / abs (g y)) /\ ~(k <= k / abs (g y))`
+}}}
 
 
 =Exercise=
 
-Work through Harrison's second [http://www.cs.ru.nl/~freek/demos/exercise/exercise2.pdf solution] of the IMO problem in the same way.  Look up each tactic that you do not understand in the [http://www.cl.cam.ac.uk/~jrh13/hol-light/reference_220.html master index].
+Work through Harrison's second [http://www.cs.ru.nl/~freek/demos/exercise/exercise2.pdf solution] of the IMO problem in the same way.  Replay each step inside HOL Light to see how it changes the goal and assumption list.  Look up each tactic that you do not understand in the [http://www.cl.cam.ac.uk/~jrh13/hol-light/reference_220.html master index].
 
-After you have gone through a few formal proofs in this way,  you will be ready to formalize your own theorems.
+After you have gone through a few formal proofs in this way,  many of the tactics will become familiar, and you will be ready to formalize your own theorems.
 
 =Further reading=
 
