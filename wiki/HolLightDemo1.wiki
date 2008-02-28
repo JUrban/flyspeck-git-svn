@@ -251,6 +251,47 @@ val it : goalstack = 1 subgoal (1 total)
 `!y. abs (g y) <= &1`
 }}}
 
+===Next Tactic===
+
+{{{MP_TAC(SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP)}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP_TAC.html  MP_TAC]  ---  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC.html  SPEC]
+
+We have defined {{{k}}} to be the {{{sup}}} of a set, but we need to quote a theorem that tells us about the properties of {{{sup}}}.    The theorem {{{SUP}}} says that if we have a nonempty set of real numbers bounded from above, then every element in that set is at most the {{{sup}}}, and it is the smallest number with that property.  Here is the formal statement.   (The symbol {{{?}}} means "there exists", and {{{IN}} is for set membership.)
+{{{
+# SUP;;
+val it : thm =
+  |- !s. ~(s = {}) /\ (?b. !x. x IN s ==> x <= b)
+         ==> (!x. x IN s ==> x <= sup s) /\
+             (!b. (!x. x IN s ==> x <= b) ==> sup s <= b)
+}}}
+
+The {{{MP_TAC}}} changes the goal from something of the form {{{Q}}} to something of the form {{{P ==> Q}}}, where {{{P}}} is a known theorem.
+
+We are using the theorem {{{SUP}}} for {{{P}}}.   Actually, we want to apply the theorem to the set {{{IMAGE (\x. abs(f(x)))}}}, so we specialize the {{{s}}} to this particular value, using {{{SPEC}}}, the command for specializing a theorem.
+
+When we run this tactic, the goal looks much more complicated, because everywhere that {{{s}}} appears in {{{SUP}}} it has been expanded out as {{{IMAGE (...)}}}.
+Note that the new goal has the form {{{`P ==>  (!y. abs (g y) <= &1)`}}} where
+{{{P}}} is a special form of the {{{SUP}}} theorem.   
+{{{
+# e ( MP_TAC(SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP) );;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+
+`(~(IMAGE (\x. abs (f x)) (:real) = {}) /\
+  (?b. !x. x IN IMAGE (\x. abs (f x)) (:real) ==> x <= b)
+  ==> (!x. x IN IMAGE (\x. abs (f x)) (:real)
+           ==> x <= sup (IMAGE (\x. abs (f x)) (:real))) /\
+      (!b. (!x. x IN IMAGE (\x. abs (f x)) (:real) ==> x <= b)
+           ==> sup (IMAGE (\x. abs (f x)) (:real)) <= b))
+ ==> (!y. abs (g y) <= &1)`
+}}}
+The next tactic will simplify things again.
+
 
 
 
