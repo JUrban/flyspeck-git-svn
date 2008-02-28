@@ -560,8 +560,7 @@ val it : goalstack = 2 subgoals (2 total)
 
 ===New Tactic===
 
-{{{ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL;
-     REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`];}}}
+{{{ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL; REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`];}}}
 
 [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html ASM_MESON_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html REAL_ARITH]
 
@@ -596,8 +595,7 @@ val it : goalstack = 1 subgoal (1 total)
 
 ===Final Tactic===
 
-{{{ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL;
-     REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]}}}
+{{{ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL; REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]}}}
 
 [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html ASM_MESON_TAC]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html REAL_ARITH]
 
