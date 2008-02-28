@@ -281,7 +281,7 @@ The {{{MP_TAC}}} changes the goal from something of the form {{{Q}}} to somethin
 
 When we run this tactic, the goal looks much more complicated.  But actually, it has changed in a simple way.
 Note that the new goal has the form {{{P ==>  Q}}} where
-{{{P}}} is the messy theorem we created out of {{{SUP}}} and {{{Q}}} is the old goal.   
+{{{P}}} is the messy theorem we created out of {{{SUP}}} and {{{Q}}} is the old goal.   The hypotheses have not changed.
 {{{
 # e ( MP_TAC(SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP) );;
 val it : goalstack = 1 subgoal (1 total)
@@ -301,6 +301,38 @@ val it : goalstack = 1 subgoal (1 total)
 }}}
 The next tactic will simplify things again.
 
+===Next Tactic===
+
+{{{ASM_SIMP_TAC[FORALL_IN_IMAGE; EXISTS_IN_IMAGE; IN_UNIV] )}}}
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_SIMP_TAC.html ASM_SIMP_TAC]
+
+The tactic {{{ASM_SIMP_TAC}}} is a simplification tactic, using the assumption list and whatever other theorems you give it.  In this case, we use three other theorems.   This is what those theorems say.  
+{{{
+# FORALL_IN_IMAGE;;
+val it : thm =
+  |- !f s. (!y. y IN IMAGE f s ==> P y) <=> (!x. x IN s ==> P (f x))
+# EXISTS_IN_IMAGE;;
+val it : thm =
+  |- !f s. (?y. y IN IMAGE f s /\ P y) <=> (?x. x IN s /\ P (f x))
+# IN_UNIV;;
+val it : thm = |- !x. x IN (:A)
+}}}
+
+Let's look at how this tactic changes the goal:
+{{{
+# e ( ASM_SIMP_TAC[FORALL_IN_IMAGE; EXISTS_IN_IMAGE; IN_UNIV] );;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+
+`(~(IMAGE (\x. abs (f x)) (:real) = {}) /\ (?b. !x. abs (f x) <= b)
+  ==> (!x. abs (f x) <= k) /\ (!b. (!x. abs (f x) <= b) ==> k <= b))
+ ==> (!y. abs (g y) <= &1)`
+}}}
+We see that the definition of {{{k}}} in the assumption list has been substituted into the goal for the messy {{{sup (...)}}}.   From {{{FORALL_IN_IMAGE, EXISTS_IN_IMAGE}}}, everywhere there was an expression in the goal of the form {{{x IN IMAGE}}} with a simpler expression.   The theorem {{{IN_UNIV}}} doesn't do much; it says that every real number is {{{IN}} the set of real numbers.
 
 
 
