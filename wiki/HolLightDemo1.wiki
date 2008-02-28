@@ -1,0 +1,97 @@
+#John Harrison on Using HOL Light
+
+=Video Presentation=
+
+John Harrison gives a [http://www.math.kobe-u.ac.jp/icms2006/icms2006-video/video/v103.html video demonstration] of how to use HOL Light.  The presentation lasts about 30 minutes, followed by questions and answers.
+
+The theorem that he proves is a problem on an old international math olympiad (IMO).
+
+=IMO problem and solution=
+
+The IMO problem and solution discussed by Harrison is the following.
+
+{{{
+
+Problem [B2 from IMO 1972]
+f and g are real-valued functions defined on the real line. For all x and y,
+
+f(x + y) + f(x - y) = 2 f(x) g(y).
+f is not identically zero and |f(x)| ≤ 1 for all x. Prove that |g(x)| ≤ 1 for all x.
+
+Solution
+Let k be the least upper bound for |f(x)|. Suppose |g(y)| > 1. Then
+
+2k ≥ |f(x + y)| + |f(x - y)| ≥ |f(x + y) + f(x - y)| = 2 |g(y)||f(x)|,
+so |f(x)| ≤ k/|g(y)|. In other words, k/|g(y)| is an upper bound for |f(x)| which is less than k. Contradiction.
+
+}}}
+
+Here is the [http://www.cs.ru.nl/~freek/demos/exercise/exercise.pdf pdf] solution, and a second [http://www.cs.ru.nl/~freek/demos/exercise/exercise2.pdf pdf] solution.
+
+
+=HOL Light solution=
+
+The video demo shows the steps he used to create the following proof, written by Harrison.
+The first part is what he did during the video demo. The second version is another proof
+of the same theorem he did later.  It is not part of the demo.  After the code, I give a line-by-line
+commentary on the code.
+
+{{{
+
+(* ------------------------------------------------------------------------- *)
+(* Cleaned-up proof from session.                                            *)
+(* ------------------------------------------------------------------------- *)
+
+let IMO = prove
+ (`!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
+        ~(!x. f(x) = &0) /\
+        (!x. abs(f(x)) <= &1)
+        ==> !x. abs(g(x)) <= &1`,
+ let LL = REAL_ARITH `&1 < k ==> &0 < k` in
+ REPEAT STRIP_TAC THEN SPEC_TAC(`x:real`,`y:real`) THEN
+ ABBREV_TAC `k = sup (IMAGE (\x. abs(f(x))) (:real))` THEN
+ MP_TAC(SPEC `IMAGE (\x. abs(f(x))) (:real)` SUP) THEN
+ ASM_SIMP_TAC[FORALL_IN_IMAGE; EXISTS_IN_IMAGE; IN_UNIV] THEN
+ ANTS_TAC THENL [ASM SET_TAC[]; STRIP_TAC] THEN
+ SIMP_TAC[GSYM REAL_NOT_LT; GSYM NOT_EXISTS_THM] THEN STRIP_TAC THEN
+ FIRST_X_ASSUM(MP_TAC o SPEC `k / abs(g(y:real))`) THEN
+ SIMP_TAC[NOT_IMP; NOT_FORALL_THM] THEN CONJ_TAC THENL
+  [ASM_MESON_TAC[REAL_LE_RDIV_EQ; REAL_ABS_MUL; LL;
+     REAL_ARITH `u + v = &2 * z /\ abs u <= k /\ abs v <= k ==> abs z <= k`];
+   ASM_MESON_TAC[REAL_NOT_LE; REAL_LT_LDIV_EQ; REAL_LT_LMUL; REAL_MUL_RID; LL;
+     REAL_ARITH `~(z = &0) /\ abs z <= k ==> &0 < k`]]);;
+
+(* ------------------------------------------------------------------------- *)
+(* second proof.                                                            *)
+(* ------------------------------------------------------------------------- *)
+
+let LEMMA1 = prove
+ (`(!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\ (!x. abs(f x) <= &1)
+  ==> !l x. abs(f x * (g y) pow l) <= &1`,
+ DISCH_THEN(STRIP_ASSUME_TAC o GSYM) THEN INDUCT_TAC THEN
+ ASM_SIMP_TAC[real_pow; REAL_MUL_RID] THEN GEN_TAC THEN MATCH_MP_TAC
+  (REAL_ARITH `abs((&2 * a * b) * c) <= &2 ==> abs(a * b * c) <= &1`) THEN
+ ASM_SIMP_TAC[] THEN FIRST_ASSUM(MP_TAC o SPEC `x + y`) THEN
+ FIRST_ASSUM(MP_TAC o SPEC `x - y`) THEN REAL_ARITH_TAC);;
+
+let LEMMA2 = prove
+ (`~(x = &0) /\ &1 < abs(y) ==> ?n. &1 < abs(y pow n * x)`,
+ SIMP_TAC[REAL_ABS_MUL; REAL_ABS_POW; GSYM REAL_LT_LDIV_EQ;
+          GSYM REAL_ABS_NZ; REAL_ARCH_POW]);;
+
+let IMO = prove
+ (`!f g. (!x y. f(x + y) + f(x - y) = &2 * f(x) * g(y)) /\
+        ~(!x. f(x) = &0) /\
+        (!x. abs(f(x)) <= &1)
+        ==> !x. abs(g(x)) <= &1`,
+ MESON_TAC[LEMMA1; LEMMA2; REAL_NOT_LE; REAL_MUL_SYM]);;
+
+
+}}}
+
+=Commentary=
+
+
+=Further reading=
+
+More details about this demo [http://www.cs.ru.nl/~freek/demos/ here].
