@@ -366,6 +366,46 @@ val it : goalstack = 2 subgoals (2 total)
 }}}
 
 
+===New Tactic===
+
+{{{[ [ASM SET_TAC[]; STRIP_TAC]}}}
+
+[http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM.html  ASM]  ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SET_TAC.html  SET_TAC] ----  [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html  STRIP_TAC] ---- [http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENL.html THENL]
+
+In this step, Harrison connects the tactics with {{{THENL}}} rather than {{{THEN}}} and gives a list of tactics after {{{THENL}}}.  He does this because we have two goals.  When we use {{{THENL}}} instead of {{{THEN}}}, the tactics that follow get applied to all the different subgoals at once.  I consider this an advanced technique.  It means that when we use it, we are proving two different results at once, using a single command.  Harrison uses this technique very effectively.   In this commentary, I will work on a single subgoal at a time.
+
+{{{SET_TAC}}} is a powerful tactic that proves many simple results about sets  (unions and intersections and so forth).  We use it here to prove that our set X is nonempty.  (The image of the real numbers under any function is nonempty.)  We also, have assumption list number 2, which says that {{{abs(f x) <= &1}}} for all x.  This is exactly what we need to show that it is bounded.    The tactic {{{ASM SET_TAC[]}}} uses the set tactic and the assumption list to prove that X is nonempty and bounded.  It solves the subgoal.  We are now back to a single goal.
+
+{{{
+# e(ASM SET_TAC[]);;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+
+`(!x. abs (f x) <= k) /\ (!b. (!x. abs (f x) <= b) ==> k <= b)
+ ==> (!y. abs (g y) <= &1)`
+}}}
+
+We have already discussed what {{{STRIP_TAC}}} does.  It moves the
+antecedent in the goal down to the assumption list.  We now have a long
+list of assumptions (which is good) and a rather easy goal (which is also good).
+{{{
+# e(STRIP_TAC);;
+val it : goalstack = 1 subgoal (1 total)
+
+ 0 [`!x y. f (x + y) + f (x - y) = &2 * f x * g y`]
+ 1 [`~(!x. f x = &0)`]
+ 2 [`!x. abs (f x) <= &1`]
+ 3 [`sup (IMAGE (\x. abs (f x)) (:real)) = k`]
+ 4 [`!x. abs (f x) <= k`]
+ 5 [`!b. (!x. abs (f x) <= b) ==> k <= b`]
+
+`!y. abs (g y) <= &1`
+}}}
+
 
 
 =Exercise=
