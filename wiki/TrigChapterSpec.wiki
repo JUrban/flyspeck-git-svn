@@ -1,0 +1,17 @@
+= Trig Chapter Specification =
+
+This page describes the formal specification of the theorems in a chapter of the proof of the Kepler conjecture.  
+It gives a concrete example of the approach to flyspeck described in FormalText.
+
+There are three components
+
+  * [http://flyspeck.googlecode.com/files/trig_chapter_200803.pdf Trig Chapter pdf].  This is the text version.
+
+
+  * [http://flyspeck.googlecode.com/svn/trunk/inequalities/definitions_kepler.ml HOL Definitions].  This is a list of definitions.  It is a rather long file, because it also includes all the definitions that appear in the formal specification of the interval arithmetic inequalities.  The part that is relevant for trigonometry starts about 3/4 of the way down with the theorem {{{real3_exists}}}
+
+
+  * [http://flyspeck.googlecode.com/svn/trunk/text_formalization/trig.ml HOL Trig Theorems].  This is a specification of all the theorems that are stated in the chapter on trig.  All the desired theorems are expressed as terms.  At the end of the file, there is a signature.  To complete the formal proof for this chapter, a module must be created with this signature. 
+
+
+To carry out the flyspeck project, it will be necessary to give similar specifications and implementations for all the chapters of the book [http://flyspeck.googlecode.com/svn/trunk/kepler_tex/ Flypaper TeX source]
