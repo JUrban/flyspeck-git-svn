@@ -1,0 +1,19 @@
+#labels Featured
+= This page is to help new users to get HOL-Light installed and running =
+
+HOL-Light will run on almost any operation system (Windows, Linux, OSX,...).
+
+You will need to install Objective CAML on your computer.  
+[http://caml.inria.fr/ocaml/index.en.html Download it here].   It is recommended that you
+click on the older releases and install 3.09.3, unless you use the latest (Feb 2008 snapshot) of HOL-Light.
+
+HOL-Light [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html download here].
+The Flyspeck project has now switched from version 2.20 to the version from February 2008, which
+is available from the download page.  The documentation at the HOL-Light site includes a tutorial
+which explains how to install HOL-Light on your computer.
+
+If you wish to contribute to the Flyspeck project, you will need to contact Tom Hales to be added
+as a project member.  Also, get set up with [http://subversion.tigris.org/ Subversion].  This allows
+you to keep your HOL-Light code on your computer in sync with the HOL-Light code at the
+Flyspeck Project page.
+
