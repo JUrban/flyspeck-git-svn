@@ -11,29 +11,24 @@ This section describes how to make a simple installation on Windows.
 
   *  You will need to install Objective CAML 3.09.3 on your computer.  [http://caml.inria.fr/ocaml/release-prev.en.html Download it here].   On that page, click on the link [http://caml.inria.fr/pub/distrib/ocaml-3.09/ocaml-3.09.3-win-mgw.exe MinGW-based native Win32 port (3.09.3).].  Do not install the latest version 3.10 or later.  You want an the old version of Objective CAML -- 3.09.3.
 
-  *  HOL-Light [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html download here].
-It is recommended that you choose the version called [http://www.cl.cam.ac.uk/~jrh13/hol-light/hol_light_080219.tgz Development snapshot from 19th February 2008].  (One reason to use this version is that it has a "search" command that allows you to search for the name of theorems.)
-The Flyspeck project has now switched from version 2.20 to the version from February 2008, which
-is available from the download page.  When you unpack hol_light, you should have a directory called hol_light, which you can put anywhere.  For instance, you can leave it on your desktop.  
+  *  HOL-Light [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html download here].  It is recommended that you choose the version called [http://www.cl.cam.ac.uk/~jrh13/hol-light/hol_light_080219.tgz Development snapshot from 19th February 2008].  (One reason to use this version is that it has a "search" command that allows you to search for the name of theorems.) The Flyspeck project has now switched from version 2.20 to the version from February 2008, which is available from the download page.  When you unpack hol_light, you should have a directory called hol_light, which you can put anywhere.  For instance, you can leave it on your desktop.  
 
-  **  For it to run, you also need to create a files called pa_j.cmo and pa_j.cmi in your hol_light directory.
+  **  For it to run, you also need to create a files called pa_j.cmo and pa_j.cmi in your hol_light directory.   If you know somebody else who has created these files using the same versions of Objective CAML and HOL-Light, you can copy their files.  Otherwise, you need to create them yourself as follows.  Rename the file pa_j_3.09.ml to pa_j.ml.  Open a cmd window (click on "Run.." then type cmd and hit return) and use the DOS "cd" to change to the hol_light directory.  Then at the command prompt type: ocamlc -c -pp "camlp4r pa_extend.cmo q_MLast.cmo" -I +camlp4 pa_j.ml    This should create the files pa_j.cmo and pa_j.cmi.
 
   *  To start HOL Light.  The quickest way to get started is with the command window (cmd).  Eventually, you will want to start HOL Light in a way that makes it easier to edit.
 
-  **  To start HOL-Light in a cmd window, open a cmd window (click on "Run.." then type cmd and hit return).  Use the DOS command "cd" to change to the hol_light directory.  At the DOS prompt type "ocaml" and hit return.  You should be inside Objective CAML.   At the Caml prompt, type "#use "hol.ml;;" then hit return.  HOL-Light should start up.  On most computers it takes a few minutes to start up.
+        #  To start HOL-Light in a cmd window, open a cmd window (click on "Run.." then type cmd and hit return).  Use the DOS command "cd" to change to the hol_light directory.  At the DOS prompt type "ocaml" and hit return.  You should be inside Objective CAML.   At the Caml prompt, type "#use "hol.ml;;" then hit return.  HOL-Light should start up.  On most computers it takes a few minutes to start up.
 
-    ** To start HOL-Light in the Objective CAML graphical user interface.  (This section needs to be written.)
+        # To start HOL-Light in the Objective CAML graphical user interface.  (This section needs to be written.)
 
-    ** To start HOL-Light inside Emacs.  First install Emacs on Windows, as described below.
+        # To start HOL-Light inside Emacs.  First install Emacs on Windows, as described below.  Then open emacs and type "alt-x shell"  This will open the command shell inside emacs.
 
 == Using the Flyspeck Google Code with Windows ==
 
   *  If you wish to make contributions to the Flyspeck project, you will need to contact Tom Hales to be added
 as a project member.  For this you need a gmail account.  Your name will appear as a project member on the [http://code.google.com/p/flyspeck/ Flyspeck home page].  You do not need to be a project member if you do not contribute to the Flyspeck project.
 
-  *  Also, get set up with [http://subversion.tigris.org/ Subversion].  This allows
-you to keep your HOL-Light code on your computer in sync with the HOL-Light code at the
-Flyspeck Project page.
+  *  To use the source files, download [http://tortoisesvn.tigris.org/ TortoiseSVN] for Windows.  You can use it to keep your files in sync with the HOL-Light code at the Flyspeck Project page.
 
 == Using Emacs on Windows ==
 
