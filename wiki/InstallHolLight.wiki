@@ -1,11 +1,11 @@
 #labels Featured
 = This page is to help new users to get HOL-Light installed and running =
 
-HOL-Light will run on almost any operation system (Windows, Linux, OSX,...).  The download page is [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html HOL-Light].  Detailed installation instructions can be found in [http://www.cl.cam.ac.uk/~jrh13/hol-light/tutorial_220.pdf Harrison's tutorial] on page 5.
+HOL-Light will run on almost any operation system (Windows, Linux, OSX,...).  The download page is [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html HOL-Light].  Detailed installation instructions can be found in [http://www.cl.cam.ac.uk/~jrh13/hol-light/tutorial_220.pdf Harrison's tutorial] on page 5.  Cygwin is not needed to run HOL-Light on Windows.
 
 == HOL Light on Windows ==
 
-This section describes how to make a simple installation on Windows.
+This section describes how to make a simple installation on Windows.  
 
   * Your computer needs to be able to use files with extensions .tar and .tgz.  If your computer does not recognize these file extensions, you should download and install [http://www.powerarchiver.com/ PowerArchiver] on your computer (which has a free trial period).
 
@@ -15,12 +15,12 @@ This section describes how to make a simple installation on Windows.
 
   *  You can open a new CMD prompt by choosing START, RUN, cmd, OK.  Change the directory with the DOS command CD to make hol_light the current directory.
 
-  *  For HOL-Light to run for the first time, you also need to create a files called pa_j.cmo and pa_j.cmi in your hol_light directory.   If you know somebody else who has created these files using the same versions of Objective CAML and HOL-Light, you can copy their files.  Otherwise, you need to create them yourself as follows.  Rename the file pa_j_3.09.ml to pa_j.ml.  At the command prompt in the hol_light directory type: ocamlc -c -pp "camlp4r pa_extend.cmo q_MLast.cmo" -I +camlp4 pa_j.ml    This should create the files pa_j.cmo and pa_j.cmi.
+  *  For HOL-Light to run for the first time, you also need to create a files called pa_j.cmo and pa_j.cmi in your hol_light directory.   If you know somebody else who has created these files using the same versions of Objective CAML and HOL-Light, you can copy their files.  Otherwise, you need to create them yourself as follows.  Rename the file pa_j_3.09.ml to pa_j.ml.  At the command prompt in the hol_light directory type: {{{ocamlc -c -pp "camlp4r pa_extend.cmo q_MLast.cmo" -I +camlp4 pa_j.ml}}}    This should create the files pa_j.cmo and pa_j.cmi.
 
   *  To start HOL Light.  The quickest way to get started is with the command window (cmd).  Eventually, you will want to start HOL Light in a way that makes it easier to edit.
         **  To start HOL-Light at the cmd prompt in the hol_light directory, type {{{ocaml}}} and hit return.  Objective CAML should start.   At the Caml prompt, type {{{#use "hol.ml;;}}} and hit return.  HOL-Light should start up.  On most computers it takes a few minutes to start up.
         ** To start HOL-Light in the Objective CAML graphical user interface.  (This section needs to be written.)
-        ** To start HOL-Light inside Emacs.  First install Emacs on Windows, as described below.  Then open emacs and type "alt-x shell"  This will open the command shell inside emacs.
+        ** To start HOL-Light inside Emacs.  First install Emacs on Windows, as described below.  Then open emacs and type "alt-x shell"  This will open the command shell inside emacs.  You can then follow the instructions for starting HOL-Light at the cmd prompt in the hol_light directory.
 
 == Using the Flyspeck Google Code with Windows ==
 
@@ -29,6 +29,9 @@ This section describes how to make a simple installation on Windows.
   *  To use the source files, download [http://tortoisesvn.tigris.org/ TortoiseSVN] for Windows.  You can use it to keep your files in sync with the HOL-Light code at the Flyspeck Project page.
 
 == Using Emacs on Windows ==
+
+Eventually, you will want to edit HOL-Light sessions with a powerful text editor.  To install the emacs editor,
+follow steps 1,2,3,4,8 (or all steps for a full installation) of [http://www.claremontmckenna.edu/math/ALee/emacs/emacs.html how to install emacs].
 
 This section needs to be filled in.
 
