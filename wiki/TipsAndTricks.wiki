@@ -1,0 +1,208 @@
+#summary This wiki is a list of advice for new users and also tricks for anyone.  Feel free to add to it.
+
+= Introduction =
+
+Many members of the Flyspeck project may be new to HOL Light or to the HOL Light tools used in the flyspeck project.  This page was created to ease this learning curve, and to effectively share the wisdom of more experienced users.  
+
+Even if you are new to HOL Light or Flyspeck, feel free to add your experiences here or ask that certain topics are added.  Other members may be struggling with the same things.
+
+= Setup of Applications =
+
+_Right now, this section overlaps a lot with the InstallHolLight wiki.  Start there first._
+
+== O'Caml and HOL Light ==
+
+O'Caml is a functional programming language, and HOL Light is the proof checking system which is run in the O'Caml top-level.  O'Caml can be run in any Linux-like environment (like Cygwin for MS Windows) or natively in Windows.  If you install the Linux version, even in Cygwin in MS Windows, *DON'T DO* `make clean`! The reason, is that you can later use the HOL Light search functionality to its fullest power. (I don't know if it's possible to do anything like this in native Windows.)
+
+See the InstallHolLight wiki for installing HOL Light.
+
+== IDE or Text Editor ==
+
+Obviously, a good editor is needed to change the files.  Something as simple as Windows Notepad suffices, but it's nice to have some more powerful features: color-coding the code and searching through multiple files.  (See below for advice on a common problem with color-coding.)  Here are some suggestions (add yours to the list if you use something different).
+
+ * *Emacs with Ocaml-mode or the Tuareg-mode*
+
+  (Someone, please fill this in.  Also, look at InstallHolLight for more information.)
+
+ * *Eclipse with the OCaIDE plugin*
+
+  Eclipse is a common Java-based IDE commonly used for Java code.  It uses Windows short-cuts (like Ctrl-C for copy).  The OCaIDE plugin isn't exactly suited for this project, but it is good enough.  It color-codes the text and recognizes the .ml extension.  Note, it will give errors for things in back quotes and for commands like `#use`, but since we aren't compiling the files, it's not a problem.  It also has an O'Caml toplevel built in, (although it doesn't work well with Cygwin).
+
+== Subversion ==
+
+Subversion (SVN) is the version control system for this project.  It allows you to download the files, and also allows more than one user to make changes to the same file.
+
+There are many GUI programs and IDE plug-ins for Subversion.  One option is Tortoise SVN for Windows.  If you use Eclipse, there also is the Subeclipse plug-in.
+
+=== Common SVN Commands ===
+
+The following are the most common commands you will need for SVN.  If you use one of the above SVN programs, these commands should be available in drop down menus.  (See the respective documentation for more details.)
+
+  * *Checkout* is used to download the files for the first time.  If you are a project member, use your Google Code user name and password (see here). You can also check them out anonymously but then you can't commit the changes later.  (If you need to be added as a project member, contact Tom Hales.)  The name "checkout" may be confusing.  When you checkout a project, it doesn't mean you plan to make changes to everything you check out, nor does it stop others from checking out the files and making changes.  It just downloads a working copy onto your computer.
+
+  * *Update* should be run every time you work on a file.  It gives you the newest version of the file.  You should be able to update one file or a whole directory.  Since others can change the file you are working on, update it often, even just before committing it.  If there is a conflict, you can go with the other person's changes, go with your changes, or manually merge the two.  (It's best to talk with the other person if there is a conflict before doing anything rash.)
+
+  * *Commit* adds your changes to the repository.  You can commit multiple files at the same time.  You need to be a project member (talk to Tom Hales if you are not) and you need to have checked out the files with your user name and password (see here).  (If you checked out the files anonymously you may need to check them out again with your username and password.)  The SVN system may save the password for you.  When you commit, you will get a dialog box where you can put notes in about the changes.  Such notes are helpful to other project members.
+
+  * *Add* adds a new file to the repository. Just creating a file in the subversion directory doesn't add it to the repository.  Instead you need to manually add it with the add command.  Then after adding it you can commit it.
+
+There are more commands as well.  See the documentation for your SVN program, or the documentation for SVN.
+
+= Getting Started on Flyspeck =
+
+After the above programs are setup, you are ready to work on the Flyspeck project (or just to start experimenting with HOL Light.)  
+
+== Files you Need for Flyspeck ==
+
+Obviously you need the base HOL Library, `hol.ml`.  But there is more. The file `/inequalities/Multivariate/vectors.ml` contains the definitions you need to get started with.  Note it also contains certain "prerequisite" HOL Light files.
+
+Right now these are
+
+  *`Multivariate/vectors.ml`
+  *`Examples/analysis.ml`
+  *`Examples/transc.ml`
+
+but this may change.  Also, other files in the `/text_formalization/` may be needed as well, such as `trig.ml`.
+
+== An Example Setup ==
+
+Below is one user's advice for setting things up.  
+
+I (Jason) recommend making minimal changes to the actual HOL Light files.  The reason for this is that you may later want to change the version of HOL Light, or even have two versions installed at the same time in different directories (this isn't a problem).  So this means checking out the Flyspeck files and saving them to a different directory, and then editing them in place.  I also use another directory for my personal flyspeck related files and another for my personal HOL files. There are a few changes, however, that I found useful to make to the HOL Light directory.  _Make sure you note the changes so you can undo or redo them later._
+
+I like to start in the HOL Light directory, so I made a file called `flyspeck.ml` that includes the following code.
+
+{{{
+#use "hol.ml"
+
+#use "/home/Jason/projects/flyspeck_tools/startup/jmr_kep_init.ml";;
+}}}
+
+And the `jmr_kep_init.ml` file which I put in a different directory includes  
+
+{{{
+needs "/home/Jason/projects/hol_tools/useful_tools.ml";;
+
+needs "Multivariate/vectors.ml";;
+needs "Examples/analysis.ml";;
+needs "Examples/transc.ml";;
+
+load_path :=
+     ["/home/Jason/projects/flyspeck_google/inequalities/";
+      "/home/Jason/projects/flyspeck_google/text_formalization/"]
+        @ (!load_path);;
+
+needs "Examples/update_database.ml";;
+
+needs "definitions_kepler.ml";;
+(*
+needs "trig.ml";;
+*)
+}}}
+
+This file is based off of a similar one in `\inequalities\` and contains everything I need to get started working on Flyspeck:
+
+  * The additional HOL Library files I need.
+  * The flyspeck files I need.
+  * Additional tools that I made for myself that are useful.  (But don't end up in the flyspeck files.)
+  * The HOL expanded search tool (`update_database.ml`).
+
+And it's all in one easy-to-change file!
+
+Other possible changes to the HOL Light directory files include fixing the comment color-coding issue, adding a fast_load option, and setting up search.  (These will be added to this wiki soon.)
+
+= Useful References =
+
+HOL Light is a large, complicated library of definitions, tactics, theorems, and tools.  Navigating it can be a challenge.  Here are some resources to help.
+
+  * *HOL Tutorial.* It's a good place to look for basic how-to information.
+
+  * *HOL Manual.* It's out-of-date, but it has a lot of good information about advanced topics.
+
+  * *HOL Reference (web, pdf, and inline `help`).* It contains every tactic, function, etc. in the basic HOL library.  Also the PDF version lists every theorem.  The inline help is the same information, and can be accessed by typing, for example, `help "ARITH_TAC"`.  _Note: This is only available in the newest version of HOL Light._
+
+  * *VERY QUICK REFERENCE.* This is included in the HOL Light files.
+
+  * *QUICK REFERENCE.* This is also included in the HOL Light files.
+
+  * *HOL Light `search` command.* It's a powerful tool!  See below for more info.
+
+  * *O'Caml Top Level.* Besides `search` and `help`, there is a lot you can investigate just by typing stuff in.  For example, to see what theorem `sqrt` is, just type it in.  Also there are tools to break things apart and look at them.  See the HOL reference for more examples.  (Also I'll add some of my own soon.)
+
+  * *HOL Light Source Code.* It's helpful just to look at the source code.  If you have a powerful IDE, you can search through the code.  But even a web brower like Firefox or a text editor like Notepad would let you explore the files individually.  (If you use an editor that color-codes the text, see here for a tip. (Coming Soon))
+
+  * *John Harrison's Papers.* Some topics of interest are in these papers.
+
+  * *Flyspeck Group.* Ask others your question, or see if it's already been asked. 
+
+== Search Feature ==
+The `search` feature is available in the newest version of HOL Light and is quite useful.  You can read the documentation for more info (type `help "search"` in HOL Light).  Note, however, that by default it only searches the theorems loaded by `hol.ml`.  The list of theorems is fixed and sorted in the file `datebase.ml`.  If you wish to search theorem from additional files you've load or even theorems you've added, you have two options.
+
+  # *Update the database using `Examples/update_database.ml`.*  This requires installing O'Caml manually and *not* doing `make clean`.  (I'm not sure if this can be done in native Windows.)  It also requires changing the `Examples/update_database.ml` file to point to certain O'Caml files made when you install O'Caml.
+
+  # *Manually change `database.ml`.*  This would be two much work to do by hand, but someone with the above fix could add say write a script to make a list of theorems from, say, `Multivariate/vectors`, etc.  Then you could replace `database.ml` with that list.
+
+= Working with Vectors =
+
+(To be added.)
+
+= Random Fixes and Tips =
+
+== The Comment Problem ==
+
+In certain IDEs that do color-coding (like Eclipse with OCaIDE), the program will think `(*)` is the start of a comment.  To fix this, you can change every instance of `(*)` to `( * )`.  This works if the `*` refers to multiplication in O'Caml or multiplication in an HOL Light term.
+
+== Investigating Types ==
+
+To both the new user and the experienced user, types can present a problem.  Often it's helpful to investigate the types of variables.  To do this one option is to turn the "pretty printer" for terms off.  You can do this with `#remove_printer print_qterm`, and then later turn it back on with `#install_print print_qterm`.  This however is quite difficult to read.  Also you can use the `term_of` tool, but that only works to find the type of the whole term, not it's parts.
+
+Another option is to use this code:
+
+{{{
+(* ------------------------------------------------------------------------- *)
+(* Prints the type after each variable.  Useful for "debugging" type issues. *)
+(* ------------------------------------------------------------------------- *)
+
+let print_varandtype tm =
+  let fmt = std_formatter in
+  let hop,args = strip_comb tm in
+  let s = name_of hop
+  and ty = type_of hop in
+  if is_var hop & args = [] then
+   (pp_print_string fmt "(";
+    pp_print_string fmt s;
+    pp_print_string fmt ":";
+    pp_print_type fmt ty;
+    pp_print_string fmt ")")
+  else fail() ;;
+
+let show_types,hide_types =
+  (fun () -> install_user_printer ("Show Types",print_varandtype)),
+  (fun () -> try delete_user_printer "Show Types"
+             with Failure _ -> failwith ("hide_types: "^
+                                         "Types are already hidden."));;
+}}}
+
+As it says, it allows the user to switch the printer to show the type of each variable.  It also has the added advantage of showing what terms are variables.  To turn it on type in `show_types ()` and to turn it off type in `hide_types ()`.
+
+{{{
+# show_types();;
+val it : unit = ()
+# `!v w. v + w = w + v`;;
+val it : term =
+  `!(v:real) (w:real). (v:real) + (w:real) = (w:real) + (v:real)`
+# hide_types();;
+val it : unit = ()
+# `!v w. v + w = w + v`;;
+val it : term = `!v w. v + w = w + v`
+}}}
+
+== Type Issues ==
+
+(I should clarify this.)
+
+When using `SUBGOAL_TAC`, `EXISTS_TAC`, `MATCH_MP_TAC`, and others it's important to be specific with the types of every polymorphic variable, because it tries to match these variables to the goal, and it considers, say, `x:A`, `x:?71752` and `x:?71753` as different types!  Also in the case of `EXISTS_TAC` it doesn't even know you mean, say, `n` to be an integer.  If you're not sure of the type of the goal, use the above script.  If you want to know what HOL thinks the type of say `n + 1` is, use `type_of`.
+
+== Loading Files Fast ==
+
+(To be added.)
