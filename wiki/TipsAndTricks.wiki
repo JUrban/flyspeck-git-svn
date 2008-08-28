@@ -32,7 +32,7 @@ Obviously, a good editor is needed to change the files.  Something as simple as 
 
 Subversion (SVN) is the version control system for this project.  It allows you to download the files, and also allows more than one user to make changes to the same file.
 
-There are many GUI programs and IDE plug-ins for Subversion.  One option is Tortoise SVN for Windows.  If you use Eclipse, there also is the Subeclipse plug-in.
+There are many GUI programs and IDE plug-ins for Subversion.  One option is Tortoise SVN for Windows.  To use Tortoise, download [http://tortoisesvn.tigris.org/ TortoiseSVN] for Windows.   A good tutorial that tells how to download and upload files with Tortoise is at [http://internetducttape.com/2007/03/03/howto_google_code_hosting_subv... TortoseSVN for Google Code].   If you use Eclipse, there also is the Subeclipse plug-in.
 
 === Common SVN Commands ===
 
