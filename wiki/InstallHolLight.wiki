@@ -30,6 +30,20 @@ This section describes how to make a simple installation on Windows.
 
   *  To use the source files, download [http://tortoisesvn.tigris.org/ TortoiseSVN] for Windows.  You can use it to keep your files in sync with the HOL-Light code at the Flyspeck Project page. A good tutorial that tells how to download and upload files to the flyspeck website is at [http://internetducttape.com/2007/03/03/howto_google_code_hosting_subv... TortoseSVN for Google Code]  These instructions tell you how to obtain your password. (If you don't use your password when you download your files, you will not be able to upload them again.)  In these instructions, whenever it says to type <project>, type flyspeck instead.    You want to follow steps 1.0,  3.0, and 4.0 that tell you how to check out an existing project and then how to upload the files that you add to the project.  After you finish step 3.0, put the file you want to upload in the same directory with all the text_formalization/ files.  Highlight the file in the directory and right click on "TortoiseSVN >> Add" to add the file to the project.  Then right click on "SVN Commit" to upload it. 
 
+Here are the instructions from Nguyen Duc Phuong:
+
+ * Step 1: download the latest version of Tortoisesvn, now is version 1.5.3 then install it.
+ 
+ * Step 2: right-mouse click on the desktop and choose SVNcheckout, then :
+ URL of repository: "link of the file that your group is now working on" for example, my group is workoing over: {{{https://flyspeck.googlecode.com/svn/trunk/text_formalization/collect_geom.ml}}}
+ Checkout directory: you choose where the file ( whose link is above) will be put there. For example:
+{{{C:\Documents and Settings\ndphuong\Desktop\text_formalization\}}}
+ 
+ * Step 3: whenever the file had been downloaded to your computer, you can use msword to edit it as you want. And then right-mouse click on that file, choose SVNcommit. Your work will be uploaded and you can check it by revisiting Flyspeck google homepage.
+ From now on, after you had finished installed tortoisesvn, everytime you want to upload files let do from step 2 and so on.
+ Enjoy your work by seeing them (next to your name {{{^.^}}}) appear in Flyspeck googlepage !
+ 
+
 == Using Emacs on Windows ==
 
 Eventually, you will want to edit HOL-Light sessions with a powerful text editor.  To install the emacs editor,
