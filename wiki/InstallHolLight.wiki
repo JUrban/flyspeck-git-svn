@@ -36,8 +36,7 @@ Here are the instructions from Nguyen Duc Phuong:
  
  * Step 2: right-mouse click on the desktop and choose SVNcheckout, then :
  URL of repository: "link of the file that your group is now working on" for example, my group is workoing over: {{{https://flyspeck.googlecode.com/svn/trunk/text_formalization/collect_geom.ml}}}
- Checkout directory: you choose where the file ( whose link is above) will be put there. For example:
-{{{C:\Documents and Settings\ndphuong\Desktop\text_formalization\}}}
+ Checkout directory: you choose where the file ( whose link is above) will be put there. For example: {{{C:\Documents and Settings\ndphuong\Desktop\text_formalization\}}}
  
  * Step 3: whenever the file had been downloaded to your computer, you can use msword to edit it as you want. And then right-mouse click on that file, choose SVNcommit. Your work will be uploaded and you can check it by revisiting Flyspeck google homepage.
  From now on, after you had finished installed tortoisesvn, everytime you want to upload files let do from step 2 and so on.
