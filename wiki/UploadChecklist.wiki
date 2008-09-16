@@ -1,0 +1,26 @@
+#summary Checklist for project members before uploading files
+
+Files are downloaded and uploaded with subversion.  See [InstallHolLight] for subversion help.
+
+= Before you Upload =
+
+ # Remove code that is not for the entire group.  For example, if you use definitions from another file, there is no need to repeat the definitions in the file you are uploading.
+ # Make sure you code runs without any errors.  
+ # Convert all interactive proof sessions (with commands {{{g}}} and {{{e}}}) to packaged proof. See Correct Form below.
+
+
+
+== Correct Form ==
+
+The proof should have the packaged form using {{{THEN}} and {{{THENL}}}, and {{{prove}}}.  
+{{{
+let EXAMPLE = prove (`!x y. ?(z:real). x + y = z`,
+  (REPEAT GEN_TAC) THEN (EXISTS_TAC `x+y:real`) THEN (REWRITE_TAC[]));;
+}}} 
+It should *not* be in interactive form :
+{{{
+g `!x y. ?(z:real). x + y = z`;;
+e (REPEAT GEN_TAC);;
+e (EXISTS_TAC `x+y:real`);;
+e (REWRITE_TAC[]);;
+}}}
