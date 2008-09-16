@@ -1,5 +1,4 @@
 #summary This note gives an outline of how the formal proof of the written text may proceed.
-#labels Featured
 =Introduction=
 
 
