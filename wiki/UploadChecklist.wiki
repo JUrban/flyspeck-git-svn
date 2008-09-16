@@ -8,6 +8,7 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
  # Make sure your code runs without any errors.  
  # Convert all interactive proof sessions (with commands {{{g}}} and {{{e}}}) to packaged proof. See Correct Form below.
  # Do not enter code that would break the project, such as new axioms, incompatible identifiers, or incompatible definitions.  
+ # Make sure that all results are clearly identified with theorem name, identifier, person who did the formal proof, and month the formal proof was completed.
 
 
 == Correct Form ==
