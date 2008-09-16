@@ -1,11 +1,11 @@
+#summary This note gives an outline of how the formal proof of the written text may proceed.
 #labels Featured
 =Introduction=
 
 
 =The Text=
 
-The purpose of this note is to give an outline of how the formal
-proof of the written text may proceed.
+
 
 Several revisions of the text have now been made.  A version, prepared especially with
 the Flyspeck project in mind, is under continual revision, viewable as [http://flyspeck.googlecode.com/svn/trunk/kepler_tex/ google code] or
