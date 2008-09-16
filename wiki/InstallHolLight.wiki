@@ -54,3 +54,9 @@ This section needs to be filled in.
 == Checkpointing ==
 
 This section needs to be filled in.
+
+== Making a version of Objective CAML with "num" preloaded ==
+
+In Windows, the library nums.cma is generally preloaded.  In unix/linux/Mac OS X, a new top level can be created (called {{{ocamlnum}}} with "num" preloaded.  Just execute
+{{{$ ocamlmktop -o ocamlnum nums.cma}}} from the directory that contains the {{{ocaml}}} executable.  Type {{{$ which ocaml}}} to determine the directory.
+
