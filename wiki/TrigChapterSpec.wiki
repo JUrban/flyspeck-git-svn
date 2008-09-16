@@ -1,4 +1,6 @@
+#summary The formal specification of the chapter on trigonometry
 #labels Featured
+
 = Trig Chapter Specification =
 
 This page describes the formal specification of the theorems in a chapter of the proof of the Kepler conjecture.  
