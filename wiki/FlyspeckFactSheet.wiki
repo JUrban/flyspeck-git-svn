@@ -1,5 +1,5 @@
+#summary Introduction to the Flyspeck Project (formal proof of the Kepler Conjecture).  This is a good place to start.
 #labels Featured
-#This is an introduction to the Flyspeck Project, whose purpose is to give a formal proof of the Kepler Conjecture.
 
 = The Flyspeck Project Fact Sheet =
 
