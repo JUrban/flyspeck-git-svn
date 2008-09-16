@@ -7,7 +7,7 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
  # Remove code that is not for the entire group.  For example, if you use definitions from another file, there is no need to repeat the definitions in the file you are uploading.
  # Make sure you code runs without any errors.  
  # Convert all interactive proof sessions (with commands {{{g}}} and {{{e}}}) to packaged proof. See Correct Form below.
-
+ # Do not enter code that would break the project, such as new axioms, incompatible identifiers, or incompatible definitions.  
 
 
 == Correct Form ==
