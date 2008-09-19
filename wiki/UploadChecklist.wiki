@@ -21,7 +21,7 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
 
 == Correct Form ==
 
-The proof should have the packaged form using {{{THEN}} and {{{THENL}}}, and {{{prove}}}.  
+The proof should have the packaged form using {{{THEN}}} and {{{THENL}}}, and {{{prove}}}.  
 {{{
 let EXAMPLE = prove (`!x y. ?(z:real). x + y = z`,
   (REPEAT GEN_TAC) THEN (EXISTS_TAC `x+y:real`) THEN (REWRITE_TAC[]));;
