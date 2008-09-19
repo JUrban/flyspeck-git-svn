@@ -12,7 +12,7 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
  # You must use "update" in SVN so that your version is consistent with the latest changes made by others, before you "commit"
 
 
-== The files.
+== The files ==
 
  * Proofs do not belong in the main definitions file "definitions_kepler.ml"  They belong in a suitable chapter file trig.ml, fan.ml, etc.
  * Proofs do not belong in the specification files.  The purpose of the specification files are to state an axiom for each chapter, so that others can use the results of the file before the formalization is complete.   Hales will create the specification files.
