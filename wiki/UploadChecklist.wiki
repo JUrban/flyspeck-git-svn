@@ -9,6 +9,14 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
  # Convert all interactive proof sessions (with commands {{{g}}} and {{{e}}}) to packaged proof. See Correct Form below.
  # Do not enter code that would break the project, such as new axioms, incompatible identifiers, or incompatible definitions.  
  # Make sure that all results are clearly identified with theorem name, identifier, person who did the formal proof, and month the formal proof was completed.
+ # You must use "update" in SVN so that your version is consistent with the latest changes made by others, before you "commit"
+
+
+== The files.
+
+ * Proofs do not belong in the main definitions file "definitions_kepler.ml"  They belong in a suitable chapter file trig.ml, fan.ml, etc.
+ * Proofs do not belong in the specification files.  The purpose of the specification files are to state an axiom for each chapter, so that others can use the results of the file before the formalization is complete.   Hales will create the specification files.
+
 
 
 == Correct Form ==
