@@ -1,0 +1,163 @@
+% Author Thomas C. Hales
+% Copyright Thomas C. Hales
+% Format latex.
+% 
+
+%!TEX TS-program = latex    
+%% This line is for TexShop. 
+
+% Revision history. See svn.
+% Document created Dec 6, 2002
+% Revision started Jan 2007, from published DCG.
+
+\documentclass[cup9a]{cupbook}
+%% Cambridge University Press Macros from
+%% https://authornet.cambridge.org/information/productionguide/laTex_files/
+
+%
+
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+%\usepackage{amsthm}
+\usepackage{amsmath}
+%\usepackage{mathidx}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{crop}
+\usepackage{txfonts}
+%\usepackage{pdfsync}  %for TexShop sync.
+\usepackage[letterpaper,colorlinks=true,
+            ps2pdf,hyperindex=true]{hyperref}
+%\usepackage{mparhack} %http://www.tex.ac.uk/cgi-bin/texfaq2html?label=marginparside
+\usepackage{multind}
+
+
+
+
+
+
+\input{flag}
+\input{kepmacros}
+\makeindex{index/Index}
+\makeindex{index/Symbols}
+\makeindex{index/Spec}
+\makeindex{index/Interval}
+\makeindex{index/References}
+\makeindex{index/Names}
+\makeindex{index/Greek}
+\makeindex{guid}
+{
+\setcat % needed?
+\input{summary_tarski.txt}
+}
+
+
+ \crop
+%\makeindex
+
+
+% This indexes all quoted results from tarski.
+% kepmacros.tex:\def\guid#1{\indy{ZA{#1}@{#1}|itt}}
+% This indexes all quoted citations.
+
+% CUP BOOK CLASS SPECIFIC
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{claim}{Claim}[chapter]
+\newtheorem{notation}{Notation}[chapter]
+\newtheorem{assumption}{Assumption}[chapter]
+\newtheorem{interpretation}{Interpretation}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\raggedbottom  % for now.
+%\raggedright  % don't worry for now.
+
+    \title{Flyspeck :
+      %\\ \phantom{Hello}
+      \\  A Blueprint for the Formal Proof of the Kepler Conjecture
+      \\ (Unfinished Notes based on the 1998 Proof)}
+    \author{Thomas C. Hales}
+    \maketitle
+    \frontmatter
+    \tableofcontents
+    \thanks
+
+\mainmatter
+
+\input{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%  \label{part:intro}
+   \newpage
+
+   \setcounter{chapter}{-1}
+   \chapter{Preface}
+   \label{XX}  % for missing references. XX.
+   \input{preface} %proofed
+   
+   \chapter{Essays on Packings}
+   \input{historical} %proofed
+   \input{lectures}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    %\part{Foundational Material}
+    
+    
+    \input{trig}  
+    \input{volume}
+    \input{hypermap}
+    %% Internal Fan, rating=4050.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    %\part{Solution to the Sphere Packing Problem}
+    
+    
+    \input{form}
+    \input{fine}
+    \input{main_estimate}
+    \input{tame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    
+    \part{Linear Program}
+    \input{lin_prog} % 4/5/2008
+    \input{DSLP} % 4/5/2008
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \part{Computations}
+    % CUP has \appendix to start the appendices.
+    % That command reduces the Table of Contents
+    % Listings.
+    %\appendix
+    %\setcounter{tocdepth}{2}
+    %\def\thesection{A\thechapter.\arabic{section}}
+    
+    \label{part:appendix}
+    \chapter{Appendix: Derivatives}
+    % reduction has an internal chapter
+    \input{reduction} 
+    \chapter{Appendix: Assembly Listing}
+    \input{assembly} % 4/5/2008
+    %\input{XX_issues}
+    \input{backmatter}
+    %%
+
+
+\end{document}

@@ -1,0 +1,3878 @@
+%% HYPERMAPS
+
+\chapter{Hypermap}\label{chap:hypermap}
+
+\section{Basics}
+
+
+
+\begin{definition}[hypermap]\label{def:hypermap}  A hypermap is a finite set $D$, together with
+three functions $e,n,f:D\to D$ that satisfy
+    $$e\circ n\circ f = I.$$
+The elements of $D$ are called {\it darts}.  The functions $e,n,f$
+are called the {\it edge map}, the {\it node map}, and the {\it
+face map}, respectively.
+\end{definition}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{/ps/dart.ps}
+  \caption{This symbol represents a dart.}
+  \label{fig:dart}
+\end{figure}
+
+\begin{remark}\tlabel{rem:hypermap} A hypermap is an abstraction of
+the concept of 
+planar graph.  Place a dart at each angle of a planar graph $G$.
+One function, $f$, 
+cycles counterclockwise around the angles of each face.  
+Another function, $n$, 
+rotates counterclockwise around the angles at each
+node.  A third function, $e$, pairs angles at opposite ends of
+each edge  (Figure~\ref{fig:hypermap_ex}).   The hypermap extracts
+the data $(D,e,n,f)$ from the planar graph and discards the rest.
+\end{remark}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{\ps/hypermap_ex.eps}
+  \caption{Darts mark the angles of a planar graph.  We may
+  permute darts about faces, nodes, and edges.}
+  \label{fig:hypermap_ex}
+\end{figure}
+
+A hypermap satisfies 
+  \begin{equation}\tlabel{eqn:triality}
+  n\circ f\circ e = f\circ e\circ n = I.
+  \end{equation}
+Inverted, this triality becomes
+   $$
+   n^{-1} \circ e^{-1} \circ f^{-1} = (f \circ e \circ n)^{-1} = I.
+   $$
+This inversion
+is the abstract form of the
+the duality between nodes and faces in a planar graph.  
+Because of
+these symmetries in the defining relation, 
+there will be multiple versions of 
+theorems about hypermaps,
+all obtained from one proof by symmetry.
+
+Each function $e,n,f$ is a permutation of $D$.  
+We write $\#h$ for the
+number of orbits of a permutation $h$ on $D$, and $\#\tangle{e,n,f}$
+for the number of orbits of the combined action of functions $e,n,f$
+on $D$.   
+
+\begin{definition}[node,~face,~edge,~group~orbit]  A node is an orbit  under
+$n$.  A face is an  orbit  under $f$.  An edge
+is an orbit under $e$. An orbit of $D$ under $\tangle{e,n,f}$
+(the combined action of $e,n,f$) is called a {\it group orbit}.
+A hypermap has a single group orbit
+if 
+  $\#\tangle{e,n,f} = 1$. 
+\end{definition}
+
+\begin{definition}[plain,~planar] A hypermap is {\it plain} (note the spelling!) if
+$e$ is an involution on $D$ (that is, $e\circ e = I$).  A hypermap
+is {\it planar} (note the spelling!) if the Euler relation holds:
+    $$\# n + \# e + \# f = \# D + 2 \#\tangle{e,n,f}.$$
+\end{definition}
+
+\begin{definition}[degenerate] A dart is degenerate if it is a
+fixed point of one of the maps $e,n,f$; otherwise it's nondegenerate.  
+%%It is nondegenerate otherwise.
+\indy{Index}{degenerate}\indy{Index}{nondegenerate}
+\end{definition}
+
+\begin{definition}[simple] 
+A hypermap is {\it simple} if the intersection of a face with
+a node never contains more than one dart.
+\indy{Index}{simple}
+\end{definition}
+
+
+% Moved from cup05_tame.tex section on tame plane graphs. 9/5/07:
+\begin{lemma}\guid{ZHQCZLX}\tlabel{lemma:nondegen} 
+Let $(D,e,n,f)$ be a simple plain hypermap such that every face has
+at least three darts.
+Then $n$ has no fixed point.
+\end{lemma}
+
+\begin{proof}  For a contradiction, let $x$ be a fixed point of
+$n$. We show that $e x$ and $f x$ lie in the same node and
+face, so are equal in the simple hypermap.  
+They lie in the same node because
+$n(f x) = e^{-1} x = e x$. They lie in the same face because
+    $$f^2 (e x) =  f(n^{-1} x) = f x.$$
+So $e x = f x$.   Thus, $f^2 (e x) = f x = e x$, and $e x$ lies on a
+face with at most two darts.  This contradicts what is given.
+\end{proof}
+
+\begin{remark}  The Euler relation for hypermaps harks back
+to the Euler relation for planar graphs.
+Let $G$ be a planar graph with a single group orbit that satisfies the
+Euler relation
+    $$V - E + F = 2$$
+where $V$ is the number of vertices, $E$ the number of edges, and
+$F$ the number of faces of $G$ (including an unbounded face). The
+hypermap $(D,e,n,f)$, made from $G$ in
+Remark~\ref{rem:hypermap}, is plain.
+Moreover,
+    $$\begin{array}{lll}
+    V &= \# n\\
+    E &= \# e\\
+    F &= \# f\\
+    2E &= \# D\\
+    1 &= \#\tangle{e,n,f}\\
+    \# n + \#e + \# f &= 
+    V + E + F = 2 E + 2 = \# D + 2 \#\tangle{e,n,f}.
+    \end{array}
+    $$
+Thus, the hypermap is also planar. 
+\end{remark}
+
+
+%% WW Used??
+%\begin{lemma}\guid{WXEZQZR}\tlabel{lemma:euler-alt}  Let $H$ be a plain planar hypermap with a single group orbit.
+%Let $f_i$ be the number of faces with $i$ darts.  Then
+%    $$2 \# n - 2 =  f_3 + 2 f_4 + 3 f_5 +\cdots$$
+%\end{lemma}
+%
+%\begin{proof}  We have
+%    $$
+%    \begin{array}{lll}
+%     \# D &= 2 \# e = 3 f_3 + 4 f_4 + \cdots\\
+%    \# f &= f_3 + f_4 + \cdots.
+%    \end{array}
+%    $$
+%Use these equations to eliminate $\#e$, $\#f$, $\#D$ from the Euler
+%relation.  The result follows.
+%\end{proof}
+%
+
+
+\subsection{walkup}
+
+When we focus on a dart $x$ in a
+hypermap, it can be useful to draw a hexagon around $x$ and place
+the six darts $e x$,
+$n x$, $f x$, $e^{-1} x$, $n^{-1} x$, $f^{-1} x$ at its corners
+in Figure~\ref{fig:dart+}.  Some of these $7$ darts may be
+equal to one another, even if the figure draws them apart.
+Figure~\ref{fig:dart-fix} shows the layout of the darts, when 
+a map $e$, $n$, or $f$ fixes $x$.
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{A dart $x$ and its entourage}
+  \label{fig:dart+}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{A dart fixed under a face map.}
+  \label{fig:dart-fix}
+\end{figure}
+
+
+A {\it walkup} deletes
+a dart from a hypermap and remolds the edge, node, and face
+maps to produce a hypermap on the reduced set of darts.  Walkups
+come in three flavors: edge walkups, face walkups,
+and node walkups.
+
+\begin{definition}[walkup]
+Let $x$ be a dart in a hypermap.  The edge walkup 
+$W_e$ at $x$ of the hypermap is the hypermap
+$(D',e',n',f')$, where $D' = D\setminus\{x\}$ and the
+the maps skip over $x$:
+    $$
+    \begin{array}{lll}
+    f' y &= \text{ if } (y = f^{-1} x) \text{ then } f x \text{ else
+    } f y\\
+    n' y &= \text{ if } (y = n^{-1} x) \text{ then } n x \text{ else
+    } n y\\
+    e' = (n'\circ f')^{-1}
+    \end{array}
+    $$
+\indy{Index}{walkup}
+\indy{Index}{edge walkup}
+\end{definition}
+
+Figure~\ref{fig:walk} shows
+the result of an edge walkup on the hexagon around a dart $x$.
+The Triality symmetry~\ref{eqn:triality}, applied to the definition
+of edge walkups, yields the definition of
+face walkup $W_f$ and node walkup $W_n$.  
+Figure~\ref{fig:walkfn} shows the result of the face and node
+walkups on the hexagon around a dart $x$.
+
+A walkup at $x$ is said to be degenerate 
+if the dart $x$ is degenerate.   
+At a degenerate dart $x$, all three walkups
+are equal: $W=W_e=W_n=W_f$ (Figure~\ref{fig:walkdeg}).
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The effect of an edge walkup at $x$}
+  \label{fig:walk}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The effect of face and node walkups at $x$}
+  \label{fig:walkfn}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The effect of a walkup at a degenerate dart}
+  \label{fig:walkdeg}
+\end{figure}
+
+
+\begin{definition}[merge,~split]\tlabel{def:merge-split} Let $h=n,e$, or $f$.
+A walkup $W_h$ at $x$ is said to merge,
+if the walkup joins the orbit of $h$ through $x$ with another orbit.  
+It is said to split, if the walkup splits the
+orbit at $x$ into two orbits.
+\indy{Index}{split}
+\indy{Index}{merge}
+\end{definition}
+
+\begin{lemma}\guid{ZMFKZNH}\tlabel{lemma:merge-split} 
+Every nondegenerate walkup merges or splits.
+The walkup $W_h$ at $x$ merges if and only if $x$ and $y$  lie
+in distinct $h$-orbits, where $(h,y)=(f,e x)$.  
+(The lemma also holds for $(h,y)=(e,n x)$ and other cases generated
+by triality.)
+\end{lemma}
+
+\begin{proof} The walkup $W_f$ splits if and only if $f x$ 
+(or $x$)
+and $e x$ lie in the same $f$-orbit before the split. 
+Figure~\ref{fig:split} makes this clear.
+\end{proof}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The face walkup at $x$ mixes $f$-orbits.  If it mixes
+  two separate 
+  orbits, the orbits merge.  If it mixes a single orbit, 
+  the orbit splits.}
+  \label{fig:split}
+\end{figure}
+
+
+\subsection{walkup and planarity}
+
+\begin{definition}[planar~index] Define the planar index of a hypermap to be
+$$\# f + \# e + \# n - \# D - 2\# \tangle{e,n,f}.$$
+(A hypermap with null index is planar.)
+\indy{Index}{index}
+\indy{Index}{planar index}
+\end{definition}
+
+\begin{lemma}\guid{IUCLZYI}\tlabel{lemma:index} Let $x$ be a dart of a hypermap $(D,e,n,f)$. Let $(D',e',n',f')$ be the result of the edge walkup $W_e$ at
+a nondegenerate dart $x$.  
+The walkup changes the sizes of some orbits.
+    $$
+    \begin{array}{lll}
+    %\text{\bf Non-degenerate dart $x$: }&\\
+    \# f &= \# f'\\  
+    \# e + \delta' &= \# e'\\
+    \# n &= \# n'\\
+    \# D - 1&= \# D' \\
+    \# \tangle{e,n,f} + \delta&= \#\tangle{e',n',f'},\\
+    \end{array}
+    $$
+where
+   $$
+   \delta' = \begin{cases}
+     1 & W_e \text{ splits }\\
+    -1 & W_e \text{ merges}\\
+   \end{cases}
+   $$
+and
+   $$
+   \delta = \begin{cases}
+    0 & W_e \text{ merges }\\
+    0 & W_e \text{ splits and } x,nx 
+      \text{ belong to the same group orbit}\\
+    1 & \text{otherwise}.
+     \end{cases}
+   $$
+Moreover, a walkup at a degenerate dart preserves the planar index.
+\end{lemma}
+
+\begin{proof} The figures make this clear.
+\end{proof}
+
+\begin{lemma}\guid{BISHKQW}\tlabel{lemma:planar-index2}
+Let $\iota$ be the index of a  hypermap $(D,e,n,f)$, and
+let $\iota'$ be the index after a walkup $W_h$
+at a dart $x$.  We have $\iota = \iota' + 2$ when
+$x$ is nondegenerate, $W_h$ splits, but the walkup does not
+split the group orbit through $x$ into two orbits.
+Otherwise, $\iota'=\iota$.
+\end{lemma} 
+
+
+%If $x$ is degenerate, then $\iota=\iota'$.
+%If $W_h$ merges, then $\iota=\iota'$.
+%If $x$ is non-degenerate and and the walkup
+%splits, the planar index is preserved iff the walkup splits the 
+%group orbit through $x$ into two orbits. When the walkup
+%does not preserve the planar index, $\iota+2=\iota'$.
+
+
+\begin{proof}  By triality symmetry, 
+we can assume the walkup is an edge walkup.  
+Note that
+if the group orbit splits then
+the $e$-orbit also splits.
+From Lemma~\ref{lemma:index},
+which lists index data, the
+relation between $\iota$ and $\iota'$ is easily calculated.
+\end{proof}
+
+
+\begin{lemma}\guid{FOAGLPA}\tlabel{lemma:planar-nonpos}  
+The planar index
+of a hypermap is never positive.
+\end{lemma}
+
+\begin{proof}  An edge walkup never decreases the index.  By a sequence
+of edge walkups we reach the empty hypermap, which has
+index zero.
+\end{proof}
+
+
+\begin{lemma}\guid{SGCOSXK}\tlabel{lemma:walkup-planar}
+Walkups take planar hypermaps to planar
+hypermaps.
+\end{lemma}
+
+\begin{proof}  
+A planar hypermap has maximum index.  The walkup
+can only increase the index, but never beyond its maximum.  
+Thus, the index remains at its maximum value.
+\end{proof}
+
+
+\subsection{double walkup}
+
+A double walkup is the composite of two walkups
+of the same type.  The
+two darts for the two walkups 
+are to be the members of an orbit of size
+two (under $n$, $e$, or $f$).  The first walkup is to be
+chosen so that it merges.  The second walkup is
+to be degenerate.
+By choosing the type of the walkups to be different from the type of
+the orbit, the first walkup reduces the orbit to a singleton,
+forcing the second walkup to be degenerate. 
+ 
+Here are some examples.
+\begin{itemize}
+    \item A double $W_n$ along an edge deletes the edge and 
+   merges the two endpoints into
+    a single node (Figure~\ref{fig:doublenode}). 
+    \item A double $W_f$ along an edge 
+    deletes the edge and merges the two faces along the edge into
+    one (Figure~\ref{fig:doubleface}).
+    \item A double $W_e$ at a node of degree two
+    deletes the node and merges the two edges at the node into
+    one (Figure~\ref{fig:doubleedge}).
+\end{itemize}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The double node walkup applied to an edge}
+  \label{fig:doublenode}
+\end{figure}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The double face walkup applied to an edge}
+  \label{fig:doubleface}
+\end{figure}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The double edge walkup applied to a node}
+  \label{fig:doubleedge}
+\end{figure}
+
+
+\begin{lemma}\guid{HOZKXVW}\tlabel{lemma:dwalk-planar}  
+The three preceding double walkups carry plain
+hypermaps into plain hypermaps.
+\end{lemma}
+
+\begin{proof} The walkups $W_n$ and $W_f$ preserve the orbit
+structure of edges, except for dropping one dart.  By dropping both
+darts from the same edge, one edge is lost and all others edges
+remain unchanged.
+
+For the double $W_e$, we refer to Figure~\ref{fig:doubleedge}.  
+If the
+original hypermap is plain, then the two darts marked 
+$x$ are equal, as are
+the two darts marked $y$.  
+The new edge map swaps $x$ and $y$, but is 
+otherwise equal to $e$ on 
+the reduced set of darts $D''$.  
+Swapping two darts has order two, 
+as we plainly see.
+\end{proof}
+
+The following is a useful way to tell if a walkup merges.
+
+
+\begin{lemma}\guid{FKSNTKR}\tlabel{lemma:ng-merge}  
+Suppose, in a simple hypermap, 
+that an edge $\{x,y\}$ consists of two nondegenerate darts.  
+Then the walkup
+ $W_f$ (resp. $W_n$) at $x$  merges.
+\end{lemma}
+
+\begin{proof} 
+We have $n (f x) = e^{-1} x = e x$. So $f x$ and $e x$ are at the
+same node. If they are also in the same face of a simple hypermap, 
+this gives $f x = e x
+= y$. So $$n y  = n f x = n f e y = y,$$ and $y$ is a fixed
+point of $n$, hence degenerate, contrary to assumption.  
+Thus, $f x$
+and $e x$ are in different faces, and the walkup merges
+by Lemma~\ref{lemma:merge-split}.  
+\end{proof}
+
+
+
+
+\subsection{contour}
+
+\begin{definition}[contour~path]  A contour path is a function $p:\{0,\ldots,k\}\to D$
+such that $p_{i+1} =
+n^{-1} p_i$ or $f p_i$ for each $i<k$.  (That is, each
+step in the path is clockwise step around a node or a
+counterclockwise step around a face.)   If the contour path
+is injective on $\{0,\ldots,k-1\}$
+and  $p_0 = p_k$, then it is a contour loop.
+\indy{Index}{contour path}\indy{Index}{path}
+\indy{Index}{contour loop}\indy{Index}{loop}
+\end{definition}
+
+\begin{lemma}\guid{KDAEDEX}\tlabel{lemma:connect-contour}  If $x$ and $y$ are darts
+in the same group orbit of a hypermap, then there exists
+a contour path from $x$ to $y$.
+\end{lemma}
+
+\begin{proof} 
+By being in the same orbit, the darts
+$x$ and $y$ are joined by a path, where each step
+is $z\mapsto h z$, for $h=e,n$, or $f$.  Eliminate $e$-steps
+through the relation $e\circ
+n\circ f = I$.   Replace each $n$-step with a sequence of
+$n^{-1}$-steps.  This gives the desired path.
+\end{proof}
+
+\begin{definition}[M\"obius~contour] A M\"obius contour is an
+injective contour path $p$ that satisfies
+    \begin{equation}
+    \tlabel{eqn:mobius}
+    p_j = n p_0\quad p_k = n p_i
+    \end{equation}
+for some $0 < i\le j< k$ (Figure~\ref{fig:mobius}).
+\end{definition}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{A M\"obius contour}
+  \label{fig:mobius}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{A M\"obius contour with three darts}
+  \label{fig:3m}
+\end{figure}
+
+
+\begin{remark}
+G. Gonthier devised the notion of M\"obius contour
+as a way to prove the Four-Color theorem without appeal
+to topology.  (The Appel-Haken
+proof of the Four-Color theorem relies on the Jordan
+curve theorem.)  A M\"obius contour is a 
+combinatorial M\"obius strip that
+twists to make 
+its left-hand side into
+its right-hand side.  A planar hypermap has no such contour.  
+Figure~\ref{fig:violate-jct}
+redraws a violation of the Jordan curve theorem
+as a M\"obius contour.   
+\end{remark}
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{A path that tunnels from the interior to the exterior
+   of a simple closed curve
+   is analogous to a M\"obius contour.}
+  \label{fig:violate-jct}
+\end{figure}
+
+
+
+
+
+
+\begin{lemma}\guid{LIPYTUI}\tlabel{lemma:no-mobius}  
+Planar hypermaps have no M\"obius contours.
+\end{lemma}
+
+\begin{proof} For a contradiction, assume that there exist planar
+hypermaps with M\"obius contours.  An edge walkup carries
+planar hypermaps into planar hypermaps. An edge walkup
+at a dart that is not on the M\"obius contour carries the
+M\"obius contour to a M\"obius contour 
+and reduces the number of darts.  
+In the M\"obius Condition~\ref{eqn:mobius},
+an edge walkup at a dart that is not at position $0$, $i$, $j$, $k$
+along the contour carries the M\"obius contour to a M\"obius contour
+and reduces the number of darts. Thus, a counterexample with
+the smallest possible number of darts contains no
+darts except those on the M\"obius contour, and its only darts
+are at positions $0$, $i=j=1$, $k=2$.
+
+This is a three darted hypermap (Figure~\ref{fig:3m}.)  
+The M\"obius condition, the
+definition of contours, together with $e\circ n\circ f=I$ force
+$e=n=f$, all permutations of order three. We reach the contradiction
+that this hypermap is not planar:
+    $$3 = \# e + \# n + \# f,\quad 5 = 3+2 = \# D + 2 \#\tangle{e,n,f}.$$
+\end{proof}
+
+
+\begin{lemma}\guid{ITBCENB}\tlabel{lemma:node-nonsimple}  
+Let $(D,e,n,f)$ be a hypermap with no M\"obius contours.
+Let $y$ be a dart at a node $N$.
+Suppose that the $f$-orbit of $y$ meets $N$ in
+at least two darts.  Then any contour path from $f y$
+to $f^{-1} y$ passes through the node $N$. 
+\end{lemma}
+
+\begin{proof} Let $F$ be the $f$-orbit of $y$.
+Let $i>0$ be the smallest index such that $f^i y\in N$.
+By assumption $f^i y \ne y$.
+Let $F' = \{y,f y,\ldots f^{i-1} y\}$.
+For a contradiction, assume that there is
+a contour path  $(f y,\ldots,f^{-1} y)$ that avoids $N$.
+Note that $f y\in F'$ and $f^{-1} y\not\in F'$.
+%
+The contour path has a subpath $(w,x,\ldots,z)$, where
+$w\in F'$, $z\not\in F'$,  $x,\ldots\not\in F$.  
+We have $x=n^{-1}w$.
+
+We form a path $x$ to $z$ along this subpath, then
+follow $f$-steps to $f^i y\in N$, passing through $y$ and
+then $n x = w$ along the way.
+Then take $n^{-1}$-steps around the node $N$ to $n y$.  This
+path is injective.  It follows the order
+   $$
+   x\ldots y\ldots n x\ldots n y.
+   $$
+This is a M\"obius contour.
+\end{proof}
+
+
+\begin{definition}[interior]\label{def:interior} 
+a dart $y$ lies in the {\it interior} of a contour
+loop $L$ if there is a an injective contour path
+$x_0,x_1,\ldots,x_k=y$ such that $x_1 = f x_0$ (if $k>0$), and
+such that $x_i$ lies on the loop $L$ if and only if $i=0$.
+%$P$ is called an interior path from $x_0$ to $y$.
+Write $D_{int}(L)$ for the set of darts in the interior of $L$.
+\end{definition}
+
+\begin{lemma}\guid{ILTXRQD}\tlabel{lemma:contour-path-type}
+Suppose that a hypermap has no M\"obius contours.
+Let $L$ be a contour loop.  Let $P$ be any injective contour path
+that starts and ends on $L$, but visits no other darts of $L$ inbetween.  
+Then the first and last steps of $P$ are both of the same
+type ($n^{-1}$ or $f$).
+\end{lemma}
+
+\begin{proof}  Suppose $P$ is $n x,f n x,\ldots,n y,y$.   Form
+contour path starting at $x$, then $n^{-1}$ steps to $L$, then
+follow $L$ to $y$, and on to $n x$.  Follow $P$ back to $n y$.  This
+is a M\"obius contour.
+
+Suppose $P$ is $n x,x,\ldots,f^{-1} y,y$.  Form a contour path
+starting at $x$, then along $P$ to $y$, along $L$ to $n x$, and
+continuing on $L$ to $n y$.  This is a M\"obius contour.
+\end{proof}
+
+
+%\begin{definition}[interior]  Let $L$ be a contour loop on a hypermap.  We say that a dart
+%lies in the interior (resp. exterior) of the loop $L$, if there is a
+%path $P$ as in the previous lemma starting and ending with $f$ steps
+%(resp. $n^{-1}$ steps).
+%\end{definition}
+
+\begin{lemma}\guid{UMYSGDB}\tlabel{lemma:dart-interior}
+Let $L$ be a contour loop on a plain hypermap without
+M\"obius contours.  Assume a dart $x$ lies in the interior of the loop $L$. 
+Then every dart in its $f$-orbit lies in
+the interior of the loop.  Moreover, if the dart
+$x$ does not lie on the same node as any dart in $L$, then every
+dart in the $n$-orbit of $x$ lies in the interior 
+of $L$.
+\end{lemma}
+
+\begin{proof} Let $P= x_0,\ldots,x$ be an injective path that certifies that $x$ lies
+in the interior of $L$.  If $f x$ lies along this path already or if it lies on $L$,
+then it is clearly interior.  Otherwise, $x_0,\ldots,x,f x$ is a certifying path
+for $f x$.  Similarly, use the certifying path $x_0,\ldots,x,n^{-1} x$ for $n^{-1} x$.
+\end{proof}
+
+
+\begin{definition}[interior~face,~node]  A face or a node is interior to a
+loop in a hypermap if all of its darts are interior.
+\end{definition}
+
+\begin{lemma}\guid{ICJHAOQ}\tlabel{lemma:contour-interior-exterior}
+Suppose that a hypermap has no M\"obius contours.  Let $L$ be a contour loop.
+Let $x$ be a dart interior to $L$.  Then there does not exist an injective contour path
+$$x_0,\ldots,x_k=x$$
+such that $x_i$ does not lie on $L$ for all $i$ and such that $x_0$ lies at a node
+visited by $L$.
+\end{lemma}
+
+\begin{proof} Assume for a contradiction that the path exists. 
+We can reverse the path to get a contour path from $x$ back to a dart $x'_0$ (not on $L$ but at a node
+visited by $L$).  In fact, Lemma~\ref{lemma:dart-interior}, shows that the interior points consist of $f$-orbits
+and $n$-orbits (away from nodes visited by $L$).  Thus an $f$-step from $x_i$ to $x_{i+1}$ can be replaced
+with a sequence of $f$ steps from $x_{i+1}$ to $x_i$.  Similarly and $n^{-1}$ step from $x_i$ to $x_{i+1}$
+can be replaced with a sequence of $n^{-1}$ steps from $x_{i+1}$ to $x_i$.  When we reach a dart $x'_0$ on a node
+visited by $L$ we stop.  
+
+There is a contour path $y_0,f y_0,\ldots,x$ that certifies that $x$ is interior.  Concatenate this
+with the reversed path from $x$ back to $x'_0$.  Then add a sequence of $n^{-1}$ steps to reach a dart $z$
+on $L$.  Pass to a subsequence to get an injective contour path $y_0,\ldots,z$ that starts with an $f$ step
+and ends with an $n^{-1}$ step.  This is prohibited by Lemma~\ref{lemma:contour-path-type} 
+\end{proof}
+
+
+%
+%\begin{lemma}\guid{HWQROBK}\tlabel{lemma:dart-n-fixed}
+%Suppose that in a nonempty hypermap without M\"obius contours,
+%there is a face that coincides with a group orbit of
+%darts.  Then that face contains a dart that is fixed under $n$.
+%\end{lemma}
+%
+%\begin{proof}  If the face contains a single dart, then it is
+%obviously fixed by $n$.  Assume that the face contains at least two
+%darts.  For a contradiction, assume that none of the darts is fixed
+%by $n$.  Thus, every node contains at least two darts.
+%
+%We will use the face path $z,f z,f^2 z,\ldots$ to construct a
+%M\"obius contour. Since the set of darts is finite, the face path
+%must eventually revisit a node already encountered.  Thus, we can
+%find a subpath $z',f z',\ldots,f^{k+1} z'$ such that the first $k$
+%darts lie on distinct nodes, but $f^{k+1} z'$ and $z'$ lie in the
+%same node $A$.
+%
+%If we had $f^{k+1} z' = z'$, then we have the full $f$-orbit in this
+%subpath, and hence also the full group orbit.  We have
+%$k>0$, so $f z'$ is then a dart that has no other darts in its node,
+%and is hence a fixed-point.  Hence $f^{k+1} z'\ne z'$.
+%
+%Continue the path further, so that $f^{r+1} z'$ is at the same node
+%as some $f^p z'$ (with $p < r$), at a different node than
+%$z',\ldots,f^r z'$, but so that the only repeated node among
+%$z',\ldots,f^r z'$ is the one at $z'$.  We have $0 < p$.
+%
+%If $f^{r+1} z' = f^p z'$, then $f^{r+1-p} z' = z'$ so all darts are
+%in the segment $z',f z',\ldots,f^{r-p} z'$ and the only node with
+%more than one dart is the one at $z'$.  Thus, we have a fixed point.
+%So $f^{r+1} z'\ne f^p z'$.
+%
+%Let $0 < k_1 < k_2 < \cdots < k_m < r+1$ be the indices at which
+%$f^{k_i} z'$ is at $A$.  Let $x = n^{-1} f^{k_m} z'$. If the segment
+%$x,n^{-1} x,\ldots,z'$ contains some $f^{k_i} z'$, we obtain a
+%M\"obius contour.  [X DETAIL.]  Take $n^{-1}$ steps from $x$ to
+%$z'$. Then take $f$-steps to $y = f^p z'$, on to $n x = f^{k_m} z'$,
+%on to $f^{r+1} z'$, then $n^{-1}$ steps to $n y$.  This is a
+%M\"obius contour.
+%\end{proof}
+%
+%\begin{lemma}\guid{KHVQHCT}[Jordan curve theorem for hypermaps]\tlabel{lemma:jct-hypermap}
+%  If a plain hypermap
+%has no M\"obius contours then it is planar.
+%\end{lemma}
+%
+%\begin{proof}  Face double walkups along edges preserve the planar
+%index.  By repeated application, we reduce to the case where every
+%group orbit contains a single face. In
+%other words, $f$ acts transitively on the darts in a given group orbit.
+%
+%If there are any darts that are fixed by all three maps $e,n,f$,
+%then the walkup at that dart eliminates the dart while preserving
+%the planar index.  Thus, we may assume there are no such darts.
+%
+%If there are any darts that are fixed points under $n$, then the
+%dart is degenerate.  The double walkup (of any type) along the edge
+%that meets that dart eliminates the dart while preserving the planar
+%index.  Thus, we may assume that there are no such darts.
+%
+%By the previous lemma, the plane hypermap must be empty.  Thus, our
+%planar-index preserving walkups have transformed an
+%arbitrary plane hypermap without M\"obius contours into the empty
+%hypermap, which is clearly planar.  The result follows.
+%\end{proof}
+%
+
+
+
+
+\section{Quotient}
+
+
+\begin{definition}[isomorphic] Two hypermaps $(D,e,n,f)$ and $(D',e',n',f')$ are
+isomorphic, if there is a bijection $F:D\to D'$ such that
+    $$h'\circ F = F\circ h$$
+for $(h,h')=(e,e'), (f,f'), (n,n')$.
+\end{definition}
+
+
+\begin{definition}[normal~collection]
+Let $H$ be a hypermap. Assume that 
+there are no darts fixed by $e$ 
+(so that we can distinguish $f x$
+from $n^{-1} x$ at each dart). 
+Let $\cal L$ be a collection of contour
+loops.  We say that $\cal L$ is a normal collection if the following
+conditions hold of its loops. \begin{itemize}
+ \item No dart is visited by two different loops.
+ \item Every loop visits at least two nodes.
+ \item If a loop visits a node, then every dart at that node is
+ visited by some loop.
+\end{itemize}
+\end{definition}
+
+From a normal collection we can form a new hypermap.   A dart in the
+new set $D'$ of darts
+$D$ is a maximal sequence $[x,n^{-1} x, n^{-2} x,\ldots,n^{-k} x]$
+    of $n^{-1}$ steps appearing in some loop in $\cal L$.
+The map $f'$ takes the maximal sequence
+    $[x,n^{-1}x,\ldots,y]$ to the maximal
+   sequence (in the same contour loop) starting 
+    $[f y,\ldots]$.
+The map ${n'}^{-1}$ takes the maximal sequence
+    $[\ldots,y]$ to the maximal sequence (in some other contour loop)
+starting $[n^{-1}y,\ldots]$. Equivalently, 
+$n'$ takes the maximal sequence
+$[x,\ldots]$ to the maximal sequence ending $[\ldots,n x]$. The map $e$ is
+defined by $e'\circ n'\circ f' = I$.  
+
+\begin{definition}[quotient]  The hypermap constructed from the normal collection
+is called the quotient of $H$ by $\cal L$, and is denoted $H/{\cal
+L}$.  The hypermap $H$ is said to be a cover of $H/{\cal L}$.
+\end{definition}
+
+Intuitively, we can represent the quotient hypermap as a graph whose
+cycles under $f$ 
+are precisely the contour loops in the normal family (Figure~\ref{fig:quot}).
+
+%% No sketch has been made for this.
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The contour loops in a normal 
+   family become faces in the
+   quotient}
+  \label{fig:quot}
+\end{figure}
+
+
+\begin{example}\label{ex:Hall} 
+Assume that $H$ is a hypermap with no fixed points under $e$.
+Assume that every face visits at least two nodes.
+Then the set of all faces
+defines a normal collection of contour loops (follow $f$ around each face:
+$x,f x,\ldots$).  Each dart of the quotient is then just a singleton
+set consisting of a single dart of $H$, and the quotient is
+isomorphic to $H$ itself.
+\end{example}
+
+\begin{example}\label{ex:H2} 
+Assume that $H$ is a hypermap with no fixed points
+under $e$.  Let $F = (x,f x,\ldots)$ be a face 
+that visits at least
+three nodes and that meets each node in at most one dart.
+Let $\cal L$ be the
+collection with two contour loops:  $(x,f x,\ldots)$ and its
+complement
+$$[n^{-1} x,
+n^{-2} x,\ldots,n x,f n x = y,n^{-1} y, n^{-2} y,\ldots, n y, f n
+y,\ldots]
+$$
+(See Figure~\ref{fig:contour-comp}.) 
+The family $\cal L$ is normal.
+The quotient hypermap $H/{\cal L}$ has two faces $F$ and a
+backside $F'$ of the same cardinality $k$.
+\end{example}
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The complementary contour loop traces the remaining darts
+   at the same nodes as the origonal contour loop.}
+  \label{fig:contour-comp}
+\end{figure}
+
+
+\begin{example}\label{ex:H2k} 
+We 
+construct a
+hypermap $H_{2k}$, whose darts are arranged in two faces.  Each
+face is $Z_n$, a cyclic group of order $n$ with generator $1$.
+The face map is $x\mapsto x+1$.
+The node map swaps the two faces $Z_n$.
+The usual condition $e\circ n\circ f = I$ defines the edge map.
+If a hypermap is isomorphic to $H_{2k}$ for
+some $k$, then we say that it is {\it cyclic}.  For example,
+the hypermap constructed in the previous example is cyclic.
+\indy{Index}{cyclic hypermap}
+\end{example}
+
+\begin{lemma}\guid{JMKRXLA}\tlabel{lemma:quotient-plain}
+Let $H$ be a plain hypermap, and let $\cal L$ be a
+normal family.  Then $H/{\cal L}$ is a plain hypermap.
+\end{lemma}
+
+\begin{proof} Let $e'$, $f'$, and $n'$ be the edge, face, and node maps on the
+quotient hypermap.  Write $[\ldots, x]$ for the node in the quotient
+ending in dart $x\in H$ and $[x,\ldots]$ for the node in the quotient
+starting with dart $x\in H$.  We have $e^2 x = x$, so that for any
+dart $[\ldots x]$ in the quotient:
+    $$\begin{array}{lll}
+    {e'}^{-2} [\ldots, x] &= n' f' n' f' [\ldots, x] = n' f' n' [f x, \ldots] \\&=
+    n' f' [\ldots, n f x] = n' [f n f, \ldots] = [\ldots, n f n f x]\\ &=
+    [\ldots, e^{-2} x] = [\ldots, x].
+    \end{array}$$
+Thus, $e'$ has order $2$ on the quotient.
+\end{proof}
+
+%\begin{lemma}\guid{ZOKKAOI}\tlabel{lemma:quotient-planar}
+%Let $H$ be a plain planar hypermap, and let $\cal L$
+%be a normal family.  Then $H/{\cal L}$ is a plain planar hypermap.
+%\end{lemma}
+%
+%\begin{proof} Suppose $H/{\cal L}$ is not planar.
+%Let $P$ be a M\"obius contour on $H/{\cal L}$.  It lifts uniquely to
+%a contour on $H$ with the property that the darts visited on $H$ are
+%precisely the darts that belong to a dart in the quotient.  This is
+%compatible with the node map $n$.  So the contour path lifts to a
+%M\"obius contour on $H$.  Thus, $H$ is not planar.
+%\end{proof}
+
+
+\subsection{flag}
+
+By the end of the chapter, we present an algorithm that
+generates all plain planar hypermaps satisfying certain general
+conditions.   The algorithm  proceeds by inserting one face
+at a time into a hypermap.  
+The algorithm  marks certain faces as `true.'
+Roughly, this  means that the the face cannot be modified
+at any later stage of the algorithm.   When all of its faces
+are true, the hypermap stands in final form.
+The function that marks each face as true or false is a
+{\it flag}.
+
+
+\begin{definition}[flag]  A flag on a hypermap
+is a boolean function on its set of faces 
+that satisfies the following two
+constraints.
+\begin{itemize}
+    \item If darts $x,y$ belong to true faces,
+    then there is a contour path from $x$ to $y$ that remains
+    in true faces.
+    \item Every edge of a false face is shared with a true face.
+    \end{itemize}
+%An isomorphism of flagged hypermaps is an isomorphism of
+%hypermaps that respects the flags.
+\end{definition}
+
+\begin{example} Let $H/{\cal L}$ be a quotient hypermap with
+normal family $\cal L$.  The canonical boolean function
+$\phi$ on the set of faces of the quotient is the function that
+is true exactly when every dart in
+the face is a singleton of $H$.
+\end{example}
+
+\begin{example} The cyclic hypermap of Example~\ref{ex:H2k}, 
+carries a flag
+that marks one face true and the other false.
+\end{example}
+
+\begin{example} Let 
+$H$ be a plain hypermap with a single group orbit, and 
+such that $e$ has no fixed points,
+and let $\cal L$ be the example of Example~\ref{ex:Hall}, 
+then the canonical
+map takes value $\op{true}$ on every face.  This is a flag.
+In fact,
+Lemma~\ref{lemma:connect-contour} provides the contour paths 
+that are required in the definition of flag.
+\end{example}
+
+\begin{lemma}\guid{STKBEPH}\tlabel{lemma:all-dart}  
+Let $H$ be a hypermap with normal family ${\cal L}$.
+If the canonical boolean function on the set of faces of
+$H/{\cal L}$ has at least as many
+true values as there are faces of $H$, then $\cal L$ is the normal family
+in Example~\ref{ex:Hall}. In particular, $H/{\cal L}$ is isomorphic to $H$.
+\end{lemma}
+
+\begin{proof}  If a face takes value $\op{true}$ 
+in $H/{\cal L}$, then its darts are
+singletons, and the face of $H/{\cal L}$ is naturally identified with
+ a face in $H$.  This is an injective map from the 
+set of true faces of $H/{\cal L}$ to
+the set of faces of $H$.  The hypothesis of the lemma implies that this
+injective map is bijective.
+All of the darts of $H$ are accounted for under this bijection.
+Thus, the quotient has no
+false faces.  The result follows.
+\end{proof}
+
+
+\subsection{face insertion}
+
+
+In this section, we describe an inductive construction of all
+plain, planar hypermaps with a single group orbit that satisfy certain constraints.
+We define a set ${\cal H}$ of tuples $(H,\phi,E,N,\lambda)$.
+The tuples are assumed to satisfy the following conditions:
+\begin{itemize}
+    \item $H$ is a hypermap.
+    \item $\phi$ is a flag on $H$.
+    \item $E$ is an edge of size two, with one
+    dart in a true face and the other in a false face.
+    \item $N$ is the size of the false face meeting $E$.
+    \item $\lambda$ is a finite increasing sequence of natural numbers:
+        $$
+        \lambda = (\lambda_1,\lambda_2,\ldots,\lambda_r)
+        $$
+    such that $\lambda_1 = 1$ and $\lambda_r \le N-1$.
+\end{itemize}
+
+We define a function from $\cal H$ to the set of hypermaps with
+flags.  We call it face insertion, because the function creates a
+hypermap with one more true face than its source hypermap $H$.
+
+We write $x_0$ for the dart of $E$ in the
+false face and $y_0$ for the dart of $E$ in the true face.  
+Write $f^i
+x_0 = x_i$ for the darts in the false face.  (Set $x_N = x_0$.)
+
+\subsection{partition transformation}
+
+We describe an algorithm $\lambda\mapsto A(\lambda)$ that takes
+as input a partition $\lambda$ (and the number $N$)
+and produces as output a list of
+tuples.
+In the first step of the algorithm,
+replace each $\lambda_j$ except for the
+first occurrence of a given natural number by a dummy symbol $*$.
+Insert $N$ at the end of the list. For example, if $N=7$,
+    $$(1,1,1,2,3,3,3,5,5)$$ becomes
+    $$(1,*,*,2,3,*,*,5,*,7).$$
+
+Next, break the sequence at each natural number (except at the initial $1$
+and terminal $N$)
+creating shorter sequences, duplicating the number at the break,
+so that each sequence begins and ends with a natural number,
+and is padded inbetween with dummy symbols. So
+    $$(1,*,*,2,3,*,*,5,*,7)$$ becomes
+$$(1,*,*,2),\ (2,3),\ (3,*,*,5),\ (5,*,7).$$
+
+Next,
+delete any ordered pair of the form $(j,j+1)$. In our example, there
+is one such ordered pair: $(2,3)$.  Our example becomes
+  $$
+  (1,*,*,2),\  (3,*,*,5),\ (5,*,7).
+  $$
+This list of tuples is the output from the algorithm.
+In our example,
+  $$A(1,1,1,2,3,3,3,5,5) = ((1,*,*,2),(3,*,*,5),(5,*,7)).$$
+
+
+
+\subsection{new hypermap}
+
+This output $A(\lambda)$
+becomes an instruction for how to draw new edges to create a
+new hypermap. A tuple $(j,*,*,\ldots,*,k)$ with $r$ dummy symbols
+is an instruction to insert an edge between darts $x_j$ and $x_k$
+and then to insert $r$ new nodes along this edge.
+Expressed in terms of double walkups, we first apply (in
+reverse) the double walkup $W_f$, and then apply $r$ times (in
+reverse) the double walkup $W_n$.  Each tuple creates $r$ new
+nodes, one new face, and $r+1$ new edges.  This action, 
+iterated over all the tuples in $A(\lambda)$, creates a new hypermap
+$H'$. 
+The function that carries
+$(H,\phi,E,\lambda)$ to $H'$ is called
+face-insertion.  
+Figure~\ref{fig:7darts} gives an example.
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{Face-insertion on a $7$-gon when
+   $A(\lambda) = ((1,*,*,2),(3,*,*,5),(5,*,7))$.}
+  \label{fig:7darts}
+\end{figure}
+
+
+The double node and face walkups preserve edges (except for
+the one that the walkup removes).
+Thus, the edge $E=\{x_0,y_0\}$
+becomes an edge $\{x_0',y_0'\}$ in $H'$
+(with $y_0$ corresponding with $y'_0$).
+
+We mark the face containing the dart $x'_0$ true, and the other
+faces created by face-insertion false.   All other faces are
+marked true or false as in the flag on the originating hypermap $H$.  
+Through this
+construction, the $H'$ contains exactly one more true face
+than the originating hypermap.
+
+\begin{lemma}\guid{AQIUNPP}\tlabel{lemma:flag} 
+The boolean function on faces constructed in this way is a
+flag.
+\end{lemma}
+
+\begin{proof}  We show first that every edge of a false face is shared
+with a true face.  If the false face is one of the newly created
+faces, its edges are those along the new true face together
+with some edges from the old false
+face. Either way, the edges are shared with a true face.   If it is a
+false face from the originating hypermap $H$, 
+it shares edges with the
+same true faces as before.
+
+Next, we show that every pair of darts $x,y$ in true faces can be
+joined by a contour path.  Let $H'=(D',e',n',f')$.  
+If neither of $x,y$ lies in the
+$f'$-orbit of $x'_0$, we can use the contour path that was used in the
+originating hypermap.  If both are in the $f'$-orbit of $x'_0$, then
+we can join $x$ to $y$ by a sequence of $f'$-steps.
+
+If $x$ lies in the $f'$-orbit of $x'_0$, but $y$ does not, 
+we first join $x$
+to $x'_0$ by $f'$-steps, then to $n'^{-1} x'_0= f' y'_0$, then to $y'_0$,
+which lies in a true face.
+From $y'_0$, we follow a path $y$.
+Similarly, if $y$ lies in the $f'$-orbit of $x'_0$ but $x$ does not; 
+we follow a contour path from $x$ to $y'_0$, then to $n'^{-1} y'_0 = f'
+x'_0$, then to $y$.
+\end{proof}
+
+\subsection{generating hypermap}
+
+The following lemma
+and the remark that follows are the principal results of the
+chapter.  They present an algorithm that 
+generates all nice planar hypermaps by face-insertions.
+This book uses the algorithm to classify of a family of
+planar hypermaps, called {\it tame hypermaps}.
+
+\begin{theorem}  Let $H$ be a hypermap with the following properties:
+    \begin{enumerate}
+        \item It is plain, planar, simple, and has a single group orbit.
+        \item The edge map $e$ has no fixed points.
+        \item The node map $n$ has no fixed points.
+        \item The size of every face is at least $3$.
+        \item There are at least $2$ faces. 
+        %%  (All hypoth. Needed?)
+    \end{enumerate}
+Let $\cal L$ be a normal family of contour paths in $H$ with
+simple quotient. Assume that
+the canonical boolean function $\phi$ on $H/{\cal L}$ is a flag. Let
+$E$ be an edge of $H/{\cal L}$ that meets both a true face
+and a false face. Let $N$ be the cardinality of that false face. Let
+$M$ be a constant such that every face of $H$ has cardinality at
+most $M$. Then there is exists a partition $\lambda=(\lambda_1,\ldots,\lambda_r)$ with at most
+$M$ parts satisfying $$1=\lambda_1\le \cdots\lambda_r \le N-1$$
+and a normal family
+${\cal L}'$ with simple quotient such that $H/{\cal L}'$  such that
+with its canonical boolean
+function is isomorphic to the image of face-insertion on
+$(H/{\cal L},\phi,E,N,\lambda)\in {\cal H}$. 
+Moreover, $H/{\cal L}'$
+has one more true face than $H/{\cal L}$ has.
+\end{theorem}
+
+\begin{remark}
+\label{remark:nice-algorithm} 
+The lemma implies that sufficiently nice hypermaps can be recovered
+from their quotients by face insertions.  (Here {\it `nice'} means
+that it satisfies the conditions of the lemma.)  
+Every nice hypermap has a cyclic quotient 
+$H_{2k}=H/{\cal L}_0$
+(Examples~\ref{ex:H2} and~\ref{ex:H2k}).
+Generate all face-insertions of $H/{\cal L}_0$ 
+(as we run over relevant partitions).
+Among the new hypermaps is some $H/{\cal L}_1$, which
+has one more $\op{true}$ face than $H/{\cal L}_0$.  By 
+Lemma~\ref{lemma:flag}, 
+the canonical boolean function on this new quotient
+is a flag.  Iterate to get a sequence
+$H_{2k} = H/{\cal L}_0, H/{\cal L}_1,\ldots, H/{\cal L}_k$,
+each obtained from the previous one by face-insertion.
+By Lemma~\ref{lemma:all-dart}, 
+as
+soon as a quotient $H/{\cal L}_k$ 
+has sufficiently many true faces, it is
+isomorphic to the the original hypermap $H$, and the process
+terminates.
+Note that we choose the edge at which we apply the face
+insertion, but we must run through
+all partitions.  To make the entire process finite, we can bound the
+number of partitions that must be considered, say by placing a
+priori bounds $M$ on the cardinalities of the faces of $H$.
+\end{remark}
+
+\begin{proof}  We set some notation.
+Write $f,e,n$ for the maps on $H$ and $f',e',n'$ for the maps on the
+quotient hypermap.   
+The dart $y'$ of $E$ that 
+lies on the true face is a
+singleton set, which can be identified with a dart $y$ in $H$.  Let
+$y_0 = e y$, and let $y_k = {f}^k y_0$ be the darts of $H$ on the
+face of $y_0$ (Figure~\ref{fig:algordart}).  
+Let $r$ be the size of this face. 
+
+We define a map $\psi$.
+Let $*$ be a symbol.
+A map
+$\psi$ on the face of $y_0$ sends 
+$y_i$ to $*$ if $y_i$ is disjoint from
+the loops of ${\cal L}$ and sends $y_i$
+to the dart of $H/{\cal L}$
+containing $y_i$ otherwise.
+As $H$ is simple, no two darts
+$y_k$ map to the same dart in $H/{\cal L}$.
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{An example of the algorithm}
+  \label{fig:algordart}
+\end{figure}
+
+We can write the map $\psi$ in terms of a map $\psi'$ on indices.
+Let $x_0 = e' y'$ and let $x_k = {f'}^k x_0$.  Let $r'$ be the
+cardinality of the $f'$-orbit through $x_0$.  
+We claim that (1) $\psi(y_i)$ is either $*$ or one of the
+darts $x_k$.  We justify this claim below.
+When $\psi(y_i)$ is a dart, set $\psi(y_i) =
+x_{\psi' i}$, for some $0< i \le r$, $0 < \psi' i \le r'$. 
+When $\psi(y_i)$ is not a dart,
+set $\psi' i = *$, 
+We claim further that (2) if
+$0< i< i'\le r$, and both $\psi(y_i)$ and $\psi(y_{i'})$ are darts, then
+$\psi' i < \psi' i'$.  We justify this claim below.
+Accepting these two claims, we complete the proof.    
+
+We construct a partition $\lambda$.
+Form a sequence
+    $$(\psi' 1,\psi' 2,\ldots,\psi' r).$$
+Form a partition $\lambda$ from this sequence, 
+by replacing each $*$ in the
+subsequence $(j,*,*,\ldots,*)$ with $j$. Thus,
+    $$(1,*,*,2,*,4,*,*,5)$$
+becomes
+    $$(1,1,1,2,2,4,4,4,5).$$
+Face-insertion on $(H/{\cal L},\phi,E,N,\lambda)$ yields a new
+hypermap $H'$.  
+
+We claim that $H'$ is isomorphic to a quotient
+$H/{\cal L}'$, which is specified as follows. The collection
+${\cal L}'$ contains all the loops of ${\cal L}$ 
+except the loop through the $f'$-orbit of $x_0$.  The collection
+${\cal L}'$ also contains
+the loop corresponding through the $f$-orbit
+of $y_0$ as well as the loops through the false faces on
+the new hypermap.  
+
+We describe the contour loops associated with false faces 
+in more detail.
+The false faces on the new hypermap give a
+contour loop of ${\cal L}'$ for each subsequence
+$(j,*,\ldots,*,j')$ with $j< j'$ 
+and one for each subsequence $(j,j')$ with
+$j+1< j'$.  
+First take the case $(j,j')$, with $j+1<j'$. 
+Write $(j,j') = (\psi'i,\psi' i')$.
+The inequality $j+1<j'$ implies that both $n^{-1}
+y_i$ and $n y_{i'}$ are in $x_j$ and $x_{j'}$ respectively.
+The contour loop for $(j,j')$ runs through 
+all the darts of $x_k$ for $j<k<j'$,
+the sequence of darts of $x_{j'}$ ending with $n y_{i'}$,
+and the sequence darts of $x_j$ starting with $n^{-1} y_i$.
+
+We continue with our description of the contour loops associated
+with false faces.
+In the case $(j,*,\ldots,j')$, we form consecutive sequences of darts
+starting with $n^{-1} y_i$ and another ending at 
+$n y_{i'}$ as in the previous case, and
+all the darts of $x_k$ for $j<k<j'$, 
+Each $y_k$, for $i < k < i'$ belongs to a node $N_k$ in $H$.
+We also have the loop visit the darts in $N_k\setminus\{y_k\}$.
+
+Now that the collection ${\cal L}'$ has been described in detail,
+it is a routine matter to check that the quotient $H/{\cal L}'$
+has the properties asserted in the lemma.
+%
+%{\bf Claim 1}:  % revised 26/10/07: 
+%The proof is now complete except for two earlier claims.  We claim
+%that $\psi(y_i)$ is either $*$ or one of the darts $x_k$. 
+%For a contradiction, 
+%suppose that the dart $z$ of $H/{\cal L}$ containing
+%$y_i$ is not equal to any $x_k$.
+%Let $L$ be the $f'$-orbit
+%of $x_0$.  This is a false face.  This implies that some
+%dart of $L$ has the form $x_p=[\ldots,y_q,n^{-1} y_q,\ldots]$.
+%Set $x = n^{-1} y_q$.  The face $L$ has a dart of the form 
+%$[y_1,\ldots]$.
+%Set $y=y_1$.  The dart $n y$ lies in a true face.
+%Start at $x$ and follow the darts of $H$ around the contour $L$ 
+%to $n x = y_q$, passing through $y$ along the way.  From
+%$y_q$, take $f$-steps to $y_i$ in $z$, 
+%then step around that node to a true face
+%of $H/{\cal L}$.  From there,
+%follow a path along true faces (as guaranteed by the definition
+%of flag) to $n y$.  The path follows the order
+%   $$x \ldots y \ldots n x \ldots n y.$$ 
+%We may assume that the path from $y_q$ to $y_i$ is minimal in the
+%sense that the $f$-steps between $y_q$ to $y_i$ 
+%are darts that map to $*$.  
+%% We can clearly cut away from the end if there is another dart
+%% like $y_i$.  We can cut away from the front if there is another
+%% dart that maps to some x_k.
+%% Injective because the 
+%With this extra condition, the contour
+%is injective and hence a M\"obius contour in 
+%the planar hypermap $H$.  
+%This contradicts Lemma~\ref{lemma:no-mobius}.
+%
+%%% 
+%{\bf Claim 2}: 
+%We claim further that if $i<i'\le r$, and both $\psi(y_i)$ and
+%$\psi(y_{i'})$ are darts, then $\psi' i < \psi' i'$.  
+%For a contradiction, assume that $\psi' i' \le \psi' i$. 
+%In fact, we may assume that $\psi'i' < \psi' i$, because
+%each dart of the face of $y_0$ lies at a different node. 
+%We may assume that $\psi' j = *$ for $i < j < i'$.  We may
+%also assume that the indices $\psi' 1,\psi' 2,\ldots,\psi' i$
+%(excluding those that are $*$) are increasing.  
+%That is we pick $i$ and $i'$ so that we have the longest
+%possible run of increasing indices, terminated by a falling
+%index.
+%%Form a contour loop
+%%$L'$ from $y_1$ along the darts $y_{i'}$ until reaching $x_{\psi' i}$,
+%%then continuing for the rest of the path of $L$ back to $y_1$.
+%%Giving the identical argument as in the preceding paragraph, but
+%%using $L'$ instead of $L$, we again get a M\"obius contour $H$.  
+%%Again, we contradict Lemma~\ref{lemma:no-mobius}.
+%Let $L$ be the $f'$-orbit of $x_0$.  The is some dart of $L$
+%of the form $x_p = [\ldots,y_q,n^{-1}y_q,\ldots]$, with
+%$i\le q< i'$.  Let $x = n^{-1}y_q$.  Let $y= y_1$.  The
+%dart $n y$ lies in a true face.  Start at $x$ and
+%follow the darts of $H$ along $L$ to $y$, then take
+%$f$-steps to $y_i$, follow the darts along $L$ to $n x =y_q$.
+%Then take $f$-steps again to $y_{i'}$.  Take $n^{-1}$-steps
+%around that node to a dart that lies on a true face.  Follow
+%true faces back to $n y$.  The path follows the order
+%  $$
+%  x\ldots y \ldots n x\ldots n y.
+%  $$
+%  With these
+%extra conditions, the contour
+%is injective and hence a M\"obius contour in 
+%the planar hypermap $H$.  
+%This contradicts Lemma~\ref{lemma:no-mobius}.
+
+{\bf Claims 1 and 2:}\FIXX{Check once more.}
+The proof is now complete except for two earlier claims.  We claim
+that $\psi(y_i)$ is either $*$ or one of the darts $x_k$ and that the darts
+$x_k$ have increasing indices.  If the claim is false, then
+we can find a counterexample with smallest index.  That is, if we remove
+from the list
+   $$
+   \psi(y_1),\psi(y_2),\ldots,\psi(y_{i'-1})
+   $$
+those that equal $*$, then we are left with an increasing sequence of 
+darts $x_k$.  But no larger index $i'$ has this property.  Thus, either
+$\psi(y_{i'})$ is a dart that is not of the form $x_k$ or has this form
+but with a drop in index $k$.  Let $i\le i'-1$
+be the largest index for which $\psi(y_i)=x_k$ for some $k$.
+The dart $x_k$ has the form $[\ldots,y_i,n^{-1}y_i,\ldots]$.  Let $x=n^{-1}y_i$.
+Let $y=y_1$.  The dart $n y$ lies in a true face.
+
+Let $L$ be the $f'$-orbit of $x_0$.  This is a false face.
+Start at $x$, follow a contour path along $L$ until reaching $y$, then
+take $f$-steps from $y$ to $y_{i'}$, passing $y_i = n x$ along the way.
+One of the loops of the collection ${\cal L}$ passes through the the node of $y_{i'}$.
+Take $n^{-1}$-steps at that node until a dart in a true face is reached.  Then
+follow a contour path through true faces (as guaranteed by the definition
+of flag) to $n y$.  
+This contour path follows the order
+  $$
+  x\ldots y \ldots n x\ldots n y.
+  $$
+Since we picked the indices $i,i'$ to give the smallest counterexample, it can be checked
+that this contour path is injective and hence a M\"obius contour in 
+the planar hypermap $H$.  
+This contradicts Lemma~\ref{lemma:no-mobius}.
+\end{proof}
+
+
+
+\section{Connected Sum}\label{sec:csum}
+
+A hypermap has more detail than its quotient hypermaps.
+When a hypermap overwhelms with detail, a carefully chosen
+quotient can hide the unwanted detail and expose its main features.
+Face-insertion works in the opposite direction,
+by adding structure to a hypermap.
+The algorithm of Remark~\ref{remark:nice-algorithm}
+builds all nice hypermaps through a series of face-insertions.
+
+This section describes a second way to embellish
+a hypermap.  It will be used to restore detail that
+a quotient has hidden.  Imagine a normal family in which every
+contour loop except one is a single face.  In the quotient, that
+exceptional loop becomes a face, a facade hides the detail of what
+the original hypermap contains.  A connected sum 
+restores what the facade
+hides.
+
+%Let $H=(D,e,n,f)$ be a hypermap.  We write
+%$\op{face}(x)$, $\op{edge}(x)$, and $\op{node}(x)$
+%for the face, edge, and node containing the dart $x\in D$.
+%We write $H/f$, $H/e$, and $H/n$ for the set of faces,
+%edges, and darts.
+
+The connected sum construction is a combinatorial analogue of
+the connected sum of two surfaces.  In this topological construction,
+disks are removed from both surfaces and the circular boundaries
+of the two disks are glued together with a map that reverses orientation.
+In a connected sum, faces are removed
+from both hypermapss and the remaining darts are
+are spliced together by means of the
+map $\phi$ that reverses orientation on faces.  
+
+To expand this analogy, 
+we note that a quotient replaces each contour loop with a face.  This
+is a combinatorial analogue of decomposing a surface by cutting
+along 
+embedded circles and then capping the circles with disks
+(Figure~\ref{fig:connected-sum}).
+% http://en.wikipedia.org/wiki/Manifold_decomposition.
+
+
+Let $A$ and $B$ be hypermaps with disjoint dart sets $D_A, D_B$.
+Let their 
+face and node
+maps be
+    $f_A,f_B$, and $n_A,n_B$, respectively.
+Let $\phi:F_A\to F_B$ be a bijection between a face of $A$ and a
+face of $B$ such that
+    $$
+    \phi(f_A x) = f_B^{-1}\phi(x),\quad \forall
+    x\in F_A.
+    $$
+Assume that the faces $F_A$ and $F_B$ have at most one dart at
+every node.
+
+\begin{definition}[connected~sum,~$\#$] Let the connected sum
+$A\,\#_\phi\, B$ be the following hypermap
+$(D,f,n,e)$:
+    $$D = D_A \cup D_B \setminus (F_A\cup F_B)$$
+    $$f x = f_A x \text{\ if }  x\in D_A,\qquad \ f_B x
+    \text{\ \ otherwise}.
+    $$
+    $$n x = \begin{cases}
+    n_A x &
+        \text{if }  x\in D_A \text{ and } n_A x\not\in F_A\\
+    n_B[\phi(n_A x)] &
+        \text{if }  x\in D_A \text{ and } n_A x\in F_A\\
+    n_B x &
+        \text{if }  x\in D_B \text{ and } n_B x\not\in F_B\\
+    n_A[\phi^{-1}(n_B  x)] &
+        \text{if }  x\in D_B \text{ and } n_B x\in F_B\\
+    \end{cases}
+    $$
+Let $e$ be defined by the relation $e\circ n\circ f = 1$.
+\end{definition}
+
+The connected sum leaves faces of $A$ and $B$ intact,
+except for the two faces that are deleted.  The node map
+leaves all the nodes of $A$ and $B$ intact, except those
+at nodes of $F_A$ and $F_B$.  Along these nodes, the nodes
+are joined.
+
+
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{The connected sum construction}
+  \label{fig:connected-sum}
+\end{figure}
+
+
+To justify this construction, the following lemma shows that the
+maps $\phi,\phi^{-1}$ are applied only to darts in their domains.
+
+\begin{lemma}\guid{IYDMHUU}\tlabel{lemma:one-dart-one-node}
+With context as above (simple hypermaps, etc.),
+if $x\in F_B$ then $n_B x\not\in F_B$.  If $x\in
+F_A$, then $n_A x\not\in F_A$.
+\end{lemma}
+
+\begin{proof} The faces $F_A$ and $F_B$ have at most one
+dart at each node.
+\end{proof}
+
+\begin{lemma}\guid{ARZBWRD}\tlabel{lemma:sum-no-fp}
+If $n_A$ and $n_B$ have no fixed points, then
+    the node map on the connected sum does not either.
+\end{lemma}
+
+\begin{proof}  The node map leaves all the nodes of $A$ and $B$
+intact, except those at nodes of $F_A$ and $F_B$.  Along these
+nodes, the nodes are joined.  If the node $N_A$ of size $a>1$ is
+joined with node $N_B$ of size $b>1$, a node of size $a+b-2>1$ is
+formed.
+\end{proof}
+
+\begin{lemma}\guid{PSMRXQT}\tlabel{lemma:sum-simple} 
+If $A$ and $B$ are simple, then
+the connected sum is simple.
+\end{lemma}
+
+\begin{proof} The connected sum preserves the structure of faces.
+The set of nodes of $A$ (resp. $B$) maps one-to-one to the 
+set of nodes of the
+connected sum.  Thus, in the connected sum, each face visits each
+node at most once.
+\end{proof}
+
+\begin{lemma}\guid{JXZZWML}\tlabel{lemma:sum-plain}
+If $A$ and $B$ are plain, then
+the connected sum is plain.
+\end{lemma}
+
+\begin{proof} The edges of $A$ and $B$ that do not have a dart
+in $F_A\cup F_B$ carry over to edges of the connected sum.  For
+such edges, the verification is easy.
+
+Let $x$ be a dart in $A$ such that $e_A x \in F_A$.  Then,
+     $$
+     \begin{array}{lll}
+     e^{-2} x &= n f n f x \\ &= n f\, (n_B \phi n_A)\, f_A x\\
+               &= (n_A \phi^{-1} n_B)\, f_B\, (n_B \phi n_A)\, f_A x\\
+               &= n_A\, (\phi^{-1} f_B^{-1})\, e_B^2 \phi\, n_A f_A x\\
+               &= n_A (f_A\, \phi^{-1})\,\phi\, n_A f_A x\\
+               &= e_A^2 x\\
+               &= x.
+     \end{array}
+     $$
+The proof for a dart $x$ in $B$ is similar.
+\end{proof}
+
+\begin{lemma}\guid{TVTVZUD}\tlabel{lemma:sum-planar}
+Assume that $A$ and $B$ are plain.
+Let $C$ be the connected sum of $A$ and $B$.
+If two of $A$,$B$,$C$ are planar, then
+    the third is planar as well.
+\end{lemma}
+
+\begin{proof}  We count the number of nodes, edges, faces, and orbits
+on the connected sum.  Let $r$ be the size of $F_A$ (or $F_B$).
+$$
+\begin{array}{lll}
+  \#n_C &= \#n_A + \#n_B - r\\
+  \#e_C &= \#e_A + \#e_B - r\\
+  \#f_C &= \#f_A + \#f_B - 2\\
+  \#D_C &= \#D_A + \#D_B - 2 r\\ 
+  \#\tangle{e_C,n_C,f_C} &= \#\tangle{e_A,n_A,f_A} + \#\tangle{e_B,n_B,f_B} - 1\\
+\end{array}
+$$
+From this, it follows that two planar indices are zero,
+then so is that of the connected sum.
+\end{proof}
+
+
+
+\subsection{connected sum and quotient}
+
+The connected sum construction adds detail to a hypermap and
+a quotient removes detail.  We formulate this in a special
+case as a lemma.    The contour loop $C$ becomes a single
+face $F$ in the quotient hypermap.
+
+Let $C$ be a contour loop in a hypermap $(D,n,e,f)$.
+We make the following assumption of simplicity:
+$C$ is injective and visits at least two nodes.  
+Moreover, if $x,y$ are
+two darts in the contour path at the same node, then
+$$
+x, n^{-1} x,\ldots, y,\quad\text{or}\quad y, n^{-1} y,\ldots, x
+$$
+is a sequence of steps along the path.
+From this hypothesis, it follows that there does not exist a node
+at which every dart belongs to $C$, because this node would then be
+the entire contour loop, contrary to the assumption of at least two nodes.
+It follows that each node visited by $C$, there are two darts $x,y$
+such that the darts visited by $C$ are
+   $$
+   x,n^{-1}x,\ldots,n y,
+   $$
+with remaining darts
+   $$
+   y, n^{-1}y,\ldots, nx.
+   $$
+We define the complementary contour loop $C'$ to be the loop that
+passes through these remaining darts, joining the nodes together with $f$-steps:
+   $$
+   y_1,n^{-1}y_1,\ldots,n x_1, f n x_1 = y_2, n^{-1} y_2,\ldots.
+   $$
+
+\begin{lemma}\guid{RIFTCTD}  Let $(D,e,n,f)$ be a plain hypermap.
+This sequence $C'$ is a contour loop that satisfies the assumption
+of simplicity.  Moreover, it visits all the nodes that $C$ does.  
+\end{lemma}
+
+\begin{proof}  The first statement is clear.  When $C$ makes an $f$-step
+from $n y_k$ to $x_{k+1}$,  the loop $C'$ makes a corresponding $f$-step
+from $n x_{k+1}$ to 
+$$f n x_{k+1} = f n f n y_k = f e n y_k = y_k.$$  Thus, the two loops
+visit the same nodes.
+\end{proof}
+
+\begin{lemma}\guid{GGKBWVR}  
+Let $(D,n,e,f)$ be a hypermap.  
+Consider a family of contour loops
+$\cal L$ with the property that all but one contour is
+a face of the hypermap.  Let $C$ be the contour loop that
+is not a face of the hypermap.  Assume that $C$ satisfies the
+assumption of simpicity.
+\end{lemma}
+
+Let $(D,n,e,f)$ be a plain hypermap.  Let $C$ be a contour loop
+that satisfies the simplicity assumption.  
+We let $D_C$ be the set of darts $x$ such that there is an injective
+contour path $x=x_0,x_1,\ldots,x_n\in C$ such that
+\begin{itemize}
+\item $x_i\not\in C$, for $i<n$,
+\item $f x_{n-1} = x_n$, if $n\ne 0$.
+\end{itemize}
+By construction $D_C$ contains the darts on the loop $C$ (take $n=0$).
+
+\begin{lemma}\guid{SXRVGEU} Let $(D,n,e,f)$ be a plain hypermap.  
+Assume that $e$ has no fixed points on $D$.
+Let $C$ be a contour
+loop that satisfies the simplicity assumption.  Then
+the sets of darts $D_C$ and $D_{C'}$ are disjoint.  Each consists
+of a union of faces.  If $(D,n,e,f)$ has a single group orbit, then
+$D_C \cup D_{C'}=D$.
+\end{lemma}
+
+\begin{proof}\FIXX{Insert.}
+\end{proof}
+
+Let $H=(D,e,n,f)$ be a plain hypermap.  Assume that $e$ has
+no fixed points on $D$, that $C$ is a contour loop that satisfies
+the simplicity assumption, and that $H$ has a single group orbit.
+
+From the contour loop $C$ we obtain a normal family ${\cal L}$ consisting
+of $C$ together with the faces of $D_{C'}$.  We obtain a second
+normal family ${\cal L}'$ consisting of $C'$ and the faces of $D_C$.
+Form quotients
+  $$A= H/{\cal L},\quad B=H/{\cal L}'$$
+The quotients have  distinguish faces $F_A,F_B$ corresponding to the
+contour loops $C,C'$ respectively.  Moreover, there is a bijection $\phi$
+between the darts of $F_A$ and $F_B$ according to the nodes of the hypermap $H$ that the contour loop passes through.
+
+We are now ready to give a precise statement about how connected sums and quotients are inverse operations.
+
+\begin{lemma}\guid{UGMTVUW}
+In this context, the bijection $\phi$ satisfies 
+   $$\phi(f_A x) = f_B^{-1} \phi(x),\quad x\in F_A.$$
+Moreover, $A\#_\phi B$ is isomorphic to $H$.
+\end{lemma}
+
+\begin{proof}\FIXX{Insert.}
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%
+
+
+\chapter{Fan}
+
+A hypermap is a combinatorial object, but a packing
+is a geometric object.  This chapter combines the combinatorics
+with the geometry, as objects called fans.  A fan is a geometric
+object, yet there is a hypermap attached to it.
+The hypermap encodes the combinatorial properties of the fan.
+
+%\begin{definition}[azimuth cycle]  Let $v\in\ring{R}^3$ and $W \subset
+%\ring{R}^3$.  We say that $\sigma:W\to W$ is an azimuth cycle on $W$
+%coming from $v$, if there is a orthonormal $2$-frame $P=(0,e_1,e_2)$
+%with $e_1 \times e_2 = v/|v|$, and a cycle is $\sigma:W\to W$ with
+%respect to $P$. (By REF%%, an azimuth cycle is unique, but may not
+%exist.)
+%\end{definition}
+
+%[ change the following definition, so that edges are triples
+%$(v,w,u)$, where $u$ is a unit point orthogonal to $v$ and $w$.
+%Assume that if $(v,w,u)\in E$ then $(w,v,-u)\in E$.  We then ask for
+%an azimuth cycle on the points $u\times v$ rather than on the
+%points $w$.  The third element $u$ allows for the case that the $v$
+%and $w$ are antipodal, or the long end of a great circle, which is
+%convenient for some of the proofs. In standard situations, we can
+%just take $u$ to be the unit length point in the direction $v\times
+%w$.  This change ripples through the text.  For instance, the proof
+%that  $\#c = \#f$ for linear graphs reduces all the way down to the
+%case of a single plane.]
+
+If $e=\{v_1,v_2\}$ is a set of two points and $v$ is any other point,
+set
+  $$
+  \begin{array}{lll}
+  C(v,e) &= \op{aff}_+(v,e)\\
+  C^0(v,e) &= \op{aff}^0_+(v,e)\\
+  \end{array}
+  $$
+%We drop the $v$ from the notation, when it is clear from context,
+%and write $C(e), C^0(e)$.
+% Note that the base point is always variable $\orgn$.
+
+\begin{definition}[fan]  Let $(\orgn,V,E)$ be a triple consisting of a point,
+a set of
+points, and a set of pairs of elements of $V$.  The triple is said to be
+a {\it fan\/} if the following conditions hold.
+    \begin{itemize}
+    \item $V$ is finite and nonempty.
+    \item $\orgn\not\in V$.
+    %\item Each element of $E$ has two elements.
+    \item For each $v\in V$, the set
+        $$
+        %% WW changed notation from E_v to E(v) to allow deformations E_t
+        E(v) = \{w\in V\mid \{v,w\}\in E\}
+        $$
+        is cyclic with respect to $(\orgn,v)$.
+    \item For each $e\in E$, $V\cap C^0(\orgn,e)=\emptyset$.
+    \item For sets $e,e'\in E$,   we have
+        $$C^0(\orgn,e) \cap C^0(\orgn,e')\ne\emptyset\ \Rightarrow (e = e').$$
+    \end{itemize}
+Call $C^0(\orgn,e)$ or $C(\orgn,e)$ a {\it blade\/} of the fan.
+\indy{Index}{blade}
+\indy{Index}{fan}
+\end{definition}
+
+We make a series of remarks about this definition.
+
+\begin{remark}\tlabel{rem:fan}\rating{30}
+\begin{itemize}
+\item The point $\orgn$ is a base point that will be fixed throughout
+the chapter.  
+\item The pair $(V,E)$ is a graph with nodes $V$ and edges $E$.  The set
+$E(v)$ is the set of edges around a fixed node $v$.
+Note that $w\in E(v)$ if and only if $v\in E(w)$.   
+%
+\item The final condition implies that the sets $C^0(\orgn,e)$
+do not meet.   This condition will eventually yield planar
+hypermaps.
+%
+\item
+By the condition that $E(v)$ should be cyclic,
+for each $v\in V$, we have an azimuth cycle $\sigma(v):E(v)\to E(v)$.
+We allow $E(v) = \{w\}$ to be a
+singleton set. If so,
+$\sigma(v)$ is the identity map on $E(v)$.
+%
+\item
+Sometimes we write $\sigma(v,w)$ for $\sigma(v)(w)\in E(v)$.
+%
+\item 
+The hypothesis of an azimuth cycle
+prevents $\{\orgn,v,v'\}$ from being a collinear set, when $\{v,v'\}\in
+E$.  In particular, there are no loops: $\{v,v\}\not\in E$.
+%
+\end{itemize}
+\end{remark}
+
+
+
+\section{Topology}\label{sec:topology}
+
+Let $(\orgn,V,E)$ be a fan.  We define sets of darts $D_1,D_2,D$:
+    $$
+    \begin{array}{lll}
+    D_1 &= \{(\orgn,v,w,w')\mid v\in V,\ w\in E(v),\ w' = \sigma(v,w)\}\\
+    D_2 &= \{(\orgn,v) \mid v\in V,\ \ E(v) = \emptyset\},\\
+    D   &= D_1\cup D_2.
+    \end{array}
+    $$
+We call $D_1$ the reduced set of darts and $D$ the extended set of darts.
+%
+We define a permutation $n$ on $D_1$ by
+    $$n(\orgn,v,w,w') = (\orgn,v,w',\sigma(v,w')).$$
+We define a permutation $f$ on $D_1$ by
+    $$
+    f (\orgn,v,w,w') = (\orgn,w,\sigma(w)^{-1} v,v).
+    $$
+Define a permutation $e$ on $D_1$ by
+    $$
+    e (\orgn,v,w,w') = (\orgn,w,v,\sigma(w,v)).
+    $$
+(Note that the symbol $e$ has two meanings according to context, both
+as the edge permutation and as an element of $E$.)
+Define permutations $e,n,f$ on $D_2$ by making them degenerate on $D_2$:
+    $$
+    e (\orgn,v) = n(\orgn,v) = f(\orgn,v) = (\orgn,v).
+    $$
+Write $\op{hyp}_r(\orgn,V,E)=(D_1,e,n,f)$ and
+Write $\op{hyp}(\orgn,V,E)=(D,e,n,f)$.  We call them the reduced hypermap
+and the (extended) hypermap associated with $(\orgn,V,E)$.  The next
+lemma justifies this terminology.
+
+
+
+\begin{lemma}\guid{AAUHTVE}\rating{40}
+Let $(\orgn,V,E)$ be a fan.  Let $D = D_1\cup D_2$
+and $\op{hyp}(\orgn,V,E) = (D,e,n,f)$, as constructed above.  Then
+    \begin{itemize}
+    \item $\op{hyp}(\orgn,V,E)$ is a plain hypermap.
+    \item  $e$ has no fixed
+points in $D_1$.
+    \item  $f$ has no fixed points on $D_1$.
+    \item For every pair of distinct nodes, there is at most one
+    edge meeting both.
+    \item The two darts of an edge (of $D_1$) lie at different nodes.
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}  We compute
+    $$e(n(f(\orgn,v,w,w'))) = e(n(\orgn,w,\sigma(w)^{-1} v,v))) =
+        e(\orgn,w,v,\sigma(w, v)) = (\orgn,v,w,\sigma(w, v)) = (\orgn,v,w,w').$$
+So it is a hypermap. We compute
+    $$e(e(\orgn,v,w,w')) = e(\orgn,w,v,\sigma(w,v)) = (\orgn,v,w,w').$$
+So it is plain. A fixed point in $D_1$ under $e$ would force $v = w\in E(v)$,
+but by construction $v\not\in E(v)$.  The argument that $f$ has no
+fixed points is similar.
+
+   We show that for every pair of distinct nodes, there is at most one edge
+meeting both.
+That is,
+        $$(n^k e x = e n^\ell x)\Rightarrow (n^\ell x = x).$$
+Let $x = (\orgn,v,w,w')\in D_1$.  Let $\sigma=\sigma(v)$. Then
+    $$
+    \begin{array}{lllllll}
+    n^\ell x &= (\orgn,v,\sigma^\ell w,\sigma^{\ell+1}w)\\
+    e n^\ell x &= (\orgn,\sigma^\ell w,*,*)\\
+    e x &= (\orgn,w,*,*)\\
+    n^k e x &= (\orgn,w,*,*)\\
+    n^k e x &= e n^\ell x &\ \Rightarrow (w = \sigma^\ell w) &\ \Rightarrow
+    (n^\ell x &= (\orgn,v,w,\sigma w) = x)
+    \end{array}
+    $$
+
+Finally, we show that each dart of an edge lies on a different node.
+That is, $e x \ne n^k x$, for $x\in D_1$.  We have
+    $$
+    \begin{array}{lll}
+        e(\orgn,v,w,w') &= (\orgn,w,*,*),\quad w\in E(v)\\
+        n^k(\orgn,v,w,w') &= (\orgn,v,*,*),\quad v\not\in E(v).
+    \end{array}
+    $$
+The result follows.
+\end{proof}
+
+\subsection{basics}
+
+There is hardly any topology that comes up in this book.  Most of
+what is needed appears in this chapter.  We make use of some basic
+notions in topology such as continuity, connectedness, and compactness.
+
+%\begin{remark} The term {\it connected} is now being used in
+%two different senses: in the topological sense and in a combinatorial
+%sense for hypermaps. 
+%\end{remark}
+%%  12/2008: connected now reserved for topology.  "Single group orbit"
+%%  for hypermaps.
+
+
+
+
+
+The set $\ring{R}^3$ is a metric space under the
+Euclidean distance function $d(v,w) = |v-w|$.  Subsets of
+$\ring{R}^3$ are a metric space under the restriction of the metric
+$d$ to the subset. Subsets carry the metric space topology. 
+If $Y$ is an open set in $\ring{R}^3$, write
+$\comp{Y}$ for its set of connected components.
+If two
+points in $\ring{R}^3$ 
+can be joined by a continuous path that avoids $X$,
+then they lie in the same component of $Y$.
+If we produce a family of nonempty connected open sets in
+$Y$, whose union is all of $Y$, then
+this family is $\comp{Y}$.
+%embers of the family are the components of $Y$.
+Let $$S^2(\orgn) = \{ v \mid | v-\orgn | = 1\}$$ be the unit sphere in
+$\ring{R}^3$, centered at $\orgn$.  
+
+
+
+
+
+
+\subsection{component and dart}
+
+Let $(\orgn,V,E)$ be a fan and let $(D,e,n,f) = \op{hyp}(\orgn,V,E)$
+be the associated hypermap.  Write $D = D_1\cup D_2$ as a union of
+reduced darts $D_1$ and non-reduced darts $D_2$.
+
+\begin{definition}[X,~Y]\label{def:XY}
+Let $(\orgn,V,E)$ be a fan.  Let $X=X(\orgn,V,E)$ be the union of the
+cones
+   $$C(\orgn,e)$$
+as $e$ ranges over $E$.  Let $Y=Y(\orgn,V,E)$ be the complement
+$Y = \ring{R}^3\setminus X$.
+\indy{Index}{X}\indy{Index}{Y}.
+\end{definition}
+
+%% WW Move the following remark elsewhere:
+%If $e=\{v,v'\}\in E$, then $\orgn,v,v'$ are not collinear
+%(Remark~\ref{rem:fan}), so that $C(\orgn,e)$
+%does not lie in a line, and does not contain any
+%distinct points $u,u'\in
+%C(\orgn,e)\setminus\{\orgn\}$ 
+%with $\op{aff}\{u,u',\orgn\}$ collinear. 
+%In particular, $C(\orgn,e)$ does not contain a line through $\orgn$.
+
+We associate a wedge $\Wdart(x)$, a subset $\Wdart(x,\epsilon)$,
+and an azimuth angle $\op{azim}(x)$
+with each dart $x\in D$.  If
+$x=(\orgn,v,w,w')\in D_1$, set
+$\Wdart(x) = W(\orgn,v,w,w')$ and $\op{azim}(x) =
+\op{azim}(\orgn,v,w,w')$.   If $x=(\orgn,v)\in D_2$, then we set
+$\Wdart(x) = \ring{R}^3\setminus \op{aff}\{\orgn,v\}$ and $\op{azim}(x) = 2\pi$.  For any $x = (\orgn,v,\ldots)\in D$, set
+    $$
+    \Wdart(x,\epsilon) = \Wdart(x) \cap \op{rcone}^0(\orgn,v,\cos\epsilon).
+    $$
+
+
+\begin{lemma}\guid{VBTIKLP}\tlabel{lemma:disjoint}\rating{100}
+Let $(D,e,n,f)$ be the hypermap attached to a 
+fan $(\orgn,V,E)$.
+Let $N$ be a node of $D$.  There exists $v\in V$
+such that the darts of $N$ are precisely
+the darts of the form $(\orgn,v,\ldots)$.  Furthermore, there is a 
+disjoint sum decomposition of $\ring{R}^3$ given by
+  $$
+  \ring{R}^3 = 
+  \op{aff}\{\orgn,v\} \cup
+  \bigcup_{x\in N} \Wdart(x)  \cup 
+  \bigcup_{\{v,w\}\in E} \op{aff}_+^0(\{\orgn,v\},w).
+  $$
+\end{lemma}
+
+\begin{proof}
+We prove the existence of the disjoint sum decomposition.
+First of all, $\ring{R}^3$ is the disjoint union of $\op{aff}\{\orgn,v\}$
+and its complement.
+Fix $u$ such that $\{v,u\}\in E$, and let $\sigma$ be the azimuth
+cycle on $E(v)$.  Every $y\in\ring{R}^3\setminus\op{aff}\{\orgn,v\}$ satisfies
+$$
+\op{azim}(\orgn,v,u,\sigma^i u)<
+\op{azim}(\orgn,v,u,y) < \op{azim}(\orgn,v,u,\sigma^{i+1} u).
+$$
+or 
+$$
+\op{azim}(\orgn,v,u,\sigma^i u) = \op{azim}(\orgn,v,u,y)
+$$
+for a unique $0 \le i < n$, where $n$ is the cardinality of $E(v)$.
+These conditions are exactly the membership conditions for the sets
+$
+\Wdart(\orgn,v,\sigma^i u,\sigma^{i+1}u)
+$
+and $\op{aff}_+^0(\{\orgn,v\},\sigma^iu)$, respectively.
+The result follows.
+\end{proof}
+
+\begin{corollary}\tlabel{cor:W}\rating{10}
+Let $x = (\orgn,v,\ldots)$ be a node.
+We have $\Wdart(x)\cap C(\orgn,e)=\emptyset$, for $e\in E(v)$.
+\end{corollary}
+
+\begin{proof} The decomposition of Lemma~\ref{lemma:disjoint} is
+disjoint.  It follows directly from the definitions that
+   $$C(\orgn,e)\subset \op{aff}_+^0(\{\orgn,v\},w) \cup 
+    \op{aff}\{\orgn,v\}.$$
+\end{proof}
+
+\begin{lemma}\guid{JGIYDLE}\rating{80} 
+For each $x$, and $\epsilon$ sufficiently small and positive,
+$\Wdart(x,\epsilon)$ is nonempty and lies in a single connected
+component of $Y(\orgn,V,E)$.
+\end{lemma}
+
+\begin{proof}  First we show that $\Wdart(x,\epsilon)$ lies in $Y$,
+for $\epsilon$ small.  Let $x=(\orgn,v,w,w')\in D_1$.  
+Let $S^2(\orgn)$ be the unit sphere centered at $\orgn$.
+By making $\epsilon$ small enough,
+the sets $\Wdart(x,\epsilon)\cap S^2(\orgn)$
+avoid the compact sets $C(\orgn,e)\cap S^2(\orgn)$ when $v\not\in e$.
+Thus, $\Wdart(x,\epsilon)$ also avoids $C(\orgn,e)$ when $v\not\in e$.
+By Corollary~\ref{cor:W}, $\Wdart(x,\epsilon)$ avoids $C(\orgn,e)$, when $v\in e$.
+Thus, $\Wdart(x,\epsilon)\subset Y$, for $\epsilon$ small.
+
+To complete the proof, it is enough to show that each $\Wdart(x,\epsilon)$ is
+connected.  
+The  set
+   $$
+   R=\{(r,\theta,\epsilon') \in (0,\infty) \times (\theta_1,\theta_2) \times (0,\epsilon)\}
+   $$
+is connected.
+The set $\Wdart(x,\epsilon)$  is the image of $R$
+under a spherical coordinate representation (Definition~\ref{def:sph}).
+It is readily verified that the polar coordinate representation is
+a continuous map. As the image of a connected set under a continuous map
+is connected, $\Wdart(x,\epsilon)$ is connected.
+\end{proof}
+
+\begin{definition}[leads~into] For each dart $x$, 
+there is then a well-defined connected
+component $U_x$ of $Y(\orgn,V,E)$ 
+that contains $\Wdart(x,\epsilon)$ (for all
+sufficiently small $\epsilon$). Say the dart {\it leads into}
+$U_x$.
+\end{definition}
+
+
+\subsection{component and face}
+
+%% WW: notation e for edge of E and for edge of the hypermap,
+% and for the edge permutation on darts.
+
+We soon prove that any two darts $x,y$  in the same
+face of the hypermap $\op{hyp}(\orgn,V,E)$ lead
+into the same component of $Y(\orgn,V,E)$.  The
+strategy of  proof
+is to construct a connected set inside $Y(\orgn,V,E)$
+that joins $\Wdart(x,\epsilon)$ to $\Wdart(f x,\epsilon)$.  
+In this section, we define these connected sets $\Wedge(x,\mu,\epsilon)$
+and study their basic properties.
+
+Let $(\orgn,V,E)$ be a fan.   Let
+$x=(\orgn,v,w,w')$ be a dart, and  $e = \{v,w\}\in E$.
+Let 
+  $$C(\orgn,e,\epsilon) =
+    \{ c\in C(\orgn,e) \mid c\not\in \op{rcone}(\orgn,v,\epsilon)
+    \cup\op{rcone}(\orgn,w,\epsilon)\}.
+  $$
+Let 
+  $$n = (v-\orgn)\times (w-\orgn)$$
+and let
+  $$
+  \Wedge(x,\mu,\epsilon) = \{ x  \in \ring{R}^3 \mid
+     x = c + \mu'\, n\, |c-\orgn|,\quad
+     c\in C(\orgn,e,\epsilon/2),\quad
+     0 < \mu' < \mu
+     \}.
+  $$
+
+\begin{lemma}\guid{LTNRBQA}\rating{80}  
+Let $(\orgn,V,E)$ be a fan.
+Let $x=(\orgn,v,w,w')$ be a dart in the associated hypermap.
+Pick $\epsilon$ so small that $\Wdart(x,\epsilon)$
+and $\Wdart(f x,\epsilon)$ each lie in a single component 
+of $Y(\orgn,V,E)$ and
+that $\Wdart(x,\epsilon)\cap \Wdart(f x,\epsilon) =\emptyset$.
+For $\mu,\epsilon > 0$, the set $\Wedge(x,\mu,\epsilon)$ is
+open and connected.
+\end{lemma}
+
+\begin{proof}  Let $\orgn + y \in \Wedge(x,\mu,\epsilon)$.
+Then $y$ can be written uniquely as
+$$
+  y = t (c - \orgn) + \mu' t n,\quad
+  t > 0,\quad
+  0 < \mu' < \mu,\quad
+  c \in C(\orgn,e,\epsilon/2) \cap S^2(\orgn).
+$$
+The parameter $c$ ranges over an open arc of the circle
+$$S^2(\orgn) \cap \op{aff}(\orgn,v,w).$$
+The parameters $(t,\mu',c)$ give a homeomorphism of $\Wedge(x,\mu,\epsilon)$
+with a product of three connected open sets.  The result follows.
+\end{proof}
+
+
+% XXS English to here.
+
+\begin{lemma}\guid{OEDRELV}\rating{100}
+Let $(\orgn,V,E)$ be a fan with dart
+$x=(\orgn,v,w,w')$.
+For all sufficiently small $\epsilon > 0$, there exists
+$\mu=\mu(\epsilon)>0$ such that
+the set $\Wedge(x,\mu(\epsilon),\epsilon)$ is
+contained in a single component of $Y(\orgn,V,E)$.
+\end{lemma}
+
+We write $\Wedge(x,\epsilon) = \Wedge(x,\mu(\epsilon),\epsilon)$.
+
+\begin{proof}  Fix $\epsilon>0$ small enough that $\Wdart(x,\epsilon)$
+and $\Wdart(f x,\epsilon)$ are contained in a single component.
+By the previous lemma, $W=\Wedge(x,\mu,\epsilon)$ 
+is connected.  
+%It is enough to
+%show that $W\cap S^2(\orgn)$  does not meet $X(\orgn,V,E) \cap S^2(\orgn)$.
+By construction, the set $W$ does not meet the blade
+$C(\orgn,\{v,w\})$.  If the lemma is false, we can find an
+edge $e\ne \{v,w\}$,
+and
+a sequence $c_i + \mu'_i n \in \Wedge(x,\mu_i,\epsilon) 
+ %\cap S^2(\orgn)
+\cap C(\orgn,e)$, and $c_i\in C(\orgn,\{v,w\},\epsilon/2) 
+ \cap S^2(\orgn)$. 
+with $\mu_i \to 0$ and $\mu'_i\to 0$. 
+By compactness, a subsequence
+of  $\{c_i\}$ converges to an
+element $c$ in 
+  $$(C(\orgn,\{v,w\})\cap C(\orgn,e)\cap S^2)
+  $$
+As $(\orgn,V,E)$ is a fan, this
+implies that $\{v,w\}$ meets $e$, say $v\in e$.
+The elements $c_i\not\in \op{rcone}^0(\orgn,v,\epsilon/2)$, so
+in the limit we have $c\not\in\op{rcone}^0(\orgn,v,\epsilon/2)$.
+However, the intersection of $C(\orgn,v)$ with $C(\orgn,\{v,w\})$
+lies in $\op{rcone}^0(\orgn,v,\epsilon/2)$.  This is a contradiction.
+\end{proof}
+
+\begin{lemma}\guid{JLYQTPB}\tlabel{lemma:umu}\rating{100}
+Let $(\orgn,V,E)$ be a fan.
+Let $x=(\orgn,v,w,w')$ be a dart in the associated hypermap.
+For all $\epsilon > 0$,
+the set $U=\Wedge(x,\epsilon)$ meets $W=\Wdart(x,\epsilon)$ and 
+$W'=\Wdart(f x,\epsilon)$.
+Furthermore, the darts $x$ and $f x$ lead into the same
+component of $Y(\orgn,V,E)$.
+\end{lemma}
+
+\begin{proof}
+We will show that $U$ meets $W$.    Let $e=\{v,w\}$. Pick 
+ $$c\in C(\orgn,e) \cap 
+      (\op{rcone}^0(\orgn,v,\epsilon)\setminus \op{rcone}(\orgn,v,\epsilon/2)).
+ $$
+Let $n$ be as above. 
+
+ We describe the behavior of 
+$u(\mu)=c + \mu n$ for sufficiently small $\mu>0$ 
+ The point lies in  $U$.  
+We show that $u(\mu)\in \Wdart(x,\epsilon)$.
+By construction $u(\mu)\in \op{rcone}^0(\orgn,v,\epsilon)$.
+The direction of the normal $n$ gives
+   $$
+   \op{azim}(\orgn,v,w,c) < \op{azim}(\orgn,v,w,u(\mu)).
+   $$
+Note that $\op{azim}(\orgn,v,w,c) = 0$, because 
+$c\in\op{aff}_+^0(\{\orgn,v\},w)$. 
+The function $\op{azim}$ is equal to $\op{dih}_V$ for
+small angles (Lemma~\ref{lemma:dih-azim}).  Moreover,
+the function $\dih_V$ is continuous (provided
+we avoid the set along which $\{\orgn,v,w\}$ or $\{\orgn,v,c\}$ is
+collinear), as can be seen
+from the explicit formula 
+for the function in Lemma~\ref{lemma:dihform}.
+Hence, $\op{azim}(\orgn,v,w,u(\mu))$ tends to zero with $\mu$.
+Thus, eventually
+   $$
+   0 < \op{azim}(\orgn,v,w,u(\mu)) < \op{azim}(\orgn,v,w,w').
+   $$
+This is precisely the condition for $u(\mu)\in \Wdart(x,\epsilon)$.
+The argument that $U$ meets
+$W'$ is similar.
+
+Each of the sets $U$, $W$, $W'$ lies in a single connected
+component of the complement.  Since $W$ and $U$ meet, they
+lie in the same component.  Likewise, $U$ and $W'$ lie in the
+same component.  By transitivity, $W$ and $W'$ lie in the same
+component.
+\end{proof}
+
+\begin{lemma}\guid{TOICXIA}\tlabel{lemma:face-component}\rating{10}
+Let $(\orgn,V,E)$ be a fan.
+If $x$ and $y$ are darts in the same face of the hypermap
+$\op{hyp}(\orgn,V,E)$, then they lead into the same component.
+\end{lemma}
+
+\begin{proof}  This is an easy induction, based on the previous
+lemma.  
+\end{proof}
+
+
+\begin{lemma}\guid{NZRCEQT}\tlabel{lemma:approach-Ce}\rating{35}
+Let $(\orgn,V,E)$ be a fan.  Let $U\in\comp{Y(\orgn,V,E)}$.  
+Let $e\in E$ and let $\{x,y\}$
+be the two darts forming an edge of $\op{hyp}(\orgn,V,E)$
+corresponding to $e$.  Let $\gamma:[0,1]\to U\cup C^0(\orgn,e)$
+be a path that begins in $U$ and ends on $C^0(\orgn,e)$.
+Then for all $\epsilon>0$ sufficiently small,
+there exists  $t\in[0,1]$ such that
+  $$\gamma(t)\in 
+  %\Wdart(x,\epsilon) \cup 
+  %\Wdart(f x,\epsilon)\cup 
+  %\Wdart(y,\epsilon)\cup 
+  %\Wdart(f y,\epsilon) 
+  %\cup 
+  \Wedge(x,\epsilon)
+  \cup \Wedge(y,\epsilon).
+  $$
+\end{lemma}
+
+\begin{proof}
+Suppose for a contradiction, that path avoids the given union
+of sets.  By going to a smaller interval $[0,t']$, $t'\le 1$,
+we may assume that $\gamma(t)\in U$ for $t < t'$ and $\gamma(t')\in
+C^0(\orgn,e)$.  
+
+Pick $\epsilon>0$ so small that 
+  $$\gamma(t')\not\in \op{rcone}^0(\orgn,u,\epsilon),\quad u=v,w.
+  $$
+%Fix $\epsilon$ small and positive.
+%Let $x = (\orgn,v,w,w')$.
+%If $\gamma(t')\in \op{rcone}^0(\orgn,v,\epsilon)$, then $\gamma(t)\in
+%\op{rcone}^0(\orgn,v,\epsilon)$ for $t$ sufficiently close to $t'$.  Th%e
+%azimuth angle $\op{azim}(\orgn,v,w,\gamma(t))$ is small but nonzero, 
+%when
+%$t$ is close to $t'$.  If it is small and positive, then 
+%it follows that $\gamma(t)\in \Wdart(x,\epsilon)$.  If it is negative, %then
+%$\gamma(t)\in \Wdart(n^{-1} x,\epsilon)$ and $n^{-1} x = f y$.
+%
+%The proof is similar, if $\gamma(t')\in \op{rcone}^0(\orgn,w,\epsilon)$.
+%Finally, in the remaining case, 
+Then $\gamma(t')\in C(\orgn,\{v,w\},\epsilon/2)$ and for $t$ near $t'$,
+$$\gamma(t)\in \Wedge(x,\epsilon)\cup \Wedge(y,\epsilon).$$
+\end{proof}
+
+\begin{lemma}\guid{AZRNUSY}\tlabel{lemma:Ux}\rating{25}
+Let $(\orgn,V,E)$ be a fan with component $U\in\comp{Y(\orgn,V,E)}$.
+Then, there exists a
+dart $x$ that leads into $U$.
+\end{lemma}
+
+\begin{proof}  Pick a curve (say an arc of a
+circle centered at $\orgn$) from any $p\in U$ to a point on $X=X(\orgn,V,E)$.
+By picking an appropriate circle, 
+we may assume that the first point of the curve in $X$ lies
+in $C^0(\orgn,e)$ for some edge $e\in E$.  
+By Lemma~\ref{lemma:approach-Ce},
+the component $U$ contains one of the connected
+sets $\Wedge(y,\epsilon),\ldots$.
+For each of these connected sets, there is a dart leading
+into its component.
+\end{proof}
+
+\begin{lemma}\guid{JDONNKL}\rating{25}
+Let $(\orgn,V,E)$ be a fan and $(\orgn,V,E')$
+a fan with one fewer edge:
+  $$
+  E' = E\setminus\{e\}, \quad X(\orgn,V,E) = X(\orgn,V,E')\cup C(\orgn,e).
+  $$
+The inclusion  $$Y(\orgn,V,E) \subset Y(\orgn,V,E').
+   $$
+gives a map
+from $\comp{Y(\orgn,V,E)}$ to
+$\comp{Y(\orgn,V,E')}$.
+\end{lemma}
+
+\begin{lemma}\guid{JJSVEPA}\tlabel{lemma:pre-walkup}\rating{20}
+Let $(\orgn,V,E)$ be a fan and $(\orgn,V,E')$
+the fan with one fewer edge $e\not\in E'$.
+Then the double walkup on $e$
+carries $\op{hyp}(\orgn,V,E)$ to
+$\op{hyp}(\orgn,V,E')$.
+\end{lemma}
+
+\begin{lemma}\guid{LNKNVPH}\tlabel{lemma:join-comp}\rating{35}
+Let $(\orgn,V,E)$ be a fan and $(\orgn,V,E')$
+a fan with one fewer edge $e=\{x,y\}$.
+Let $U,U'$ be different
+components of $Y(\orgn,V,E)$ with the same
+image in $\comp{Y(\orgn,V,E')}$.  Then 
+$x$ and $y$ lead into $U$ and $U'$, respectively, suitably ordered.
+\end{lemma}
+
+\begin{proof}  Let $Y'=Y(\orgn,V,E')$.
+As $U$ and $U'$ have the same image in $\comp{Y'}$,
+there is a path in $U\cup U'\cup C^0(\orgn,e)$, starting in $U$
+and ending in $U'$.  As $U$ and $U'$ are different components,
+the path meets $C^0(\orgn,e)$.
+By Lemma~\ref{lemma:approach-Ce}, the
+initial part of the path in $U\cup C^0(\orgn,e)$ up to the first
+intersection with $C^0(\orgn,e)$ meets $\Wedge(x)\cup \Wedge(y)$, where
+  $
+  \Wedge(z) = 
+    %\Wdart(z,\epsilon) \cup \Wdart(f z,\epsilon) 
+    %\cup 
+    \Wedge(z,\epsilon).
+  $
+(We assume that $\epsilon$ is positive and sufficiently
+small, then drop it from the notation.)
+Similarly, the terminal part of the path in $U'\cup C^0(\orgn,e)$, 
+from the
+final intersection with $C^0(\orgn,e)$ on, meets $\Wedge(x)\cup \Wedge(y)$.
+Recall that $\Wedge(x)$ and $\Wedge(y)$ are connected.  Thus,
+if the initial and terminal segments of the path were to
+meet the
+same set (say $\Wedge(x)$), then $U$ and $U'$ would be equal components.
+Thus, $U$ contains (say) $\Wedge(x)$ and $U'$ contains $\Wedge(y)$.
+%The result now follows from the definition of what it means
+%to lead into a component.
+By Lemma~\ref{lemma:umu}, $\Wedge(x,\epsilon)$ meets $\Wdart(x,\epsilon)$,
+so $x$ leads into $U$.  Similarly, $y$ leads into $U'$.
+\end{proof}
+
+
+\begin{lemma}\guid{IRPGMRU}\tlabel{lemma:U-bij}\rating{30}
+Let $(\orgn,V,E)$ be a fan and $(\orgn,V,E')$
+a fan with one fewer edge.  Let $\{x,y\}$ be the edge of the hypermap
+that corresponds to the edge of $E\setminus E'$.
+Let $Y=Y(\orgn,V,E)$ and $Y'=Y(\orgn,V,E')$.
+Then
+the map  $\comp{Y}\to \comp{Y'}$ is onto.
+Furthermore, if the the double walkup
+on $\{x,y\}$ splits,
+%(see Lemma~\ref{lemma:pre-walkup} 
+%and Definition~\ref{def:merge-split}).  
+then $\comp{Y}\to\comp{Y'}$ is bijective.
+\end{lemma}
+
+\begin{proof}
+First we show that the map is onto.  Let $U'$
+be a component of $Y'$.  If $p\in U'$,
+then a sufficiently small neighborhood of $p$ is contained
+in $Y'$ and contains a point $q\not\in C(\orgn,\{x,y\})$.  The
+point $q$ belongs to some component $U$ of $Y$.  The image
+of $U$ is $U'$.
+
+We show that the map is injective.  If not, two
+components $U_1,U_2$ map to the same component of $Y'$.
+By Lemma~\ref{lemma:join-comp}, we may assume
+that $x$ leads into $U_1$ and
+$y$ leads into $U_2$.
+However, when splitting, $x$ and $y$ are in the same face of
+the hypermap and hence lead into the
+same component.  Thus, $U_1=U_2$.
+\end{proof}
+
+%\begin{lemma}\guid{RQFUWXH}\tlabel{lemma:split-component}
+%Let $(\orgn,V,E)$ be a fan.  Suppose that
+%deleting an edge of the graph is given combinatorially as a splitting
+%double face walkup.  Then the number of components of
+%$Y(\orgn,V,E)$ is preserved by the edge deletion.  All
+%components are left as before, except one that differs only by the
+%presence of the edge.
+%\end{lemma}
+%
+%\begin{proof}
+%The components other those along the edge are unaffected. Suppose
+%that there are two components $U,U'$ in $H'$ that become
+%connected after the edge deletion.  If sets $\Wedge(x,\epsilon)$ and
+%$\Wedge({e x},\epsilon)$  were both to belong to the
+%same component $U$, then $U\cup\{\text{the open-ended edge}\}$ WW
+%and $U$ are disjoint open after the deletion, contrary to the
+%assumption they become connected.  So $\Wedge(x,\epsilon) \subset U$ and
+%$\Wedge({e x},\epsilon) \subset U'$.  Thus, $x$ and $e x$ lie on
+%different faces of $H'$ and this implies that the double walkup
+%merges, contradicting the hypothesis that it splits. Thus, the
+%number of components remains constant.
+%\end{proof}
+%
+
+\begin{lemma}\guid{OOCOCDU}\tlabel{lemma:U-merge}\rating{35}
+Let $(\orgn,V,E)$ be a fan and $(\orgn,V,E')$
+a fan with one fewer edge.  Let  $\{x,y\}$ be the set of darts
+for that  edge.
+Suppose that $x$ and $y$ lead into different components $U_x,U_y$
+of $Y(\orgn,V,E)$.
+Then $U_x$ and $U_y$ map to the same component of $Y'=Y(\orgn,V,E')$.
+\end{lemma}
+
+\begin{proof}
+Let $f,n$ be the face and node maps on the hypermap.
+If $y$ leads into $U_y$, then so does
+$f y = n^{-1} x$.  Let $z$ be the dart in
+$(D',\cdot,n',\cdot)=\op{hyp}(\orgn,V,E')$ that is the image of the dart $n^{-1}x$
+in $H$. We see that
+$\Wdart(x,\epsilon)$ and $\Wdart(n^{-1} x,\epsilon)$ combine into a single
+region $\Wdart({n'}^{-1}z,\epsilon)$.  Thus, $U_x$ and $U_y$ map to the
+same component of $Y'$.
+\end{proof}
+
+\begin{lemma}\guid{ILJJNGK}\tlabel{lemma:orbit-connect}\rating{35}
+Let $(\orgn,V,E)$ be a fan with hypermap 
+$(D,e,n,f)$.
+Fix a union $A$ of group orbits.
+Let $X_1$ be
+the union of blades $C(\orgn,{\{v,w\}})$ with a dart 
+$x =
+(\orgn,v,w,w')$ in $A$.  Similarly, 
+let $X_2$ be the union of blades with darts
+not in $A$.  
+Then $$X_1\cap X_2 = \{\orgn\}.$$
+\end{lemma}
+
+\begin{proof} 
+If the intersection  is not $\{\orgn\}$, then by
+the definition
+of a fan,
+there are blades of the form
+  $$
+  \begin{array}{lll}
+   C_1 &= C(\orgn,\{u,v\})\subset X_1,\\
+   C_2 &= C(\orgn,\{v,w\})\subset X_2.\\
+  \end{array}
+  $$
+By the definition of fans, $u$ and $w$ are
+in the same orbit of the azimuth cycle $\sigma(v)$ on $E(v)$.
+The azimuth cycle is used to define the node map.
+Hence, the darts 
+   $$
+   (\orgn,v,u,\sigma(v,u)) \text{ and }
+   (\orgn,v,w,\sigma(v,w))
+   $$
+are connected by a contour path of $n^{-1}$-steps.
+This gives a contour path from a dart in $A$ to a dart that
+is not in $A$.
+This is contrary to the assumption that these darts lie in
+separate group orbits.
+\end{proof}
+
+
+
+%%% EXIST DART
+%%%
+%\begin{lemma}\guid{ENJSZWC}\tlabel{lemma:dart-lead}
+%For each component of 
+%$Y$, there exists a
+%dart $x$ that leads into that component.
+%\end{lemma}
+%
+%\begin{proof} This follows from the claim
+%of the following lemma (Lemma~\ref{lemma:dart-curve}), 
+%which constructs
+%a continuous curve from any point in 
+%$Y$ to a wedge
+%$\Wdart(x,\epsilon)$.
+%\end{proof}
+%
+%\begin{lemma}\guid{FIIBFJR}\tlabel{lemma:dart-curve}
+%Let $(\orgn,V,E)$ be a fan.  Assume that $E\ne\emptyset$.
+%%Let $X=X(\orgn,V,E)$.
+%Let $v\in Y$.  
+%Then there exists a nondegenerate dart 
+%$x=(\orgn,v_1,w_1,w_2)$ of $\op{hyp}(\orgn,V,E)$ with the
+%following properties:
+%\begin{itemize}
+%\item Let $F$ be the orthonormal frame with respect to 
+%  $(\orgn,v_1,w_1)$ and let $P(F,r,\theta,\epsilon)$ be the spherical
+%  coordinate representation with respect to this frame
+%  (Definition~\ref{def:sph}).
+%\item We have
+%   $$v = P(F,r_v,\theta_v,\epsilon_v).$$
+%\item 
+%   For all $0 < \epsilon \le \epsilon_v$, we have
+%   $P(F,r_v,\theta_v,\epsilon)$ does not meet any $C(\orgn,e)$, 
+%   for $e\in E$.
+%\item For all $\epsilon>0$ sufficiently small,
+%   $P(F,r_v,\theta_v,\epsilon)\in \Wdart(x)$.
+%\end{itemize}
+%\end{lemma}
+%
+%\begin{proof} 
+%If $v$ lies in some $\Wdart(x,\epsilon)$, the conclusion follows
+%directly from the definition of $\Wdart(x,\epsilon)$.  We may
+%assume that $v$ does not lie in any of the sets $\Wdart(x,\epsilon)$.
+%
+%Now assume that no  dart $x$ satisfying the conditions
+%of the lemma exists.  
+%Consider the circle
+%   $$S^1 = \{u\mid |u-\orgn|=1,\quad
+%     (u-\orgn)\cdot (v-\orgn) = 0\}.$$
+%The set $S^1$ is a metric space in the induced metric
+%from $\ring{R}^3$ and a connected topological space in the
+%metric space topology.
+%Let $A\subset S^1$ be defined as
+%  $$
+%  A = \{u \in S^1 \mid  \op{aff}\{\orgn,v,u\} \cap X(\orgn,V,E)\ne\emptyset\}.
+%  $$
+%
+%We claim that $A$ is not empty.  Let $u'\in X(\orgn,V,E)$ be any
+%element such that $u'\not\in \op{aff}\{\orgn,v\}$.  Then
+%$\op{aff}\{\orgn,v,u'\} = \op{aff}\{\orgn,v,u\}$ for some $u\in S^1$.
+%This element $u$ belongs to $A$.
+%
+%The set $X(\orgn,V,E)$ is closed, and this implies that $A\subset S^1$
+%is closed.  
+%
+%We define a function $f:A\to E$ as follows.  Take $u\in A$.
+%Write
+%$u'\in\op{aff}(\orgn,v,u)$ in polar coordinates
+%$(r,\theta)$ with respect to $(\orgn,v,u)$ (Definition~\ref{def:polar}).
+%Let $\theta$ be the smallest polar coordinate such
+%that the point $u'$ with polar coordinates $(r,\theta)$ lies
+%in $X(\orgn,V,E)$.  (By a compactness argument
+%on $X(\orgn,V,E)\cap S^2(\orgn)$, $\theta$ exists.)  By the
+%assumption that the desired dart $x$ does not exist, we
+%find that $u'$ lies in a unique $C(\orgn,e)$.  Define $f(u)=e$.
+%
+%In fact, the element $u'$  lies in $C^0(\orgn,e)$.  Under small
+%perturbations of $u\in S^1$, the corresponding $u'$ also
+%lies in $C^0(\orgn,e)$.  Thus, the preimage $f^{-1}(e)$ is an
+%open set of $S^1$, for each $e\in E$.  The sets $S^1\setminus A$,
+%and $f^{-1}(e)$ give a finite cover of $S^1$ by disjoint open
+%sets.  By the connectedness of $S^1$, we have $f^{-1}(e)=S^1$
+%for some $e\in E$.
+%
+%However, by Tarski arithmetic\tarf{miss-plane}, there is a 
+%plane $\op{aff}\{\orgn,v,u\}$ that does not meet $C(\orgn,e)$.
+%This contradiction gives the desired conclusion.
+%\end{proof}
+%
+%%::DONE:: Why not replace this with a result that takes any
+%%plane that meets $X()$.  It isn't necessary to close in on
+%%a corner.  The only use of generalized polar coords was this.
+%
+
+\section{Deformation}
+
+In this section, we consider various deformations $(\orgn,V_t,E_t)$,
+for $t\in I\subset \ring{R}$, of
+a fan $(\orgn,V_0,E_0)$.  
+We assume that $t=0\in I$ gives the initial point
+of the deformation.  
+In general, these deformations
+are obtained by choosing replacing each vertex $w_0\in V$
+with a path $w:I\to \ring{R}^3$, with value $w_t$ at $t$.
+
+\begin{definition}[fan~deformation]
+If every configuration $(\orgn,V_t,E_t)$ of the 
+deformation is a fan,
+if $v$ is a continuous function of $t$ for all $v_0\in V$,
+if $v_0\mapsto v_t$is a bijection of $V_0$ with $V_t$, 
+and if
+ every deformation
+preserves the edge set:
+   \begin{equation}\tlabel{eqn:edge}
+   E_t = \{ \{v_t,w_t\} \mid \{v_0,w_0\}\in E_0\}.
+   \end{equation}
+then call it a
+fan deformation.
+\end{definition}
+
+\begin{lemma}\guid{KQRJETU}\tlabel{lemma:deform-invariant}
+Let $(\orgn,V_t,E_t)$ (for $0\le t\le t_{\text{max}}$) 
+be a fan deformation. Then we have the following invariants
+of the deformation:
+\begin{itemize}
+\item \rating{30} 
+The bijection $V_0\to V_t$ of vertex sets
+given by $v_0\mapsto v_t$ 
+is equivariant for
+azimuth cycles on $E_0(v_0)$ and $E_t(v_t)$.
+\item \rating{30} 
+There is a bijection between the darts of $\op{hyper}(\orgn,V_0,E_0)$
+and those of $\op{hyper}(\orgn,V_t,E_t)$ given by
+   $$(\orgn,v_0,\ldots) \mapsto (\orgn,v_t,\ldots).$$
+\item \rating{30} 
+The hypermaps $\op{hyper}(\orgn,V_0,E_0)$ and $\op{hyper}(\orgn,V_t,E_t)$
+are isomorphic under this bijection.
+\item \rating{400} 
+There is a bijection $U_0\mapsto U_t$ 
+between $\comp{Y(\orgn,V_0,E_0)}$
+and $\comp{Y(\orgn,V_t,E_t)}$ such that whenever a
+dart $x_0$ leads into
+$U_0$, the dart $x_t$ leads into
+$U_t$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof} By the Identity~\ref{eqn:edge}, the deformation is
+a bijection $V_0\to V_t$ and preserves $E_t$.  There
+is thus a natural bijection between $E(v_0)$ and $E_t(v_t)$.
+This bijection is compatible with the azimuth cycles on both
+sets.  In fact, for the azimuth cycle to change, there must
+be some earlier time $0\le\tau \le t$ when two azimuth angles coincide:
+$$\op{azim}(\orgn,v_\tau,w_\tau,u_\tau) = \op{azim}(\orgn,v_\tau,w_\tau,u'_\tau)$$
+with $w_\tau,u_\tau,u'_\tau\in E_\tau(v_\tau)$.  However, this
+implies that the intersection of two blades 
+   $$
+   C(\orgn,\{v_\tau,u_\tau\}) \text{ and } C(\orgn,\{v_\tau,u'_\tau\})
+   $$
+is larger than what is allowed by the definition of fan.  Thus,
+the bijection preserves the azimuth cycle.
+
+It is clear that there is a bijection of darts of the two
+hypermaps.   The edge, node, and face maps on darts are defined
+in terms of the azimuth cycle.  As the azimuth cycle is
+preserved, the two hypermaps are easily seen to be isomorphic.
+
+We pick the parameter $\epsilon$ as follows.
+By a compactness argument, we can find
+$\epsilon>0$ that gives
+   $$
+   \begin{array}{rll}
+   \Wdart(x_t,\epsilon)&\subset Y(\orgn,V_t,E_t)\\
+   \Wedge(x_t,\epsilon)&\subset Y(\orgn,V_t,E_t)
+   \end{array}
+   $$
+for all darts $x_0$ and all subsequent times $0\le t\le t_{\text{max}}$.
+
+We define a relation $R_t$ consisting of all ordered pairs $(U_0,U_t)$
+such that there exists a dart $x_0$ of $(\orgn,V_0,E_0)$ and 
+corresponding dart $x_t$ of $(\orgn,V_t,E_t)$ such that $x_0$
+and $x_t$ lead into $U_0$ and $U_t$, respectively.  If we show
+that this relation is a bijective function, then the final claim
+of the lemma follows.
+
+To show that the relation $R_t$ is a function, we must check that
+if $x_0$ and $x'_0$ both lead into $U_0$, then $x_t$ and $x'_t$
+both lead into the same component $U'_t$.  If $x_0$ and $x_0'$
+lie in the same face, then $x_t$ and $x'_t$ lie in the same face.
+In this case, Lemma~\ref{lemma:face-component} 
+implies that both darts, $x_t$
+and $x'_t$ lead into the same component. 
+Hence, we assume that $x_0$ and $x'_0$ lie in different faces, but lead
+into the same component.  
+
+There is a smallest time
+$s>0$ for which $\varphi(s)$ fails, where 
+ $\varphi(t)$ is the statement that $x_t$ and $x'_t$ lead
+into the same component of $Y(\orgn,V_t,E_t)$.
+To prove this, note that 
+if $x_t$ and $x'_t$ lead into the same component, there is
+a path $\gamma$ in $Y(\orgn,V_t,E_t)$
+from $\Wdart(x_t,\epsilon)$ to $\Wdart(x'_t,\epsilon)$.  This path avoids 
+$X(\orgn,V_{\tau},E_{\tau})$ and connects $\Wdart(x_{\tau},\epsilon)$ to
+$\Wdart(x'_{\tau},\epsilon)$ for all $\tau$ sufficiently close to $t$.
+Thus, the set of times $t$ for which $\varphi(t)$ holds is an
+open set containing $t=0$.  Thus, a smallest time $s$ exists.
+
+The next paragraph produces a contradiction
+by showing that $\varphi(s)$ holds.  It does this by
+constructing a curve that connects $\Wdart(x_s,\epsilon)$ to $\Wdart(x'_s,\epsilon)$.
+It constructs the curve by perturbing the curve that
+exists at time $t<s$, for $t$ sufficient close to $s$.  
+
+To construct
+a curve at time $s$,  the main point is to construct
+a tubular neighborhood of $X(\orgn,V_s,E_s)$.
+Let $W_t(F,\rho)$ be the union of the sets
+   $$\Wdart(y_t,\rho\epsilon) \text{ and } \Wedge(y_t,\rho\epsilon)$$
+as $y_t$ runs over the darts in a face $F$, considered as a face
+of $\op{hyp}(\orgn,V_t,E_t)$.
+As $t$ approaches $s$ from below, the points $v_t\in V_t$
+approach $v_s\in V_s$.  It follows that we can find
+some $t<s$ sufficiently close to $s$ has the
+following properties.
+\begin{itemize}
+%% WW This will take some work to prove formally.
+ \item For each face $F$, the set of boundary points of $W_t(F,0.1)$ that
+   also lie in $Y(\orgn,V_t,E_t)$ is a subset of $W_s(F,1)$.
+ \item  $X(\orgn,V_s,E_s)$ lies in the union of $X(\orgn,V_t,E_t)$ with
+  the
+  sets $W_t(F,0.1)$ (as $F$ runs over all faces of the hypermap).
+ \item $\exists p_0 \in (W(x_t,1)\cap W(x_s,1)) \setminus W(x_t,0.1)$.
+ \item $\exists p'_0 \in (W(x'_t,1)\cap W(x'_s,1)) \setminus W(x'_t,0.1)$.
+\end{itemize}
+(Here $0.1$ does not have any special properties, except for being a small number.)
+Let $\gamma$ be a path in $Y(\orgn,V_t,E_t)$ from $p_0$ to $p'_0$.
+By using these  properties, 
+we can break the path into finitely many
+segements $[a_i,a_{i+1}]$ such that for each $i$ we have one
+of the following two conditions
+\begin{itemize} 
+\item
+$\gamma|_{(a_i,a_{i+1})}$ does not meet $X(\orgn,V_s,E_s)$.
+\item There is a face $F$ such that
+$\gamma(a_i), \gamma(a_{i+1})\in W_s(F,1)$.
+\end{itemize}
+
+To see this, for a given face $F$, we can choose the time $a$ at
+which $\gamma$ first enters $W_t(F,0.1)$ and $a'$ when $\gamma$ last
+exits $W_t(F,0.1)$.  Use $[a,a']$ as a segment.  Repeat over the
+remaining faces.  What remains is a set of segments of the first type.
+We can arrange the initial segment starting at $p_0$ and the final
+segment up to $p'_0$ to have the first type.
+
+Along each interval of the first type, the path takes values in
+$Y(\orgn,V_s,E_s)$.  Along each interval of the second type,
+we may use that $W_s(F,1)$ is connected to modify
+the curve so that it lies in $Y(\orgn,V_s,E_s)$ and takes
+the same values at the endpoints.  Modifying the curve in this way,
+we obtain a path in $Y(\orgn,V_s,E_s)$
+from $p_0\in\Wdart(x_s,\epsilon)$ to $p'_0\in\Wdart(x'_s,\epsilon)$.  This is the desired
+contradiction.  This completes
+the proof that the relation $R_t$ is a function.
+
+The function $R_t$ is onto, because every component of $Y(\orgn,V_t,E_t)$
+has a dart $x_t$ that leads into it (Lemma~\ref{lemma:Ux}).  The function is injective,
+if the opposite relation $R_t^{op}$ consisting of all ordered pairs
+$(U_t,U_0)$ is a function.  This is established by the same argument
+that shows that $R_t$ is a function.  The lemma follows. 
+\end{proof}
+
+%
+
+\section{Path} % Visibility % DCG Sec. 12.7
+
+%%
+
+%% Moved from the end of [DCG SEC 12.7]
+\begin{definition}[visible]
+Let $(\orgn,V,E)$ be a fan with component $U\in \comp{Y(\orgn,V,E)}$, 
+and let $v,v'\in \ring{R}^3$.  We say
+that $v$ is visible from $v'$ in $U$ 
+if $\{v,v',\orgn\}$ is not
+collinear,  and
+  $$\op{aff}_+^0(\orgn,\{v,v'\})\subset U.$$
+The visibility relation is clearly symmetric in $v$ and $v'$.
+\end{definition}
+
+
+
+\begin{lemma}\guid{SJRGNXF}\rating{60} 
+Let $(\orgn,V,E)$ be a fan and let $v,v'\in V$.
+Suppose that $v$ is visible from $v'$ in some component $U$.  
+Then
+$(\orgn,V,E\cup\{v,v'\})$ is a fan.
+\indy{Index}{visible}
+\end{lemma}
+
+
+
+\begin{lemma}\guid{REZCYVI}\rating{50}  
+Let $(\orgn,V_0,E_0)$ be a fan with cyclic hypermap.  Let $(\orgn,V_t,E_t)$
+for $t\in I = [0,t']$ be a deformation of $(\orgn,V_0,E_0)$. 
+%Suppose that $|v_t-v'_t|\ge 2$ for all $t$ and all $v_t,v_t'\in V_t$.  
+%Suppose for two vertices $v_0,v'_0\in V_0$, such that $v'_0$
+%is not visible from $v_0$ (in the component of $F$).
+%Suppose that for all $t$, and $|v_t-v'_t|< L$.
+%Add hypothesis to make result true.
+Let $v_0,v_0'\in V_0$.  Suppose for all $t\in I$, and all $w_0\in V_0$,
+$w_t\not\in \op{aff}_+^0(\orgn,\{v_t,v_t'\})$.
+Then for all $t\in I$, $v'_t$ is not visible from $v_t$.
+\end{lemma}
+
+\begin{proof} For a contradiction, assume there exists some $t\in I$,
+such that $v'_t$ is visible from $v_t$.  
+Fix $s>0$, the infimum of $t$ for which $v'_t$ is visible
+from $v_t$.   Then there is $w_s\in V_s$ such that
+$w_s\in \op{aff}_+^0(\orgn,\{v_s,v_s'\})$.  This contradicts the hypothesis.
+\end{proof}
+
+
+
+\begin{definition}[convex,~concave]\label{def:concave}
+A dart of of a hypermap of a fan is {\it convex\/}
+if its azimuth angle is less than $\pi$, and otherwise that it
+is {\it concave}.  
+(A weakly convex dart has azimuth angle at most $\pi$.)
+\indy{Index}{convex}\indy{Index}{concave}\indy{Index}{weakly convex}
+%
+\end{definition}
+
+
+%\subsection{Preservation of Minimal Distance}
+%\subsection{Proof that Distances Remain at least $2$} %DCG 12.13, p140
+    \label{sec:proof-2}
+
+\begin{definition}[$S_U$]
+Let $(\orgn,V,E)$ be a fan, and let $U\in [Y(\orgn,V,E)]$.  Let $D_U$ be the set of darts leading into the hypermap, and $E_{U}\subset D_U$ the subset of reduced darts.
+Let $*$ be a symbol. Form the disjoint union
+ $$
+ S_U =  \{*\} \cup E_U \cup D_U.
+$$
+As the union is disjoint, we name the inclusion $\iota:D_U\to E_U$ to keep the sets separate.
+\end{definition}
+
+
+
+\begin{definition}[structured~point] A structured point $\phi$ of $U$ is a pair $(v,s)$,
+where $v\in\ring{R}^3$ and $s\in S_U$ such that
+\begin{enumerate}
+\item If $s = \{*\}$, then $v \in U$.
+\item If $s = (\orgn,w,\ldots)\in D_U$, then $v\in\op{aff}_+^0(\orgn,\{w\})$.
+\item If $s=(\orgn,v,w,w')\in E_U$, then $v\in\op{aff}_+^0(\orgn,\{u,w\})$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark} The purpose of a structured point is to deal with point in the boundary of $U$.  The structural information  tracks how a boundary point ``degenerates'' from points of $U$.  No such degeneracy information is needed when $v\in U$.  Hence in this case, we assign it the dummy symbol $*$.  When $s\in E_U$, the degneration lands in an edge; when $s\in D_U$, the degeneration lands over a dart.
+\end{remark}
+
+\begin{lemma}\guid{QGATMJH}\rating{30}
+Let $(\orgn,V,E)$ be a fan and let $U$ be a component of $Y(\orgn,V,E)$.
+The following relation $\prec$ makes $S_U$
+a partially ordered set.  (Here $f$ is the face map on the hypermap.)
+$$
+x \prec y \Leftrightarrow   
+\begin{cases}
+   x \in D_U\cup E_U & y = *,\quad {\text{or}}\\
+   x = \iota y, \iota (f y) & y \in E_U
+\end{cases}
+$$
+\end{lemma}
+
+Write $x \preceq y$ for $x \prec y$ or $x = y$.
+If $\phi(v,s)$ is a structured point, we write $v(\phi)$ and $s(\phi)$ for the first and second components of $\phi$.  
+
+If $s(\phi)\in D_U$, we say that $\phi$ is a vertex point.  If $\phi$ is a structured point and $\epsilon > 0$, we write $U(\phi,\epsilon)$ for the following set
+$$
+\begin{cases}
+  \op{rcone}^0(\orgn,v(\phi),\epsilon)&s(\phi) = *,   \\
+  \Wdart(x,\epsilon)& s(\phi) = x\in D_U,   \\
+  \Wedge(x,\epsilon) &s(\phi) = x\in E_U.   \\
+\end{cases}
+$$
+
+\begin{definition}[link]\label{def:link}  Two structured points $(v,s)$
+and $(v',s')$ are linked if
+\begin{itemize}
+ \item $\{\orgn,v,v'\}$ is not collinear,
+ \item $\exists s''\in S_U.\ \ {\text{ s.t.}}$
+   \begin{itemize}
+     \item $s \preceq s'',\quad s'\preceq s''$,
+      \item for all $v''\in\op{aff}_+^0(\orgn,\{v,v'\})$,
+           $(v'',s'')$ is a structured point.
+   \end{itemize}
+ \item For every $\epsilon > 0$, there exists $\delta>0$ such that
+   $$
+   \op{aff}_+^0(\orgn,\{v,v'\}) \cap \op{rcone}(v,\delta) \subset
+     U((v,s),\epsilon)
+   $$
+   (together with the symmetrical statement with $(v,s)$ and $(v',s')$ interchanged).
+\end{itemize}
+\end{definition}
+
+\begin{definition}[path] A sequence $\phi_0,\phi_1,\ldots,\phi_r$ is a path in $U$ from $\phi_0$ to $\phi_r$, if % (setting $v_i = v(\phi_i)$),
+%\begin{itemize}
+%\item $v_i\ne \orgn$,
+%\item $v_{i+1}\not\in \op{aff}_+^0(\orgn,\{v_i\})$,
+%\item $V\cap \op{aff}_+^0(\orgn,\{v(\phi_i),v(\phi_{i+1})\}) = \emptyset,$
+%\item For every sufficiently small $\epsilon>0$, there exists $v_i'\in U(\phi_i,\epsilon)$ such that
+%   {
+%   \begin{itemize}
+%     \item $\{\orgn,v_i',v_i'\}$ is not collinear,
+%     \item $\op{aff}_+(\orgn,\{v_i',v_{i+1}'\})\subset U$.
+%   \end{itemize}
+%   }
+%\end{itemize}
+$\phi_i$ is linked with $\phi_{i+1}$ for all $i<r$.
+\end{definition}
+
+A path $\phi_0,\ldots,\phi_r$ is a vertex path if $s(\phi_i)\in D_U$,
+for $0<i<r$.  
+
+%\begin{remark}\label{rem:structure}
+%Given a path $\phi_0,\ldots,\phi_r$, we can structure
+%each point $w\in\op{aff}_+(\orgn,\{v(\phi_i),v(\phi_{i+1})\})$ as follows.  If $w\in U$, use $*$.  Elseif $w\in \op{aff}_+^0(\orgn,\{ v(\phi_j)\})$, use
+%$s(\phi_j)$.  In the remaining cases, the structure of $w$ is an edge, which we determine as follows.  If $s(\phi_i)=s(\phi_{i+1})$, use $s(\phi_i)$.  
+%If $\{s(\phi_i),s(\phi_{i+1})\}\cap E_U = \{s_0\}$, use $s_0$.  In the remaining case, $\{s(\phi_i),s(\phi_{i+1})\} = \{x,e x\}$, with $x\in D_U$.  Use $x\in E_U$ (considered in $E_U$ rather than $D_U$).  Although these rules are rather involved at the logical level, they express a geometrically obvious condition that the structure of $w$ should be the natural geometric extension of the structure of its endpoints $\phi_i$.  For example, if $\phi_i$ and $\phi_{i+1}$ lie on the same blade, then an intermediate point $w$ should be given the structure of that plade (expressed as an element of $E_U$).
+%\end{remark}
+%
+%%\begin{remark}
+%%\label{flexremark} In Section~\ref{remark:proof-2}, to allow for
+%%more flexible deformations, we drop all constraints on the lengths
+%%of (undistinguished) edges $\{v_1,v_2\}$ that cross the boundary of
+%%the substandard component.  We deform in such a way that the edges $\{v_1,v_2\}$
+%%will maintain a length of at least $2$.
+%%\end{remark}
+
+\begin{definition}[path~length,~step~length]
+The {\it path-length} of a vertex-path is the sum of the lengths
+$$
+\sum_{i=0}^{r-1}\arc(\orgn,v(\phi_i),v(\phi_{i+1}))
+$$
+The {\it step length} is $r$.
+\end{definition}
+
+%For a fixed $(\orgn,V,E)$, there is a constant $C$ such that
+%each term $\arc(\orgn,v_i,v_{i+1})$ has length greater than $C$.  It
+%follows that the path-length tends to infinity as the length of
+%the vertex-path tends to infinity.  It also follows that there are only
+%finitely many vertex-paths that are contenders for the shortest path-length,
+%and that some path attains the smallestt path-length among all vertex-paths.
+
+%More generally, we consider paths
+%$v=v_0,v_1,v_2,\ldots,v_r=v'$ such that 
+%\begin{itemize}
+%\item for each $i$, there exists $w_i$, $w_{i+1}$ with $\{w_i,w_{i+1}\}\in E$
+%such that $C^0(v_i,v_{i+1})\subset C^0(w_i,w_{i+1})$, or
+%\item $C^0(v_i,v_{i+1})\subset U$.
+%\end{itemize}
+%Again, we measure the path-length as the sums of the arcs.
+
+\begin{definition}[path~angle]  Let $\phi_0,\ldots,\phi_r$ be a path (in
+some component $U$ of a fan).  We define the path angle $\alpha_i$
+for $0 < i < r$ as follows.  If $s(\phi_i)\in \{*\}\cup E_U$, then
+we define $\alpha_i$ to be the dihedral angle 
+   $$\dih_V(\{\orgn,v(\phi_i)\},\{v(\phi_{i-1}),v(\phi_{i+1})\})$$
+If $s(\phi_i)=(\orgn,v,u,w)\in D_U$, order $\{w_1,w_2\} = \{v(\phi_{i-1},v(\phi_{i+1})\}$ with respect to the azimuth cycle so that
+  $$\op{azim}(x) = \op{azim}(\orgn,v,u,w_1)+\op{azim}(\orgn,v,w_1,w_2)+
+    \op{azim}(\orgn,v,w_2,w).$$
+Then set $\alpha_i = \op{azim}(\orgn,v,w_1,w_2)$.  (In particular,
+if $\alpha_i >\pi$, then $s(\phi_i)\in D_U$ is a concave dart.)
+\end{definition}
+
+\begin{lemma}\guid{UMZPAFC}\tlabel{lemma:path-case}\rating{400}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Let $\phi,\phi',\phi''$ be 
+a path in $U$.
+Let $v,v',v''$ be the corresponding vertices in $V$.
+Assume that $\alpha(\phi')\le\pi$.
+Set $w(t) = (1-t) v' + t v''$.  One of the following holds.
+\begin{enumerate}
+ \item $\phi,\phi''$ is a path in $U$.
+ \item There exists $0 < t \le 1$, $r>1$, and a path $\phi_0,\ldots,\phi_r$ in $U$ such that
+   \begin{itemize}
+    \item $v(\phi_0) = u$, $v(\phi_r) = w(t)$;
+    \item There is a closed half plane with bounding line through $\orgn$ that contains $v(\phi_i)$;
+     \item The path length is equal to the arclength from $v$ to $w(t)$;
+     \item $s(\phi_i)$ is a concave dart in $D_U$ for $0 < i < r$;
+     \item The path angle $\alpha(\phi_i) \ge \pi$, for $0 < i < r$;
+   \end{itemize}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof} We assume that $\phi,\phi''$ is not a path in $U$.
+To avoid trivialities,
+we also assume that $(\phi_0,\phi_1,\phi_2)=(\phi,\phi',\phi'')$
+does not satisfy the conclusions of the theorem already.
+
+we can structure the point $\phi(t)=(w(t),s(t))$ as in Definition~\ref{def:link}.  For small $t\ge 0$, we consider the path
+$\phi,\phi(t),\phi''$.  This is indeed a path for small $t$.
+
+As we increase $t$, three things can go wrong.  (Assume that
+we stop at the smallest $t$ for which one of the following occurs.)
+(1)  $\op{aff}_+^0(\orgn,\{v',w(t)\})\cap V\ne\emptyset$.
+We consider the modified path
+ $$
+   \phi,
+   \phi_1,\phi_2,\ldots,\phi_k,\phi(t)
+   $$
+where the inserted terms $\phi_j$ are for points 
+ $\op{aff}_+^0(\orgn,\{v_i,u_t\})\cap V$. The structure of each
+inserted term is a concave dart $D_U$.
+We have
+   $$v(\phi_i)\in \op{aff}_+^0(\orgn,\{v',w(t)\}).$$
+In particular, the points lie in a common half plane.  The other
+properties are readily verified.
+
+(2) $\{\orgn,\phi_i(t),\phi_{i-1}\}$ is collinear.  In this case,
+there is a family of halfplanes passing through this line.  We can
+vary this halfplane $A^0$ until $A^0\cap V\ne\emptyset$.  
+We then repeat the construction of (1), with $A^0$ replacing
+$\op{aff}_+^0(\orgn,\{v',w(t)\})$.
+
+(3) We increase $t$ until $t=1$.  In this case, $\phi(t)$ coalesces
+with $\phi''$ and we have a path $\phi,\phi''$.
+\end{proof}
+
+\begin{lemma}\guid{WHVQQLB}\tlabel{lemma:min-path}\rating{200}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+For any choice of two structured points of $U$, there exists a path
+between those points of least path-length.
+If a path in $U$ has least path length, then
+all its intermediate points $\phi_i$ have 
+$\alpha_i\ge\pi$.  There exists a path in $U$ of least path
+length that has the property that every intermediate point $\phi_i$
+is a concave dart.
+% If alpha > pi it is necessarily a dart, by def of path angle.
+% darts with angles >= pi are necessarily concave.
+\end{lemma}
+
+\begin{definition}[minimal~vertex~path] A path of least path length in $U$
+is called a minimal
+vertex path.
+\end{definition}
+
+\begin{proof}  
+%Let $D_{cv}\subset D_U$ be the subset of concave darts.  
+For
+any path $\phi_0,\ldots,\phi_r$, let
+   $$a = \#\{i \mid 0 < i < r,\quad (s(\phi_i)\not\in D_U \text{ or }
+       \alpha_i < \pi)\}.$$
+We define the complexity of a path to be the ordered pair $(a,-r)$.
+There is a partial order on complexities given by the lexicograpical order.
+One pair $(a,-r)$ smaller complexity than another $(a',r')$ if $a<a'$
+or if $a=a'$ and $r>r'$.  If we fix the number $a$, and  $L>0$, then there is a constant $r(a,L)$ such
+that every path with path-length at most $L$ and constant $a$ has step length at
+most $r(a,L)$.  (Choose $C>0$ such that every
+arclength between concave darts is at least $C$. The path has at most $L/C$ such steps.  Then set $r(a,L) = 2 a + L/C$.)
+
+Thus, among paths of path-length at most $L$, from $\phi$ to $\phi'$,
+there is one of least complexity. If this path
+has an intermediate structured point $\phi_i$ such that 
+$\alpha(\phi_i)<\pi$ or $s(\phi_i)\not\in D_U$, then we use 
+Lemma~\ref{lemma:path-case} to modify the path.  The new path
+may have greater step size, but it always has smaller complexity.
+By the spherical triangle inequality and the conclusions of Lemma~\ref{lemma:path-case}, the modified path length is not increased.
+If $\alpha(\phi_i)<\pi$, the modified path length decreases.  
+Hence, if a path is minimal, then $\alpha(\phi_i)\ge\pi$, at each intermediate structured point.  This established the first
+claim of the lemma.
+
+Repeating, we may assume that $a=0$.  If such a path visits the same dart twice it creates a ``loop'' which cannot be part of a minimal  vertex path. Hence we can restrict the minimization to paths that visit each dart at most once, which are finite in number.  Thus, a vertex path exists for which all intermediate points are structured as darts.  As the path angles must satisfy $\alpha(\phi_i)\ge\pi$, they are necessarily concave.
+\end{proof}
+
+
+\begin{lemma}\guid{LGXSUBS}\tlabel{lemma:visr1}\rating{30}  
+Let $(\orgn,V,E)$ be a fan. Let $U$ be a component of $Y(\orgn,V,E)$.  Let $\phi_0,\ldots,\phi_r$ be a minimal vertex path in $U$ from $\phi_0$ to $\phi_r$.  Let $v=v(\phi_0)$ and $v'=v(\phi_r)$, with $v,v'\in V$.  Assume that there is no edge $e\in E$ such that $\op{aff}_+(\orgn,\{v,v'\})\subset C(\orgn,e)$.
+Then $v$ is visible from $v'$ in $U$ if and only if $r=1$. 
+\end{lemma}
+
+\begin{proof}
+If $\{\orgn,v,v'\}$ is collinear, then $r>1$ and $v$ is not visible from $v'$.  The result holds here.  Assume non collinearity.  
+
+Let $C^0 = \op{aff}_+^0(\orgn,\{v,v'\})$.  If $r=1$, then
+$V\cap C^0 = \emptyset$.  We have
+$C^0(\orgn,e)\cap C^0 = \emptyset$, for $e\in E$.  It follows that
+$C^0\subset U$, so that $v$ is visible from $v'$.
+
+Conversely, if $v$ is visible from $v'$, then $\phi_0,\phi_r$ is a vertex path from $\phi_0$ to $\phi_r$.  By the spherical triangle inequality, it has minimal path-length.  By the case of equality in the spherical triangle inequality, it is the unique minimal vertex path.  So $r=1$.
+\end{proof}
+
+\subsection{convexity}
+
+
+\begin{lemma}\guid{JGEHGYO}\tlabel{lemma:convex-vis}\rating{20}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Assume that every dart that leads into $U$ is convex.  Then
+ for every pair of structured points $\phi,\phi'$ of $U$, 
+$v(\phi)$ is visible from $v(\phi')$, or there exists an edge
+$e\in E$ such that 
+  $$\op{aff}_+(\orgn,\{v(\phi),v(\phi')\})\subset C(\orgn,e).$$
+In particular, the minimal path-length between any
+two structured points in $U$ is less than $\pi$. 
+\end{lemma}
+
+\begin{proof}  The minimal vertex path between $\phi$ and $\phi'$ has $r=1$ (Lemma~\ref{lemma:min-path}.
+By Lemma~\ref{lemma:visr1}, $v(\phi)$ is visible from $v(\phi')$.  
+In particular, $\{\orgn,v(\phi),v(\phi')\}$ is not collinear.
+The angle between any two points that are not collinear with $\orgn$ is less than $\pi$. 
+\end{proof}
+
+\begin{lemma}\guid{RAXFNJD}\tlabel{lemma:details}\rating{20}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.  Assume that there is a face $F$ such that every dart that leads into $U$ lies in $F$.  Assume every dart of $F$ is convex 
+except possibly one $x$
+at vertex $v$.  Then  every vertex $w$ of $F$ is visible from $v$, is adjacent to $v$ along an edge (meaning the vertex at $f x$ or $f^{-1} x$, for face map $f$), or is $v$ itself.
+\end{lemma}
+
+\begin{proof} Similar to the proof of Lemma~\ref{lemma:convex-vis}.
+\end{proof}
+
+%\begin{proof}  Let $w$ be a vertex that is not $v$ and is not adjacent %to $v$. 
+%In the minimal vertex path from $w$ to $v$, every intermediate
+%vertex is concave.  By assumption, no such vertices exist.  Therefore,
+%the vertex-path runs directly from $w$ to $v$.  In particular,
+%$w$ is visible from $v$.
+%\end{proof}
+
+\begin{lemma}\guid{PHMPEFB}\tlabel{lemma:path-arc}\rating{300}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Assume that every dart that leads into $U$ is weakly convex.  Let
+$\phi,\phi'$ be structured points of $U$.  Then the minimal path-length
+from $\phi$ to $\phi'$ is equal to the arclength between $v(\phi)$ and
+$v(\phi')$.
+\end{lemma}
+
+\begin{proof}  Let $\phi_0,\ldots,\phi_r$ be a minimal vertex path.
+If $r=1$, the the proof proceeds as in the previous lemma. Assume that $r>1$.
+At each intermediate point $\phi_i$, 
+the path angle $\alpha_i$ at $\phi_i$ is at least $\pi$.  The angle of the dart is at most $\pi$, so each path angle is precisely $\pi$.  It follows that there is a plane through $\orgn$ containing all the points $v_i=v(\phi_i)$.  The azimuth angles of the darts $s(\phi_i)$ are $\pi$, and
+$s(\phi_i)$ are consecutive darts along a face of the hypermap.
+
+If we show that all the points $v(\phi_i)$ lie in the same closed half plane through $\orgn$, then the angles sum as desired to give the conclusion:
+  $$
+  \sum_{i=0}^{r-1}\arc(\orgn,v_i,v_{i+1}) = \arc(\orgn,v_0,v_r).
+  $$
+
+To complete the proof, we show that if the points $v_i$
+do not lie in the same half plane, then the vertex path does not have minimal path length.  
+Write $v=v(\phi)$ and use
+similar notation for other structured points.
+Pick any structured point $\phi''$ such that
+$\{\orgn,v,v''\}$ 
+is collinear and $\orgn$ lies between the other two.  
+We have $v''\in \op{aff}_+(\orgn,\{v_i,v_{i+1}\})$ for some $i$.
+Infinitely many closed half planes pass through $\orgn,v,v''$.  One such half
+plane contains $v=v_0,\ldots,v_i,v''$.  Shift this half-plane slightly
+into $U$ so that the angle $\alpha''$ at $\phi''$ is less than $\pi$.
+In this way, we construct a new vertex path
+of the same path length but with a path angle less than $\pi$.
+
+However, no path with a path angle less than $\pi$ has minimal path length (Lemma~\ref{lemma:min-path}).
+This completes the proof.
+\end{proof}
+
+\begin{lemma}\guid{EYRRSJK}\tlabel{lemma:convex-face-simple}\rating{30}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component
+of $Y(\orgn,V,E)$.  Assume that there is a face $F$ such that every
+dart that leads into $U$ is convex and is an element of $F$.  Then
+$F$ is a simple face.
+\end{lemma}
+
+\begin{proof} Let $x,x'$ be two darts that lead into $U$.  Let
+$(v,x)$, $(v',x')$ be the corresponding structured points, with $v,v'\in V$.
+Let $\phi_0,\ldots,\phi_r$ be a minimal vertex path from $(v,x)$ to 
+$(v',x')$.  By Lemma~\ref{lemma:visr1}  and~\ref{lemma:convex-vis}, 
+$r=1$ and $v$ is visible from $v'$.  By the definition of visible
+$v\ne v'$.  Hence $x$ and $x'$ lie at different vertices and $F$ is simple.
+\end{proof}
+
+\begin{lemma}\guid{HDRFIYR}\tlabel{lemma:concave-simple}\rating{30}
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.  Assume that there is a face  $F$ that leads into $U$ in which every dart is concave.  Then $F$ is simple or there exists a plane through $\orgn$ that contains all the vertices of $F$.
+\end{lemma}
+
+\begin{proof}  Assume that $F$ is not simple.
+If two darts $x,y$
+of the face appear at a node, the azimuth angle constraint forces both darts to
+have angle $\pi$, so that the node has degree two and lies in the same plane
+as the adjacent nodes. Let the hypermap of $(\orgn,V,E)$ be $(D,n,e,f)$.  The two darts $f x$ and $f^{-1}y$ also appear in $F$.  Moreover, from $n y = x$, we derive $n (f x) = e x = e n y = f^{-1} y$.  So $f x$ and $f^{-1} y$ are at the same node.  If $f x = f^{-1} y$, then $n$ is degenerate at $f x$ and the node has size one.  Otherwise, we obtain a second pair of darts $x',y'$ in $F$ that lie at the same node in plane $A$.
+Continuing in this manner, we find that $f x',f^{-1} y'$, and eventually
+the vertices of all darts lie in the plane $A$.
+\end{proof}
+
+\begin{lemma}\guid{UOCPEYC}\tlabel{lemma:convex-2-dart}\rating{150}
+Let $(\orgn,V,E)$ be a fan, with cyclic hypermap.  
+Let $U$ be a component of $Y(\orgn,V,E)$.
+Assume
+that every dart of $F$ is weakly convex.  If there is at most
+one convex dart in $F$, then all the darts have azimuth angle $\pi$,
+and all the vertices of $F$ lie in a plane through $\orgn$.  The path length of the path following the darts of $F$ around its cycle is $2\pi$.
+If there are two convex darts in $F$ with vertices $v,w$, then
+$\{\orgn,v,w\}$ is collinear, all the vertices of $F$ lie on two planes through $\{\orgn,v,w\}$, and the path length around $F$ is again $2\pi$.
+\end{lemma}
+
+\begin{proof}
+If every dart but at most one 
+has azimuth angle exactly $\pi$, then the set $\{\orgn\}\cup V$ is
+planar.  This forces the final dart to have azimuth angle $\pi$ as well. 
+The sum of the angles at $\orgn$ is exactly $2\pi$.  The path length
+is then also $2\pi$.
+
+If there are only two convex darts $x,y$ (at $v,w\in V$), 
+then the darts from $x$ to $y$ (stepping around the face with with face map) lie at a set of vertices of $V$ that all lie on a common plane through $\orgn$.  Similarly, the vertices encountered stepping from $y$ to $x$ (with the inverse of the face map) all lie on a common plane through $\orgn$.  Thus, $v,w$ lie on two distinct planes through $\orgn$.  This forces $\{\orgn,v,w\}$ to be collinear.
+Thus, the sum of the arclengths from $x$ to $y$ is $\pi$, and the sum from $y$ back to $x$ is also $\pi$, giving path length $2\pi$ for $P$.
+\end{proof}
+
+\begin{lemma}\guid{ZZPFZYF}\tlabel{lemma:convex-half-plane}\rating{150}
+Let $(\orgn,V,E)$ be a fan.  
+Let $U$ be a component of $Y(\orgn,V,E)$.
+Let $F$ lead into $U$.
+that every dart of $F$ is weakly convex. Assume that there
+are at least three convex darts in $F$.  Let $x,y$
+be consecutive darts on $F$ and let $u,v$ be the corresponding points of $V$.
+Choose $p\in U$ that does not lie in the plane $\op{aff}\{\orgn,u,v\}$.
+Then $U$
+is contained in the half-space $\op{aff}_+^0(\{\orgn,u,v\},p)$.
+\end{lemma}
+
+\begin{proof} As $U$ is open, it is enough to show that it lies
+in each $\op{aff}_+(\{orgn,u,v\},p)$.  For a contradiction, let
+$q\in \op{aff}_-^0(\orgn,u,v\},p)\cap U$. 
+ By Lemma~\ref{lemma:convex-vis},
+we have $A^0=\op{aff}_+^0(\orgn,\{p,q\})\subset U$. 
+By perturbing $q$, we may assume that $A^0\cap V=\emptyset$. 
+
+If $x=(\orgn,v,\ldots)$, write $v(x)$ for its second component.
+Consider the cylic order on the darts of $F$ given by the face map.
+Moving from $p$ to
+$q$, pick consecutive darts $x,y$ ($y = f x$) 
+such that $A^0$ crosses $\op{aff}\{\orgn,v(x),v(y)\}$ first, say at point $p'$. Let $i\ge0$ be as small as possible such that $y'=f^i x$ is
+convex.  Set $y'' = f y'$.  Similarly, set $x' = f^{-j} x$, $x'' = f^{-1} x'$.
+
+Let $w\ne\orgn$ be a point on the intersection of planes $\op{aff}\{\orgn,v(x'),v(x'')\}\cap \op{aff}\{\orgn,v(y'),v(y'')\}$.
+By the first crossing construction,
+we have $p'\in \op{aff}_+(\{\orgn,w\},\{v(x'),v(y')\})$.  
+We see from this
+that $p'\in\op{aff}_+(\orgn,\{v(z),v(z')\})$,
+for some $z = f^k x$, $z' = f^{k+1}x$, with $-j \le k< i$. 
+As $A^0\cap V=\emptyset$,
+we have more strongly that $p'\in\op{aff}_+^0(\orgn,\{u,v\})\subset X(\orgn,V,E)$.
+Thus, $p'\not\in U$, which contains $A^0$.  This is a contradiction.
+\end{proof}
+
+
+\begin{lemma}\guid{WSEWPCH}\tlabel{lemma:convex-hyper}\rating{250}
+Let $(\orgn,V,E)$ be a fan, with cyclic hypermap.  
+Let $U$ be a component of $Y(\orgn,V,E)$.  Let $F$ lead
+into $U$.
+Assume
+that every dart of $F$ is weakly convex. 
+let $P$ be the vertex path that steps through the vertices of $V$ listed
+in the order of the face-map $f$ on $F$.  Then the path-length of the closed
+path $P$ is at most $2\pi$.
+\end{lemma}
+
+\begin{proof}  Lemma~\ref{lemma:convex-2-dart} handles the case
+when there are at most two convex darts in $F$.
+Assume that there are at least three convex darts.
+We prove the result by induction on the number of convex darts, with base case given by two convex darts.
+
+Pick distinct planes $\op{aff}(\orgn,\{u,v\})$ and $\op{aff}(\orgn,\{u',v'\})$ with vertices $u,v,u,v'\in V$, such that there are no points of
+$V$ along the line of intersection.  We may further assume that 
+the arclength from $v$ to $v'$ is less than $\pi$ and
+$\op{aff}_+(\orgn,\{v,v'\})$ is the path length of the path that
+steps consecutively through the darts from $v$ to $v'$\FIXX{Why?}
+
+Pick $w\ne \orgn$ in the intersection of these two planes along
+the half circle of radius $1$, centered at $\orgn$, that lies
+in the half plane $\op{aff}_+(\{\orgn,u\},v)$.  Modify the fan
+as follows. Add to $V$ the point $w$ and delete the vertices along
+$F$ strictly between $v$ and $v'$.  Delete the edges with a vertex
+at any of these deleted vertices.  Add edges $\{v,w\}$ and $\{w,v'\}$.
+
+The resulting fan $(\orgn,V',E')$ has a corresponding face $F'$ that is
+still weakly convex.  It has fewer convex darts (so that the induction
+hypothesis applies to it).  By the triangle inequality, the
+arclength from $\{v,w\}$ then to $\{w,v'\}$ is at least the arclength
+of $v$ to $v'$.  So we increase the perimeter path length to get
+a path length at most $2\pi$.
+\end{proof}
+
+%We consider a deformation $(\orgn,V_t,E)$ such that the only vertex that moves is
+%$v$.  Suppose that $(u,v,w)$ are consecutive (distinct) vertices in the face  $F$ and that the dart at $w$ is convex.
+%Let $v_t$ be the point in the plane of $\{\orgn,u,v\}$ at distance $1$ from $\orgn$ that
+%is extended by arclength $t$ beyond the arc from $(u-\orgn)/|u-\orgn|$ to $(v-\orgn)/|v-\orgn|$.
+%As $t$ increases, the angle at $w$ increases until for some value $t=s$, the angle
+%at $w$ is $\pi$.  The angle at $v_t$ remains between $0$ and $\pi$.  If $t<t'$, then $U_t\subset U_{t'}$.   By the spherical-triangle inequality, it is
+%also increasing in the perimeter path-length.   
+%By Lemma~\ref{lemma:path-arc}, the path-length between any two structured 
+%points of $U$ is the same as its arclength.
+%Because of the bound on the path-length
+%at most $\pi$ in $\bar U_t$, it is not possible for $C^0(\orgn,\{v_t,w\})$ to meet
+%$C^0(\orgn,\{u,u'\})$ for any edge $\{u,u'\}\ne\{v_t,w\}\in E$.   
+%When $t=s$, we reduce to a case known by the induction hypothesis.
+%\end{proof}
+%
+%
+%
+
+
+\begin{lemma}\guid{XWPWWFE}\tlabel{lemma:7-sides}
+    \oldlabel{5.1.2}
+Let $(\orgn,V,E)$ be a fan with cyclic hypermap.
+Let $F$ be one of the two faces of the
+hypermap.  Assume that every dart of $F$ has azimuth angle at
+most $\pi$.  Assume that each edge of $F$ has arclength 
+greater than $\pi/4$.
+Then the size of the face $F$ is at most seven.
+\end{lemma}
+
+\begin{proof} By Lemma~\ref{lemma:convex-hyper},
+ its perimeter path-length is at
+most $2\pi$.  If there are eight sides, the perimeter
+is greater than $8 (\pi/4) =2\pi$.
+\end{proof}
+
+
+
+
+\subsection{triangulation}
+
+
+
+
+\begin{lemma}\guid{YHBASEV}\tlabel{lemma:exists-diagonal}\rating{150}
+ Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Assume that one of the following conditions hold:
+\begin{itemize} 
+  \item There are darts $x,y$ in different group orbits  of the 
+   hypermap that lead into $U$, or
+  \item Some face $F$ whose darts lead into $U$ 
+has more than three darts, and there is a convex dart of $F$.
+\end{itemize}
+Then there exists $\{u,v\}$ such that $\{u,v\}\not\in E$ and such
+that $u$ is visible from $v$.
+\end{lemma}
+
+\begin{proof} Suppose that there are darts $x,y$ in different group orbits
+of the hypermap that lead into $U$.  Let $v,v'\in V$ be the vertices of $x,y$, respectively.
+Let $(\phi=\phi_0,\ldots,\phi_r=\phi')$ be a minimal vertex path.
+By Lemma~\ref{lemma:orbit-connect},  the group orbits
+lie in topologically distinct sets of vertices and edges of the fan.   
+Thus, for some $i$,
+   $$
+   \op{aff}_+^0(\orgn,\{v_i,v_{i+1}\})\subset U
+   $$
+and $\{v_i,v_{i+1}\}\not\in E$.  This is the desired pair.
+
+We may now assume that the darts leading into $U$ all belong to the same
+group orbit of the hypermap.  In particular, we may assume that
+the darts leading into $U$ are non-degenerate.
+Suppose that $F$ leads into $U$ and has at least four darts.
+Let $(x,y,z)$ be consecutive darts of $F$ under the face map.  
+with corresponding vertices $(u,v,w)$.  Suppose that $y$ is convex.
+This implies that $\{\orgn,u,v,w\}$ is not coplanar.
+
+Consider the minimal vertex path $\phi_0,\ldots,\phi_r$ from
+$\phi_0=(u,x)$ to $\phi_r=(w,z)$.  
+If any link $\phi_i,\phi_{i+1}$ is not along an edge,
+then $\{v(\phi_i),v(\phi_{i+1})\}$ gives the lemma.
+So assume these links are each along some edge.  In particular, we may
+assume that $r>1$, because $\{u,w\}$ is not an edge.
+
+The azimuth angle at $x$ is at most
+   $$\op{azim}(\orgn,u,v,v(\phi_1))\le 
+     \dih_V(\{\orgn,u\},\{v,w\}) <\pi.$$
+Thus, $x$ is convex.  Similarly, $z$ is convex.  
+
+The minimal vertex path $\phi'_0,\phi'_1,\ldots$
+from $(v,y)$ to $\phi_1$ does not pass
+by way of $\phi_0,\phi_r$.  Thus, $\{v,v(\phi'_1)\}$ gives the
+lemma.
+\end{proof}
+
+%
+%As in the proof of 
+%Lemma~\ref{lemma:min-path}, we consider the blade $C^0_s= aff_+^0(\orgn,\{u,(1-t)v + t w\})$ and the
+%sup $s$ of $t\le 1$ for which $C^0_t\subset U$.  If $s=1$ and $C^0_1\subset U$,
+%then the assumption that that there are at least four darts in $F$ allows us
+%to conclude that $\{v,w\}\not\in F$, so that $C^0_1$ is the desired blade.
+%If, on the other hand, $s<1$, we find that $C^0_s$ contains points
+%$v'_1,\ldots,v'_k$ of $V$.  We may order the points along $C^0_s$.  If
+%$v'_1$ is not the vertex consecutive to $u$ in the order imposed by the face map on $F$,
+%then $C^0(\orgn,\{u,v'_1\})$ gives the desired blade.  Hence we may assume that
+%the vertices appear in the face $F$ in the order $(v'_1,u,v,w)$.  The azimuth
+%angle at $u$ is less than the dihedral angle of $(\{\orgn,u\},\{v,w\})$.  In particular,
+%it is a convex dart at $u$.  By a symmetrical argument, we also find a desired blade at $w$
+%or prove that the azimuth angle of the dart at $w$ is convex.
+%
+%
+%Consider the minimal vertex path from $v=v_0$ to $v'_1$.  Any intermediate
+%vertices on this path are concave by Lemma~\ref{lemma:min-path}.  
+%In particular, the path
+%does not pass through the darts $x$ and $z$ at $u$ and $w$.  That is, the path
+%jumps from $y$ past the adjacent darts $x$ and $y$.  Hence 
+%$C^0(\orgn,\{v_0,v'_1\})$ gives the desired blade.
+%\end{proof}
+%
+
+
+\subsection{planarity}
+
+\begin{lemma}\guid{TXIEOJT}\tlabel{lemma:tri-tri}\rating{100}
+Let $(\orgn,V,E)$ be a fan.  Assume
+that its hypermap is a triangulation. (That is, all the darts are reduced; there is a single group orbit; the size of each face is $3$; and every dart is
+convex).   
+Let $\#c$ be the number
+of components of $Y(\orgn,V,E)$.  We have
+    \begin{itemize}
+    \item The hypergraph $\op{hyp}(\orgn,V,E)$ is planar.
+    \item The faces are in bijection with the components, given by which
+    component each face leads into.
+        \item Let $U$ be a component. Then $U \cap B(\orgn,1)$ 
+       is measurable and eventually radial at $\orgn$.  Its solid angle is
+        $$-\pi + \sum_{x\in F} \op{azim}(x)$$
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+Each component 
+of $Y(\orgn,V,E)$ has
+the form $U(v_1,v_2,v_3)=\op{aff}_+^0(\orgn,\{v_1,v_2,v_3\})$.  In fact,
+these sets are open, convex, and hence connected, 
+and their union is all of $Y(\orgn,V,E)$; thus,
+they are the components.   There is a bijection
+between components and faces $U \leftrightarrow F$, which associates this component
+with the three darts $(\orgn,v_i,v_j,v_k)$, $(i,j,k)$ a cyclic permutation
+of $(1,2,3)$  (assuming appropriate orientation on the indices $(1,2,3)$).
+
+Each component $U(v_1,v_2,v_3)$ is measurable and eventually radial
+at $\orgn$.  By the area formula for a solid triangle, the solid angle of $U(v_1,v_2,v_3)$
+is 
+   $$-\pi + \sum_{x\in F} \op{azim}(x)$$
+as stated in the lemma.  If we sum this relation over all components, we obtain
+the solid angle of a sphere:
+   \begin{equation}\tlabel{eqn:euler}
+   \begin{array}{lll}
+   4\pi &= -\sum_{F} \pi + \sum_{x} \op{azim}(x)\\
+        &= -\#f \pi + 2 \# n \pi.
+   \end{array}
+   \end{equation}
+In a triangulation, $\#\tangle{e,n,f}=1$, $2 \# e  = 3\#f$, $\# D = 2 \#e$.
+It follows from these relations that
+   $$
+   \#n + \# e + \# f = 2\#\tangle{e,n,f}+\# D.
+   $$
+Thus, the hypermap is planar.  The lemma is now fully established.
+\end{proof}
+
+
+\begin{lemma}\guid{DAADCNV}\tlabel{lemma:cx-dart}  
+Let $(\orgn,V,E)$ be a fan. Assume that the hypermap contains a single
+group orbit.   
+Assume that no half space
+through $\orgn$ contains $V$.  Then every face of the hypermap contains
+a convex dart.
+\end{lemma}
+
+\begin{proof}
+Suppose for a contradiction that 
+some face $F$ of the resulting hypermap only has concave darts.  Then
+the face is simple (Lemma~\ref{lemma:concave-simple}).  
+
+We form a cyclic quotient of the hypermap.
+There
+is a normal family consisting of the concave face and the complementary path.
+The quotient is is cyclic.  We delete from $V$ the vertices that are not on the face $F$ and from $E$ the edges that are not edges coming from the face $F$,
+to get a fan $(\orgn,V',E')$ for the cyclic quotient.
+The quotient hypermap has two faces $F$ and $F'$.  Every dart
+of $F'$ is convex.  Assume that $F'$ leads into $U'\in[Y(\orgn,V',E')]$.
+
+By Lemma~\ref{lemma:convex-half-plane}, $U'$
+lies in the intersection $R$ of half-planes
+$$
+\op{aff}_+(\{\orgn,u,v\},p),
+$$
+where $\{u,v\}$ runs over adjacent vertices.  
+
+
+We have $V'\subset R$.\FIXX{You could save some effort by rewording lemma:convex-half-plane so that it covers the construction in this paragraph.}  We claim, in fact, that
+every vertex of $V\subset R$.
+(This will contradict the assumption that $V$ does not lie in a half plane.)
+If not, we use that the hypermap is has a single group orbit 
+to find an edge $\{w,w'\}$ such
+that one endpoint $w$ lies in $R$ and the other $w'$ does not.  
+Let $\op{aff}\{\orgn,u,v\}$ be the bounding plane of $R$ that 
+is crossed first (say at point $q$) by
+$C(\orgn,\{w,w'\})$.
+Let consecutive vertices be $u,v,v'$ on $F$.  Since
+$q\in \op{aff}_+(\{\orgn,v,v'\},u)$, 
+we see that $q$ has non-negative barycentric
+coordinate with respect to $u$ in $\{\orgn,v,v',u\}$.  
+We have $q\in \op{aff}\{\orgn,u,v\}$. Also, $q\in\op{aff}\{\orgn,u,v\}$.
+Hence, $q\in \op{aff}_+(\{\orgn,v\},u)$.  Similarly,
+$q\in\op{aff}_+(\{\orgn,u\},v)$.
+We conclude that 
+  $$q\in \op{aff}_+(\orgn,\{u,v\}).$$
+By the definition of fans, the meeting of two
+blades implies that $w\in\{u,v\}$. Say $v=w$.
+
+$(\orgn,v,v',u)$ is a dart of $F$.  Thus, $u$ follows $v'$ in the azimuth cycle on $E(v)$.  Thus,
+  $$0 \le \op{azim}(\orgn,v,u,w) \le \op{azim}(\orgn,v,u,u').$$
+This implies that $w\in R$, for a contradiction.
+\end{proof}
+
+\begin{lemma}\guid{QBWFUSK}\tlabel{lemma:hypermap-planar}\rating{400}
+Let $(\orgn,V,E)$ be a fan.    
+Let $\#c$ be the number
+of components of $Y(\orgn,V,E)$.  Let $t>0$. We have
+    \begin{itemize}
+    \item The hypermap $\op{hyp}(\orgn,V,E)$ is planar.
+    \item No two faces in a given group orbit lead
+    into the same component.
+    \item $\#c = 1 + \#f - \#\tangle{e,n,f}$
+    \item Let $U$ be a component. Let $F\mapsto U$ mean
+    that the face is non-degenerate and leads into $U$.  
+     Then $U \cap B(\orgn,t)$ 
+       is measurable and eventually radial at $\orgn$.  Its solid angle is
+        $$\op{sol}(U) = 4\pi + \sum_{F\mapsto U}(-2\pi + \sum_{x\in F}
+        (\op{azim}(x)-\pi))$$
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}  
+Add to the fan finitely many isolated
+points  $V' = V\cup S$ to make $(\orgn,V',E)$ (by isolated we mean that the edge set $E$ does not change) such that no half-space
+through $\orgn$ contains $V'$.    While the hypermap
+has more than one group orbit, 
+we may use Lemma~\ref{lemma:exists-diagonal} to find $u,v\in V'$ such
+that $C^0=C^0(\orgn,\{u,v\})$ lies in a single component of $Y(\orgn,V',E)$ and
+joins two group orbits.  We add the edge $\{u,v\}$ to $E$ to form
+a new fan and hypermap.
+We repeat this process until the hypermap has one group orbit.  In particular, this
+inserts edges to each of the extra added points $S\subset V'$.
+
+
+By Lemma~\ref{lemma:cx-dart},
+every face has at least one convex dart.  By Lemma~\ref{lemma:exists-diagonal},
+we can add an edge to every face (that is not already a triangle).  By repeatedly
+inserting edges, eventually we obtain a triangulation.  It satisfies
+the conclusions of Lemma~\ref{lemma:tri-tri}.
+
+Now we reverse the process.  Starting with the triangulation, we remove the
+edges that we have inserted into the preplanar graph  (in a first-in first-out order).  
+Each edge removal is
+described combinatorially as a double-walkup.  (Note that
+in the case of an edge to an isolated vertex  $v\in S\subset V'$, the second walkup
+in the double walkup
+ removes the degenerate dart at $v$.  Hence in reversing the process,
+the vertices $S$ may be removed.)  Double-walkups of
+a planar hypermap preserve planarity by Lemma~\ref{lemma:walkup-planar}.  Hence the original
+fan has a planar hypermap.  Also, by the calculations of planar indices
+in Lemma~\ref{lemma:index}, every double walkup either merges or  splits
+ increasing the number of components by $1$.
+
+In the triangulation the set of components is in natural bijection with the set of faces.
+Each merging double walkup is applied to an edge $\{x,y\}$ such that each endpoint $x$,
+$y$ leads into a different face, hence into a different component.  By Lemma~\ref{XX},
+and Lemma~\ref{lemma:U-merge}, the number of components and faces both drop by exactly one.
+In particular, the components and faces remain in natural bijection after the
+double walkup.  Each double walkup that splits increases the number of faces by one,
+increases $\#\tangle{e,n,f}$ by one, and preserves the number of components.
+The announced formula for the number of components thus holds.
+
+Finally, the solid angle formula is easily checked to be compatible with
+the deletion of the edges.  That is, when two areas are joined, we have
+  $$\op{sol}(C_1) + \op{sol}(C_2) = \op{sol}(C_1\cup C_2)$$
+and the combinatorial formula is similarly additive.
+The lemma is now completely established.
+\end{proof}
+
+
+
+\begin{lemma}\guid{BICPVGX}[Jordan curve theorem]\tlabel{lemma:jct}\rating{50}
+Let $(\orgn,V,E)$ be a fan.
+If $\op{hyp}(\orgn,V,E)$ is a combinatorial polygon (a
+ hypermap with a single group orbit such that every node has cardinality two), then
+$Y(\orgn,V,E)$ has exactly two components.
+\end{lemma}
+
+\begin{proof} By the preceding lemma, $\# c = \#f$, and the
+hypermap is planar.  Since every node and every edge has order two,
+we have $\#D = 2\#n = 2\# e = \#n +\#e$.  Also by assumption,
+$\#\tangle{e,n,f} = 1$.  The Euler relation gives:
+    $$
+    \#c = \#f = (\#D - \#n - \#e) + 2\#\tangle{e,n,f} =2.
+    $$
+\end{proof}
+
+
+
+\subsection{deleting a node}
+
+\FIXX{Revise.}
+
+When we delete vertices and edges from a fan, its hypermap
+changes.  We show that the new hypermap is a quotient
+of the one we start with.
+
+Let $(v,V,E)$ be a fan with hypermap $\op{hyp}(v,V,E)$.
+Let $V'\subset V$ be a set of nodes. 
+Let $E'\subset E$ be the set of edges $e$ that meet $V'$.
+We have a fan $(v,V\setminus V',E\setminus E')$.
+
+The set $V$ is in bijection with the nodes of the hypermap.
+Explicitly, $v\in V$ corresponds with the set of darts
+ $\{(v_0,v,\ldots)\}$.
+We define a normal family of contour loops on 
+$\op{hyp}(v,V,E)$.  Let $D''$ be the set of darts that lie in the
+nodes constituting $V'$.  Let $D'$ be the remaining darts.
+We place each $x\in D'$ in a contour
+loop by the following permutation $r$ on $D'$:
+    $$r x =
+    \begin{cases}
+    f x, & f x \in D'\\
+    n^{-1} x & f x \in D''\\
+    \end{cases}
+    $$
+For each $x\in D'$, we obtain a contour loop $(x,r x, r^2 x,\ldots)$.
+Let $\cal L$ be this family of contour loops.  It is normal.
+
+\begin{lemma}\guid{CLEJEKW}\tlabel{lemma:quot-fan}
+In this context,
+$\op{hyp}(v,V,E)/{\cal L}$ is isomorphic to 
+$\op{hyp}(v,V\setminus V',E\setminus E')$.
+\end{lemma}
+
+The hypermap $\op{hyp}(v,V,E)$ attached to a fan $(v,V,E)$
+has two types of darts: the non-degenerate darts of the form
+$(v,v_1,v_2,v_3)$ and the degenerate darts of the form $(v,w)$.
+Each degenerate dart is a  fixed point for the edge, face, and node
+permutations.
+
+A special case of the construction of the previous section
+is to delete a degenerate node (dart) from a fan.
+Degenerate darts $x=(v,w)$ are in bijection with vertices
+$w\in V$ such that $E_w = \emptyset$.
+If $V'$ is a set of degenerate darts, with corresponding elements
+$V'\subset V$, 
+we obtain a fan
+$\op{hyp}(v,V\setminus V',E)$.  There is a canonical bijection
+between components of $Y(v,V,E)$ and components of $Y(v,V\setminus V',E)$.
+
+Each degenerate dart $x=(v,w)$ leads into a uniquely determined
+component of $\op{hyp}(v,V,E)$.  
+Figure~\ref{fig:deg-pent-hex} %% WW not yet drawn. Two frames of DCG~page126.
+shows a degenerate dart that leads into a component where
+the other darts leading into the component form a pentagon
+or hexagon.
+
+\begin{figure}[htb]
+  \centering
+  \myincludegraphics{noimage.eps}
+  \caption{Degenerate darts lead into components} % DCG examples.
+  \label{fig:deg-pent-hex}
+\end{figure}
+
+
+\subsection{distance}
+
+
+\begin{lemma}\guid{BQZRMDY}\tlabel{dist2}\rating{400}
+Let $(\orgn,V,E)$ be a fan with component $U$ of
+$Y(\orgn,V,E)$.  Assume the hypermap is cyclic. 
+Let $F$ be the simple face of the hypermap
+that leads into $U$.   Suppose that there are $v,w\in V$ such that
+the following conditions hold:
+\begin{itemize}
+ \item $\{v,w\}\not\in E$;
+ \item $2\le |v'-\orgn| \le 2.51$, for $v'\in V$,
+ \item $|v'-w'|> 3.2$ if
+    \begin{itemize}
+       \item $v'\ne w'\in V$,
+       \item $\{v',w'\}\not\in E$,
+       \item $\not\exists u'.\quad \{v',u'\}, \{u',w'\}\in E$, and
+       \item $\op{aff}_+^0(\orgn,\{v',w'\})\subset U$;
+    \end{itemize}
+ \item $|v'-w'|\ge \sqrt8$ if
+    \begin{itemize}
+      \item $v'\ne w'\in V$,
+      \item $\{v',w'\}\not\in E$, and
+      \item $\op{aff}_+^0(\orgn,\{v',w'\})\subset U$;
+    \end{itemize}
+ \item $|v'-w'|\le 3.2$ if $\{v',w'\}\in E$;
+ \item $2\le |v'-w'|$, if $v'\ne w'$ and $\{v',w'\}\ne \{v,w\}$.
+ \item $v(1-t) + w t \in U$ for all sufficiently small $t>0$.
+\end{itemize}
+Then $|v-w|>2$.
+\end{lemma}
+
+
+\begin{proof}
+The proof is by contradiction.  Assume that $|v-w|\le 2$.
+If $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, then $|v-w|\ge\sqrt8$ and
+we are done.  Assume otherwise.  Since $(1-t)v + t w\in U$ for $t>0$
+small, we can find a smallest positive $t\le 1$ (say $t'$) for which
+$(1-t)v + t w\not\in U$.  We have
+$$p_0 = (1-t') v + t' w \in \op{aff}_+(\orgn,\{v_1,v_2\})$$
+for some edge $\{v_1,v_2\}\in E$.  
+In fact, $p_0\in \op{aff}_+(\orgn,\{v_1,v_2\})$.
+
+We can structure each point of $\op{aff}^0_+(\orgn,\{v'\})$ with
+$v'\in V$ with the corresponding dart $(\orgn,v',\ldots)$ of $F$.
+Structure each point of $\op{aff}_+^0(\orgn,\{v',w'\})$ with
+$\{v',w'\}\in E_U$, with the corresponding $(\orgn,v',u',w')\in E_U$.
+Structure points of $U$ with $*$. Thus, we consider our points as
+structured without further comment.
+
+
+We have $|v_1-v_2|\ge2.91$ by Tarski arithmetic\tarfE{E:part4:10}.
+
+Let $\phi_0,\ldots,\phi_r$ be a minimal vertex-path from $v$ to
+$v_1$, and let $\phi'_0,\ldots,\phi'_s$ be a minimal vertex-path from
+$v$ to $v_2$ (for some natural numbers $r,s$). 
+Set $\beta_i = \arc(\orgn,\phi_i,\phi_{i+1})$ and
+$\beta'_i = \arc(\orgn,\phi'_i,\phi'_{i+1})$.
+By minimality, 
+  $$
+   \sum \beta_i + \sum \beta'_i \le 2 \arc(\orgn,v,w) + \arc(\orgn,v_1,v_2).
+  $$
+(Compare the minimal path with one running from $v$ to $p_0$ to $v_1$
+together with one from $v$ to $p_0$ to $v_2$. Then use $\arc(\orgn,v,p_0)\le
+\arc(\orgn,v,w)$.)
+
+We say that two vertices are subadjacent (with subvertex $u$)
+if they are both adjacent
+to the same vertex $u$.
+
+Note that if $r+s\le4$, then one of the arclengths on one of the two minimal paths
+must be at
+least $3.2$, for otherwise consecutive pair of structure points
+in the path corresponds to
+an 
+edge of $E$ or to a subadjacent pair. 
+In this case, the vertices and subvertices completely enumerate
+all the vertices around $F$ and hence all of $V$.  This means that
+$w$ lies on the vertex path or is one of the subvertices.  It
+cannot lie on the vertex path because $w$ is outside $\op{aff}_+(\orgn,
+\{v,v_1,v_2\})$ and the vertices of the vertex path inside.
+It cannot be a subvertex by Tarski arithmetic\tarf{subvertex}.
+Hence some length is at least $3.2$.
+
+We have $r+s\le3$ by the following calculations.  Here
+$y\in[2,T]$, where $T=2.51$.
+    $$5\arc(T,T,2) > \arc(2,2,3.2)+ 2 \arc(2,2,2).$$
+    $$3\arc(T,T,2) + \arc(T,y,3.2) > \arc(y,2,3.2) + 2 \arc(2,2,2).$$
+    $$3\arc(T,T,2) + \arc(T,y,3.2) > \arc(2,2,3.2) + 2\arc(y,2,2).$$
+    $$2\arc(y,T,2) + \arc(T,T,2) + \arc(T,T,3.2) > \arc(2,2,3.2) + 2\arc(y,2,2) $$
+(In every possible placement of the edge of length greater than $3.2$,
+we have that $\sum \beta_i + \sum\beta'_i$ is at least the left-hand side
+and the right-hand side is at least $\arc(\orgn,v_1,v_2)+2\arc(\orgn,v,w)+$,
+which is contrary to minimality.)
+
+Next, we prove the lemma in the case that the distance from
+$v$ to one of the endpoints, say $v_1$, of $\{v_1,v_2\}$ is at least
+$3.2$. In this case, Tarski arithmetic\tarf{dcg-1220} shows
+that we have an
+impossible geometric configuration. The
+constraints are as follows.  There are five points: $\orgn,v_1,w,v,v_2$.
+The plane $\op{aff}_+\{\orgn,v_1,v_2\}$ separates the point $w$ from $v$. The
+distance constraints are as follows:
+    $$2\le |u-\orgn| \le T,$$
+for $u=v_1,w,v,v_2$; $|v-v_1|\ge 3.2$, $|v-w|\le2$, $|v-v_2|\ge2$,
+$|w-v_1|\ge2$, $|w-v_2|\ge2$, $2\le |v_1-v_2|\le 3.2$.
+
+We may now assume that the distances from $v$ to the vertices $v_1$ and
+$v_2$ are at most $3.2$.  This condition is incompatible with $r+s=2$
+(and the fact that some step of a minimal path has distance greater than 
+$3.2$).  
+
+Hence, $r+s=3$.
+Say $r=1$ and $s=2$. We have $\{v,v_1\}$ is
+an edge of $E$ or a special pair.  Let
+$\{v,u\}=\{\phi'_0,\phi'_1\}$. We
+have $|u-v_1|\ge\sqrt8$ because $\{u,v_1\}$ is not in $E$,
+and $\max(|u-v|,|u-v_1|)>3.2$, by our assumption that there is at least
+one large step.  Tarski arithmetic\tarfE{dcg-p142} now shows that
+there does not exist a configuration of five points
+$\orgn$, $u$, $v$, $v_1$, $v_2$, with all distances at least $2$
+satisfying these constraints.
+\end{proof}
+
+
+
+\subsection{containment} %DCG  12.11, p 136
+    \oldlabel{4.12}
+
+%
+%Let $H =\op{hyp}(\orgn,V,E)$ be the hypermap of a fan,
+%and let $U$ be a component
+%of $Y(\orgn,V,E)$.
+%
+%We assume
+%that we are working with a component
+%with the following properties. If $v$ is a concave dart and $w$
+%is not adjacent to $v$, and yet is visible from $v$, then
+%$|v-w|\ge3.2$. If $v$ is a concave corner, then $|v-w|\ge3.07$ for
+%both adjacent corners $w$. If $v$ is a concave corner and
+%$|v-\orgn|\ge2.2$, then $|v-w|\ge3.2$ for both adjacent corners $w$.
+%
+%
+%Recall from Definition~\ref{def:concave} that we call a spherical
+%region {\it convex} if its interior angles are all less than
+%$\pi$. 
+%%The case where the substandard component is a convex triangle will be
+%%treated in Section~\ref{x-5.7}. Hence, we may also assume in
+%We assume
+%that the component is
+%not a convex triangle.
+%
+%In Section~\ref{sec:tcc}, a region $TC(\orgn,v,w_1,w_2,1.255,\lambda)$,
+%called the
+%truncated corner cell (tcc), is introduced.
+%We construct a {\it truncated corner cell\/} at each corner.  It depends on 
+%parameters $1.255$ and $\lambda \in [1.6,1.945]$. In all applications, we
+%take
+%    $\lambda = 1.945 = 3.2-1.255$, $\lambda = 1.815 = 3.07-1.255$, or
+%    $\lambda = 1.6 = 3.2/2$.
+%In all applications $w_1,v,w_2$ will be consecutive corners of
+%a standard component.
+%
+%By construction tccs at adjacent
+%corners of a standard component are separated by a plane . Tccs at
+%nonadjacent corners do not overlap if the corners are
+%$\ge2\lambda$ apart. Tccs will only be used in substandard components
+%satisfying this condition. It will be shown in
+%this section that tccs lie in the cone over the substandard component
+%(for suitable $\lambda$).
+%
+
+
+\begin{lemma}\guid{YHACLHD}\tlabel{lemma:4.12.3}
+%%    \oldlabel{4.12.3}
+%The truncated corner cells with parameter $1.6$ in a substandard component do
+%not meet at interior points.
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Suppose that the set of darts leading into $U$ forms a simple face $F$.
+Assume that $|v-w|\ge 3.07$ for all $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item the dart at $v$ in $F$ is concave.
+  \end{itemize}
+Assume that $|v-w|\ge 3.2$ for $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item $\{v,w\}\not\in E$.  % NB. no specials.
+  \end{itemize}
+Assume that $2\le |v-v_0|\le 2.51$ for all $v\in V$.
+Let $x,x'$ be darts of $F$ that are not adjacent, appearing at $v,v'\in V$.  
+Then
+$$
+V(x,\epsilon(v))\cap V(x',\epsilon(v')) = \emptyset,
+$$
+where $\epsilon(u) = \cosarc(|u-\orgn|,1.255,\lambda)$ and $\lambda=1.6$.
+\end{lemma}
+
+\begin{proof}
+Assume for a contradiction that these sets meet at $p$.
+Let $\phi=(v,x)$ and $\phi'=(v',x')$ be the structured points for
+the darts $x,x'$.  Let $\phi_0,\ldots,\phi_r$ be a minimal vertex
+path from $\phi$ to $\phi'$.  By minimality,
+$$
+\begin{array}{lll}
+ 2.0 &> 2\arc(2,1.255,\lambda) \ge \arc_V(\orgn,v,p) +
+\arc_V(\orgn,p,v') \\
+  &\ge \sum \arc_V(\orgn,v(\phi_i),v(\phi_{i+1})\ge
+  r \arc(2.51,2.51,3.07)\\ 
+  &> r (1.316).
+\end{array}
+$$
+Hence, $r=1$.
+Thus, $\op{aff}_+^0(v_0,\{v,v'\})\subset U$ and by Tarski arithmetic\tarf{cone-meet},
+$$
+  3.2 \le |v-v'| < 3.2.
+$$
+\end{proof}
+
+%We may assume that the corners are not adjacent. If a nonadjacent
+%corner $w$ is visible from $v$, then $|w-v|\ge3.2$, and an
+%interior point intersection $p$ is incompatible with the triangle
+%inequality: $|p-v|\le 1.6$, $|p-w|<1.6$. If $w$ is not visible, we
+%have a chain $v=v_0,v_1,\ldots,v_r=w$ such that $v_{i+1}$ is
+%visible from $v_i$. Imagine a taut string inside the substandard component
+%extending from $v$ to $w$. The radial projections of $v_i$ are the
+%corners of the string's path.   The string bends in an angle
+%greater than $\pi$ at each $v_i$, so the angle at each
+%intermediate $v_i$ is greater than $\pi$. That is, they are
+%concave. Thus, by our deformations $|v_i-v_{i+1}|\ge3.07$. The
+%string has path-length at least $r \arc(T,T,3.07)>r (1.316)$.
+%But the corner cells lie in cones of arcradius
+%$\arc(2,1.255,\lambda)< 1$. So $2(1.0)>r(1.316)$, or $r=1$.  Thus,
+%$w$ is visible from $v$.
+%\end{proof}
+
+ 
+\begin{lemma}\guid{ZFWIKSV}\tlabel{lemma:4.12.4}
+%%   \oldlabel{4.12.4}
+%The corner cell for $\lambda \le 1.815$ does not meet at an
+%interior point with the $1.255$-cone wedge around another corner
+%$w$.
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Suppose that the set of darts leading into $U$ forms a simple face $F$.
+Assume that $|v-w|\ge 3.07$ for all $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item the dart at $v$ in $F$ is concave.
+  \end{itemize}
+Assume that $|v-w|\ge 3.2$ for $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item $\{v,w\}\not\in E$.  % NB. no specials.
+  \end{itemize}
+Assume that $2\le |v-v_0|\le 2.51$ for all $v\in V$.
+Let $x,x'$ be darts of $F$ that are not adjacent, appearing at $v,v'\in V$.  
+Then
+$$
+V(x,\epsilon(v,\lambda))\cap V(x',\epsilon(v',1.255)) = \emptyset,
+$$
+where $\epsilon(u,h) = \cosarc(|u-\orgn|,1.255,h)$ and $\lambda=1.815$.
+\end{lemma}
+
+
+\begin{proof}
+As in the previous proof, if the sets meet, then
+    $$\arc(2,1.255,\lambda) +\arc(2,1.255,1.255) > r \arc(2.51,2.51,3.07),$$
+and again $r=1$.  So each of the two vertices in question is visible
+from the other. By Tarski arithmetic\tarf{cone-meet}, 
+$$
+3.07 \le |v-v'| < 1.815 + 1.255 = 3.07.
+$$
+\end{proof}
+
+\begin{lemma}\guid{KBASWYI}\tlabel{lemma:4.12.5}
+%%    \oldlabel{4.12.5}
+%The corner cell for $\lambda \le 1.945$ at a corner $v$ satisfying
+%$|v-\orgn|\ge2.2$ does not meet at an interior point with the $1.255$-cone
+%wedge around another corner $w$.
+Let $(\orgn,V,E)$ be a fan.  Let $U$ be a component of $Y(\orgn,V,E)$.
+Suppose that the set of darts leading into $U$ forms a simple face $F$.
+Assume that $|v-w|\ge 3.2$ for all $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item the dart at $v$ in $F$ is concave.
+  \end{itemize}
+Assume that $|v-w|\ge 3.2$ for $v,w\in V$, distinct, such that
+  \begin{itemize}
+   \item $\op{aff}_+^0(\orgn,\{v,w\})\subset U$, and
+   \item $\{v,w\}\not\in E$.  % NB. no specials.
+  \end{itemize}
+Assume that $2\le |v-v_0|\le 2.51$ for all $v\in V$.
+Let $x,x'$ be darts of $F$ that are not adjacent, appearing at vertices
+$v,v'$.  Assume $2.2\le |v-\orgn|$.  Then
+$$
+V(x,\epsilon(v,\lambda))\cap V(x',\epsilon(v',1.255)) = \emptyset,
+$$
+where $\epsilon(u,h) = \cosarc(|u-\orgn|,1.255,h)$ and $\lambda=1.9$.
+\end{lemma}
+
+\begin{proof}
+As in the previous proof, if the sets meet at $p$, then
+    $$\arc(2,1.255,\lambda) +\arc(2,1.255,1.255) > r \arc(2.51,2.51,3.2),$$
+and again $r=1$.  Then the desired contradiction 
+follows from Tarski arithmetic\tarf{cone-meet}
+    $$3.2\le |v-v'|<  1.945 + 1.255 = 3.2.$$
+\end{proof}
+
+
+
+
+
