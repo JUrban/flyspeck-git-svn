@@ -3,19 +3,19 @@
 
 This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version).  This is recent research and many of the inequalities have not been verified by interval arithmetic.  We mark each inequality FP (formal proof completed), VE (verified by ordinary interval arithmetic), or NV (not verified), depending on its status.
 
-= Minor inequalities:
+= Minor inequalities = 
 
- * An inequality approximating arc (cc:arc in tex files).  {{{STATUS: NV}}}
+ * An inequality approximating arc (cc:arc in tex files).  {{{STATUS_NV}}}
 
 = Inequalities from Marchal's paper =
 
 = Supercell Inequalities =
 
 = Tau Estimates =
- * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS: NV}}}
+ * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
 
 = Minor Linear programs =
 
- * (Tag FUSDSPJ)  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS: NV}}}
+ * (Tag FUSDSPJ)  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS_NV}}}
 
 = Major Linear Programs =
