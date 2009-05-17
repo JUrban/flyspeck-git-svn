@@ -1,0 +1,15 @@
+#This page gives a summary of the use of non-linear inequalities in the proof.
+
+= Introduction =
+
+This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version)
+
+= Inequalities from Marchal's paper =
+
+= Supercell Inequalities =
+
+= Minor Linear programs =
+
+ * (Tag FUSDSPJ)  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.
+
+= Major Linear Programs =
