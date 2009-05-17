@@ -1,4 +1,4 @@
-#This page gives a summary of the use of non-linear inequalities in the proof.
+# This page gives a summary of the use of non-linear inequalities in the proof.
 
 = Introduction =
 
