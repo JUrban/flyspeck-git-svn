@@ -9,10 +9,20 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
 
 = Inequalities from Marchal's paper =
 
+ * Marchal's k-cell inequality {{{gamma(X,M)}}} is non-negative. (cc:mar in tex files) {{{STATUS_NV}}}
+
 = Supercell Inequalities =
+
+ * gamma2 is nonnegative on quarters. (cc:qtr in tex) {{{STATUS_NV}}}
+ * 2-blade inequality: gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{STATUS_NV}}}
+ * 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
+ * 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
+ * 5-blade inequalities:  (cc:5bl in tex) {{{STATUS_NV}}}
+ * 6 or more-blade inequalities:  (cc:6bl in tex) {{{STATUS_NV}}}
 
 = Tau Estimates =
  * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
+ * A quadrilateral can be deformed (cc:qua in tex files) {{{STATUS_NV}}}
 
 = Minor Linear programs =
 
