@@ -1,5 +1,4 @@
-#This page gives a summary of the use of non-linear inequalities in the proof.
-
+#this page gives a summary of the use of non-linear inequalities in the proof.
 = Introduction =
 
 This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version)
