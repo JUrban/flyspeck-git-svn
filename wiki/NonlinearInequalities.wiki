@@ -8,6 +8,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
  * An inequality approximating arc (cc:arc in tex files).  {{{STATUS_NV}}}
  * The disjointness of Marchal's disks (cc:disks in tex files). a + a' <= arc(2h,2h',2). {{{STATUS_NV}}}
  * A linear lower bound on the area of regular polygons (cc:alin in tex). {{{STATUS_NV}}}
+ * A linear lower bound on the area of regular polygons (large disk) (cc:alin2 in tex). {{{STATUS_NV}}}
 
 = Inequalities from Marchal's paper =
 
