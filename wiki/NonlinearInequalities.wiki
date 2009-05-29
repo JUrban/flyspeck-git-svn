@@ -26,6 +26,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
 = Tau Estimates =
  * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
  * A quadrilateral can be deformed (cc:qua in tex files) {{{STATUS_NV}}}
+ * Tau estimates for each partition (cc:tau in tex files) {{{STATUS_NV}}}
 
 = Minor Linear programs =
 
