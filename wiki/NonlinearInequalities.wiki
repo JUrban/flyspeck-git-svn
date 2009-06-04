@@ -30,7 +30,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
 
 = Minor Linear programs =
 
- * (Tag FUSDSPJ)  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS_NV}}}
+ * /FUSDSPJ/  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS_NV}}}
 
 = Major Linear Programs =
 
