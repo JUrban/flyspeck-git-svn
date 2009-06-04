@@ -21,7 +21,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
  * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
  * 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
  * 5-blade inequalities:  (cc:5bl in tex) {{{STATUS_NV}}}
- * 6 or more-blade inequalities:  (cc:6bl in tex) {{{STATUS_NV}}}
+ * /TTAMHQQ/ 6 or more-blade inequalities:  (cc:6bl in tex) {{{STATUS_NV}}}
 
 = Tau Estimates =
  * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
