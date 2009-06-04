@@ -16,7 +16,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
 
 = Supercell Inequalities =
 
- * gamma2 is nonnegative on quarters. (cc:qtr in tex) {{{STATUS_NV}}}
+ * [GLFVCVK] gamma2 is nonnegative on quarters. (cc:qtr in tex) {{{STATUS_NV}}}
  * 2-blade inequality: gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{STATUS_NV}}}
  * 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
  * 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
