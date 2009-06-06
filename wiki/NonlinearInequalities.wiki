@@ -19,7 +19,7 @@ This page gives the nonlinear inequalities used in the proof of the Kepler Conje
  * /GLFVCVK/ gamma2 is nonnegative on non-quarters. (cc:qtr in tex) {{{STATUS_NV}}}
  * /FHBVYXZ/ 2-blade inequality: gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{STATUS_NV}}}
  * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
- * 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
+ * /QITNPEA/ 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
  * /ZTGIJCF/ 5-blade inequalities:  (cc:5bl in tex) {{{STATUS_NV}}}
  * /TTAMHQQ/ 6 or more-blade inequalities:  (cc:6bl in tex) {{{STATUS_NV}}}
 
