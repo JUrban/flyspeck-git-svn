@@ -42,6 +42,8 @@ Here are the instructions from Nguyen Duc Phuong:
  * Step 3: whenever the file had been downloaded to your computer, you can use msword to edit it as you want. And then right-mouse click on that file, choose SVNcommit. Your work will be uploaded and you can check it by revisiting Flyspeck google homepage.
  From now on, after you had finished installed tortoisesvn, everytime you want to upload files let do from step 2 and so on.
  Enjoy your work by seeing them (next to your name {{{^.^}}}) appear in Flyspeck googlepage !
+
+WARNING:  If you checkout using http://...,  you will not be able to check it back in.  (It will ask for your password, but not accept your password.)  You must first checkout using https://.... if you plan to check back in.
  
 
 == Using Emacs on Windows ==
