@@ -1,7 +1,14 @@
 #this page gives a summary of the use of non-linear inequalities in the proof.
 = Introduction =
 
-This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version).  This is recent research and many of the inequalities have not been verified by interval arithmetic.  We mark each inequality FP (formal proof completed), VE (verified by ordinary interval arithmetic), or NV (not verified), depending on its status.
+This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version).  This is recent research and many of the inequalities have not been verified by interval arithmetic.  Grep for the identifier to find the files involved in the verification.
+
+We mark each inequality, depending on its status
+
+  * FP (formal proof completed), 
+  * VE (verified by ordinary interval arithmetic), or 
+  * GRAD (verified numerically by gradient descent)
+  * NV (no verification)
 
 = Minor inequalities = 
 
