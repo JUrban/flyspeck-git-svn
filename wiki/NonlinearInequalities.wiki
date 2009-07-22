@@ -19,15 +19,15 @@ We mark each inequality, depending on its status
 
 = Inequalities from Marchal's paper =
 
- * Marchal's k-cell inequality {{{gamma(X,M)}}} is non-negative. (cc:mar in tex files) {{{STATUS_NV}}}
+ * Marchal's k-cell inequality {{{gamma(X,M)}}} is non-negative. (cc:mar in tex files)
  * ID[1025009205] Marchal's 4-cell inequality {{{GRAD}}}
  * ID[3564312720] Marchal's 3-cell inequality {{{GRAD}}}
 
 = Supercell Inequalities =
 
- * /GLFVCVK/ gammaL is nonnegative on non-quarters. (cc:qtr in tex) {{{STATUS_NV}}}
-    * ID[4869905472] gamma(3cell,L) >= 0. 
-    * ID[2477216213] gamma(4cell s.t. nonquarter,L) >= 0.  (The actual constraint is the exterior of a ball contained in the set of quarters).
+ * /GLFVCVK/ gammaL is nonnegative on non-quarters. (cc:qtr in tex) 
+    * ID[4869905472] gamma(3cell,L) >= 0. {{{GRAD}}}
+    * ID[2477216213] gamma(4cell s.t. nonquarter,L) >= 0.  (The actual constraint is the exterior of a ball contained in the set of quarters). {{{GRAD}}}
  * /FHBVYXZ/ 2-blade inequality: gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{STATUS_NV}}}
  * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
  * /QITNPEA/ 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
