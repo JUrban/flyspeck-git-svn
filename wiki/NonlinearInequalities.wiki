@@ -30,7 +30,7 @@ We mark each inequality, depending on its status
     * ID[2477216213] gamma(4cell s.t. nonquarter,L) >= 0.  (The actual constraint is the exterior of a ball contained in the set of quarters). {{{GRAD}}}
  * /FHBVYXZ/ 2-blade inequality: 
     * ID[1118115412] gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{GRAD}}}
- * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) {{{STATUS_NV}}}
+ * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) 
     * ID[2300537674] if dih > 1.65, then gammaL > 0. {{{GRAD}}}
     * ID[6652007036] dih(4-cell along a critical edge) < 2.8 {{{GRAD}}}
     * ID[7080972881] dih(spine) > 2.3 ==> adjacent edges to spine are not critical {{{GRAD}}} 
@@ -38,7 +38,9 @@ We mark each inequality, depending on its status
     * ID[9455898160] gamma4L(quarter) > -0.0057 {{{GRAD}}}
     * ID[7274157868]  dih(spine) > 2.3 ==> gamma4L(cell) > 0.0057 {{{GRAD}}}
  * /QITNPEA/ 4-blade inequalities:  (cc:4bl in tex) {{{STATUS_NV}}}
- * /ZTGIJCF/ 5-blade inequalities:  (cc:5bl in tex) {{{STATUS_NV}}}
+ * /ZTGIJCF/ 5-blade inequalities:  (cc:5bl in tex) 
+    * ID[1821661595]  gammaL >= a + b azim (4-cell) {{{GRAD}}}
+    * ID[7907792228]  gammaL >= a + b azim (2+3-cell) {{{GRAD}}}
 
 = Tau Estimates =
  * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
