@@ -4,4 +4,3 @@
 
  * Write {{{( * )}}} for infix multiplication rather than {{{(*)}}} because the latter confuses emacs syntacs highlighting.  (It interprets it as a ML comment.)
  * In analysis.ml, a restrictive skeleton excludes many useful sums and breaks the "search" function when searching for theorems with "sum".  Write the skeleton as {{{make_overloadable "sum" `:A->(B->real)->real`;;}}}
- * There does not seem to exist an order in which to load the files that allows one to load vectors.ml, analysis.ml, transc.ml, and convex.ml 
