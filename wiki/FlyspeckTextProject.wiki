@@ -1,0 +1,54 @@
+#summary Text Formalization Projects needed for completion of Flyspeck
+
+= Trig Chapter = 
+  * John Harrison (arg, azim)
+  * Jason Rute,
+  * Nguyen Quang Truong, work in progress
+
+= Volume Chapter =
+  * construction of measure: John Harrison (done)
+  * primitive volumes: John Harrison (done)
+  * solid angle, finiteness bounds: Nguyen Tat Thang (work in progress)
+
+= Hypermap Chapter =
+  * Tran Nam Trung, work in progress
+
+= Fan Chapter =
+  * topology: Hoang Le Truong
+  * planarity
+  * proof of face attributes
+  * polygon perimeter
+  * polygon area (unwritten text)
+  * polyhedron: John Harrison
+
+= Formulation = 
+  * statement: 
+  * rogers partition: 
+  * marchal's partition
+  * kissing number estimates (function M)
+  * more kissing number estimates (function L)
+  * bounding the number of spheres
+
+= Tame hypermap =
+  * contravention is tame
+  * main estimate
+  * main estimate cases
+
+= Lemmas in Elementary Geometry =
+  * Nguyen Quang Truong (done)
+
+= Supplementary results = 
+
+  * moving the project over to Multivariate library.
+  * no new axioms
+  * all theorems properly packaged
+  * A quadrilateral face of a tame graph does not contain two interior vertices.
+  * polar polygons
+  * circular disks and polyhedra
+  * Jordan curve type results.
+
+= nonlinear inequalities (contact Roland) = 
+
+= linear programming = 
+
+= graph generator (completed by Bauer-Nipkow) = 
