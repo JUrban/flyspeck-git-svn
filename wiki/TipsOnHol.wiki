@@ -1,0 +1,67 @@
+#summary Various Tips about Tactics and Using HOL
+
+= Proving Well-definedness =
+
+It occurred to me on answering a question just now that there is a
+slightly easier way of justifying the well-definedness of functions,
+using a function (used internally by "define") called
+"prove_general_recursive_function_exists" that will automate this
+pattern of reasoning. You can find out more by using
+
+ help "prove_general_recursive_function_exists";;
+
+One way to turn it into a tactic is the following rather tricky OCaml
+code (I will explain this sort of thing next week).
+{{{
+let PROVE_FUNCTION_EXISTS_TAC =
+ W(MATCH_MP_TAC o DISCH_ALL o prove_general_recursive_function_exists o snd);;
+}}}
+For example for extending a function to rational values:
+{{{
+ # g `?f. !m n. f(&m / &n) = something m n`;;
+ Warning: inventing type variables
+ Warning: Free variables in goal: something
+ val it : goalstack = 1 subgoal (1 total)
+
+ `?f. !m n. f (&m / &n) = something m n`
+
+ # e PROVE_FUNCTION_EXISTS_TAC;;
+ val it : goalstack = 1 subgoal (1 total)
+
+ `!m n m' n'. &m / &n = &m' / &n' ==> something m n = something m' n'`
+}}}
+or to integer values:
+{{{
+ # g `?f. (!n. f (&n) = positive_case n) /\ (!n. f (-- &n) = negative_case n)`;;
+
+ Warning: inventing type variables
+ Warning: Free variables in goal: negative_case, positive_case
+ val it : goalstack = 1 subgoal (1 total)
+
+ `?f. (!n. f (&n) = positive_case n) /\ (!n. f (-- &n) = negative_case n)`
+
+ # e PROVE_FUNCTION_EXISTS_TAC;;
+ val it : goalstack = 1 subgoal (1 total)
+
+ `(!x y. &x = &y ==> positive_case x = positive_case y) /\
+  (!x y. -- &x = -- &y ==> negative_case x = negative_case y) /\
+  (!x y. &x = -- &y ==> positive_case x = negative_case y)`
+}}}
+John.
+
+I have also uploaded to the HOL Light page a file with the little
+function calculus trick I presented at the board a day or two ago,
+which may be helpful for the Foundations exercise showing the
+uniqueness of complete ordered fields.
+
+ [http://weyl.math.pitt.edu/hanoi2009/uploads/HOLLight/function_welldefined.ml well-defined]
+
+John.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
