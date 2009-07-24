@@ -1,5 +1,18 @@
 #summary Various Tips about Tactics and Using HOL
 
+= WLOG Tactic = 
+
+n the latest snapshot, the WLOG tactics are in
+
+ Multivariate/wlog.ml
+
+There are some examples (including the one in the paper) in the files
+
+ Multivariate/wlog_examples.ml
+ Multivariate/flyspeck.ml
+
+
+
 = Proving Well-definedness =
 
 It occurred to me on answering a question just now that there is a
