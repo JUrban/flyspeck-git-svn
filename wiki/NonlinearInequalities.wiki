@@ -28,6 +28,7 @@ We mark each inequality, depending on its status
  * /GLFVCVK/ gammaL is nonnegative on non-quarters. (cc:qtr in tex) 
     * ID[4869905472] gamma(3cell,L) >= 0. {{{GRAD}}}
     * ID[2477216213] gamma(4cell s.t. nonquarter,L) >= 0.  (The actual constraint is the exterior of a ball contained in the set of quarters). {{{GRAD}}}
+    * ID[8328676778] gamma4Lbwt >= 0 for 4-cells of wt 1/2.
  * /FHBVYXZ/ 2-blade inequality: 
     * ID[1118115412] gamma2(four-cell)+gamma2(three-cell) >= 0.   (cc:2bl in tex) {{{GRAD}}}
  * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) 
