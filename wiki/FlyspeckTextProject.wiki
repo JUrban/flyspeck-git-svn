@@ -22,20 +22,28 @@
   * polyhedron: John Harrison has formalized the Krein-Milman theorem
 
 = Formulation = 
-  * statement: 
-  * rogers partition: 
-  * marchal's partition
-  * kissing number estimates (function M)
-  * more kissing number estimates (function L)
-  * bounding the number of spheres
+  * statement (Nguyen Tat Thang): 
+  * rogers partition (J.H.)
+  * marchal's partition (J.H.)
+  * kissing number estimates (function M) (J.H.)
+  * more kissing number estimates (function L) (J.H.)
+  * bounding the number of spheres (13 or 14)
 
 = Tame hypermap =
-  * contravention is tame
+  * contravention is tame  (There are 13 lemmas here to be done.)
+    *  Definition of tame
+    *  [PPHEUFG] A hypermap is tame if and only if its opposite is tame.
+    *  [FATUGPD] [FNJLBXS] [FCDJDOT]  A counterexample can be "improved" by moving spheres inward.
+    *  [HRXEFDM] The definition of tau and the equivalence of a tau-bound with the L-bound.
+    *  [CDTETAT], [SZIPOAS], [KCBLRQC], [BDJYFFB] linear programming properties of nodes.
+    *  [CRTTXAT] every face has cardinality at most 6.
+    *  [GNCEGFN] four-face-step lemma (assuming the result about packings in Elementary Geometry).
+    *  triangles condition of tameness
   * main estimate (Thomas Hales)
-  * main estimate cases (Thomas Hales)
 
 = Lemmas in Elementary Geometry =
   * Nguyen Quang Truong has completed proofs of many results in this collection.  These results need to be integrated with the 2009 version of the proof.
+    * 
 
 = Supplementary results = 
 
@@ -49,7 +57,7 @@
 
 = nonlinear inequalities (contact Roland) = 
 
-There are many [NonlinearInequalities] that occur in the proof.
+There are many [NonlinearInequalities] that occur in the proof.  The list is much shorter in the 2009 proof.  The list requires formal verification.
 
 = linear programming = 
 
@@ -57,3 +65,9 @@ The linear programming part of the proof is given in [http://code.google.com/p/f
 
 = graph generator (completed by Bauer-Nipkow) = 
 
+Bauer and Nipkow have a formal correctness proof of the graph generator in Isabelle.
+The graph generator uses a different set of input parameters in the 1998 and 2009 proofs.  The Bauer-Nipkow
+result needs to be adapted to the new set of input parameters.
+
+Roughly, the Bauer-Nipkow result assumes an algorithm for generating restricted hypermaps and based on that, they give a
+correctness proof that the computer code correctly filters the tame hypermaps.  The chapter on hypermap gives an algorithm for generating restricted hypermaps.  This should be combined with the Bauer-Nipkow result.
