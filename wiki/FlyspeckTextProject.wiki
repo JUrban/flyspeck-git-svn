@@ -19,7 +19,7 @@
   * proof of face attributes
   * polygon perimeter
   * polygon area (unwritten text)
-  * polyhedron: John Harrison
+  * polyhedron: John Harrison has formalized the Krein-Milman theorem
 
 = Formulation = 
   * statement: 
@@ -31,11 +31,11 @@
 
 = Tame hypermap =
   * contravention is tame
-  * main estimate
-  * main estimate cases
+  * main estimate (Thomas Hales)
+  * main estimate cases (Thomas Hales)
 
 = Lemmas in Elementary Geometry =
-  * Nguyen Quang Truong (done)
+  * Nguyen Quang Truong has completed proofs of many results in this collection.  These results need to be integrated with the 2009 version of the proof.
 
 = Supplementary results = 
 
@@ -49,6 +49,11 @@
 
 = nonlinear inequalities (contact Roland) = 
 
+There are many [NonlinearInequalities] that occur in the proof.
+
 = linear programming = 
 
+The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof.  Matthew Wampler-Doty has been involved in this project during the summer 2009.
+
 = graph generator (completed by Bauer-Nipkow) = 
+
