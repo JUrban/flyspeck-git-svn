@@ -11,15 +11,17 @@
   * solid angle, finiteness bounds: Nguyen Tat Thang (work in progress)
 
 = Hypermap Chapter =
-  * Tran Nam Trung, work in progress
+  * Tran Nam Trung, work in progress (long chapter)
 
 = Fan Chapter =
   * topology: Hoang Le Truong
   * planarity
   * proof of face attributes
+
+= Fan Chapter Additional Results = 
   * polygon perimeter
   * polygon area (unwritten text)
-  * polyhedron: John Harrison has formalized the Krein-Milman theorem
+  * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
 
 = Formulation = 
   * statement (Nguyen Tat Thang): 
@@ -31,7 +33,7 @@
     
 
 = Tame hypermap =
-  * contravention is tame  (There are 13 lemmas here to be done.)
+  * contravention is tame  
     *  Definition of tame
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame.
     *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.
@@ -43,18 +45,23 @@
   * main estimate (Thomas Hales)
 
 = Lemmas in Elementary Geometry =
+
   * Nguyen Quang Truong has completed proofs of many results in this collection.  These results need to be integrated with the 2009 version of the proof.
-    * 
+    * positive orientation "chi", delta properties, E, quad interior.
 
 = Supplementary results = 
+
+  * A quadrilateral face of a tame graph does not contain two interior vertices (Hard project!)
+  * polar polygons (Hard project!)
+  * circular disks and polyhedra
+  * deformations of polygons for the main estimate.
+  * Jordan curve type results.
+
+= Packaging = 
 
   * moving the project over to Multivariate library.
   * no new axioms
   * all theorems properly packaged
-  * A quadrilateral face of a tame graph does not contain two interior vertices.
-  * polar polygons
-  * circular disks and polyhedra
-  * Jordan curve type results.
 
 = nonlinear inequalities (contact Roland) = 
 
