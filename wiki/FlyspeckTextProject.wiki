@@ -32,12 +32,12 @@
 = Tame hypermap =
   * contravention is tame  (There are 13 lemmas here to be done.)
     *  Definition of tame
-    *  [!PPHEUFG] A hypermap is tame if and only if its opposite is tame.
-    *  [!FATUGPD] [!FNJLBXS] [!FCDJDOT]  A counterexample can be "improved" by moving spheres inward.
-    *  [HRXEFDM] The definition of tau and the equivalence of a tau-bound with the L-bound.
-    *  [CDTETAT], [SZIPOAS], [KCBLRQC], [BDJYFFB] linear programming properties of nodes.
-    *  [CRTTXAT] every face has cardinality at most 6.
-    *  [GNCEGFN] four-face-step lemma (assuming the result about packings in Elementary Geometry).
+    *  !PPHEUFG A hypermap is tame if and only if its opposite is tame.
+    *  !FATUGPD !FNJLBXS !FCDJDOT  A counterexample can be "improved" by moving spheres inward.
+    *  !HRXEFDM The definition of tau and the equivalence of a tau-bound with the L-bound.
+    *  !CDTETAT, !SZIPOAS, !KCBLRQC, !BDJYFFB linear programming properties of nodes.
+    *  !CRTTXAT every face has cardinality at most 6.
+    *  !GNCEGFN four-face-step lemma (assuming the result about packings in Elementary Geometry).
     *  triangles condition of tameness
   * main estimate (Thomas Hales)
 
