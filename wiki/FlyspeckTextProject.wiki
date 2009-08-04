@@ -1,5 +1,9 @@
 #summary Text Formalization Projects needed for completion of Flyspeck
 
+= Guidelines =
+  * Do not ever introduce new axioms.  If you need results from earlier chapters that have not been proved, introduce them as explicit assumptions in the statement of the theorem.  If there are assumptions you use more than once, make a definition containing the term, so that you can just type {{{my_assumption}}} for example, to enter it as an assumption.  You are not allowed to use assumptions to make the theorem easier to prove.  Only use assumptions for lemmas from earlier chapters that have not been proved yet.
+  * Package the results up when you are done, using {{{THEN}}} and {{{THENL}}}.
+
 = Trig Chapter = 
   * John Harrison (arg, azim)
   * Jason Rute,
@@ -25,24 +29,27 @@
 
 = Formulation = 
   * statement (Nguyen Tat Thang): 
-  * rogers partition (J.H.)
-  * marchal's partition (J.H.)
-  * kissing number estimates (function M) (J.H.)
-  * more kissing number estimates (function L) (J.H.)
-  * /DLWCHEM/ bounding the number of spheres (13 or 14)
+  * rogers partition (John Harrison)
+  * marchal's partition (John Harrison)
+  * kissing number estimates (function M) (John Harrison)
+  * more kissing number estimates (function L) (John Harrison)
+  * /DLWCHEM/ bounding the number of spheres (13 or 14)  (Nguyen Anh Tam)
     
 
 = Tame hypermap =
   * contravention is tame  
     *  Definition of tame
-    *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame.
-    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.
-    *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound.
-    *  /CDTETAT/, /SZIPOAS/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.
-    *  /CRTTXAT/ every face has cardinality at most 6.
+    *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (Vu Khac Ky)
+    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.  (Trieu Thi Diep FATUGPD) (Vuong Anh Quyen FNJLBXS)
+    *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. (Vu Van Phan)
+    *  /CDTETAT/, /SZIPOAS/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Vu Quang Thanh) (Tran Tien Thuc) (Trinh Thi Thu Le) 
+    *  /CRTTXAT/ every face has cardinality at most 6.  (Dang Tat Dat)
     *  /GNCEGFN/ four-face-step lemma (assuming the result about packings in Elementary Geometry).
     *  triangles condition of tameness
-  * main estimate (Thomas Hales)
+  * main estimate 
+
+= Special Projects =
+    * Project management software (Nguyen Duc Tam)
 
 = Lemmas in Elementary Geometry =
 
@@ -69,7 +76,11 @@ There are many [NonlinearInequalities] that occur in the proof.  The list is muc
 
 = linear programming = 
 
+(Matthew Wampler-Doty, Nguyen Duc Thinh)
+
 The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof.  Matthew Wampler-Doty has been involved in this project during the summer 2009.
+
+
 
 = graph generator (completed by Bauer-Nipkow) = 
 
