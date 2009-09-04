@@ -29,7 +29,7 @@
 
 = Formulation = 
   * statement (Nguyen Tat Thang): 
-  * rogers partition (John Harrison)
+  * rogers partition (Nguyen Tat Thang, John Harrison)
   * marchal's partition (John Harrison)
   * kissing number estimates (function M) (John Harrison)
   * more kissing number estimates (function L) (John Harrison)
