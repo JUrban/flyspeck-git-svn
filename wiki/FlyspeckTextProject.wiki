@@ -44,7 +44,6 @@
     *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. (Vu Van Phan)
     *  /CDTETAT/, /SZIPOAS/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Vu Quang Thanh) (Tran Tien Thuc) (Trinh Thi Thu Le) 
     *  /CRTTXAT/ every face has cardinality at most 6.  (Dang Tat Dat)
-    *  /GNCEGFN/ four-face-step lemma (assuming the result about packings in Elementary Geometry).
     *  triangles condition of tameness
   * main estimate 
 
