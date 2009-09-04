@@ -57,11 +57,8 @@
 
 = Supplementary results = 
 
-  * A quadrilateral face of a tame graph does not contain two interior vertices (Hard project!)
-  * polar polygons (Hard project!)
   * circular disks and polyhedra
   * deformations of polygons for the main estimate.
-  * Jordan curve type results.
 
 = Packaging = 
 
