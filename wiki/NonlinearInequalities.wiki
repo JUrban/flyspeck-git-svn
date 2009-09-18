@@ -50,6 +50,7 @@ We mark each inequality, depending on its status
     * ID/3848804089/ j=2 quarters, gammaL(quarter) (small blade case) {{{GRAD}}}
     * ID/2134082733/ j=2 quarters, gamma4Lbwt(4-cell) (small blade case) {{{GRAD}}}
     * ID/9063653052/ j=2 quarters gamma4Lbwt(4-cell) (big blade case) {{{GRAD}}}
+    * ID/5400790175/ j=1 or 2 quarters gamma4Lbwt + gamma3L > 0.0057 (small blade case) {{{GRAD}}}
     * ID/5814748276/ j=1 quarter gammaL(quarter) {{{GRAD}}}
     * ID/3803737830/ j=1 quarter gamma4Lbwt(4-cell nonquarter) {{{GRAD}}}
  * /ZTGIJCF/ 5-blade inequalities:  (cc:5bl in tex) 
