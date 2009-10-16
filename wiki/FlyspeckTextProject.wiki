@@ -10,7 +10,9 @@
   * Nguyen Quang Truong, work in progress
   * Hoang Le Truong, ULEKUUB
 
-= Volume Chapter = (This chapter has been completed.)
+= Volume Chapter = 
+
+(This chapter has been completed.)
   * construction of measure: John Harrison (done)
   * primitive volumes: John Harrison (done)
   * solid angle, finiteness bounds: Nguyen Tat Thang  (done)
