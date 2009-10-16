@@ -8,11 +8,12 @@
   * John Harrison (arg, azim)
   * Jason Rute,
   * Nguyen Quang Truong, work in progress
+  * Hoang Le Truong, ULEKUUB
 
-= Volume Chapter =
+= Volume Chapter = (This chapter has been completed.)
   * construction of measure: John Harrison (done)
   * primitive volumes: John Harrison (done)
-  * solid angle, finiteness bounds: Nguyen Tat Thang (work in progress)
+  * solid angle, finiteness bounds: Nguyen Tat Thang  (done)
 
 = Hypermap Chapter =
   * Tran Nam Trung, work in progress (long chapter)
@@ -39,11 +40,11 @@
 = Tame hypermap =
   * contravention is tame  
     *  Definition of tame
-    *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (Trieu Thi Diep)
+    *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
     *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.   (Vu Khac Ky FATUGPD) (Vuong Anh Quyen FNJLBXS)
     *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. (Vu Van Phan)
     *  /CDTETAT/, /SZIPOAS/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Vu Quang Thanh) (Tran Tien Thuc) (Trinh Thi Thu Le) 
-    *  /CRTTXAT/ every face has cardinality at most 6.  (Dang Tat Dat)
+    *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
     *  triangles condition of tameness
   * main estimate 
 
