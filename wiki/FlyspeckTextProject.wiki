@@ -43,7 +43,8 @@
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
     *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.   (Vu Khac Ky FATUGPD) (Vuong Anh Quyen FNJLBXS)
     *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. (Vu Van Phan)
-    *  /CDTETAT/, /SZIPOAS/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Vu Quang Thanh) (Tran Tien Thuc) (Trinh Thi Thu Le) 
+    *   /SZIPOAS/ (done by Vu Quang Thanh), 
+    * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Tran Tien Thuc) (Trinh Thi Thu Le) 
     *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
     *  triangles condition of tameness
   * main estimate 
