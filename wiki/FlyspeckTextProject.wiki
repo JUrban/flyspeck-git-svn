@@ -27,8 +27,9 @@
 
 = Fan Chapter Additional Results = 
   * polygon perimeter
-  * polygon area (unwritten text)
+  * polygon area
   * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
+  * (Dat is currently working on polygon and polyhedron.  Check with him.)
 
 = Formulation = 
   * statement (Nguyen Tat Thang): 
