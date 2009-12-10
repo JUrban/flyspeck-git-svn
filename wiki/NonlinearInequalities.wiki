@@ -14,20 +14,20 @@ We mark each inequality, depending on its status
   * GRAD (verified numerically by gradient descent).  
   * NV (no verification)
 
-= Minor inequalities = 
+= Packing - Minor Inequalities = 
 
  * An inequality approximating arc (cc:arc in tex files).  {{{STATUS_NV}}}
  * The disjointness of Marchal's disks (cc:disks in tex files). a + a' <= arc(2h,2h',2). {{{STATUS_NV}}}
  * A linear lower bound on the area of regular polygons (cc:alin in tex). We may replace n with a continuous variable n>=3.  The inequality can be cut off for some large n, because the partial derivative in n has fixed sign for large n.  {{{STATUS_NV}}}
  * A linear lower bound on the area of regular polygons (large disk) (cc:alin2 in tex). {{{STATUS_NV}}}
 
-= Inequalities from Marchal's paper =
+= Packing - Inequalities from Marchal's paper =
 
  * Marchal's k-cell inequality {{{gamma(X,M)}}} is non-negative. (cc:mar in tex files)
  * ID/1025009205/ Marchal's 4-cell inequality {{{GRAD}}}
  * ID/3564312720/ Marchal's 3-cell inequality {{{GRAD}}}
 
-= Supercell Inequalities =
+= Packing - Cluster Inequalities =
 
  * /GLFVCVK/ gammaL is nonnegative on non-quarters. (cc:qtr in tex) 
     * ID/4869905472/ gamma(3cell,L) >= 0. {{{GRAD}}}
@@ -57,15 +57,16 @@ We mark each inequality, depending on its status
     * ID/1821661595/  gammaL >= a + b azim (4-cell) {{{GRAD}}}
     * ID/7907792228/  gammaL >= a + b azim (2+3-cell) {{{GRAD}}}
 
-= Tau Estimates =
+= Cyclic Fan - Tau Estimates =
  * The second derivatives are negative, allowing heights to be adjusted (cc:d2a, cc:d2b in tex files).  {{{STATUS_NV}}}
  * A quadrilateral can be deformed (cc:qua in tex files) {{{STATUS_NV}}}
  * Tau estimates for each partition (cc:tau in tex files) {{{STATUS_NV}}}
 
-= Minor Linear programs =
+= Tame Hypermap - Minor Linear programs =
 
  * /FUSDSPJ/  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS_NV}}}
 
-= Major Linear Programs =
+= Tame Hypermap - Major Linear Programs =
 
-= Packings with Full Contact = 
+= Further Results - Packings with Full Contact = 
+
