@@ -8,6 +8,7 @@
   * John Harrison (arg, azim)
   * Jason Rute,
   * Nguyen Quang Truong, work in progress
+  * Euler's solid angle formula, Diep, work in progress
   * Hoang Le Truong, ULEKUUB
 
 = Volume Chapter = 
@@ -36,7 +37,7 @@
   * marchal's partition
   * kissing number estimates (function M) 
   * more kissing number estimates (function L) 
-  * /DLWCHEM/ bounding the number of spheres (13 or 14)  
+  * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  
 
 = Cyclic Fan =
   * polygon perimeter
@@ -48,7 +49,7 @@
   * contravention is tame  
     *  Definition of tame
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
-    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.  
+    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward. (Quyen in progress) 
     *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. 
     *   /SZIPOAS/ (done by Vu Quang Thanh), 
     * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  
