@@ -9,7 +9,7 @@
   * Jason Rute,
   * Nguyen Quang Truong, work in progress
   * Euler's solid angle formula, Diep, work in progress
-  * Hoang Le Truong, ULEKUUB
+  * Hoang Le Truong has proved ULEKUUB, in a modified form.
 
 = Volume Chapter = 
 
@@ -37,7 +37,7 @@
   * marchal's partition
   * kissing number estimates (function M) 
   * more kissing number estimates (function L) 
-  * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  
+  * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
 
 = Cyclic Fan =
   * polygon perimeter
