@@ -25,29 +25,32 @@
   * planarity
   * proof of face attributes
 
-= Fan Chapter Additional Results = 
+= Fan Chapter Polyhedra = 
+
+  * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
+  * (Dat and John Harrison is currently working  polyhedron.  Check with them.)
+
+= Packing = 
+  * statement (Nguyen Tat Thang): 
+  * rogers partition (Nguyen Tat Thang,)
+  * marchal's partition
+  * kissing number estimates (function M) 
+  * more kissing number estimates (function L) 
+  * /DLWCHEM/ bounding the number of spheres (13 or 14)  
+
+= Cyclic Fan =
   * polygon perimeter
   * polygon area
-  * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
-  * (Dat is currently working on polygon and polyhedron.  Check with him.)
-
-= Formulation = 
-  * statement (Nguyen Tat Thang): 
-  * rogers partition (Nguyen Tat Thang, John Harrison)
-  * marchal's partition (John Harrison)
-  * kissing number estimates (function M) (John Harrison)
-  * more kissing number estimates (function L) (John Harrison)
-  * /DLWCHEM/ bounding the number of spheres (13 or 14)  (Nguyen Anh Tam)
     
 
 = Tame hypermap =
   * contravention is tame  
     *  Definition of tame
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
-    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.   (Vu Khac Ky FATUGPD) (Vuong Anh Quyen FNJLBXS)
-    *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. (Vu Van Phan)
+    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward.  
+    *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. 
     *   /SZIPOAS/ (done by Vu Quang Thanh), 
-    * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  (Nguyen Tien Dung) (Tran Tien Thuc) (Trinh Thi Thu Le) 
+    * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  
     *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
     *  triangles condition of tameness
   * main estimate 
@@ -59,11 +62,6 @@
 
   * Nguyen Quang Truong has completed proofs of many results in this collection.  These results need to be integrated with the 2009 version of the proof.
     * positive orientation "chi", delta properties, E, quad interior.
-
-= Supplementary results = 
-
-  * circular disks and polyhedra
-  * deformations of polygons for the main estimate.
 
 = Packaging = 
 
@@ -80,8 +78,6 @@ There are many [NonlinearInequalities] that occur in the proof.  The list is muc
 (Matthew Wampler-Doty, Nguyen Duc Thinh)
 
 The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof.  Matthew Wampler-Doty has been involved in this project during the summer 2009.
-
-
 
 = graph generator (completed by Bauer-Nipkow) = 
 
