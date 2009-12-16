@@ -41,6 +41,7 @@
 = Cyclic Fan =
   * polygon perimeter
   * polygon area
+  * main estimate 
     
 
 = Tame hypermap =
@@ -53,7 +54,7 @@
     * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  
     *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
     *  triangles condition of tameness
-  * main estimate 
+
 
 = Special Projects =
     * Project management software (Nguyen Duc Tam)
