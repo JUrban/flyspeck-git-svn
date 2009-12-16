@@ -29,7 +29,7 @@
 = Fan Chapter Polyhedra = 
 
   * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
-  * (Dat and John Harrison is currently working  polyhedron.  Check with them.)
+  * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
   * statement (Nguyen Tat Thang): 
