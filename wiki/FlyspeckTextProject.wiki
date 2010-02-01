@@ -5,10 +5,11 @@
   * Package the results up when you are done, using {{{THEN}}} and {{{THENL}}}.
 
 = Trig Chapter = 
+(This chapter is nearly complete)
   * John Harrison (arg, azim)
   * Jason Rute,
   * Nguyen Quang Truong, work in progress
-  * Euler's solid angle formula, Diep, work in progress
+  * Euler's solid angle formula, Diep, Ky, work in progress
   * Hoang Le Truong has proved ULEKUUB, in a modified form.
 
 = Volume Chapter = 
@@ -28,7 +29,7 @@
 
 = Fan Chapter Polyhedra = 
 
-  * polyhedron: (John Harrison has formalized the Krein-Milman theorem)
+  * polyhedron: (John Harrison)
   * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
@@ -39,7 +40,7 @@
   * more kissing number estimates (function L) 
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
 
-= Cyclic Fan =
+= Local Fan = (Nguyen Quang Truong)
   * polygon perimeter
   * polygon area
   * main estimate 
