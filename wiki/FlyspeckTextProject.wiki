@@ -40,10 +40,14 @@
   * more kissing number estimates (function L) 
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
 
-= Local Fan = (Nguyen Quang Truong)
+= Local Fan = 
+  * (Nguyen Quang Truong)
   * polygon perimeter
   * polygon area
   * main estimate 
+
+= local fan =
+  * 2158872499  (Diep)
     
 
 = Tame hypermap =
