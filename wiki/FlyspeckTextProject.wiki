@@ -1,5 +1,7 @@
 #summary Text Formalization Projects needed for completion of Flyspeck
 
+
+
 = Guidelines =
   * Do not ever introduce new axioms.  If you need results from earlier chapters that have not been proved, introduce them as explicit assumptions in the statement of the theorem.  If there are assumptions you use more than once, make a definition containing the term, so that you can just type {{{my_assumption}}} for example, to enter it as an assumption.  You are not allowed to use assumptions to make the theorem easier to prove.  Only use assumptions for lemmas from earlier chapters that have not been proved yet.
   * Package the results up when you are done, using {{{THEN}}} and {{{THENL}}}.
@@ -33,8 +35,9 @@
   * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
-  * statement (Nguyen Tat Thang): 
-  * rogers partition (Nguyen Tat Thang,)
+  * (Alexey Solovyev)
+  * statement (Nguyen Tat Thang)
+  * rogers partition 
   * marchal's partition
   * kissing number estimates (function M) 
   * more kissing number estimates (function L) 
@@ -48,7 +51,6 @@
 
 = local fan =
   * 2158872499  (Diep)
-    
 
 = Tame hypermap =
   * contravention is tame  
@@ -56,7 +58,7 @@
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
     *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward. (Quyen in progress) 
     *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. 
-    *   /SZIPOAS/ (done by Vu Quang Thanh), 
+    *   /SZIPOAS/ (done by Vu Quang Thanh, in quarantine for the use of CHEAT_TAC), 
     * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  
     *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
     *  triangles condition of tameness
@@ -67,13 +69,9 @@
 
 = Lemmas in Elementary Geometry =
 
-  * Nguyen Quang Truong has completed proofs of many results in this collection.  These results need to be integrated with the 2009 version of the proof.
-    * positive orientation "chi", delta properties, E, quad interior.
 
 = Packaging = 
 
-  * moving the project over to Multivariate library.
-  * no new axioms
   * all theorems properly packaged
 
 = nonlinear inequalities (contact Roland) = 
