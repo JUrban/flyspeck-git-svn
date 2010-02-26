@@ -67,12 +67,6 @@
 = Special Projects =
     * Project management software (Nguyen Duc Tam)
 
-= Lemmas in Elementary Geometry =
-
-
-= Packaging = 
-
-  * all theorems properly packaged
 
 = nonlinear inequalities (contact Roland) = 
 
