@@ -35,7 +35,7 @@
   * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
-  * (Alexey Solovyev)
+  * (Alexey Solovyev, John Harrison)
   * statement (Nguyen Tat Thang)
   * rogers partition 
   * marchal's partition
