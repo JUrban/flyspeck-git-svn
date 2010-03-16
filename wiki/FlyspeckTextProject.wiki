@@ -54,15 +54,10 @@
 
 = Tame hypermap =
   * (Alexey Solovyev)
-  * contravention is tame  
-    *  Definition of tame
-    *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
-    *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward. (Quyen in progress) 
-    *  /HRXEFDM/ The definition of tau and the equivalence of a tau-bound with the L-bound. 
-    *   /SZIPOAS/ (done by Vu Quang Thanh, in quarantine for the use of CHEAT_TAC), 
-    * /CDTETAT/, /KCBLRQC/, /BDJYFFB/ linear programming properties of nodes.  
-    *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
-    *  triangles condition of tameness
+  *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
+  *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward. (Quyen in progress) 
+   *   /SZIPOAS/ (done by Vu Quang Thanh, in quarantine for the use of CHEAT_TAC), 
+   *  /CRTTXAT/ every face has cardinality at most 6.  (done Dang Tat Dat)
 
 
 = Special Projects =
