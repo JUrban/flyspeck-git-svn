@@ -48,6 +48,7 @@
   * polygon perimeter
   * polygon area
   * main estimate 
+  * CKQOWSA (Nguyen Tat Thang)
 
 = local fan =
   * 2158872499  (Diep)
