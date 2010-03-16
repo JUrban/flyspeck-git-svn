@@ -35,8 +35,8 @@
   * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
-  * (Alexey Solovyev, John Harrison)
-  * statement (Nguyen Tat Thang)
+  * ( John Harrison)
+  * statement (done by Nguyen Tat Thang)
   * rogers partition 
   * marchal's partition
   * kissing number estimates (function M) 
@@ -53,6 +53,7 @@
   * 2158872499  (Diep)
 
 = Tame hypermap =
+  * (Alexey Solovyev)
   * contravention is tame  
     *  Definition of tame
     *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
