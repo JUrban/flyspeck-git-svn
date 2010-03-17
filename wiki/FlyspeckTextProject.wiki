@@ -45,6 +45,7 @@
 
 = Local Fan = 
   * (Nguyen Quang Truong)
+  * WRGCVDR (Truong)
   * polygon perimeter
   * polygon area
   * main estimate 
