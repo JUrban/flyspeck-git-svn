@@ -39,7 +39,7 @@
   * statement (done by Nguyen Tat Thang)
   * rogers partition 
   * marchal's partition
-  * kissing number estimates (function M) (Ky)
+  * kissing number estimates (function M) UPFZBZM (Ky)
   * more kissing number estimates (function L) 
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
 
