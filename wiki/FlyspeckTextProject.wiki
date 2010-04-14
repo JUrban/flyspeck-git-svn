@@ -7,11 +7,11 @@
   * Package the results up when you are done, using {{{THEN}}} and {{{THENL}}}.
 
 = Trig Chapter = 
-(This chapter is nearly complete)
+(This chapter is complete)
   * John Harrison (arg, azim)
   * Jason Rute,
-  * Nguyen Quang Truong, work in progress
-  * Euler's solid angle formula, Diep, Ky, work in progress
+  * Nguyen Quang Truong, complete
+  * Euler's solid angle formula, Diep, Ky, 
   * Hoang Le Truong has proved ULEKUUB, in a modified form.
 
 = Volume Chapter = 
@@ -39,7 +39,7 @@
   * statement (done by Nguyen Tat Thang)
   * rogers partition 
   * marchal's partition
-  * kissing number estimates (function M) 
+  * kissing number estimates (function M) (Ky)
   * more kissing number estimates (function L) 
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
 
