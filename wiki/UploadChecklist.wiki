@@ -24,11 +24,6 @@ Then use it:
 let mylemma = prove (`GLTVHUM_concl ==>  RiemannHypothesis`,AMAZING_TAC);;
 
 
-== The files ==
-
- * Proofs do not belong in the main definitions file "definitions_kepler.ml"  They belong in a suitable chapter file trig.ml, fan.ml, etc.
-
-
 
 
 == Correct Form ==
