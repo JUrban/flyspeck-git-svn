@@ -11,7 +11,8 @@ Files are downloaded and uploaded with subversion.  See [InstallHolLight] for su
  # Make sure that all results are clearly identified with theorem name, identifier, person who did the formal proof, and month the formal proof was completed.
  # You must use "update" in SVN so that your version is consistent with the latest changes made by others, before you "commit"
 
- ==How to use unproved lemmas from earlier chapters ==
+
+==How to use unproved lemmas from earlier chapters ==
 
 People who are working on the later chapters may use results from earlier chapters.  Suppose I want to use
 GLTVHUM_concl from the file pack/pack_concl.hl before it has been proved.
