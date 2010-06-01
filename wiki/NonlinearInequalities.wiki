@@ -21,11 +21,6 @@ We mark each inequality, depending on its status
  * A linear lower bound on the area of regular polygons (cc:alin in tex). We may replace n with a continuous variable n>=3.  The inequality can be cut off for some large n, because the partial derivative in n has fixed sign for large n.  {{{STATUS_NV}}}
  * A linear lower bound on the area of regular polygons (large disk) (cc:alin2 in tex). {{{STATUS_NV}}}
 
-= Packing - Inequalities from Marchal's paper =
-
- * Marchal's k-cell inequality {{{gamma(X,M)}}} is non-negative. (cc:mar in tex files)
- * ID/1025009205/ Marchal's 4-cell inequality {{{GRAD}}}
- * ID/3564312720/ Marchal's 3-cell inequality {{{GRAD}}}
 
 = Packing - Cluster Inequalities =
 
