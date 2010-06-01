@@ -61,7 +61,3 @@ We mark each inequality, depending on its status
 
  * An inequality approximating arc (cc:arc in tex files).  {{{STATUS_NV}}}
  * /FUSDSPJ/  Tameness constants b(p,q).  There is a collection of inequalities for triangles and quadrilaterals relating tau and azim.   This includes dihedral angle bounds for triangles, quadrilaterals and exceptional regions.  {{{STATUS_NV}}}
-
-= Tame Hypermap - Major Linear Programs =
-
-= Further Results - Packings with Full Contact = 
