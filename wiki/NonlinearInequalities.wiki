@@ -1,11 +1,7 @@
 #summary This page gives a summary of the use of non-linear inequalities in the proof.
 = Introduction =
 
-This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2009 version).  This is recent research and many of the inequalities have not been verified by interval arithmetic.  Grep for the identifier to find the files involved in the verification.
-
-[http://code.google.com/p/flyspeck/source/browse/trunk/book_code/lp2009.cc  Source files] for gradient descent testing of linear programming bounds
-
-[http://code.google.com/p/flyspeck/source/browse/trunk/book_code/marchal.cc  Source files] for gradient descent testing of inequalities in the main text
+This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2010 version).  
 
 We mark each inequality, depending on its status
 
