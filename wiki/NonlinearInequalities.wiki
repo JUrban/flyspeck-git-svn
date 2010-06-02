@@ -27,11 +27,11 @@ We mark each inequality, depending on its status
  * /FHBVYXZ/ 2-blade inequality: 
     * ID/1118115412/ gamma(four-cell)+gamma(three-cell) >= 0.   (cc:2bl in tex) {{{GRAD}}}
  * /BIXPCGW/ 3-blade inequalities:  (cc:3bl in tex) (implemented in code {{{shorts.mod}}} {{{shorts.ml}}})
+    * ID/9455898160/ gamma4L(quarter) > -0.0057 {{{GRAD}}}
     * ID/2300537674/ if dih > 1.65, then gammaL > 0. {{{GRAD}}}
     * ID/6652007036/ dih(4-cell along a critical edge) < 2.8 {{{GRAD}}}
     * ID/7080972881/ dih(spine) > 2.3 ==> adjacent edges to spine are not critical {{{GRAD}}} 
     * ID/1738910218/ dih(spine) > 2.3 ==> opposite edge to spine is not critical {{{GRAD}}}
-    * ID/9455898160/ gamma4L(quarter) > -0.0057 {{{GRAD}}}
     * ID/7274157868/  dih(spine) > 2.3 ==> gamma4L(cell) > 0.0057 {{{GRAD}}}
  * /QITNPEA/ 4-blade inequalities:  (cc:4bl in tex) (implemented in code {{{shorts.mod}}} {{{shorts.ml}}})
     * ID/5653753305/  j=4-quarter inequality {{{GRAD}}}
