@@ -1,5 +1,5 @@
 #summary The formal specification of the chapter on trigonometry
-#labels Featured
+#labels Deprecated
 
 = Trig Chapter Specification =
 
