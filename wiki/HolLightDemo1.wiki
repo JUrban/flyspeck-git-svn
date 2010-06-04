@@ -1,5 +1,4 @@
 #summary A tutorial of HOL-Light based on John Harrison's proof of an IMO problem
-#labels Featured
 
 =Video Presentation=
 
