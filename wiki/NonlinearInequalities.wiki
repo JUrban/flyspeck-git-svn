@@ -1,4 +1,5 @@
 #summary This page gives a summary of the use of non-linear inequalities in the proof.
+#labels Deprecated
 = Introduction =
 
 This page gives the nonlinear inequalities used in the proof of the Kepler Conjecture (2010 version).  
@@ -18,7 +19,7 @@ We mark each inequality, depending on its status
  * A linear lower bound on the area of regular polygons (large disk) (cc:alin2 in tex). {{{STATUS_NV}}}
 
 
-= Packing - Cluster Inequalities =
+= Packing - Cluster Inequalities (These have all been formally specified) =
 
  * /GLFVCVK/ gammaL is nonnegative on non-quarters. (cc:qtr in tex) 
     * ID/4869905472/ gamma(3cell,L) >= 0. {{{GRAD}}}
