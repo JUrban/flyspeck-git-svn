@@ -233,6 +233,23 @@ The project may take as many as 20 work-years to complete.
 
   * As participation in the flyspeck project grows, other formal theorem proving systems have been added ([http://coq.inria.fr/ Coq], [http://isabelle.in.tum.de Isabelle]).  The eventual aim will be to get the different systems to communicate meaningfully, and bring the project to a unified conclusion.
 
+== June 2010 Update ==
+
+Here is a brief update on the Flyspeck project.  I assume that you have looked at the article
+"A revision of the proof of the Kepler conjecture" http://arxiv.org/abs/0902.0350 that describes the
+status of the Flyspeck project as of early 2009.  The flyspeck project page is http://code.google.com/p/flyspeck/
+
+
+The formal proof of the text part of the proof is estimated to be about 65% complete.  There have been many who have contributed to this work, especially John Harrison, Nguyen Quang Truong, Tran Nam Trung, and Hoang Le Truong.
+
+There are three bodies of computer code that are to be formalized.  Links to the relevant papers are at the flyspeck project page.
+
+ # The Nipkow-Bauer project "Flyspeck I" completes the formal proof of the first piece of code that classifies tame planar graphs.
+ # Obua's thesis completes the linear programming part of the proof for 92.5% of the tame graphs. (But this was for the earlier version of the proof; his work needs to be brought up to date.)
+ # Zumkeller has developed the technology for the third  piece of computer code, but this should still be considered as work in progress. He has just finished a postdoc with me at the University of Pittsburgh.
+
+Hales has a book "Dense Sphere Packings: a formal blueprint" that will soon be published by Cambridge University Press that gives a simplified proof of the Kepler conjecture and derives some additional results about sphere packings.  The formal proof project is now based on this simplified proof.
+
 
 ==*Should I get involved*==
 
