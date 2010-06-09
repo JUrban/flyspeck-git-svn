@@ -41,7 +41,7 @@
   * marchal's partition
   * kissing number estimates (function M) UPFZBZM (Ky)
   * more kissing number estimates (function L) 
-  * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress)
+  * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress) (renewed June 10 2010)
 
 = Local Fan = 
   * (Nguyen Quang Truong)
