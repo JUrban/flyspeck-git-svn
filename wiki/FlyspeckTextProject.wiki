@@ -35,9 +35,8 @@
   * (Dat and John Harrison are currently working on polyhedra.)
 
 = Packing = 
-  * ( John Harrison)
-  * statement (done by Nguyen Tat Thang)
-  * rogers partition 
+  * statement (done by Nguyen Tat Thang, John Harrison)
+  * rogers partition (Alexey Solovyev)
   * marchal's partition
   * kissing number estimates (function L M) KIZHLTL UPFZBZM (Ky)
   * more kissing number estimates (function L) 
