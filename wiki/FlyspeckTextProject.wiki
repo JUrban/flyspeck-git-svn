@@ -37,9 +37,7 @@
 = Packing = 
   * statement (done by Nguyen Tat Thang, John Harrison)
   * rogers partition (Alexey Solovyev)
-  * marchal's partition
-  * kissing number estimates (function L M) KIZHLTL UPFZBZM (Ky)
-  * more kissing number estimates (function L) 
+  * marchal's partition and kissing number estimates (function L M) KIZHLTL UPFZBZM (Ky)
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress) (renewed June 10 2010)
 
 = Local Fan = 
