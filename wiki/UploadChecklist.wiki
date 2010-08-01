@@ -40,3 +40,9 @@ e (REPEAT GEN_TAC);;
 e (EXISTS_TAC `x+y:real`);;
 e (REWRITE_TAC[]);;
 }}}
+
+To convert the proof from the g-e format to prove_by_refinement, follow these steps:
+
+  * Where your proof says {{{g ` goalterm`;;}}} replace it with {{{let theorem_name = prove_by_refinement ( `   goalterm `, [}}}
+  * Where it says {{{e ( tactic);;}}}  replace it with {{{tactic ;}}}
+  * Terminate the script with closing brackets {{{ ]);;}}}
