@@ -32,7 +32,7 @@
 = Fan Chapter Polyhedra = 
 
   * polyhedron: (John Harrison)
-  * (Dat and John Harrison are currently working on polyhedra.)
+  * There are a few odds and ends to be finished in this section.
 
 = Packing = 
   * statement (done by Nguyen Tat Thang, John Harrison)
