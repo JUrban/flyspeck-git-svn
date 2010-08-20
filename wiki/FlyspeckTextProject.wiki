@@ -36,7 +36,7 @@
 
 = Packing = 
   * statement (done by Nguyen Tat Thang, John Harrison)
-  * rogers partition (Alexey Solovyev)
+  * rogers partition (completed by Alexey Solovyev)
   * marchal's partition and kissing number estimates (function L M) KIZHLTL UPFZBZM (Ky)
   * /DLWCHEM/ polyhedral bounds on the number of spheres (13 or 14)  (Dat in progress) (renewed June 10 2010)
 
@@ -70,9 +70,7 @@ There are many [NonlinearInequalities] that occur in the proof.  The list is muc
 
 = linear programming = 
 
-(Matthew Wampler-Doty, Nguyen Duc Thinh)
-
-The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof.  Matthew Wampler-Doty has been involved in this project during the summer 2009.
+The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof. 
 
 = graph generator (completed by Bauer-Nipkow) = 
 
