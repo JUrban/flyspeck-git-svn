@@ -72,6 +72,7 @@ There are four pieces of nonlinear inequality verification code.
   * [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/interval_code Hales's code] from 1998, adapted to the Flyspeck project.  
   * Ferguson's code from 1997-1998, this has not been updated in several years.
   * [http://code.google.com/p/kepler-code/source/browse/#svn/trunk/src McLaughlin's ML version].  The especially relevant sections are in the directories taylor/ functions/ and seconds/.
+  * [http://code.google.com/p/sergei/ Zumkeller's Berstein] polynomial approach.
 
 = linear programming = 
 
@@ -82,7 +83,15 @@ The linear programming part of the proof is given in [http://code.google.com/p/f
 Bauer and Nipkow have a formal correctness proof of the graph generator in Isabelle.
 
 
+
+
+== Integrating the Bauer-Nipkow project with Flyspeck ==
+
 Roughly, the Bauer-Nipkow result assumes an algorithm for generating restricted hypermaps and based on that, they give a
 correctness proof that the computer code correctly filters the tame hypermaps.  The chapter on hypermap gives an algorithm for generating restricted hypermaps.  This should be combined with the Bauer-Nipkow result.
 
-== Integrating the Bauer-Nipkow project with Flyspeck ==
+  * The [http://afp.sourceforge.net/entries/Flyspeck-Tame.shtml Bauer-Nipkow classification] of tame plane graphs has been formalized in Isabelle.   This needs to be patched with HOL Light as follows:
+  * The definitions of [http://afp.sourceforge.net/browser_info/current/HOL/Flyspeck-Tame/Plane.html planar graph] needs to be translated to HOL Light.  Let's call such a graph K98-planar.
+  * The statement of the [http://afp.sourceforge.net/browser_info/current/HOL/Flyspeck-Tame/Completeness.html classification theorem] (which they call the "completeness theorem") needs to be translated to HOL Light.  Their theorem essentially states that a the face dump of every tame K98-planar graph is equivalent to one in the archive (which is a list of list of lists of integers).
+  * The flypaper gives an algorithm for the generation of restricted hypermaps.  Every tame hypermap is restricted by definition.  The main point to be shown is that every restricted graph is K98-planar graph.  This should be done by interlacing the algorithm for restricted hypermaps with the iteration in Isabelle for K98-planar graphs.  There is a choice function that comes up in the algorithms (about which faces and edges to build on). It is important for these two choice functions to be compatibly chosen.
+
