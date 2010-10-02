@@ -68,6 +68,11 @@
 
 There are many [NonlinearInequalities] that occur in the proof.  The list is much shorter in the 2009 proof.  The list requires formal verification.
 
+There are four pieces of nonlinear inequality verification code.
+  * [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/interval_code Hales's code] from 1998, adapted to the Flyspeck project.  
+  * Ferguson's code from 1997-1998, this has not been updated in several years.
+  * [http://code.google.com/p/kepler-code/source/browse/#svn/trunk/src McLaughlin's ML version].  The especially relevant sections are in the directories taylor/ functions/ and seconds/.
+
 = linear programming = 
 
 The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof. 
@@ -75,8 +80,9 @@ The linear programming part of the proof is given in [http://code.google.com/p/f
 = graph generator (completed by Bauer-Nipkow) = 
 
 Bauer and Nipkow have a formal correctness proof of the graph generator in Isabelle.
-The graph generator uses a different set of input parameters in the 1998 and 2009 proofs.  The Bauer-Nipkow
-result needs to be adapted to the new set of input parameters.
+
 
 Roughly, the Bauer-Nipkow result assumes an algorithm for generating restricted hypermaps and based on that, they give a
 correctness proof that the computer code correctly filters the tame hypermaps.  The chapter on hypermap gives an algorithm for generating restricted hypermaps.  This should be combined with the Bauer-Nipkow result.
+
+== Integrating the Bauer-Nipkow project with Flyspeck ==
