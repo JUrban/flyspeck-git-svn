@@ -51,11 +51,32 @@ WARNING:  If you checkout using http://...,  you will not be able to check it ba
 Eventually, you will want to edit HOL-Light sessions with a powerful text editor.  To install the emacs editor,
 follow steps 1,2,3,4,8 (or all steps for a full installation) of [http://www.claremontmckenna.edu/math/ALee/emacs/emacs.html how to install emacs].
 
-This section needs to be filled in.
+After installing emacs, you should install the major mode {{{hol-light-mode}}}. This can be found in the flyspeck emacs directory.
 
 == Checkpointing ==
 
-This section needs to be filled in.
+Since {{{ocaml}}} provides no method for storing the current state of the {{{toplevel}}}, it becomes useful to have an external utility that can start/stop a {{{ocaml}}} process that has {{{hol}}}/{{{flyspeck}}} already loaded into memory.
+
+One way to achieve this, is to build [https://ftg.lbl.gov/CheckpointRestart/downloads/blcr-0.8.2.tar.gz Berkeley Lab Checkpoint/Restart]. This is only applicable to certain versions of linux. Even if you do not run Linux, you can always use [http://www.virtualbox.org/wiki/Downloads VirtualBox] to host a copy of Linux on your current OS.
+
+BLCR only works on Linux kernel versions <= 2.6.30. One distribution of Linux which has been tested with this setup is Ubuntu Hardy Desktop.
+
+I found that once BLCR is configured, one should run
+
+  {{{cr_run ocampl -I hol_light -I text_formalization}}}
+
+where {{{ocampl}}} is as in {{{flyspeck/text_formalization/strictbuild.hl}}}, {{{hol_light}}} is the path to the directory containing the source of {{{hol_light}}}, and
+{{{text_formalization}}} is the path to the {{{text_formalization}}} in the {{{flyspeck}}} directory. This will open {{{ocaml}}}. You should then issue {{{#use "hol.ml";;}}} and {{{#use "strictbuild.ml";;}}} or whatever you do not want to have to sit through every time you want to start working. After waiting for {{{ocaml}}} to finish, you can then run {{{ps -A}}} to find the PID for {{{ocaml}}}. Then run
+
+  {{{cr_checkpoint -f <filename.cr> --term <ocaml PID>}}},
+
+where {{{filename.cr}}} is what you want to call the saved process. Then whenever you want to restart just run
+
+  {{{cr_restart --no-restore-pid -S 2 <filename.cr>}}}.
+
+It would probably be convenient to make a {{{bash}}} script called {{{hol_light}}} on your {{{PATH}}} so that running from {{{emacs}}} in {{{hol-light-mode}}} is simplified.
+
+The advantage of BLCR is that multiple instances of the same image can be active at once. Also the images can be migrated to other computers with the same kernel. I have not personally tested the claim about migration, but this is what the BLCR claims to be able to do.
 
 == Making a version of Objective CAML with "num" preloaded ==
 
