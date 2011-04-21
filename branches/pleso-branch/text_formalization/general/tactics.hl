@@ -1,0 +1,127 @@
+(* ========================================================================== *)
+(* FLYSPECK - BOOK FORMALIZATION                                              *)
+(*                                                                            *)
+(* Lemma: General Tactics                                                     *)
+(* Author: Thomas C. Hales                                                    *)
+(* Date: 2010-07-16                                                           *)
+(* ========================================================================== *)
+
+(* needs "general/update_database_310.ml" *)
+
+module Tactics = struct
+
+
+
+(* NB. These tactics are still in experimental form and may change.
+    Be cautious about using tactics that may break your proofs if they
+    are later changed.
+*)
+
+(* ASSUMPTION LISTS *)
+
+let ASM_STRIP_TAC = 
+   FIRST[FIRST_X_ASSUM CHOOSE_TAC;
+   FIRST_X_ASSUM (CONJUNCTS_THEN ASSUME_TAC);
+	];;
+
+let FIRST_RULE_ASSUM rule ttc = FIRST_ASSUM (ttc o rule );;
+
+let FIRST_RULE_X_ASSUM rule ttc = FIRST_X_ASSUM (ttc o rule );;
+
+(* INDUCTION *)
+
+let INDUCT_SPEC_TAC vn = 
+  let v = mk_var (vn,`:nat`) in
+  SPEC_TAC (v,v) THEN INDUCT_TAC;;
+
+
+(* ------------------------------------------------------------------ *)
+(* SELECT ELIMINATION.
+   SELECT_TAC should work whenever there is a single predicate selected.
+   Something more sophisticated might be needed when there
+   is (@)A and (@)B
+   in the same formula.
+   Useful for proving statements such as  `1 + (@x. (x=3)) = 4` *)
+(* ------------------------------------------------------------------ *)
+
+(* spec form of SELECT_AX *)
+let select_thm select_fn select_exist =
+  BETA_RULE (ISPECL [select_fn;select_exist]
+             SELECT_AX);;
+
+(* example *)
+select_thm
+    `\m. (X:num->bool) m /\ (!n. X n ==> m <= n)` `n:num`;;
+
+let SELECT_EXIST = prove_by_refinement(
+  `!(P:A->bool) Q. (?y. P y) /\ (!t. (P t ==> Q t)) ==> Q ((@) P)`,
+  (* {{{ proof *)
+
+  [
+  REPEAT STRIP_TAC;
+  ASSUME_TAC (ISPECL[`P:(A->bool)`;`y:A`] SELECT_AX);
+  ASM_MESON_TAC[];
+  ]);;
+
+  (* }}} *)
+
+let SELECT_THM = MESON[SELECT_EXIST]
+  `!(P:A->bool) Q. (((?y. P y) ==> (!t. (P t ==> Q t))) /\ ((~(?y. P y)) ==>
+     (!t. Q t))) ==> Q ((@) P)`;;
+
+let SELECT_TAC  =
+  let unbeta = prove(
+  `!(P:A->bool) (Q:A->bool). (Q ((@) P)) <=> (\t. Q t) ((@) P)`,MESON_TAC[]) in
+  let unbeta_tac = CONV_TAC (HIGHER_REWRITE_CONV[unbeta] true) in
+  unbeta_tac THEN (MATCH_MP_TAC SELECT_THM) THEN BETA_TAC THEN 
+  REPEAT STRIP_TAC;;
+
+(* PATTERNS *)
+
+let (PAT_MATCH:term list -> (string*thm) -> bool) = fun pat sth ->
+  not(search_thml (term_match[]) pat [sth] = []);;
+
+let (PAT_TAC2:tactic -> tactic -> term list -> (string * thm) -> tactic)  = fun tac1 tac2 pat sth -> if PAT_MATCH pat sth then tac1 else tac2;;
+
+let (PAT_TAC:term list -> (string * thm) -> tactic)  = 
+  PAT_TAC2 ALL_TAC NO_TAC;;
+
+let (FIRST_PAT_ASSUM: term list -> thm_tactic -> tactic) =
+  fun pat ttac (asl,w as g) -> tryfind (fun sth -> (PAT_TAC pat sth THEN ttac (snd sth)) g) asl;;
+
+let (FIRST_PAT_X_ASSUM:term list -> thm_tactic -> tactic) =
+  fun pat ttac ->
+    FIRST_PAT_ASSUM pat (fun th -> UNDISCH_THEN (concl th) ttac);;
+
+let (EVERY_PAT_ASSUM:term list -> thm_tactic -> tactic) = 
+  fun pat ttac (asl,w) -> 
+    let rl = map snd (filter (PAT_MATCH pat) asl) in 
+    let tacl = map ttac rl in  
+      EVERY tacl (asl,w);;
+
+(* Well defined functions *)
+
+(* Harrison's lemma *)
+let WELLDEFINED_FUNCTION_1 = prove
+ (`(?f:B->C. !x:A. f(s x) = t x) <=> (!x x'. s x = s x' ==> t x = t x')`,
+  MATCH_MP_TAC EQ_TRANS THEN
+  EXISTS_TAC `?f:B->C. !y. !x:A. s x = y ==> f y = t x` THEN 
+  CONJ_TAC THENL
+   [MESON_TAC[]; REWRITE_TAC[GSYM SKOLEM_THM] THEN 
+  MESON_TAC[]]);;
+
+
+let WELLDEFINED_FUNCTION_2b = prove_by_refinement(
+`(?f:C->D. (!x:A y:B. P x y ==> f(s x y) = t x y)) <=> 
+   (!x x' y y'. (P x y /\ P x' y' /\ (s x y = s x' y')) ==> t x y = t x' y')`,
+[
+  MATCH_MP_TAC EQ_TRANS ;
+  EXISTS_TAC  `?f:C->D. !z. !x:A y:B. ((P x y) /\ (s x y = z)) ==> f z = t x y`;
+  CONJ_TAC;
+  MESON_TAC[];
+  REWRITE_TAC[GSYM SKOLEM_THM];
+  MESON_TAC[];
+]);;
+
+
+ end;;

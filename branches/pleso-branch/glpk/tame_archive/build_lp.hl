@@ -1,0 +1,60 @@
+(*
+Local build file for linear programs.
+
+The nonlinear programs can be tested as follows.
+They were tested on August 2, 2010.
+
+let lpineq = Ineq.getfield Lp in
+  Parse_ineq.execute_cfsqp_list lpineq;;
+
+*)
+
+flyspeck_needs "nonlinear/ineq.hl";;
+flyspeck_needs   "nonlinear/parse_ineq.ml";;
+
+
+let test_nonlinear_lp() = let lpineq = Ineq.getfield Lp in
+  Parse_ineq.execute_cfsqp_list lpineq;;
+
+(*
+test_nonlinear_lp();;
+*)
+
+flyspeck_needs "../glpk/glpk_link.ml";;
+flyspeck_needs "../glpk/tame_archive/lpproc.ml";;
+
+(* correct the archive location before loading hard_lp.ml *)
+
+Lpproc.archiveraw := "/Users/thomashales/Desktop/drafts/my_hanoi_web_workshop_files/tame_archive_svn1997.txt";;
+(*
+Parse_ineq.output_filestring "/tmp/body.mod" (Parse_ineq.lpstring());;
+place it in glpk/tame_archiv *)
+
+
+flyspeck_needs "../glpk/sphere.ml";;
+flyspeck_needs "../glpk/tame_archive/hard_lp.ml";;
+flyspeck_needs "../glpk/tame_archive/scaffolding.hl";;
+
+let run_all() = 
+  let lpdata = Lpproc.execute() in
+  let  (tame_bb,feasible_bb,hard_bb,easy_bb,
+	remaining_easy_bb) = lpdata in
+  let _ = (remaining_easy_bb=[]) or (failwith "easy cases remain") in  Hard_lp.execute();;
+
+(* 
+run_all();; 
+!Glpk_link.solve_counter;;
+*)
+(* 
+Run of Hard_lp.execute();;
+started at Thu Aug  5 16:58:26 ICT 2010
+finished Aug  5 23:20.
+STACK 1 15413 (so about 30K linear programs)
+val it : Lpproc.branchnbound list list =
+  [[]; []; []; []; []; []; []; []; []; []; []; []]
+
+retested Sep 22 on Thackmac, identical results, svn 1978.
+
+retested Oct 22, 2010 on Malt, 2026, some weakened ineqs.
+
+*)

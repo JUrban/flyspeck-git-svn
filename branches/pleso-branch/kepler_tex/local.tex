@@ -1,0 +1,2457 @@
+%
+% total ratings 16400 as of 5/18/2010.
+
+\chapter{Local Fan}\label{sec:local}
+
+
+\begin{summary}
+  The difficult technical estimates that we need for the proof of the
+  Kepler conjecture are found in this chapter.  The main estimate
+  (Lemma~\ref{lemma:empty-d}) takes the form
+\begin{equation}\label{eqn:main}
+\tau(V,E,F) \ge d(r,s),
+\end{equation}
+for every special fan $(V,E,F,S)$ with parameters $(r,s)$.  Here
+$(V,E)$ is a fan; $F$ is a face of the hypermap of $(V,E)$; $S$ is a
+subset of $E$; and $(r,s)$ is an ordered pair of natural numbers.  The
+function $d$ is defined by a table of nonnegative values for various
+$(r,s)$.  Heuristically, the real-valued function $\tau$ measures the
+looseness of a packing.  Large values of $\tau$ indicate that the
+points of $V$ are loosely arranged around the face and large values of
+$\tau$ indicate a tight packing.  The main estimate~\ref{eqn:main}
+gives limits to the tightness of a packing, with the eventual aim of
+showing that no packing can have density greater than the
+FCC packing.  The next chapter  shows that all
+packings of concern to us are special, so that the main estimate is in
+fact a general estimate.
+
+This chapter also proves the well-know result that the perimeter of a
+geodesically convex spherical polygon is never greater than $2\pi$,
+the length of a great circle.
+
+Because of the technical nature of this chapter, the final section gives a summary
+of the results.
+\end{summary}
+
+
+\section{Localization}
+
+The \newterm{localization} of a fan along
+a face discards everything but the part of the fan near the face.  
+The localization is used to focus attention on a single face
+in a fan.  
+We also introduce a notion of convexity that is suitable for local fans.
+
+\subsection{basics}
+
+A local fan is to a fan what a polygon is to a plane graph.  
+
+
+\begin{definition}[local fan]\guid{FTNGOGF} \label{def:convex-local}
+\formaldef{local fan}{local\_fan}
+\formaldef{nonreflexive local fan}{convex\_local\_fan}
+A triple $(V,E,F)$ is a \newterm{local fan} if the following conditions hold:
+\begin{enumerate} 
+\item \case{fan} $(V,E)$ is a fan.
+\item \case{face} $F$ is a face of $H = \op{hyp}(V,E)$.
+\item \case{dihedral} $H$ is isomorphic to $\op{Dih}_{2k}$, where $k =
+\card(F)$.
+\end{enumerate}
+A local fan $(V,E,F)$ is said to be \newterm{nonreflexive} if the following
+additional conditions hold:
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item %\setcounter{enumi}{4} 
+\case{angle} $\op{azim}(x)\le \pi$ for all darts $x\in F$.
+\item \case{wedge} $V\subset \bWdart(x)$ for all $x\in F$.
+% \item If $\{\v,\w\}\in E$, then $\{\orz,\v,\w\}$ is not
+%   collinear. %% part of def of fan.
+\end{enumerate}
+\end{definition}
+\indy{Index}{fan!local}%
+
+In the proof of the Kepler conjecture in this chapter and the next,
+all local fans are nonreflexive.  Local fans (that are reflexive) appear in
+applications to other packing problems in Chapter~\ref{sec:further}.
+
+\begin{remark}[visualization]\guid{PNCVUMY}
+  The intersection of $X(V,E)$ with the unit sphere is a spherical
+  polygon, gives a visual representation of a local fan $(V,E,F)$.
+  The choice of $F$ distinguishes the interior of the polygon from its
+  exterior.  If the local fan is nonreflexive, then the interior of the
+  polygon is geodesically convex.
+\end{remark}
+
+
+\begin{lemma}[]\guid{WRGCVDR}\rz{0}%
+\oldrating{300}
+\formalauthor{Nguyen Quang Truong}
+For any nonreflexive local fan $(V,E,F)$, there is a bijection from $F$ onto $V$
+given by
+\[ 
+(\v,\w) \mapsto \v.
+\] 
+Moreover, write $\v\mapsto(\v,\rho\v)$ for the inverse map. 
+Then $\rho:V\to V$ is a cyclic permutation.
+\end{lemma}
+\indy{Index}{cyclic permutation}%
+
+\begin{proof} The map from a face to the set of nodes is a bijection
+  for the dihedral hypermap $\op{Dih}_{2k}$. It is a also bijection
+  for a fan isomorphic to $\op{Dih}_{2k}$.
+
+For all $(\v,\rho \v)\in F$,
+\[ 
+f(\v,\rho \v) = (\rho\v,\rho^2\v),
+\] 
+so that the order of $\rho$ on $V$ is the order of $f$ on $F$, which
+is $k=\card(F)$.  Thus, $\rho$ is a cyclic permutation of $V$ of order
+$k=\card(V)$.
+\end{proof}
+
+\begin{definition}[$\rho$,~$\nd$]\guid{MFMPCVM} 
+\formaldef{$\rho$}{rho\_node}
+\formaldef{$\nd$}{FST}
+For any nonreflexive local fan $(V,E,F)$, write
+$\nd:F\to V$ and $\rho:V\to V$ for the bijections of the preceding
+lemma.
+\end{definition}
+\indy{Notation}{ZZrho@$\rho$}%
+\indy{Notation}{node@$\nd$}%
+
+\begin{definition}[interior angle,~$\angle$,~$\bWdart$]\guid{PJRIMCV}
+\formaldef{interior angle}{interior\_angle}
+\formaldef{$\bWdart$}{cw\_node\_fan}
+\formaldef{$\Wdart$}{w\_node\_fan}
+For any nonreflexive local fan $(V,E,F)$,
+write
+\[ 
+\angle(\v) = \op{azim}((\v,\rho\v)),
+\] 
+for all $\v\in V$.  This is the \newterm{interior} angle of the nonreflexive local fan at $\v$.  Also, write
+\[ 
+  \Wdart(F,\v) = \Wdart((\v,\rho \v)),\quad 
+\bWdart(F,\v) =\bWdart((\v,\rho \v)).
+\] 
+\indy{Notation}{1@$\angle$}%
+\indy{Notation}{Wdart@$\Wdart(F,\v)$}%
+\indy{Notation}{Wdart@$\bWdart(F,\v)$}%
+%\indy{Notation}{node@$\nd(x)$}%
+\end{definition}
+
+
+\begin{definition}[localization]\guid{BIFQATK}
+\formaldef{localization}{localization}
+ Let $(V,E)$ be a fan and let $F$ be
+a face of $\op{hyp}(V,E)$.  Let
+\begin{align*}
+V' &= \{\v\in V \mid \exists~\w\in V.~(\v,\w)\in F\}.\\
+E' &= \{\{\v,\w\} \in E\mid (\v,\w)\in F\}.
+\end{align*}
+The triple $(V',E',F)$ is called the \newterm{localization} of $(V,E)$ along $F$.
+\end{definition}
+\indy{Index}{localization}%
+
+
+\begin{lemma}[localization]\guid{LVDUCXU}\rz{0}%
+\oldrating{450}
+\formalauthor{Nguyen Quang Troung}
+\label{lemma:localization}
+Let $(V,E)$ be any fan and let $F$ be a face of its hypermap that is
+simple and has cardinality at least three.  Then the localization
+$(V',E',F)$ is a local fan.  Moreover, the angle $\op{azim}(x)$ and
+the wedges $\bWdart(x)$ and $\Wdart(x)$ do not depend on whether they
+computed relative to $\op{hyp}(V,E)$ or to $\op{hyp}(V',E')$ for all
+$x\in F$.
+%That is, 
+%\[ 
+%\begin{align}
+%\op{azim}(V,E,x) &=\op{azim}(V',E',x)\\
+%\Wdart(V,E,x) &=\Wdart(V',E',x)\\
+%\end{align}
+%\] 
+\end{lemma}
+
+
+
+\begin{proof}
+The proof that $(V',E')$ is a fan consists of various simple
+verifications based on the techniques of
+Remark~\ref{remark:fan-verify}.  The details are left to the reader.
+
+The dart set $D'$ of $\op{hyp}(V',E')$ is naturally identified with
+the disjoint union $F\coprod F'$, where $F = \{(\v,\rho\v) \mid \v\in
+V\}$ and $F'=\{(\v,\rho^{-1}\v) \mid \v\in V\}$.  Under this
+identification, $F$ is a face of $\op{hyp}(V',E')$.  The face, node,
+and edge permutations have orders $k$, $2$, and $2$, respectively.  By
+Lemma~\ref{lemma:dih-iso}, this bijection extends to an isomorphism of
+hypermaps $\op{Dih}_{2k}$ onto $\op{hyp}(V',E')$.
+
+The proof that the $\op{azim}(x)$ and $\Wdart(x)$ do not depend on the
+choice of fan is a consequence of their definitions:
+\begin{align*}
+\op{azim}(x) &= \op{azim}(\orz,\v,\w,\sigma(\v,\w)),\textand \\
+\Wdart(x) &= \Wdart(\orz,\v,\w,\sigma(\v,\w)).\\
+\end{align*}
+where $x = (\v,\w)$.  It is enough to check that $\sigma(\v,\w)\in
+E'(\v)$.  But $\{\sigma(\v,\w),\v\}\in F$, so this is indeed the case.
+% In particular $\op{azim}(x)\le\pi$ follow by the assumptions of the
+% lemma.
+\end{proof}
+
+
+
+\subsection{geometric type}\label{sec:types}
+
+\begin{definition}[generic,~lunar,~circular]\guid{RTPRRJS}
+\formaldef{generic}{is\_generic\_clf}
+\formaldef{lunar}{is\_lunar\_clf}
+\formaldef{circular}{is\_circular\_clf}
+A nonreflexive local fan $(V,E,F)$ is \newterm{generic}  if for every $\{\v,\w\}\in E$
+and every $\u\in V$, 
+\[ 
+C\{\v,\w\}\cap C^0_-\{\u\} = \emptyset.
+\] 
+A nonreflexive local fan is \newterm{circular}  if there exists $\u\in V$ and
+$\{\v,\w\}\in E$ such that
+\[ 
+C^0\{\v,\w\}\cap C^0_-\{\u\}\ne \emptyset.
+\] 
+A nonreflexive local fan is \newterm{lunar} with pole $\{\v,\w\} \subset V$ if it is not
+circular, if $\v\ne\w$, and if $\{\v,\w\}$ is a parallel set.
+\end{definition}
+\indy{Index}{generic}%
+\indy{Index}{lunar}%
+\indy{Index}{circular}%
+
+
+\begin{lemma}[trichotomy]\guid{CIZMRRH}\rz{0}%
+\oldrating{200} %
+\formalauthor{Nguyen Quang Truong}
+Every nonreflexive local fan is either
+generic, lunar, or circular.  Moreover, these three properties are
+mutually exclusive.
+\end{lemma}
+\indy{Index}{fan!local}%
+\indy{Index}{nonreflexive local fan}%
+\indy{Index}{generic}%
+\indy{Index}{lunar}%
+\indy{Index}{circular}%
+
+\begin{proof} If $(V,E,F)$ is not generic,  select some $\{\v,\w\}\in E$
+and some $\u\in V$ such that
+\begin{equation}\label{eqn:nongeneric}
+C\{\v,\w\}\cap C^0_-\{\u\} \ne \emptyset.
+\end{equation}
+Now $C\{\v,\w\} = C^0\{\v,\w\} \cup C\{\v\}\cup C\{\w\}$.  If, for
+some such triple $(\u,\v,\w)$, the
+intersection~(\ref{eqn:nongeneric}) meets $C^0\{\v,\w\}$, then the
+nonreflexive local fan is circular.  Otherwise, the nonreflexive local fan is lunar.
+\end{proof}
+
+\begin{definition}[flat]\guid{YPSTLXA}
+\formaldef{flat}{is\_flat}
+ Let $(V,E,F)$ be a nonreflexive local fan.
+If $\angle(\v)=\pi$, then $\v$ is \newterm{flat}.
+\end{definition}
+\indy{Index}{flat (node of a fan)}
+
+
+\begin{lemma}[]\guid{LDURDPN}\rz{0}%
+\oldrating{100}  \label{lemma:coplanar}%
+\formalauthor{Nguyen Quang Truong}%
+Assume that $\{\orz,\u,\w\}$ and $\{\orz,\u,\v\}$ are not collinear sets.
+Then $\op{azim}(\orz,\u,\v,\w)=\pi$ if and only if
+there exists a plane $A$ such that $\{\orz,\u,\v,\w\}\subset A$
+and such that the line $\op{aff}\{\orz,\u\}$ separates $\v$ from
+$\w$ in $A$.
+\end{lemma}
+
+\begin{proof} The given azimuth angle is $\pi$ if and only if
+$\dih(\{\orz,\u\},\{\v,\w\})=\pi$.  This holds exactly when $\{\orz,\u,\v,\w\}$ is
+coplanar, and the line $\op{aff}\{\orz,\u\}$ separates $\v$ from $\w$
+in $A$.
+\end{proof}
+
+\begin{lemma}[]\guid{KOMWBWC}\rating{0}\label{lemma:kom}
+\formalauthor{Nguyen Quang Truong}
+\oldrating{400}
+Let $(V,E,F)$ be a nonreflexive local fan.  Let $k=\card(F)$.  Assume that for
+some $0<r\le k-1$ and some $\v\in V$, the set $U=\{\v,\rho
+\v,\ldots,\rho^r \v\}$ is contained in a plane $A$ passing through
+$\orz$.  Let $\e$ be the unit normal to $A$ in the direction
+$\v\times \rho \v$.  Then the set $U$ is cyclic with respect to
+$(\orz,\e)$, and the azimuth cycle $\sigma$ on $U$ is
+\[ 
+  \sigma \u = 
+\begin{cases} 
+\rho \u, & \u\ne \rho^r\v,\\ \v, & \u = \rho^r\v.
+\end{cases}
+\] 
+Furthermore, for all $0\le i\le r-1$,
+\[ 
+(\rho^i \v\times\rho^{i+1}\v)\cdot \e > 0.
+\] 
+\end{lemma}
+
+\begin{proof} 
+We write $\v_i = \rho^i \v$ for $i=0,\ldots,r$.
+
+\claim{We claim that $(\v_i \times \v_{i+1})\cdot \e > 0$ for all $i\le r-1$. }
+Indeed, the base case $(\v_0\times \v_1)\cdot \e > 0$ of an induction
+argument holds by assumption.  Assume for a contradiction that the
+inequality holds for $i$, but not for $i+1$.  Then
+\[ 
+  \op{aff}^0_+(\{\orz,\v_{i+1}\},\v_i) 
+= \op{aff}^0_+(\{\orz,\v_{i+1}\},\v_{i+2}).
+\]  
+This forces $C^0\{\v_i,\v_{i+1}\}$ to meet $C^0\{\v_{i+1},\v_{i+2}\}$,
+which is contrary to the definition of a fan.  Thus, the claim holds.
+
+The fact that $U$ is cyclic follows trivially from the fact that $U$
+is contained in a plane $A$ through $\orz$ and that $\e$ is orthogonal
+to $A$.
+
+\claim{For all $0\le i \le r-1$,  $\sigma \v_i = \v_{i+1}$.}
+Otherwise, there is some 
+\[ 
+  \u \in (U\setminus \{\v_i,\v_{i+1}\}) 
+\cap W^0(\orz,\e,\v_i,\v_{i+1}) \cap A.
+%  ~~\subset~~ 
+\] 
+However, by the claim, this intersection is a subset of $C^0\{\v_i,\v_{i+1}\}$, and
+$\u\in C^0\{\v_i,\v_{i+1}\}$ is contrary to the property
+\case{intersection} of fans.  The result follows.
+% The membership of $\u$ in the rightmost term is contrary to the
+% definition of fan.  Let $\e_3$ be the unit vector in the direction
+% $\v\times \u$.  Let $\e_1$ be the unit vector in the direction $\u$.
+% Let $\e_2 = \e_3 \times \e_1$.  The coordinates of $\u,\v,\w$ with
+% respect to the frame $(\e_1,\e_2,\e_3)$ take the form
+%\[ 
+%\begin{align}
+%\v &= \wild  \e_1 + a \e_2,  &\quad & a &< 0\\
+%\u &= a' \e_1, &\quad & a' &>0\\
+%\w&= \wild  \e_1 + a'' \e_2, &\quad & a'' &>0\\
+%\end{align}
+%\] 
+%From this representation it is clear that $\v\times \u$ points in the
+% same direction as $\u\times \w$.  The set $\{\v,\u,\w\}$ is clearly
+% cyclic and the counterclockwise cycle $\sigma$ in the
+% $\{\e_1,\e_2\}$ plane takes $\v$ to $\u$ and $\u$ to $\w$.
+\end{proof}
+
+\begin{lemma}[]\guid{OZQVSFF}\rating{0} \label{lemma:A}  
+\formalauthor{Nguyen Quang Truong}
+\oldrating{600}
+Let $(V,E,F)$ be a nonreflexive local fan and let
+  $\u,\v,\w\in V$ satisfy
+\begin{enumerate}\wasitemize 
+\item $\{\orz,\u,\v,\w\}$ is contained in a plane $A$. \vspace{3pt}
+\item $\u,\w\not\in\op{aff}\{\orz,\v\}$. \vspace{3pt}
+\item $\op{aff}^0_+(\{\orz,\v\},\u) \ne \op{aff}^0_+(\{\orz,\v\},\w)$.
+\end{enumerate}\wasitemize 
+Then $\v$ is flat.  Moreover, $\rho \v,\rho^{-1} \v\in A$.
+\end{lemma}
+
+\begin{proof} Let $x = (\v,\rho\v)\in F$.  
+Order $\u$ and $\w$ so that
+\[ 
+\op{azim}(\orz,\v,\rho\v,\u) \le \op{azim}(\orz,\v,\rho\v,\w).
+\] 
+By the definition of nonreflexive local fan, by the conditions $\u,\w\in \bWdart(x)$, 
+and by  Lemma~\ref{lemma:coplanar},
+%By the assumptions, $\dih(\{\orz,\v\},\{\u,\w\})=\pi$.  Since
+%$\u,\w\in \bWdart(x)$, it follows that
+%\[ \pi = \dih(\{\orz,\v\},\{\u,\w\}) \le 
+%\op{azim}(x) = \angle(\v) \le \pi.\] 
+%The first conclusion follows.
+\begin{align*}
+%\begin{align}
+0 &\le \op{azim}(\orz,\v,\rho\v,\u) \\
+&= \op{azim}(\orz,\v,\rho\v,\w) - \op{azim}(\orz,\v,\u,\w)\\
+&= \op{azim}(\orz,\v,\rho\v,\w)-\pi \\
+&\le \op{azim}(\orz,\v,\rho\v,\rho^{-1}\v) - \pi \\
+&=\op{azim}(x) - \pi \\
+&=\angle(\v)-\pi\\
+&\le 0. 
+%\end{align}
+\end{align*}
+Hence, each inequality is equality.  In particular, $\v$ is flat.
+In particular, $0 =\op{azim}(\orz,\v,\rho\v,\u)$, so that 
+\[ 
+\rho\v\in \op{aff}_+(\{\orz,\v\},\u) \subset A.
+\] 
+Similarly,
+\[ 
+\rho^{-1}\v\in \op{aff}_+(\{\orz,\v\},\w) \subset A.
+\] 
+\end{proof}
+
+If Lemma~\ref{lemma:A} can be applied once to a set of vectors, then
+it can often be applied repeatedly along a chain of vectors.  For
+example, the conclusion of the lemma implies that $\rho^{-1} \v \in
+A$.  In fact, by the definition of fan,
+\[ 
+  \rho^{-1}\v \in A \setminus \op{aff}\{\orz,\v\} 
+= \op{aff}^0_+(\{\orz,\v\},\u) \cup \op{aff}^0_+(\{\orz,\v\},\w).
+\] 
+Suppose that $\rho^{-1} \v$ lies in the second term of the union.  If
+$\w\ne \rho^{-1}\v$, then the assumptions of the lemma are met for
+$\{\w,\rho^{-1} \v,\v\}$, giving the conclusions that $\rho^{-1} \v$
+is flat and that $\rho^{-2}\v\in A$.  Repeating the argument
+on a new set of vectors, we obtain a chain
+\[ 
+\pi=\angle(\v) = \angle(\rho^{-1} \v) = \cdots,
+\] 
+with $\v,\rho^{-1}\v,\ldots\in A$.  Another chain $\v,\rho \v,\ldots$
+of vectors can be constructed in the other direction.  This process of
+chaining gives the following lemma.
+
+\begin{lemma}[circular geometry]\guid{KCHMAMG}\rating{0}
+\label{lemma:circular}
+\formalauthor{Nguyen Quang Truong}
+\oldrating{300}
+Let $(V,E,F)$ be a circular fan. Then
+\begin{enumerate}\wasitemize 
+\item $\v$ is flat for all $\v\in V$.
+\item The set $V$ lies in a plane $A$ through $\orz$.
+\item For some choice of unit vector $\e$ orthogonal to $A$, the set
+$V$ is cyclic with respect to $(\orz,\e)$, and the azimuth cycle on
+$V$ coincides with $\rho:V\to V$.  
+\item 
+$
+\op{azim}(\orz,\e,\v,\rho\v) = \dih(\{\orz,\e\},\{\v,\rho\v\})
+=\op{arc}_V(\orz,\{\v,\rho \v\}) <\pi
+$.
+\end{enumerate}\wasitemize 
+\end{lemma}
+
+\begin{proof} Let $\v, \u\in V$ be such that $C^0\{\u,\rho \u\}$ meets
+$C^0_-\{\v\}$.  Apply Lemma~\ref{lemma:A} to $\{\u,\v,\rho \u\}$ to
+conclude that $\v$ is flat, and some plane $A$ contains
+$\{\orz,\u,\rho\u,\v,\rho \v,\rho^{-1} \v\}$.  If
+%\[ 
+%\{\orz,\u,\rho \u,\v,\rho \v,\rho^{-1} \v\} \subset V\cap A,
+%\] 
+%and 
+$\w\in V\cap A$, then there exists $\w_1,\w_2\in (V\cap
+A)\setminus\{\w\}$ for which the assumptions of Lemma~\ref{lemma:A}
+hold for $\w_1,\w,\w_2$.  
+Then $\w$ is flat, and $\rho \w \in V\cap A$.  The set $V\cap
+A$ is therefore preserved by $\rho$.  By observing that $V$ is the
+only nonempty subset of $V$ that is preserved by $\rho$, it follows
+that $V\subset A$ and that $\w$ is flat for all $\w\in V$.
+
+
+By Lemma~\ref{lemma:coplanar}, $V$ is cyclic with respect to a unit
+vector $\e$ orthogonal to $A$.  The azimuth cycle on $V$ is $\v
+\mapsto \rho \v$.
+
+We turn to the final conclusion.  By the final conclusion of
+Lemma~\ref{lemma:kom} and Lemma~\ref{lemma:sim}, the azimuth angle is
+less than $\pi$.  Under this constraint, the azimuth angle equals the
+dihedral angle by Lemma~\ref{lemma:dih-azim}.  By definition, the
+dihedral angle is the angle $\arc_V(\orz,\wild )$ of an orthogonal
+projection of $\{\v,\rho\v\}$ to a plane with normal $\e$.  But
+$\{\v,\rho\v\}$ is already a subset of the plane $A$, so that the
+projection is the identity map, and the dihedral angle is
+$\arc_V(\orz,\{\v,\rho\v\})$.
+%
+%\[ 
+%%  \op{azim}(\orz,\e,\v,\rho\v) = \dih(\{\orz,\e\},\{\v,\rho\v\}) =
+%%  \op{arc}_V(\orz,\{\v,\rho\v\}),
+%\] 
+%because the azimuth angle is less than $\pi$ and
+%the dihedral angle is defined as the angle obtained by orthogonal projection
+%to the plane $A$.  Since the points $\v,\rho\in A$, orthogonal projection has no effect.
+\end{proof}
+
+\begin{lemma}[lunar geometry]\guid{HKIRPEP}\rating{0}
+\formalauthor{Nguyen Quang Truong}
+\oldrating{300}\label{lemma:lunar}
+Let $(V,E,F)$ be a lunar fan with pole $\{\v,\w\}\subset V$.  
+%Assume that $\rho^r \v = \w$ for some $0< r < k$.
+Then
+\begin{enumerate}\wasitemize 
+\item $\u$ is flat for all $\u\in V\setminus \{\v,\w\}$. \vspace{3pt}
+\item $0< \angle(\v) = \angle(\w)\le \pi$. \vspace{3pt}
+\item $V\cap \op{aff}_+(\{\orz,\v\},\rho \v) = \{\v,\rho \v,\ldots,
+\w\}$. \vspace{3pt}
+\item $V \cap \op{aff}_+(\{\orz,\v\},\rho^{-1} \v) = \{\w,\rho
+\w,\ldots \v\}$. \vspace{3pt}
+\end{enumerate}\wasitemize 
+\end{lemma}
+
+\begin{proof} Set $V_1 = \{\v,\rho \v,\ldots,\w\}$ and $V_2 =
+\{\w,\rho \w,\ldots,\v\}$.  Let $\u\in V\setminus\{\v,\w\}$ be
+arbitrary.  Apply Lemma~\ref{lemma:A} to the set $\{\v,\u,\w\}$ to
+find that $\u$ is flat and that $\{\orz,\u,\rho \u,\rho^{-1} \u\}$
+belongs to a plane $A(\u)$.  Now $A(\u)$ and $A(\rho \u)$ are both
+the unique plane containing $\{\orz,\u,\rho \u\}$; hence, $A(\u) =
+A(\rho \u)$ when $\rho \u\not\in \{\v,\w\}$.  By induction, there
+are planes $A_1, A_2$ such that $V_i\subset A_i$.  There is an
+azimuth cycle $\sigma_i$ on $V_i$ such that $\sigma_i \u = \rho \u$,
+when $\u \in A_i\setminus \{\v,\w\}$.
+
+The angles $\angle(\v)$ and $\angle(\w)$ are both equal to the
+dihedral angle between the half-planes
+$\op{aff}_+(\{\orz,\v\},\rho^{\pm}\v)$.  In particular,
+$0<\angle(\v)=\angle(\w)\le\pi$.
+\end{proof}
+
+
+
+
+\begin{lemma}[monotonicity]\guid{EGHNAVX}\rating{650} 
+\label{lemma:monotone}
+Let $(V,E,F)$ be a nonreflexive local fan and let $k$ be the cardinality
+of $F$.  Fix $\v_0\in V$.  Assume that
+$\{\orz,\v_0,\u\}$ is not collinear for any $\u\in
+V\setminus\{\v_0\}$.  For all $i$, set $\v_i = \rho^i \v_0$ and
+$\beta(i) = \op{azim}(\orz,\v_0,\v_1,\v_i)$.  Then
+\[ 0=\beta(1)\le \beta(2)\le \cdots\le
+\beta(k-1)\le\pi.\] 
+Moreover, if $\beta(i)=0$ for some $1<i \le k-1$, then
+\[ 
+\angle(\v_1) = \cdots = \angle(\v_{i-1}) = \pi,
+\] 
+and $\{\v_1,\ldots,\v_i\} \subset \op{aff}^0_+(\{\orz,\v_0\},\v_1)$.
+Finally, if $\beta(i)=\beta(k-1)$ for some $1\le i<k-1$, then 
+\[ 
+\angle(\v_{i+1}) = \cdots = \angle(\v_{k-1}) = \pi,
+\textand  \{\v_i,\ldots,\v_{k-1}\} \subset
+\op{aff}^0_+(\{\orz,\v_0\},\v_{k-1}).
+\]
+\end{lemma}
+
+\begin{proof}  
+  With respect to a frame, the points $\v_j$ can be represented in
+  spherical coordinates $(r_j,\theta_j,\phi_j)$.  In an appropriate
+  frame, $\phi_0=0$ and $\theta_j=\beta(j)$ for all $j$.  From
+  $\v_j\in \bWdart(F,\v_0)$ and $\angle(\v_0)\le\pi$, it follows that
+  $0\le\theta_j\le\theta_{k-1}\le\pi$ when $0\le j\le k-1$.
+
+One may assume the induction hypothesis that $0\le \beta(1)\le\cdots\le
+\beta(i)$.  The condition
+\[ 
+\v_0\in \bWdart(F,\v_i)
+\] 
+implies that
+\[ 
+  0 \le \op{azim}(\orz,\v_i,\v_{i+1},\v_0)
+\le \op{azim}(\orz,\v_i,\v_{i+1},\v_{i-1})\le\pi.
+\] 
+By Lemma~\ref{lemma:sim}, the resulting inequality
+\[ 
+\sin(\op{azim}(\orz,\v_i,\v_{i+1},\v_0))\ge 0
+\] 
+reduces to a triple-product:
+\[ 
+(\v_0 \times \v_i)\cdot \v_{i+1}\ge 0.
+\] 
+In spherical coordinates, this inequality becomes
+\[ 
+r_0r_ir_{i+1}\sin\phi_i\sin\phi_{i+1}\sin(\theta_{i+1}-\theta_i)\ge0.
+\] 
+Under the noncollinearity assumption, $\sin\phi_i\sin\phi_{i+1}\ne0$
+(when $0< i < k-1$).  Once we deal with the degenerate
+case $\theta_{i+1}=0,\theta_i=\pi$, these inequalities give
+$\theta_i\le \theta_{i+1}$, and the result follows by induction.
+
+Turn to the degenerate case $\theta_{i+1}=0,\theta_i=\pi$.  In this case,
+the set $\{\orz,\v_0,\v_i,\v_{i+1}\}$ is coplanar.  Let $C^0_+=C^0_+(\v_i,\v_{i+1})$. 
+The values the angles $\theta_i$ and $\theta_{i+1}$
+imply that $C^0_+$ meets
+the line $\op{aff}(\orz,\v_0)$. In particular, $\epsilon \v_0\in C^0_+$
+for some choice of sign $\epsilon\in\{\pm 1\}$.
+ The definition of a fan implies
+$\v_0\not\in C^0_+$. Hence $-\v_0\in C^0_+$.
+By the definition of a circular fan, $(V,E,F)$ is circular.
+The lemma follows in this case from the explicit description of circular
+fans in Lemma~\ref{lemma:circular}.  This completes the proof of the first
+statement of the lemma.
+
+Assume that $\beta(i)=\theta_i=0$ for some $1<i\le k-1$.  Then by the first
+conclusion, $\theta(j)=0$ for $0\le j\le i$.  That is, 
+$\v_1,\ldots,\v_i$ all lie in the half-plane
+$\op{aff}^0_+(\{\orz,\v_0\},\v_1)$.  In particular, they are coplanar.
+A chaining argument based on Lemma~\ref{lemma:A} gives the result.
+
+The final conclusion follows by a similar chaining argument.
+\end{proof}
+
+
+
+\subsection{deformation}\label{sec:deformation}
+
+
+This subsection develop a theory of deformations of a nonreflexive local fan
+$(V,E,F)$, including sufficient conditions for the deformation of a
+nonreflexive local fan to remain a nonreflexive local fan.
+
+
+\begin{definition}[deformation]\guid{YWNHMBP}
+\formaldef{deformation}{is\_deformation\_clf}
+A \newterm{deformation} 
+of a nonreflexive local fan $(V,E,F)$ over an interval
+$I\subset\ring{R}$ is a function $\varphi:V\times I
+\to\ring{R}^3$ that is continuous $\varphi(v,\wild):I\to\ring{R}^3$
+for each $v\in V$.
+\end{definition}
+\indy{Index}{deformation}%
+\indy{Index}{fan!local}%
+
+\begin{notation}
+  Beware of the notational distinction between the zenith angle $\phi$
+  and the deformation $\varphi$.  When a deformation $\varphi$ is
+  given, write $\v(t)$ as an abbreviation of $\varphi(\v,t)$ for
+  $t\in I$.  Also, set
+\begin{align*}
+V(t)&=\{\v(t) \mid \v\in V\},\\
+E(t)&=\{\{\v(t),\w(t)\}\mid \{\v,\w\}\in E\},\\
+F(t)&= \{(\v(t),\w(t)) \mid  (\v,\w)\in F\}.
+\end{align*}
+\indy{Notation}{vt@$\v(t)$ (deformation of $\v$)}
+\end{notation}
+
+A deformation does not require $(V(t),E(t),F(t))$ to be a nonreflexive local fan
+for all $t\in I$, although this is often  the case. The
+permutation $\rho:V\to V$ gives $\varphi(\rho \v,t)\in V(t)$ for
+every $\v\in V$.
+
+
+\begin{example}[lunar deformation]\label{example:lunar}
+Consider a lunar fan $(V,E,F)$ with pole $\{\v,\w\}\subset V$.
+Pick a frame and spherical coordinates $(r,\theta,\phi)$ such that $\phi(\v)=0$,
+$\phi(\w)=\pi$,  $\theta(\rho \v)=0$, and $\theta(\rho^{-1}
+\v)=\theta_{k-1}\le\pi$.  Consider the deformation $\varphi$ over $I
+= \{t \mid 0 \le t < 1\}$ such that radial $r$ and zenith $\phi$
+coordinates of $\varphi(\u,t)$ are constant as functions of $t$, and
+the azimuth angle $\theta$ of $\varphi(\u,t)$ equals
+
+\[ 
+\begin{cases} 
+  (1-t) \theta_{k-1} & \text{if } \u\in 
+\{\rho \w,\rho^2 \w,\ldots, \rho^{-1} \v\},\\
+  0 & \text{if } \u\in \{\rho \v,\rho^2 \v,\ldots,\rho^{-1} \w\}.\\
+\end{cases}
+\] 
+%This deformation $(V(t),E(t),F(t))$ is a nonreflexive local fan for all $t\in I$.
+%The cardinality of $V$ is independent of $t\in I$.
+Note that $(V(0),E(0),F(0)) = (V,E,F)$.
+\end{example}
+\indy{Index}{lunar}%
+\indy{Index}{spherical coordinates}%
+
+\begin{lemma}[]\guid{HZIYFIZ}\rating{450}\label{lemma:lunar-deform} 
+  Let $(V,E,F)$ be a lunar fan with pole $\{\v,\w\}\subset V$.  In the
+  deformation $(\varphi,V,I)$ of Example~\ref{example:lunar}, the
+  triple $(V(t),E(t),F(t))$ is a lunar fan for all $t\in I$.  The
+  cardinality of $V$ is independent of $t\in I$.
+\end{lemma}
+
+\begin{proof} The proof consists of checking the defining properties
+  of a lunar fan, one by one.  The verification of the property
+  \case{cardinality} follows from the methods of
+  Remark~\ref{remark:fan-verify}.
+
+The map $\varphi(\wild,t)$ is invertible, so that $V(t)$ is in
+bijection with $V$.  In particular, the cardinality of $V(t)$ does not depend
+on $t$.
+
+\case{origin} The radial spherical coordinate is nonzero for every
+element of $V(t)$.  Hence, $V(t)$ does not contain $\orz$.
+
+\case{nonparallel} For $\{\v,\rho \v\}\in E$, the angle
+$\alpha=\op{arc}_V(\orz,\{\varphi(\v,t),\varphi(\rho \v,t)\})$ is
+independent of $t$.  The nonparallel property is equivalent to
+$\alpha\ne0,\pi$.  Thus, the  property for $E$ implies
+the property for $E(t)$.
+
+\case{intersection} The points $V(t)$ are contained in the union of
+two half-planes $A_1,A_t$.  The deformation is the identity on $A_1$
+and an isometry $A_0\to A_t$ on the second half-plane.  These
+bijections preserve the incidence relations of blades of the cones
+$C(\ee)$.
+
+\case{dihedral}~\case{face} The combinatorial structure of
+the hypermap does not depend on $t$.  In particular, the hypermap has
+face $F(t)$, and the hypermap is isomorphic to $\op{Dih}_{2k}$.
+
+\case{angle} The azimuth angle $\angle(\varphi(\u,t))$ is fixed when
+$\u\ne \v,\w$ and is decreasing in $t$ when $\u\in \{\v,\w\}$.
+Hence, the upper bound on the angle is preserved.
+
+\case{wedge} $V(t)\subset A_0\cup A_t$, where $A_0$ and $A_t$ are
+the half-planes described above.  Now $\bWdart(F,\varphi(\u,t))$ is
+a half-space containing $A_0$ and $A_t$ when $\u\ne \v,\w$.  Also,
+$\bWdart(F,\varphi(\u,t))$ is a wedge with bounding half-planes
+$A_0$ and $A_t$ when $\u\in \{\v,\w\}$.  Hence, $V(t)\subset A_0\cup
+A_t\subset \bWdart(F,\varphi(\u,t))$ for all $\u\in V$.
+
+\case{lunar} The points $\v,\w\in V(t)$ remain fixed and hence
+remain parallel.  Thus, the nonreflexive local fan remains lunar.
+\end{proof}
+\indy{Index}{angle!azimuth}%
+
+Next consider a deformation of a nonreflexive local fan.  The following lemma
+gives a list of conditions that ensure that the deformed fan remains
+nonreflexive local throughout the deformation.
+
+
+\begin{lemma}[]\guid{XRECQNS}\rating{700}\label{lemma:fan-open}
+Let $(\varphi,V,I)$ be a deformation of a nonreflexive local fan $(V,E,F)$ over an
+interval $I$.  Assume that $0\in I$ and that $\varphi(\v,0)=\v$ for
+all $\v\in V$.  For all $\v\in V$ assume that if
+$\v$ is flat, then $\v(t)$ is flat for all sufficiently small $t$.
+%$\{\orz,\rho^{-1}\v,\v,\rho\v\}$ is coplanar, then
+%\[ 
+%\{\orz,\varphi(\rho^{-1}\v,t),\varphi(\v,t),\varphi(\rho\v,t)\}
+%\]  is coplanar for all sufficiently small $t$.
+%If the property \case{wedge} is maintained for sufficiently small $t$,
+Then exists $\epsilon>0$ such that $(V(t),E(t),F(t))$ is a nonreflexive local fan
+for all $t\in I\cap \leftopen-\epsilon,\epsilon\rightopen$.  
+%Moreover,
+%if $(V,E,F)$ is generic, then the property \case{wedge} is in fact
+%maintained for sufficiently small $t$.  
+Moreover,  if $(V,E,F)$ is
+generic, then the deformed fan is also generic for sufficiently small
+$t$.
+\end{lemma}
+
+\begin{proof} We examine in turn each of the defining properties of a generic fan.
+
+\case{cardinality}: The set $V(t)$ is the image of $V$ and is
+therefore finite and nonempty.
+
+\case{origin} Since $\varphi$ is continuous and
+$\orz\not\in V$, it follows that $\orz\not\in V(t)$ for sufficiently
+small $t$.
+
+\case{nonparallel}: If $\v,\w$ are nonparallel, then $\v(t)$ and
+$\w(t)$ are nonparallel for sufficiently small $t$.
+
+\case{intersection}: If $\ee \cap \ee'=\emptyset$, then $C(\ee)\cap
+S^2$ has a positive distance from $C(\ee')\cap S^2$.  Hence, for
+sufficiently small times, the deformation of these sets remain
+disjoint.  If $\ee=\{\u,\v\}$ and $\ee'=\{\v,\w\}$, where $\u\ne\w$,
+then again the deformations of $C(\ee)\cap C(\ee')$ is
+$C(\{\v(t)\})$ for sufficiently small $t$.  The other cases are
+similar.
+
+\case{face},~\case{dihedral}: The azimuth cycle on $E(\v(t))$
+is preserved; hence, the combinatorial properties of the hypermap do
+not change when $t$ is sufficiently small.
+
+\case{angle}: If $\op{azim}(x)<\pi$, then the inequality remains
+strict for sufficiently small $t$.  If $\op{azim}(x)=\pi$, then the
+flatness assumption of the lemma forces the equality to be
+preserved for all sufficiently small $t$.
+
+\case{wedge}: The property $\u\in \Wdart(x)$ is an open condition.
+It holds for sufficiently small $t$. Consider the case $\u\in
+\bWdart(x)\setminus \Wdart(x)$, where $x= (\v_0,\rho\v_0)$.  Write
+$\v_i = \rho^i\v_0$ and pick $r\le k-1$ such that $\u = \v_r$.  The
+wedge property holds trivially when $r\in\{0,1,k-1\}$. Assume that
+$r\not\in\{0,1,k-1\}$.  We finish the argument in cases, according to 
+the type of the nonreflexive local fan  $(V,E,F)$.
+
+If the fan $(V,E,F)$ is circular, then some plane $A$ through
+the origin  contains $V$.  By the flatness condition, the
+deformation maintains a coplanarity condition $V(t)\subset A(t)$.  The
+sets $\bWdart(x(t))$ are half-spaces bounded by $A(t)$.  Thus,
+$V(t)\subset A(t)\subset \bWdart(x(t))$, as desired.
+
+If the fan $(V,E,F)$ is lunar with pole $\{v,w\}$, the argument is
+similar, but there are two half-planes $A_1(t)$ and $A_2(t)$ such that
+$V(t)\subset A_1(t)\cup A_2(t)$.  Arguing as in the previous case,
+each wedge $\bWdart(x(t))$ contains $A_1(t)\cup A_2(t))$.  The result
+follows.
+
+If the fan $(V,E,F)$ is generic, then
+by the genericity assumption $\v_r$ and
+$\v_0$ are nonparallel.  In the notation of
+Lemma~\ref{lemma:monotone}, $\beta(r) = 0$ or $\beta(r) =
+\beta(k-1)$.  This proof treats the case $\beta(r)=0$. (The case
+$\beta(r)=\beta(k-1)$ is similar.)  By Lemma~\ref{lemma:monotone},
+\[ 0=\beta(1)=\beta(2)=\cdots=\beta(r),\] 
+and 
+\[ 
+\{\orz,\v_0,\v_1,\ldots,\v_r\} \subset \op{aff}^0_+(\{\orz,\v_0\},\v_1).
+\] 
+In particular, the set is coplanar.  By the flatness assumption of
+the lemma, $\{\orz,\v_0(t),\v_1(t),\ldots,\v_r(t)\}$ is coplanar for
+sufficiently small $t$.  In fact, the condition $\v_r(t)\not\in
+\op{aff}_+(\{\orz,\v_0(t)\})$ is an open condition, so that
+$\v_r(t)\in \op{aff}^0_+(\{\orz,\v_0(t)\},\v_1(t))$ for sufficiently
+small $t$.  This half-plane is the bounding half-plane of
+$\bWdart(F,\v_0(t))$.  Hence, $\u = \v_r\in \bWdart(F,\v_0(t))$ for
+sufficiently small $t$.
+
+\case{generic}: Genericity is stated as open conditions $\v\not\in
+C\{\u,\w\}$.  These conditions continue to hold for sufficiently small
+$t$.
+\end{proof}
+
+
+%%%%%%%%%%%
+
+
+
+
+\section{Perimeter}
+
+The perimeter bound of $2\pi$ for convex spherical
+polygons is classical~\cite[p.~100]{vanderWaerden:1951}.
+This  result adapts easily  to a nonreflexive local fan, which also has
+ a perimeter.  This section proves the bound $2\pi$ on the perimeter of a
+nonreflexive local fan (Lemma~\ref{lemma:convex-hyp}).  A great circle has
+perimeter $2\pi$.  The proof follows the classical argument, which deforms the nonreflexive local fan in a way that flattens out the interior angles and increases
+the perimeter.  Eventually a circular nonreflexive local fan or lunar nonreflexive local fan is reached.  Both of these extremal cases have perimeter $2\pi$. 
+
+
+
+%\subsection{perimeter}
+
+\begin{definition}[perimeter]\guid{IQCPCGW}\label{lemma:perim}
+Let $(V,E,F)$ be a nonreflexive local fan.    Set
+\[ 
+  \op{per}(V,E,F) 
+= \sum_{i=0}^{k-1} \arc_V(\orz,\{\rho^i \v,\rho^{i+1} \v\}), 
+\] 
+where $k=\card(F)$.  The right-hand side of this formula is easily
+seen to be independent of the choice of $\v\in V$.  Call $\op{per}$
+the \newterm{perimeter} of the nonreflexive local fan.  If $\v,\w\in V$ are
+distinct nodes, define the \newterm{partial perimeter}
+\[ 
+  \op{per}(V,E,F,\v,\w) 
+= \sum_{i=0}^{r-1} \arc_V(\orz,\{\rho^i \v,\rho^{i+1} \v\}), 
+\] 
+where $r$ is chosen so that $\w=\rho^r \v$ and $0<r\le k-1$.
+\end{definition}
+\indy{Index}{perimeter!nonreflexive local fan}%
+\indy{Index}{fan!local}%
+\indy{Notation}{per@$\op{per}$ (perimeter)}%
+
+
+
+\begin{lemma}[perimeter majorization]\guid{WSEWPCH}\rating{1200} %was 400
+\label{lemma:convex-hyp}
+The perimeter of every nonreflexive local fan is at most $2\pi$.  
+\end{lemma}
+\indy{Index}{fan!local}%
+\indy{Index}{perimeter}%
+
+\begin{proof} 
+\claim{If the nonreflexive local fan is circular, then its perimeter is
+$\op{per}(V,E,F) =2\pi$.}  Indeed, by Lemma~\ref{lemma:circular},
+the arcs making up the perimeter all lie in a common plane.  The
+azimuth cycle on $V$ coincides with $\rho:V\to V$.  The sum of the
+terms in the formula defining the perimeter is the sum of the
+azimuth angles in the azimuth cycle.  The sum is $2\pi$ by
+Lemma~\ref{lemma:2pi-sum}.
+
+
+\claim{If the nonreflexive local fan is lunar, then its perimeter is
+$\op{per}(V,E,F) =2\pi$.}  Indeed, by Lemma~\ref{lemma:lunar}, the
+set $V$ is contained in the union of two half-planes.  The perimeter
+is the sum of arcs in a half-circle in the first half-plane plus the
+sum of arcs in a half-circle in the second half-plane. This sum is
+$2\pi$.
+
+Finally, assume that the nonreflexive local fan is generic.  Suppose for a
+contradiction that the lemma is false.  Consider all counterexamples
+that minimize the cardinality of $V$.  
+%Among all such
+%counterexamples, pick a counterexample with the smallest number of
+%darts $x\in F$ such that $\op{azim}(x) = \pi$.
+
+A nonreflexive local fan $(V,E,F)$ is determined by $V$ and the cyclic
+permutation $\rho:V\to V$: $E=\{\{\v,\rho \v\}\mid \v\in V\}$ and $F
+= \{(\v,\rho \v)\mid \v\in V\}$.
+
+In such a counterexample, if there is any flat dart $x=(\v,\w)\in F$,
+then there is a new nonreflexive local fan $(V',E',F')$ with $V' =
+V\setminus\{\v\}$ and $\rho':V'\to V'$ given by
+\[ 
+\rho'(\u) = \begin{cases}
+\rho(\u), & \text{if } \rho(\u)\ne \v,\\
+\rho(\v), & \text{if }\rho(\u) = \v.\\
+\end{cases}
+\] 
+This is a nonreflexive local fan with the same perimeter, contrary to the presumed
+minimality of the counterexample.  Thus, in the minimal counterexample
+$\op{azim}(x) <\pi$ for all $x\in F$.
+
+If $\card(V) <3$, then the nonreflexive local fan is circular or lunar.  The
+circular and lunar cases have 
+already been treated.  If $\card(V)=3$, then $V=\{\v_1,\v_2,\v_3\}$.
+By the triangle inequality, $\arc_V(\orz,\{\v_2,\v_3\}) \le
+\arc_V(\orz,\{\v_2,-\v_1\})+\arc_V(\orz,\{-\v_1,\v_3\})$.  Thus,
+\begin{align*}
+  \op{per} &=\arc_V(\orz,\{\v_1,\v_2\}) 
+  + \arc_V(\orz,\{\v_2,\v_3\}) 
+  + \arc_V(\orz,\{\v_1,\v_3\})\\
+  &\le(\arc_V(\orz,\{\v_1,\v_2\})+\arc(\orz,\{\v_2,-\v_1\}))
+  \\&\qquad\qquad+(\arc_V(\orz,\{\v_1,\v_3\})
++\arc_V(\orz,\{-\v_1,\v_3\})) \\
+  &= \pi+\pi.
+\end{align*}
+
+Now assume that $\card(V)\ge 4$.  Select $\v\in V$.  Consider a
+deformation of the nonreflexive local fan $\varphi:V\times I \to \ring{R}^3$ that
+fixes $V\setminus\{\v\}$ and moves $\v$:
+\[ 
+\varphi(\v,t) = \cos(t) \v - \sin(t) \rho \v,\quad
+ t \in I=\leftclosed0,\frac{\pi}{2}\rightclosed.
+\] 
+By the spherical triangle inequality, this deformation increases in the
+perimeter.  For sufficiently small $t$, it remains a generic nonreflexive local fan
+(Lemma~\ref{lemma:fan-open}).  For sufficiently small $t$, the
+minimality gives $\angle(\varphi(\u,t))<\pi$.  Eventually, for some
+smallest $t=t_0$, the deformed value is no longer a generic nonreflexive local fan.
+% or for some $\u\in V$, $\angle(\varphi(\u,t_0))=\pi$.  In the latter
+% case, the minimality condition fails, and the result follows.
+
+Note that at $t=\pi/2$, $\rho\v,-\rho\v\in V(t)$, which violates the
+genericity condition.  This gives an upper bound on the time $t_0$ of
+``first failure.''  Let $L$ be the line of intersection of two planes
+through the origin:
+\[ 
+L= \op{aff}\{\orz,\v,\rho\v\}
+\cap\op{aff}\{\orz,\rho^{-1}\v,\rho^{-2}\v\}.
+\] 
+These two planes are not equal by the nonflatness at $\v$ and
+Lemma~\ref{lemma:A}.
+
+\claim{The line $L$ meets the segment
+  $\op{aff}^0_+(\emptyset,\{\v,-\rho\v\})$.}  Otherwise, it meets
+$\op{conv}\{\v,\rho\v\}$.  The points $\v$ and $\rho\v$ lie in distinct
+half-spaces bounded by $\op{aff}\{\orz,\rho^{-1}\v,\rho^{-2}\v\}$.  By
+the nonflatness conditions, they even lie in different open
+half-spaces.  Since $\bWdart(F,\rho^{-1}\v)$ is contained in one of
+the two half-spaces, the condition $\v,\rho\v\in
+\bWdart(F,\rho^{-1}\v)$ fails, and $(V,E,F)$ is not a nonreflexive local
+fan.  This contradiction establishes the claim.
+
+\claim{The time of $t_0$ of first failure satisfies $t_0 \le t_1
+  <\pi/2$, where $t_1$ is the first time at which $\varphi(\v,t)$
+  meets $L$.}  Indeed, by the previous claim, $t_1 <\pi/2$.  Also, at
+time $t_1$, the set $\{\orz,\varphi(\v,t_1),\rho^{-1}\v,\rho^{-2}\v\}$
+is coplanar, so that the dart of $F$ at $\rho^{-1}$ is flat, which is
+contrary to the established flatness property.  This gives the claim.
+
+\claim{The \case{nonparallel} property holds at $t=t_0$}.  Indeed, it
+is enough to check nonparallelism when one of the points is
+$\varphi(\v,t_0)$ and the other is $\rho\v$ or $\rho^{-1}\v$.  Begin
+with $\rho^{-1}\v$.  If the set $\{\orz,\rho^{-1}\v,\varphi(\v,t)\}$
+is collinear, then that line is contained in $L$, which is impossible
+since $\rho^{-1}\v\not\in \op{aff}\{\orz,\v,\rho\v\}$.  Thus,
+$\rho^{-1}\v$ and $\varphi(\v,t)$ are not parallel.  Also $\pi/2 >
+t_0$ implies that $\varphi(\v,t_0)$ and $\rho\v$ are not
+parallel. This gives nonparallelism.
+
+\claim{The \case{intersection} property holds.}  If $\ee\subset V$,
+write $\ee(t) = \{\varphi(\u,t) \mid \u\in \ee\}$.  Let $W
+=W(\orz,\v,\rho\v,\rho^{-1}\v)$. The verification of the intersection
+property is based on the following facts (when $t>0$):
+\begin{enumerate}\wasitemize  
+\item If $\v\not\in \ee$, then $C(\ee(t))=C(\ee)\subset W$.
+\item $C^0\{\v(t)\} \cap W = \emptyset$.
+\item $C^0\{\v(t),\rho^{-1}\v\}\cap W = \emptyset$.
+\item $C\{\v(t),\rho\v\}\cap W = C\{\v,\rho\v\}.$
+\item $C\{\v(t),\rho\v\}\cap C\{\v(t),\rho^{-1}\v\} = C\{\v(t)\}$.
+\end{enumerate}\wasitemize 
+
+\claim{At time $t=t_0$, the deformed value is a nonreflexive local fan.}
+Otherwise, if the object fails to be a nonreflexive local fan at time
+$t=t_0$, then the \case{nonparallel} property, \case{intersection}
+property, or the \case{dihedral} property fails.  The first two
+properties have already been checked, so that the deformed value must
+be a fan.  Furthermore, the conditions for a fan to be nonreflexive local
+are closed conditions, so they must also hold.
+
+In summary, at $t=t_0$, the deformed fan is nonreflexive local but not
+generic.  The perimeter bound follows from circular and lunar cases.
+\end{proof}
+
+Here is a second proof of the same lemma.  It is conceptually much
+simpler but possibly more difficult to formalize.  The proof is based
+on polar polygons (a generalization of polar triangles to spherical
+polygons).
+
+\begin{proof} A fan does not have any faces of cardinality less than
+three.  Every blade of the fan has radian measure less than $\pi$.
+\indy{Index}{polygon!polar}%
+
+Consider the case of a spherical triangle with edges $a_i$
+and polar triangle with angles $\beta_i$. Then $\beta_i=\pi-a_i$.
+The perimeter is 
+\[ a_1+a_2+a_3 = 2\pi - (\beta_1 -\beta_2 -
+\beta_3-\pi)= 2\pi-\op{sol} < 2\pi\]  because the
+solid angle $\op{sol}$ of the polar triangle is always strictly
+positive.  \indy{Index}{triangle!spherical}%
+
+Similarly, if the edges of the spherical polygon are
+$a_i$, then the angles of the polar polygon are $\beta_i = \pi-a_i$.
+The perimeter is
+\[ 
+a_1+\cdots+a_n  = 2\pi- \op{sol}< 2\pi,
+\] 
+where $\op{sol} = 2\pi-\sum a_i$ is the solid angle of the polar polygon.
+%~\cite[\p.261]{williamson:2008}.
+\indy{Notation}{solid@$\sol$ (solid angle)}%
+\end{proof}
+
+
+\section{Special Fan}\label{sec:weight}  
+
+Our aim becomes single-minded throughout the rest of the chapter; we
+wish to give a proof of the main estimate (Lemma~\ref{lemma:empty-d}).
+This,  the longest proof in the book,  requires substantial
+preparation.  We  assume the existence of a counterexample to the
+main estimate.  Assuming the existence of some counterexample, a
+compactness argument gives the existence of a minimal counterexample.
+The properties of minimal counterexamples are developed in a long
+series of lemmas.  Eventually, enough properties of a minimal
+counterexample are established to conclude that it cannot exist.
+
+Although the main estimate is all that is needed for the text part of
+the proof of the Kepler conjecture, the linear programming part of the
+proof requires two other estimates that are similar in nature to the
+main estimate.  These secondary estimates will be given at the end of the chapter.
+
+%To give a uniform proof of the main estimate and
+%secondary estimates, we collect the parameters that are estimate
+%specific into a \newterm{profile}.  The first basic
+%profile contains the parameters that are relevant for the main
+%estimate.
+
+\subsection{definition}
+
+This subsection gives the definitions that are needed to state the
+main estimate.
+
+\begin{definition}[d]\guid{EFWASJQ}\label{def:d}
+\[
+d(r,s) = \begin{cases}
+0.103 (2-s) + 0.2759 (r+2s-4), & r + 2s > 3,\\
+0, & r + 2s \le 3.
+\end{cases}
+\]
+\end{definition}
+%d(3,0)=0, d(4,0)= 0.206; d(5,0)= 0.4819,   .7578
+\indy{Notation}{d (lower bound for $\tau$)}
+
+
+\begin{definition}[special~fan,~$\hm$]\guid{FIJJSLP}
+Let $\hm = 1.26$.
+A \newterm{special fan} is a tuple $(V,E,F,S)$, where
+\begin{enumerate}
+\item \case{packing} $V$ is a packing.  That is, for every $\v,\w\in
+V$, if $\norm{\v}{\w}<2$, then $\v=\w$.
+\item \case{annulus} $V\subset \BB$.
+\item \case{local~fan} $(V,E,F)$ is a nonreflexive local fan (Definition~\ref{def:convex-local}).
+\item \case{subset} $S\subset E$.
+\item \case{s~norm} If $\{\v,\w\}\in S$, then $\norm{\v}{\w}=2\hm$.
+\item \case{e~norm} If $\{\v,\w\}\in E\setminus S$, then $\norm{\v}{\w}\le 2\hm$.
+\item \case{diagonal} For all distinct elements $\v,\w\in V$, if
+$\{\v,\w\}\not\in E$, then \[ \norm{\v}{\w}\ge
+2\hm.\] 
+\item \case{card} %$k=\card(F)$,
+Let      $s=\card(S)$ and $r=\card(E) - s = \card(F)-s$.  Then
+\[ 0\le s \le 3,\textand 3-s \le r \le 6 -
+2s.\] 
+\end{enumerate}
+The constants $r$ and $s$ are called the \newterm{parameters} of the special fan.
+\end{definition}
+\indy{Index}{special fan}
+\indy{Index}{parameters (of a special fan)}
+\indy{Notation}{r@$r$ (special fan parameter)}
+\indy{Notation}{s@$s$ (special fan parameter)}
+
+
+
+\begin{definition}[$\hm$,~$\tau$,~$\dih_i$]\guid{CUFCNHB}\label{def:tau}
+Let $(V,E,F)$ be a nonreflexive local fan.  Set $\hm = 1.26$.  Set
+\[ 
+  \tau(V,E,F) =\sum_{x\in F} \op{azim}(x)\left(1 + \left(\dfrac{\sol_0}{\pi}  \right)
+    \dfrac{\normo{\nd(x)}-2}{2\hm-2}\right) 
++ \left(\pi+{\sol_0}\right) (2- k(F)),
+\] 
+where $\sol_0=3\arccos(1/3)-\pi\approx0.551$ is the solid angle of a
+spherical equilateral triangle of side $\pi/3$, and $k(F)$ is the
+cardinality of $F$.  The function $\tau$ is extended to special fans by
+disregarding $S$:
+\[ 
+\tau(V,E,F,S) = \tau(V,E,F).
+\] 
+Let 
+\[ 
+  \tau_{tri}(y_1,y_2,y_3,y_4,y_5,y_6) =
+  \sum_{i=1}^3 \dih_i(y_1,\ldots,y_6)
+\left(1 + \left(\dfrac{\sol_0}{\pi}  \right)\dfrac{y_i -2}{2\hm-2}\right) 
+- \left(\pi+{\sol_0}\right),
+\] 
+where
+\begin{align}\label{eqn:dihi}
+\dih_1(y_1,y_2,y_3,y_4,y_5,y_6) &= \dih(y_1,y_2,y_3,y_4,y_5,y_6),\notag\\
+\dih_2(y_1,y_2,y_3,y_4,y_5,y_6) &= \dih(y_2,y_3,y_1,y_5,y_6,y_4),\textand\notag \\
+\dih_3(y_1,y_2,y_3,y_4,y_5,y_6) &= \dih(y_3,y_1,y_2,y_6,y_4,y_5).
+\end{align}
+\indy{Notation}{h0@$\hm$}
+\indy{Notation}{zzt@$\tau$}
+\indy{Notation}{sol@$\sol_0$}
+\indy{Notation}{dih@$\dih_i$}
+\end{definition}
+
+
+
+\subsection{compactness}
+
+This subsection continues with preparations for the main estimate.
+The proof of the main estimate is a proof by contradiction. Assuming a
+counterexample exists, compactness results are used to prove the
+existence of a minimal counterexample.  This subsection prepares for
+the proof of the main estimate by proving a compactness result.
+
+Let 
+\begin{align*}
+V(\p) &= \{\p_{i}\mid i=0,\ldots,k-1\},\\
+E(\p) &= \{\{\p_{i},\p_{i+1}\}\mid i=0,\ldots,k-1\},\\
+F(\p) &= \{(\p_{i},\p_{i+1}) \mid i=0,\ldots,k-1\},\\
+\end{align*}
+where $\p:\{0,\ldots,k-1\}\to \ring{R}^3$ is any function, and $\p_k =
+\p_0$.  (That is, for purposes of indexing, identify
+$\{0,\ldots,k-1\}$ with the cyclic group $Z_k$.)  If
+$I\subset\{0,\ldots,k-1\}$, then set
+\[ S(\p,I) = \{(\p_i ,\p_{i+1}) \mid i\in
+I\}.\] 
+
+\begin{definition}[fan~datum]\guid{PJWMYDB}
+ Let $k\ge3$ and $I\subset
+\{0,\ldots,k-1\}$.  A fan datum of shape $(k,I)$ is a function
+$\p:\{0,\ldots,k-1\}\to \BB$ such that
+\begin{enumerate}\wasitemize 
+\item \case{packing} For every $i,j$, if $\norm{\p_i}{\p_j}<2$, then
+$i=j$.
+\item \case{i~norm} If $i\in I$, then $\norm{\p_i}{\p_{i+1}}=2\hm$.
+\item \case{e~norm} For all $i$, $\norm{\p_i}{\p_{i+1}} \le 2\hm$.
+\item \case{diagonal}  $\norm{\p_i}{\p_j} \ge 2\hm$ when $|i-j|>1$.
+\item \case{card}  Let $s=\card(I)$ and $r=k-s$.  Then 
+\[ 0\le s \le 3,\textand 3-s \le r \le 6
+- 2s.\] 
+\item \case{angle} $\op{azim}(\orz,\p_i,\p_{i+1},\p_{i-1})\le \pi$ for
+all $i$.
+\item \case{wedge} $\p_j\in W(\orz,\p_i,\p_{i+1},\p_{i-1})$ for all $i,j$.
+\end{enumerate}\wasitemize 
+\end{definition}
+
+
+Let
+\[
+\label{eqn:fan-edge}
+E_{std}= \{\{\v,\w\}\subset V
+  \mid 0 < \norm{\v}{\w}\le 2\hm \},
+\]
+
+
+The proof of the following lemma is deferred until Lemma~\ref{lemma:std-fan}.
+
+\begin{lemma*}\label{deferred:std-fan}
+Let $V\subset \BB$ be a packing.  
+Then $(V,E_{std})$ is a fan.
+\end{lemma*}
+
+
+\begin{lemma}[]\guid{VYNCGCO}\rating{150}
+Assume the deferred result~\ref{deferred:std-fan}.
+If $\p$ is a fan datum of shape $(k,I)$, then
+\[ 
+(V(\p),E(\p),F(\p),S(\p,I))
+\] 
+is a special fan.  Moreover, every special fan is equal to
+\[ 
+(V(\p),E(\p),F(\p),S(\p,I))
+\] 
+for some fan datum $\p$ of some shape $(k,I)$.
+\end{lemma}
+
+\begin{proof}
+\claim{We claim that every special fan $(V,E,F,S)$ is equal to
+$(V(\p),E(\p),F(\p),S(\p,I))$ for some fan datum $\p$ of some
+shape $(k,I)$.}  Indeed, let $k=\card(F)$.  Fix any element $\u\in V$ and
+set $\p_i = \rho^i \u$.  Let $I = \{i\mid (\p_i,\p_{i+1}) \in S\}$.
+Clearly, $(V,E,F,S)=(V(\p),E(\p),F(\p),S(\p,I))$, and $\p$ is a fan
+datum.
+
+Let $\p$ be any fan datum of shape $(k,I)$.  The pair
+$(V(\p),E(\p))$
+is a fan by Lemmas~\ref{lemma:std-fan} and \ref{lemma:subset-fan}.
+
+
+\claim{$(V(\p),E(\p),F(\p))$ is a nonreflexive local fan.} The properties
+\case{wedge} and \case{angle} have been built into the definition of a
+fan datum.  The azimuth cycle $\sigma(\p_i)$ on $E(\p_i) =
+\{\p_{i+1},\p_{i-1}\}$ interchanges $\p_{i+1}$ with $\p_{i-1}$.  From
+this fact, the combinatorial properties \case{face} and
+\case{dihedral} are easily determined with the help of
+Lemma~\ref{lemma:dih-iso}.
+%The bijection from the disjoint
+%union of two copies of $Z_k$ onto the set of darts is given by the
+%pair of maps
+%\[ 
+%i\mapsto (\p_i,\p_{i+1}),\quad i\mapsto (\p_{i+1},\p_i).
+%\] 
+%This bijection extends to an isomorphism of hypermap $\op{Dih}_{2k}$ onto
+%$\op{hyp}(V(\p),E(\p))$.
+
+\claim{$(V(\p),E(\p),F(\p),S(\p,I))$ is a special fan.} The properties
+of a special fan all follow trivially from the corresponding
+properties of a fan datum.
+\end{proof}
+
+The set of fan data of shape $(k,I)$ is a subspace of the compact metric
+space $\BB^k$.
+
+
+\begin{lemma}[compactness of fans]\guid{KFIIPLO}\rating{250}\label{lemma:compact-fan}
+The space of fan data of shape $(k,I)$ is a compact metric space.
+Moreover,
+\[ 
+\p \mapsto \tau(V(\p),E(\p),F(\p))
+\] 
+is a continuous function on the space of fan data of shape $(k,I)$.
+\end{lemma}
+
+\begin{proof} $\BB^k$ is a compact metric space and the constraints
+are all closed conditions.
+
+The function $\tau$ is a polynomial in $\normo{\p_i}$ and
+$\op{azim}(\orz,\p_i,\p_{i+1},\p_{i-1})$.  The norm and azimuth
+angle are both continuous functions of $\p$.
+\end{proof}
+
+
+
+
+\subsection{internal blades}
+
+This subsection continues with preparations for the main estimate.
+The proof of the main estimate is a proof by contradiction.  We assign
+a natural number invariant to each special fan.  We examine a minimal
+counterexample in the sense of having the smallest possible invariant.
+To use the minimality in the proof of the main estimate, we need to
+relate the minimal counterexample to a special fan that has an even
+smaller numerical invariant.  Adding one more blade to change the
+fan of the minimal counterexample accomplishes this.  This subsection
+describes how to add a blade to a fan.
+
+
+
+\begin{lemma}[]\guid{PGSQVBL}\oldrating{80}\rating{0}
+\formalauthor{Nguyen Quang Truong} 
+Let $(V,E,F)$ be a nonreflexive local fan.
+If $\v,\w\in V$ are nonparallel, then $C\{\v,\w\} \subset
+\bWdart(x)$ for any dart $x\in F$.
+\end{lemma}
+\indy{Index}{fan!local}%
+
+\begin{proof} This is an elementary consequence of
+the cone shape of $\bWdart(x)$,  the condition that $V\subset
+\bWdart(x)$, and definitions.
+\end{proof}
+
+
+\begin{lemma}[internal
+blades]\guid{YOLCBTG}\rating{700} \label{lemma:internal}
+Let $(V,E,F)$ be a nonreflexive local fan.  Let $\v,\w\in V$ be nonparallel.
+Suppose that there exists $\v',\w'$ such that
+$\angle(\v'),\angle(\w')<\pi$, where $\v,\v',\w,\w'$ are four
+distinct elements of $V$ that appear in cyclic order.  Then
+$C^0\{\v,\w\}\subset \Wdart(x)$ for all $x\in F$.
+% Pick a dart $x=(\v_0,\v_1)\in V$.  Set $\v_j = \rho^j \v_0$.
+% Assume that there are four darts $(y_1,y_2,y_3,y_4)$, $y_j =
+% x_{j(j)}$, with $0\le j(1) < j(2) < j(3) < i(4)\le k-1$ such that
+% $\op{azim}(y_j) < \pi$ for $j=2,4$.  Then
+% $C^0\{\v_{i(1)},\v_{i(3)}\} \subset \Wdart(x)$ for all $x\in F$.
+\end{lemma}
+\indy{Index}{blade!internal}%
+\indy{Index}{internal blade}%
+
+To say that a sequence $\v_i$ of elements is in \newterm{cyclic
+order} means that $\v_i = \rho^{j (i)}\v_0$ for some increasing
+function $j$ with range $\{0,\ldots,k-1\}$.
+
+\begin{proof} Abbreviate $C^0 = C^0\{\v,\w\}$.  The first case to
+consider is $\nd(x)=\v$.  For all $\p\in C^0\cap \bWdart(x)$,
+\[ 
+  0 \le \op{azim}(\orz,\v,\rho \v,\p) 
+\le \op{azim}(\orz,\v,\rho \v,\rho^{-1} \v).
+\]   
+These inequalities are in fact strict.  If, for example $0 =
+\op{azim}(\orz,\v,\rho \v,\p)$, then the set $\{\orz,\v,\rho \v,\w\}$
+is coplanar.  Repeated application of Lemma~\ref{lemma:A} gives
+\[ 
+\angle(\v) = \angle(\rho \v) = \cdots = \angle(\rho^{-1} \w) = \pi,
+\] 
+which is contrary to $\angle(\v') = \pi$.  The strict inequalities
+imply $\p\in \Wdart(x)$, as desired.  The case $\nd(x)=\w$ is similar.
+
+Now assume that $\u=\nd(x)\ne \v,\w$.  By Lemma~\ref{lemma:A}, we may
+assume that $\{\orz,\u,\v,\w\}$ is not coplanar.  (Otherwise, the
+contradiction $\angle(\v')=\pi$ or $\angle(\w')=\pi$ is reached.) Then
+\[ 
+  \op{aff}\{\orz,\u,\v\}\cap C^0 \subset \op{aff}\{\orz,\u,\v\}
+  \cap \op{aff}\{\orz,\v,\w\} \cap C^0 
+= \op{aff}\{\orz,\v\} \cap C^0 = \emptyset.
+\] 
+Thus, $C^0$ is disjoint from $\op{aff}\{\orz,\u,\v\}$ and is also
+disjoint from $\op{aff}\{\orz,\u,\w\}$.
+
+We have the following facts:
+\[ 
+\v,\w\in W(\orz,\u,\v,\w),\quad C^0\{\v,\w\} \subset W(\orz,\u,\v,\w).
+\] 
+Also,
+\begin{align*}
+  C^0 &= C^0\cap W(\orz,\u,\v,\w) \\
+  &\subset C^0 \cap (W^0(\orz,\u,\v,\w) 
+\cup \op{aff}\{\orz,\u,\v\} \cup \op{aff}\{\orz,\u,\w\})\\
+  &\subset C^0 \cap W^0(\orz,\u,\v,\w)\\
+  &\subset \Wdart(x).
+  % \v,\w\in \barW &= \{\p \mid 0 
+  %\le \op{azim}(\orz,\u,\v,\p) \le \op{azim}(\orz,\u,\v,\w)\}.\\
+  % C^0 &\subset \barW\\
+  % \bar W &\subset W(\orz,\u,\v,\w) 
+  %\cup \op{aff}\{\orz,\u,\v\} \cup \op{aff}\{\orz,\u,\w\}\\
+  % W(\orz,\u,\v,\w) & \subset \Wdart(x),
+\end{align*}
+%\[ 
+%\Wdart(x) = \bWdart(x)
+%\setminus (\op{aff}\{\orz,\u,\v\}\cup\op{aff}\{\orz,\u,\w\}).
+%\] 
+\end{proof}
+
+\begin{lemma}[]\guid{TECOXBM}\rating{180}\label{lemma:2hm-slice}
+Let $(V,E,F,S)$ be a special fan.  Let $\v,\w\in V$ be
+elements such that $\norm{\v}{\w}=2\hm$ and such that
+$\{\v,\w\}\not\in E$.  Then $\v$ and $\w$ are nonparallel, and
+$C^0\{\v,\w\}\subset \Wdart(x)$ for all $x\in F$.
+\end{lemma}
+
+\begin{proof} By Remark~\ref{remark:fan-verify}, nonparallelism follows
+from the strict triangle inequality
+\[ 
+\norm{\v}{\w} \le 2\hm < 2 + 2 \le \normo{\v} + \normo{\w}.
+\] 
+Assume for a contradiction that the conclusion of the lemma is false.
+Then by Lemma~\ref{lemma:internal}, all the intermediate internal
+angles between $\v$ and $\w$ are equal to $\pi$.  As a result, (after
+interchanging $\v$ and $\w$ if necessary), the set
+$\{\orz,\v,\rho\v,\rho^2\v,\ldots,\rho^r\v\}$ is planar, and
+\[ 
+  \arc_V(\orz,\{\v,\rho^r\v\}) 
+= \sum_{i=0}^{r-1} \arc_V(\orz,\{\rho^i\v,\rho^{i+1}\v\}),
+\] 
+where $\rho^r \v = \w$ and $1 < r \le k-1$.
+However, the left-hand side is at most
+\[ 
+\arc(2,2,2\hm) < 1.5,
+\] 
+while the right-hand side is at least
+\[ 
+2\arc(2\hm,2\hm,2) > 1.5.
+\] 
+This gives the desired contradiction.
+\end{proof}
+
+\subsection{slicing}
+
+We stop to recall the current context of what we are trying to accomplish.
+We are in the midst of preparations for the main estimate.
+The proof of the main estimate is a proof by contradiction.  We 
+assign a natural number invariant to each special fan.  We 
+examine a minimal counterexample in the sense of having the smallest
+possible invariant.  To use the minimality in the proof of the main
+estimate, we need to relate the minimal counterexample to a special
+fan that has an even smaller numerical invariant. This is accomplished
+by changing the fan of the minimal counterexample by adding one more
+blade.  This has the effect of slicing the fan in two.  This
+subsection studies how the parameters of the minimal counterexample
+relate to the parameters of the two fans produced by slicing.
+
+\begin{definition}[slice]\guid{CNAQAAA}
+ Let $(V,E,F)$ be a nonreflexive local fan.  Assume that
+$\v,\w\in V$ are nonparallel and that $(V,E')=(V,E\cup
+\{\{\v,\w\}\})$ is a fan.  Let $F'$ be the face of $\op{hyp}(V,E')$
+containing the dart $(\w,\v)$.  Write
+\[ (V[\v,\w],E[\v,\w],F[\v,\w])\] 
+for the localization of $(V,E')$ along $F'$, where
+\begin{align*}
+  V[\v,\w] &= \{\v,\rho \v,\rho^2 \v,\ldots,\w\},\\
+  E[\v,\w] &= \{\{\v,\rho \v\},\ldots,\{\rho^{-1}\w,\w\},\{\w,\v\}\},\\
+  F[\v,\w] &= \{(\v,\rho \v),(\rho \v,\rho^2 \v),
+ \ldots,(\rho^{-1}\w,\w),(\w,\v)\}.
+\end{align*}
+The triple $(V[\v,\w],E[\v,\w],F[\v,\w])$ is called the
+\newterm{slice\/} of $(V,E,F)$ along $(\v,\w)$.
+\end{definition}
+\indy{Index}{fan!local}%
+\indy{Index}{slice}
+\indy{Notation}{1@$\wild[\v,\w]$ (slicing a fan)}
+
+To allow for more than one nonreflexive local fan $(V,E,F)$, we  extend
+the notation, writing $\angle(H,\v)$ for $\angle(\v)$ in the hypermap
+$H$.  Similarly, we write $\Wdart(H,\v)$ for $\Wdart(x)$ and so
+forth.  \indy{Notation}{azimhv@$\op{azim}(H,\v)$}%
+\indy{Notation}{wdart@$\Wdart$}%
+
+
+\begin{lemma}[slicing]\guid{EJRCFJD}\rating{400}\label{lemma:slice} Let
+$(V,E,F)$ be a nonreflexive local fan with hypermap $H$.  Pick $\v,\w\in V$. For
+each $\u\in \{\v,\w\}$, assume that $\u$ is not parallel with  any
+element of $V\setminus\{\u\}$.  Assume that $C^0\{\v,\w\}\subset
+\Wdart(x)$ for all darts $x\in F$.  Then
+\begin{enumerate}\wasitemize 
+\item $(V[\v,\w],E[\v,\w],F[\v,\w])$ and
+$(V[\w,\v],E[\w,\v],F[\w,\v])$ are nonreflexive local fans.
+\item Let $H[\v,\w]$ and $H[\w,\v]$ be the hypermaps of these two
+  nonreflexive local fans, respectively.  Let $g:V\to\ring{R}$ be any
+  function.  Then
+\[ 
+  \sum_{\v\in V} g(\v)\angle(H,\v) 
+  = \sum_{\v\in V[\v,\w]}g(\v)\angle(H[\v,\w],\v) 
+  + \sum_{\v\in V[\w,\v]}g(\v)\angle(H[\w,\v],\v).
+\] 
+\end{enumerate}\wasitemize 
+\end{lemma}
+\indy{Index}{slice}%
+\indy{Index}{fan!local}%
+
+\begin{proof} 
+\claim{$(V,E')$ is a fan, where $E' = E\cup \{\{\v,\w\}\}$.}
+Indeed, except for the intersection property, all of the properties
+of a fan follow trivially from the fact that $(V,E)$ is a fan and
+that $\v$ and $\w$ are nonparallel.  (Note the similarity with
+Lemma~\ref{lemma:add-edge}.)  The intersection property also is
+trivial except in the case $\ee=\{\v,\w\}$ and $\ee'\setminus \ee\ne
+\emptyset$.  Pick $\u\in \ee'\setminus\ee$.  It follows from the
+node partition of Lemma~\ref{lemma:disjoint} that
+\begin{align*}
+C(\ee) \cap C(\ee') &= (C(\v) \cap C(\ee')) \cup (C(\w)\cap C(\ee')) \\
+&= C(\{\v\}\cap \ee') \cup C(\{\w\}\cap \ee') \\
+&= C(\{\v,\w\}\cap \ee').
+\end{align*}
+The intersection property thus holds and $(V,E')$ is a fan.
+
+It follows by Lemma~\ref{lemma:localization} that
+$(V[\v,\w],E[\v,\w],F[\v,\w])$ is a local fan.
+
+The second conclusion of the lemma follows from the following identities.
+If $\u\ne \v,\w$ with $\u\in V[\v,\w]$, then $\u\not\in V[\w,\v]$ and 
+\begin{equation}
+\Wdart(H,\u)=\Wdart(H[\v,\w],\u),\quad \angle(H,\u) = \angle(H[\v,\w],\u).
+\end{equation}
+If $\u\in\{\v,\w\}$, then 
+$\angle(H,\u)=\angle(H[\v,\w],\u) +\angle(H[\w,\v],\u)$.
+
+Finally, it remains to be shown that the local fan is nonreflexive.
+%Lemma~\ref{lemma:localization} already shows that the hypermap is
+%isomorphic to $\op{Dih}_{2k}$. and that $F[\v,\w]$ can be identified with a
+%face.  
+The conclusion $V[\v,\w]\subset \bWdart(x)$ follows from the
+fact that the angles $\beta(i)$ are increasing in
+Lemma~\ref{lemma:monotone}.
+\end{proof}
+
+
+
+The slicing procedure can also be applied to a special fan $(V,E,F,S)$.
+Abbreviate the slices as
+\begin{align*}
+(V',E',F')&=(V[\v,\w],E[\v,\w],F[\v,\w])\text{ \ and}\\
+(V'',E'',F'')&= (V[\w,\v],E[\w,\v],F[\w,\v]).
+\end{align*}
+Both edge sets $E'$ and $E''$ contain $\{\v,\w\}$.  The sets $G'$ and
+$G''$ can be defined as
+\begin{align*}
+G' &= \{\{\v,\w\}\} \cup (E'\cap S)\text{ \ and}\\
+G'' &= \{\{\v,\w\}\} \cup (E''\cap S).\\
+\end{align*} 
+
+Let $(r',s')$ and $(r'',s'')$ be the parameters for $(V',E',F',G')$
+and $(V'',E'',F'',G'')$, respectively.  Set $k=r+s$, $k'=r'+s'$, and
+$k''=r''+s''$.
+
+\begin{lemma}[slicing special fans]\guid{IXZYRSY}\rating{500}
+\label{lemma:param-add}  
+Let $(V,E,F,S)$ be a special fan (with parameters $r$ and $s$).  Pick
+distinct elements $\v,\w\in V$ such that $\{\v,\w\}\not\in E$.
+Assume that $\norm{\v}{\w}=2\hm$.  For each $\u\in \{\v,\w\}$,
+also assume that $\u$ is not parallel with any element of 
+$V\setminus\{\u\}$.
+%Assume that $C^0\{\v,\w\}\subset \Wdart(x)$ for all darts $x\in F$. 
+Then $(V',E',F',G')$ and $(V',E',F',G')$ are special fans.  Moreover,
+the parameters satisfy the relations
+\[ 
+k'+k'' = k + 2,\quad s'+s'' = s + 2,\quad r'+r''=r.
+\] 
+Finally,
+\[ 
+\tau(V,E,F)= \tau(V'',E'',F'') +\tau(V',E',F').
+\] 
+\end{lemma}
+
+By interchanging $\v$ and $\w$, the lemma also asserts that
+$(V'',E'',F'',G'')$ is a special fan.
+
+\begin{proof} The proof considers in turn each of the defining properties of a
+  special fan.  By Lemma~\ref{lemma:2hm-slice}, if
+  $\{v,w\}\not\in E$, then $C^0\{v,w\}\subset \Wdart(x)$ for all darts
+  $x\in F$.
+
+The properties \case{packing}, \case{annulus}, \case{diagonal},
+\case{subset}, \case{s~norm}, and \case{e~norm} follow directly from
+definitions and the corresponding properties for $(V,E,F,S)$.  The
+property \case{local~fan} follows from Lemma~\ref{lemma:slice}.
+
+The relations between the constants $k,s,r$ for the various fans
+follows directly from the construction.  For example, there are two
+more darts in $F''\cup F'$ than in $F$.
+
+\claim{Property~\case{card} holds.}  Indeed, recall that each face
+in the hypermap of a fan has at least three darts.  Hence, $3\le k$,
+$3\le k'$, and $3\le k''$.  The sets $G'$ and $G''$ contain
+$\{\v,\w\}$.  Hence, $1\le s'$ and $1\le s''$.  From $0\le r\le 6 -
+2s$, it follows that $s\le 3$.  If $s=3$, then $r=0$ and $k=r+s=3$.
+This means that $F$ is a triangle.  For some ordering of the pair,
+$x=(\v,\w)$ is a dart in $F$.  Hence, $C^0\{\v,\w\} \not\subset
+\Wdart(x)$.  This is contrary to hypothesis.  Therefore, $s\le 2$.
+
+Now for the verifications.
+\[ 0\le s' = s + 2 - s'' \le s+1\le 3.\] 
+\[ 3-s'\le k'-s' = r'.\] 
+\[ k' = k + 2 - k'' \le k-1.\] 
+\[ 
+  r'= k'+s' - 2 s' \le (k-1) + (s+1) - 2s' 
+  =k+s - 2s' = r + 2s -2s' \le 6 - 2s'.
+\] 
+This completes the proof of property~\case{card}.
+
+The additivity of $\tau$ follows directly from the azimuth angle
+estimates in Lemma~\ref{lemma:slice}.
+\end{proof}
+
+
+\section{Minimality}
+
+%\subsection{minimality}
+
+This section continues to prepare for the proof of the main estimate.
+The main estimate has the form
+\[
+\tau(V,E,F) \ge d(r,s)
+\]
+for all special fans $(V,E,F,S)$ with parameters $(r,s)$.  The proof
+is by contradiction; we assume the existence of a counterexample.
+Rather than analyze a generic counterexample, it is more convenient to
+assume that a counterexample has various minimality properties.  This
+section defines minimality precisely and develops the properties of a
+minimal counterexample.  Eventually we show that a minimal
+counterexample does not exist (Lemma~\ref{lemma:min-empty}).  This
+gives the proof of main estimate (Lemma~\ref{lemma:empty-d}).
+
+
+This definition captures the properties of a minimal counterexample.
+This definition is transitory in the sense that eventually we show
+that minimal fans do not exist.
+
+\begin{definition}[minimal~fan,~$k_{min}$,~$\tau_{min}$]\guid{DJISMZB}
+Let $k_{min}$ be the minimum of $r+s$ over
+all special fans $(V,E,F,S)$ such that 
+\begin{equation}\label{eqn:kmin}
+\tau(V,E,F) < d (r,s),
+\end{equation}
+where $(r,s)$ are the parameters of the special fan.  If no special
+fan exists that satisfies the inequality, then set $k_{min}=0$.  Let
+$\tau_{min}$ be the infimum of $\tau(V,E,F)-d(r,s)$ over all special
+fans $(V,E,F,S)$ with parameters $(r,s)$ that satisfy $r+s=k_{min}$.  If
+no special fans exist with parameters $r+s=k_{min}$, then set
+$\tau_{min}=0$.  Any special fan $(V,E,F,S)$ with parameter
+$r+s=k_{min}$ such that
+\[ 
+\tau_{min}= \tau(V,E,F)-d(r,s)
+\] 
+is a \newterm{minimal} fan.
+\end{definition}
+\indy{Index}{fan!minimal}
+\indy{Index}{minimal fan}
+
+
+\begin{lemma}[]\guid{ADKOXQY}\rating{400}\label{lemma:c-bound}
+There is a constant $c>2\hm$ such that for every minimal fan
+$(V,E,F,S)$ and every distinct $\v,\w\in V$, either $\{\v,\w\}\in E$
+or $\norm{\v}{\w}\ge c$.
+\end{lemma}
+
+\begin{proof} 
+  Pick a sequence of fan data $\p$ such that the associated fan is a
+  minimal fan and such that
+\[ 
+\min_{|i-j|>1} \norm{\p_i}{\p_j}
+\] 
+is tending to the minimal value $c$.  By passing to s subsequence, we
+may assume without loss of generality that every term in the sequence
+has the same shape $(k_{min},I)$ for some $I$.  The sequence then lies
+in a compact metric space.  Passing again to a subsequence, we may
+assume without loss of generality that the sequence converges.  The
+limiting value is a fan datum with an associated minimal fan $(V,E,F,S)$ that
+satisfies
+\[ 
+\norm{\v}{\w}=c
+\] 
+for some $\v,\w\in V$ such that $\{\v,\w\}\not\in E$.
+
+Suppose for a contradiction that $c=2\hm$.  Then by
+Lemma~\ref{lemma:2hm-slice}, $C^0\{\v,\w\}\subset \Wdart(x)$ for all
+$x\in F$.  The fan can be sliced along the $\{\v,\w\}$.  The
+parameters for the new pieces satisfy:
+\[ 
+k' = k+2 - k'' \le k-1.
+\] 
+The function $d$ is additive over slices.  For some constants $d_1$
+and $d_2$,
+\begin{align}\label{eqn:drs}
+d(r,s) &= d_1 (2 - s) + d_2 (r + 2 s-4) \nonumber\\
+&= d_1 (2-s') + d_2 (r'+2 s'-4) + d_1 (2-s'') + d_2 (r''+2s''-4)\nonumber\\
+&= d(r',s') + d(r'',s'').
+\end{align}
+By Lemma~\ref{lemma:param-add}, one of the two resulting fans
+satisfies Inequality~\ref{eqn:kmin}.  This is contrary to the choice
+of $k_{min}$ in the definition of minimality.
+\end{proof}
+
+
+
+
+
+\subsection{genericity}
+
+This subsection continues to prepare for the proof of the main
+estimate.  The method of proof is to show that no minimal
+counterexample can exist.  To that end, we proof various properties of
+minimal fans throughout the section.  This subsection starts out with
+the proof that minimal fans are generic.
+
+\begin{lemma}[generic]\guid{RRAJQBH}\rating{750}\label{lemma:circular-nonmin}
+Every minimal fan is generic.
+\end{lemma}
+
+\begin{proof}
+  By the classification of nonreflexive local fans, it is enough to show
+  that the fan is not circular and not lunar.
+
+\claim{In a minimal fan, $\op{azim}(x)<\pi$ for some $x\in F$.}
+Otherwise, the result follows from the following estimates:
+\begin{align*}
+  \tau(V,E,F) &=\sum_{x\in F} \op{azim}(x)
+  \left(1 + \dfrac{\sol_0}{\pi}  \dfrac{\normo{v}-2}{2\hm-2}\right) 
++ \left(\pi+{\sol_0}\right) (2- k(F))\\
+  &\ge \sum_{x\in F} \pi + \left(\pi+{\sol_0}\right) (2- k(F))\\
+  &= 2\pi + 2\sol_0 - k(F) \sol_0\\
+  &\ge 2\pi - 4\sol_0\\
+  &> 0.7578\\
+  &=0.103 (2) + 0.2759 (2)\\
+  &\ge 0.103 (2-s) + 0.2759 (r+2s-4) \\ 
+  &= d(r,s).
+\end{align*}
+This proves the claim.  In particular, a minimal fan is not circular.
+
+
+Section~\ref{sec:deformation} develops a theory of deformations of
+nonreflexive local fans $(V,E,F)$.  Recall that a deformation is continuous
+function $\varphi:V\times I\to\ring{R}^3$.  A deformation determines
+sets $V(t)$, $E(t)$, $F(t)$, and $S(t)$ for each $t\in I$.
+
+
+\claim{A minimal fan is not lunar.}  Otherwise, suppose for a
+contradiction, that $(V,E,F)$ is lunar, special, and minimal.  Let
+$\v,\w\in V$ be parallel.  By the previous claim, we may assume
+without loss of generality that $\angle(\v)=\angle(\w)<\pi$.
+Example~\ref{example:lunar} describes a deformation of the lunar fan
+$(V,E,F)$ over $I=\leftclosed0,1\rightopen$.  The deformation fixes
+$\normo{\u}$ and is nonincreasing in $\angle(\u(t))$ for $\u\in V$.
+From the defining formula for $\tau$, it follows that the function
+$\tau(V(t),E(t),F(t))$ is a decreasing function of $t$.
+
+\claim{For sufficiently small positive $t$, the deformed value is a
+special fan.}  The deformed value is a nonreflexive local fan for small positive
+$t$ by Lemma~\ref{lemma:fan-open}.  The property~\case{diagonal} of
+special fans holds by Lemma~\ref{lemma:c-bound}.  The other properties
+of a special fan follow immediately from the construction.
+
+However, the function $\tau$ attains its minimum at $(V,E,F)$ and
+hence $\tau(V(t),E(t),F(t))$ cannot be decreasing in $t$.  This
+contradiction proves the claim that a minimal fan is not lunar.
+\end{proof}
+
+\begin{lemma}[]\guid{QAGHDMN}\rating{100}
+Let $(V,E,F)$ be a nonreflexive local fan.  If $V$ is contained in a plane
+through the origin, then $(V,E,F)$ is not generic.
+\end{lemma}
+
+\begin{proof} This proof is left to the reader.
+\end{proof}
+
+\begin{lemma}[]\guid{EAEKYHM}\rating{180}\label{lemma:3-nonflat}
+Every nongeneric nonreflexive local fan $(V,E,F)$ has at least three nonflat
+nodes in $V$.
+\end{lemma}
+
+\begin{proof}
+If there is at most one nonflat nodes $\v\in V$, then there exists
+a plane $A$ through the origin that contains $V$.  This is not
+generic.
+
+If there are exactly two nonflat nodes in $V$, then
+there exist two half-planes through the origin, the union of which contains
+$V$.  The two nonflat points necessarily lie along the intersection
+of the two planes.  They are parallel nodes of a lunar fan.
+This is not generic.
+\end{proof}
+
+\subsection{features}
+
+The aim is to show that the set of minimal fans is empty.  The proof
+is not a simple one that works in a fell swoop.  Instead, we proceed
+indirectly, by proving a long list of features that any minimal fan
+must have.  Each new feature puts a small constraint on the set of
+minimal fans.  By slowly amassing more and more features in a long
+series of lemmas, the set
+gradually becomes heavily constrained until finally it is seen to be
+empty.  The full list of featues is listed in
+Lemma~\ref{lemma:feature}, which is a peculiar result in that it
+asserts the inconsistency of a list of features that are evidently
+inconsistent.    The nonexistence of minimal fans eventually follows
+from this inconsistency.
+
+
+\begin{definition}[extremal,~minimal]\guid{VLEKVIO}
+ Let $(V,E,F,S)$ be a special fan
+and let $\{\v,\w\}\in E$.  The edge $\{\v,\w\}\in E$ is
+\newterm{S-extremal} if $\{\v,\w\}\in S$ or
+\[ 
+\norm{\v}{\w}\in\{2,2\hm\}.
+\] 
+The edge $\{\v,\w\}\in E$ is \newterm{S-minimal} if $\{\v,\w\}\in S$ or
+\[ 
+\norm{\v}{\w}=2.
+\] 
+\end{definition}
+\indy{Index}{extremal ($S$-extremal edge)}
+\indy{Index}{minimal ($S$-minimal edge)}
+
+To lighten the notation in this subsection, we introduce the following
+convention.  Let $(V,E,F,S)$ be a special fan.  If $v\in V$, then we
+introduce the abbreviation $\v_i = \rho^i\v$ for all $i\in\ring{Z}$.
+In particular, $\v_0=\v$, $\v_1=\rho\v$, and so forth.  The next lemma
+names each feature for future reference.   The number following each name
+refers to the lemma that establishes the feature.
+
+\begin{lemma}[feature list]\guid{IDOTAPN}\rating{50}\label{lemma:feature}\label{l:f}
+No special fan $(V,E,F,S)$ has all of the following features:
+\begin{enumerate}\wasitemize 
+\bigskip
+\centerline{\bf{extremality}}
+\smallskip
+\item \case{extreme~edge~\ref{l:ee}} For every $\v\in V$ and every $\w\in E(\v)$, the edge
+$\{\v,\w\}\in E$ is $S$-extremal.
+\item \case{minimal~node~\ref{l:mn}} For every $\v\in V$, either $\normo{\v}=2$
+  or there exists $\w\in E(\v)$ such that $\{\v,\w\}$ is $S$-minimal.
+\item \case{s~minimal~\ref{l:sm}} Either $r+2s = 6$, or every edge of $E$ is $S$-minimal.
+
+%%
+\bigskip\centerline{\bf{general flat node}}\smallskip
+\item \case{flat~exists~\ref{l:fe}} For every $\v\in V$, at least one of $\v_1,\v_2,\v_3,\v_4$ is flat, or  $r+s\le 4$ and
+$\norm{\u}{\w}=2$ for all $\{\u,\w\}\in E$.
+\item \case{no~triple~flat~\ref{l:ntf}} For every $\v\in V$, at least one of $\v_0$, $\v_1$, and $\v_2$
+is not flat.
+\item \case{flat~count~\ref{l:fc}} There are at least three nonflat nodes of $V$.
+
+%%
+\bigskip\centerline{\bf{single flat node}}\smallskip
+\item \case{balance~\ref{l:b}} For every $\v\in V$, if $\v$ is flat and if $\{\u,\v\},\{\w,\v\}\in
+E\setminus S$, then
+\[ 
+\norm{\u}{\v} = \norm{\w}{\v}.
+\] 
+\item \case{minimal~node~flat~\ref{l:mnf}} 
+For every $\{\u,\v\}\in E$, if $\v$ is flat, then $\{\u,\v\}$ is $S$-minimal 
+or $\normo{\v}=2$.
+
+
+%%
+\bigskip\centerline{\bf{adjacent flat nodes}}\smallskip
+\item \case{s~flat~\ref{l:sf}} For every $\v\in V$, if $\v_1$ and $\v_2$ are both flat, then 
+\[ S\cap
+\{\{\v_0,\v_1\},\{\v_1,\v_2\},\{\v_2,\v_3\}\} =
+\emptyset.\] 
+\item \case{flat~middle~\ref{l:fm}} For every $\v\in V$, if $\v_1$ and $\v_2$ are both flat, then
+\[ 
+\norm{\v_1}{\v_2} = 2.
+\] 
+\item \case{flat~extremal~\ref{l:fext}} For every $\v\in V$, if $\v_1$ and $\v_2$
+  are both flat, then either $\v_1$ or $\v_2$ has an extremal norm:
+\[ \normo{\v_1}\in \{2,2\hm\}\quad\text{ or }\quad
+\normo{\v_2}\in \{2,2\hm\}.\] 
+
+
+%%
+\bigskip\centerline{\bf{cardinality}}\smallskip
+\item \case{card~\ref{l:c}} 
+Let      $s=\card(S)$ and $r=\card(E) - s = \card(F)-s$.  Then
+\[ 0\le s \le 3\textand 3-s \le r \le 6 -
+2s.\] 
+
+\item \case{triangle~free~\ref{l:tf}} $\op{card}(F) \ne 3$.
+\item \case{quadrilateral~free~\ref{l:qf}} $\op{card}(F) \ne 4$.
+\item \case{pentagon~free~\ref{l:pf}} $\op{card}(F) \ne 5$.
+\item \case{hexagon~free~\ref{l:hf}} $\op{card}(F) \ne 6$.
+\end{enumerate}\wasitemize 
+\end{lemma}
+
+%from flat exists: 
+%then $r+s\le 4$ and $\norm{\u}{\w}=2$ for all $\{u,w\}\in E$.
+% $r+s=4$. %, and $\norm{\u}{\w}\in\{ 2,2\hm}$ for all $\{\u,\w\}\in E$.
+
+% \item \case{extremal~node} If $\v_0$, $\v_1$, and $\v_2$ are not
+%   flat, then
+%\[ 
+%\normo{\v_1}\in \{2,2\hm\}.
+%\] 
+% \item \case{flat~extremal~node} If $\v_1$ is flat, but none of
+%   $\v_0,\v_2,\v_3$ is flat, then
+%\[ 
+%\normo{\v_1}\in \{2,2\hm\}
+%\quad\text{ or }\quad\normo{\v_2}\in \{2,2\hm\}.
+%\] 
+% \item \case{flat~extremal~node sym} If $\v_2$ is flat, but none of
+%   $\v_0,\v_1,\v_3$ is flat, then
+%\[ 
+%\normo{\v_1}\in \{2,2\hm\}
+%\quad\text{ or }\quad\normo{\v_2}\in \{2,2\hm\}.
+%\] 
+
+
+
+\begin{proof}
+  By \case{card}, $3\le\op{card}(F)\le 6-s\le 6$.  However, by
+  \case{triangle~free}, \case{quadrilateral~free},
+  \case{pentagon~free}, and \case{hexagon~free}, we cannot have
+  $3\le\op{card}(F)\le 6$.
+\end{proof}
+
+
+%\begin{lemma}[]\guid{KDKAGRS}\cutrate{}\label{lemma:min-irred}
+%Every minimal fan $(V,E,F,S)$ is irreducible at every $\v\in V$.
+%\end{lemma}
+
+%The proof appears in the next subsection as a series of small
+%verifications.
+
+%\subsection{features}
+
+Next, to contradict the existence of minimal fans,
+we give a long series of lemmas that show that every minimal fan
+has every feature in the list of Lemma~\ref{lemma:feature}.
+
+If there are $i$ consecutive flat nodes $\v_1,\ldots,\v_i$, then there
+are $i+2$ corresponding nodes that lie in a plane $A$ through the
+origin: $\{\orz,\v_0,\ldots,\v_{i+1}\}\subset A$.
+
+% XX expand
+
+\begin{lemma}[card]\guid{FPITROS}\rating{50}\label{l:c}
+Every minimal fan $(V,E,F,S)$ has the feature \case{card~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof} This holds by the property \case{card} of special fans.
+\end{proof}
+
+
+\begin{lemma}[no~triple~flat]\guid{TESVAFW}\rating{80}\label{l:ntf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{no~triple~flat~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}  Three flat nodes produces a long arc
+\[ 
+  \arc_V(0,\{\v_0,\v_4\}) 
+= \op{per}(V,E,F,\v_0,\v_4) \ge4\arc(2\hm,2\hm,2) > \pi.
+\] 
+An arc this long contains antipodal points of the sphere, which is
+contrary to Lemma~\ref{lemma:circular-nonmin}.
+\end{proof}
+
+\begin{lemma}[flat~count]\guid{GOKZLRP}\rating{40}\label{l:fc}
+Every minimal fan $(V,E,F,S)$ has the feature \case{flat~count~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}  
+This lemma is a consequence of Lemma~\ref{lemma:3-nonflat}.
+\end{proof}
+
+
+
+\begin{lemma}[s~flat]\guid{SDCCMGA}\rating{100}\label{l:sf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{s~flat~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof} Argue by contradiction.  From the constraints on $r$ and
+$s$, if $S\ne\emptyset$, then $s>0$ and $r+s\le 5$.
+By property \case{flat~count}, it follows that $r+s\ge 5$.
+Thus, $r+s=5$.  
+% then $V = \{\v,\rho \v,\rho^2\v,\rho^3\v\}$.  A plane $A$ contains
+% $V\cup\{\orz\}$.  This is not generic.
+
+A plane $A$ contains
+$\{\orz,\v_0,\v_1,\v_2,\v_3\}$.  We obtain a contradiction
+by computing $\arc_V(\orz,\v_0,\v_3)$ in two ways.  On the
+one hand, it is equal to the partial perimeter from $\v_0$ to
+$\v_3$.  On the other hand, it is estimated by triangle
+inequality on the other two edges:
+\begin{align*}
+\arc_V(\v_0,\v_3)
+&\le\arc_V(\v_3,\v_4) + \arc_V(\v_4,\v_0) \\
+&\le\arc(2,2,2\hm)+\arc(y,2,2\hm)\\
+&< \min(\arc(y,2\hm,2h_0)+\arc(2\hm,2\hm,2)+\arc(2\hm,2\hm,2) ,\\
+&\phantom{<\min~}\arc(y,2\hm,2)+\arc(2\hm,2\hm,2\hm)+\arc(2\hm,2\hm,2))\\
+&\le\arc_V(\v_0,\v_3).
+\end{align*}
+where $y=\normo{\v_0}$.  The strict inequality is a \cc{SDCCMGA}{}.
+This is a contradiction.
+\end{proof}
+
+\begin{lemma}[extreme~edge]\guid{BAWWPPB}\rating{900}\label{l:ee}
+Every minimal fan $(V,E,F,S)$ has the feature \case{extreme~edge~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof} 
+By Lemma~\ref{lemma:3-nonflat}, there are at least three flat
+nodes of $V$.
+
+Assume for a contradiction that some edge $\{\u,\rho\u\}\in
+E\setminus S$ of the minimal fan $(V,E,F,S)$ is not extremal.  
+We can find $\v_0,\ldots,\v_n$ with the following properties:
+\begin{enumerate}\wasitemize 
+\item $\rho^i\v_0 =\v_i$.
+\item $\v_0$, $\v_n$ and exactly one other point $\v_m$ (for some
+  $0<m<n$) are not flat.
+\item $\u=\v_k$ for some $0\le k<m$.
+\end{enumerate}\wasitemize 
+
+Select a deformation $\varphi$ that satisfies the following conditions:
+\begin{enumerate}\wasitemize 
+\item The deformation fixes every element of
+$V\setminus\{\v_1,\ldots,\v_{n-1}\}$.
+\item The set $\{\orz,\v_0(t),\ldots,\v_m(t)\}$ is coplanar.
+\item The set $\{\orz,\v_m(t),\ldots,\v_n(t)\}$ is coplanar.
+\item The deformation  fixes the norm $\normo{\v_i(t)}$ for all $0<i<n$.
+\item The deformation fixes the norm $\norm{\v_i(t)}{\v_{i+1}(t)}$
+  whenever $0\le i<n$ and $i\ne k$.
+\item $\norm{\v_k(t)}{\v_{k+1}(t)} = \norm{\v_k}{\v_{k+1}}+t$.
+\end{enumerate}\wasitemize 
+There is a unique deformation that satisfies these properties.  Moreover, it
+is a special fan for sufficiently small $t$.
+
+\claim{The function $t\mapsto \tau(V(t),E(t),F(t))$ does not have a
+local minimum at $t=0$.}  Indeed, by Definition~\ref{def:tau},
+$\tau$ has the form
+\[ 
+  g(s) = \dih(2,2,2,s,b,c) e_1 
++ \dih(2,2,2,b,c,s) e_2 + \dih(2,2,2,c,s,b) e_3
+\] 
+for some $e_i\in\leftclosed1,1+\sol_0/\pi\rightclosed$, some
+reparameterization $s=s(t)$ of $t$ such that $s(0)=a$, and some
+parameters $a,b,c$.  The parameters $a,b,c$ lie in
+$\leftclosed2/\hm,4\rightclosed$ and satisfy $\Delta>0$, where
+$\Delta = \Delta(4,4,4,a^2,b^2,c^2)$.  
+%We may restrict $a$ further so that $a\le 3.8$.
+
+%If $g$ has a local minimum at $s=0$, then
+The function
+\begin{equation}\label{eqn:g''}
+G(a) = (16-a^2)^2a^2(\Delta g'(a)^2 - 0.01\Delta^{3/2} g''(a))
+\end{equation}
+is a polynomial in $a$ for fixed values of the parameters
+$b,c,e_1,e_2$, and $e_3$.  It has degree $10$ in $a$ with leading
+coefficient $-2 e_1\ne0$.  In particular, $G$ is not the zero
+polynomial and has isolated roots.  A \cc{2065952723}{This is a
+  calculation of derivatives.  There are degeneracies when $a$ approaches
+  $4$ that are treated in the same way as the degeneracies in
+  Lemma~\ref{lemma:hexagon-free}.}  shows that $G(a)$ is nonnegative
+for all parameters $b,c,e_1,e_2,e_3$ in the domain.  It follows from
+this inequality that every interior critical point of $g$ is a local
+maximum.  Indeed, the dominant term
+%\footnote{We may exclude the point $a=4$, because at this endpoint of
+%  the domain, we have $\Delta=-4 (b^2+c^2-16)^2\le0$, 
+%which is contrary to assumption.}
+of $G$ near an interior critical point is 
+\[
+-0.01(16-a^2)^2a^2\Delta^{3/2}g''(a)
+\] 
+so that
+$g''(a)$ is strictly negative in some punctured neighborhood of the critical
+point.  Thus, $g$ does not have any local interior point minimum.  The
+claim contradicts the assumed minimality of $(V,E,F,S)$.  This
+completes the proof.
+\end{proof}
+
+
+\begin{lemma}[minimal~node]\guid{PZFSEVR}\rating{200}\label{l:mn}
+Every minimal fan $(V,E,F,S)$ has the feature \case{minimal~node~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof} If the conclusion is false, then for sufficiently small
+positive $a$, the deformation $\varphi$ over $[0,a]$ given by
+\[ 
+\varphi(\u,t) =
+\begin{cases}
+\u, & \text{if }\u \ne \v,\\
+(1-t) \v, & \text{if }\u = \v\\
+\end{cases}
+\] 
+decreases $\tau$.  It is a deformation of special fans.  This shows
+that $(V,E,F,S)$ is not minimal.
+\end{proof}
+
+\begin{lemma}[minimal~node~flat]\guid{JLXMEJN}\rating{350}\label{l:mnf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{minimal~node~flat~\ref{l:f}}.
+% \case{minimal~node~flat} If $v$ is flat, and $\{u,v\}\in
+% E\setminus S$, then $\norm{\u}{\v}=2$ or $\normo{\v}=2$.
+\end{lemma}
+
+\begin{proof} 
+Let $A$ be the plane containing $\{\orz,\rho^{-1}\v,\v,\rho\v\}$.
+Assume that $\{\u,\v\}\in E\setminus S$.  Let $\u\ne \w\in E(\v)$.
+Then $\u,\v,\w\in A$.
+
+If the conclusion is false, then for sufficiently small positive
+$a$, let $\varphi$ be the deformation over $[0,a]$ that fixes all
+elements of $V$ other than $\v$ and moves $\v$ in the plane $A$
+around the circle of radius $\norm{\w}{\v}$ with center $\w$.  The
+direction of the circular motion can be chosen to decrease $\tau$, $\normo{\v}$
+and $\norm{\v}{\u}$.
+It is a deformation of special fans.  This shows that $(V,E,F,S)$ is
+not minimal.
+\end{proof}
+
+\begin{lemma}[balance]\guid{TPKKQOL}\rating{350}\label{l:b}
+Every minimal fan $(V,E,F,S)$ has the feature \case{balance~\ref{l:f}}.
+%For every edge $\{\v,\w\}\in E$ in a minimal fan $(V,E,F,S)$, 
+%\[ \norm{\v}{\w}\in\{2,2\hm\}.\] 
+\end{lemma}
+
+\begin{proof} Assume for a contradiction that the property fails.  In
+view of properties \case{extreme~edge} and \case{minimal~node~flat},
+after possibly swapping $\u$ and $\w$, we may assume without loss of
+generality that
+\[ 
+\normo{\v}=2,\quad \norm{\u}{\v}=2,\quad \norm{\w}{\v}=2\hm.
+\] 
+For sufficiently small positive $a$, let $\varphi$ be the deformation
+over $[0,a]$ that fixes all elements of $V$ other than $\v$ and moves
+$\v$ in the plane of $\{\orz,\u,\v,\w\}$ around a circle of radius $2$
+with center at the origin.  The direction of the deformation can be
+chosen to be increasing in $\norm{\u}{\v}$.  The function $\tau$ is
+constant along the deformation, which carries minimal fans
+to minimal fans.  However, the deformed fan does not satisfy property
+\case{extreme~edge}.  This is a contradiction.
+\end{proof}
+
+
+
+
+\begin{lemma}[flat~middle]\guid{CFJSRQH}\rating{450}\label{l:fm}
+Every minimal fan $(V,E,F,S)$ has property
+\case{flat~middle~\ref{l:f}} at every $\v\in V$.
+\end{lemma}
+
+\begin{proof} %Write $\v_i = \rho^{i-2} \v$.  
+Assume for a contradiction that the conclusion is false.  There is a
+plane $A$ that contains $\{\orz,\v_0,\v_1,\v_2,\v_3\}$.  By property
+\case{s~flat}, none of the edges $\{\v_0,\v_1\}$, $\{\v_1,\v_2\}$,
+$\{\v_2,\v_3\}$ lies in $S$.  Furthermore, by \case{extreme~edge}
+and \case{balance}, the distances $\norm{\v_i}{\v_{i+1}}$ are equal
+to one another and take values in $\{2,2\hm\}$ for $i=0,1,2$.  By
+\case{minimal~node}, if these distances are $2\hm$, then the partial
+perimeter from $\v_0$ to $\v_3$ is at least
+\begin{equation}\label{eqn:3side}
+2\arc(2\hm,2,2\hm)+\arc(2,2,2\hm) > \pi.
+\end{equation}
+This is not generic.
+%\begin{equation}\label{eqn:3side}
+%\arc(y_1,2,2\hm)+\arc(2,2,2\hm)+\arc(2,y_4,2\hm),
+%\end{equation}
+%where $y_i=\normo{\v_i}$.  However, there are at most two other nodes
+%($\v_4$ and $\v_5$) and three other edges in the special fan.  By the
+%triangle inequality, the sum of these three lengths is at most
+%\eqn{eqn:3side}.  Thus, equality is obtained in the triangle
+%inequality.  This implies that $\v_4$ and $\v_5$ lie in the plane $A$.
+%Thus, $V\subset A$.  This is not generic.
+\end{proof}
+
+\begin{lemma}[flat~extremal]\guid{OUCPLRI}\rating{1600}\label{l:fext}
+Every minimal fan $(V,E,F,S)$ has the feature \case{flat~extremal~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}  The proof is by contradiction.
+Assume there are two adjacent flat nodes $\v_1,\v_2$, so that
+some plane $A$  contains $\{\orz,\v_0,\v_1,\v_2,\v_3\}$.
+By previously established properties of minimality,
+\indy{Index}{angle!flat}%
+$\norm{\v_i}{\v_{i+1}}=2$ for $i=0,1,2$.  Let $y_i = \normo{\v_i}$.
+%
+
+\claim{There exists a deformation that not only fixes all $\u\ne \v_1,\v_2$,
+but also maintains flatness at $\v_1$ and $\v_2$, maintains the coplanarity
+of $\{\orz,\v_0,\v_1(t),\v_2(t),\v_3\}$, and also keeps $y_1+y_2$,
+$\norm{\v_0}{\v_1}$, $\norm{\v_2}{\v_3}$, and $\tau$ constant,
+while increasing $\norm{\v_1}{\v_2}$.}  Indeed, the partial
+perimeter $c$ is given by a sum of three terms:
+\[ 
+c=\sum_{i=0}^2\arc(y_i,y_{i+1},2).
+\] 
+Set
+\[ 
+  g(t_1,t_2) = \arc(y_0,y_1+t_1,2) 
++ \arc(y_1+t_1,y_2-t_1,2+t_2) + \arc(y_2-t_1,y_3,2) - c.
+\] 
+Then $g(0,0)=0$.  
+
+Use subscript notation for partial derivatives of $g$.  If $g_1(0,0)
+\ne 0$, then by the implicit function theorem there is a function $h$
+locally near $0$ such that $h(0)=0$ and $g(h(t_2),t_2)=0$.  Define a
+deformation that fixes $\u\ne\v_1,\v_2$ and moves $\v_1,\v_2$ in the
+fixed plane $\op{aff}\{\orz,\v_1,\v_2\}$ subject to the constraints
+$\norm{\v_1(t)}{\v_2(t)}=2+t$, $\normo{\v_1(t)} = 2+h(t)$, and
+$\normo{\v_2(t)} = 2-h(t)$.  These conditions uniquely determine the
+deformation.  The deformed value is a special fan for sufficiently
+small positive $t$.  It keeps $\tau$ fixed.  Hence, the deformed fan is
+also minimal.  However, the existence of this deformation contradicts
+property \case{flat~middle}.
+
+On the other hand, if $ g_1(0,0) =0$, then a calculation gives
+\[ g_2(0,0) = \dfrac{2}{y_1y_2\sqrt{\ldots}} >
+0.\]  Again by the implicit function theorem there is
+a function $h$ locally near $0$ such that $h(0)=0$ and
+$g(t_1,h(t_1))=0$.  Define a deformation that fixes $\u\ne \v_1,\v_2$
+and moves $\v_1$ and $\v_2$ within the fixed plane
+$\op{aff}\{\orz,\v_1,\v_2\}$ by the conditions $\normo{\v_1(t)} = 2 +
+t$, $\normo{\v_2(t)} = 2 - t$, and $\norm{\v_1(t)}{\v_2(t)}=2+h(t)$.
+These conditions uniquely determine the deformation.  The deformed fan
+is special for sufficiently small $t$.  It keeps $\tau$ fixed.  Hence
+the deformed fan is also a minimal.
+
+By implicit differentiation, $h'(0) = 0$ and $g_2(0,0) h''(0) =
+-g_{11}(0,0)$.  Thus, $h''(0)$ and $g_{11}(0,0)$ have opposite signs.
+The function $t_1\mapsto g(t_1,0)$ equals, up to a constant, the sum
+of three terms of the form $\arc(\wild,\wild,2)$.
+A \cc{OUCPLRI}{This is a second derivative calculation.} shows that the second derivative of each
+term  is negative at $t=0$:
+\begin{equation}\label{eqn:arc''}
+\def\vt{\vrule_{\relax{\raisebox{-0.55em}{\ensuremath{\displaystyle{~t=0}}}}}}
+\frac{d^2 \arc(y_0,y_1+t,2)}{d t^2}\,\vt < 0\textand
+\dfrac{d^2 \arc(y_0+t,y_1-t,2)}{d t^2}\,\vt < 0.
+\end{equation}  
+Thus, $h''(0)>0$
+and for sufficiently small nonzero $t$, $\norm{\v_1(t)}{\v_2(t)}>2$.
+However, the existence of this deformation contradicts property
+\case{flat~middle}.
+\end{proof}
+
+
+\begin{lemma}[s~minimal]\guid{HJXLQOT}\rating{100} \label{l:sm}
+Every minimal fan $(V,E,F,S)$ has the feature \case{s~minimal~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof} Assume for a contradiction that the minimal fan has the
+  property $r+2s < 6$ and that some edge is not $S$-minimal.  We also
+  have $s<3$ because otherwise $r+2s\ge 6$.  The constants $d(r,s)$
+  satisfy $d(r-1,s+1) > d(r,s)$.  Thus, we may decrease
+  $\tau(V,E,F)-d(r,s)$ by transferring one edge of $E\setminus S$ that
+  is not $S$-minimal into the set $S$.  This transfer changes the parameters
+  $(r,s)\mapsto (r-1,s+1)$.
+\end{proof}
+
+\begin{lemma}[triangle~free]\guid{OMKYNLT}\rating{200}\label{lemma:triangle-free}\label{l:tf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{triangle~free~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}
+  For a contradiction, let $(V,E,F,S)$ be a minimal fan with
+  $\card(F)=3$.  By property \case{flat~count}, every node is nonflat.
+  By \case{s~minimal}, $r+2s=6$, or every edge of $E$ is $S$-minimal.
+  However, if $r+2s=6$, then $S=E$;  no matter what, every edge
+  of $E$ is $S$-minimal.
+
+There are four cases: $\card(S)\in\{0,1,2,3\}$.  Each case is a
+nonlinear optimization problem in three variables $\normo{\v_i}$,
+$i=1,2,3$.  The edge lengths $\norm{\v_i}{\v_{i+1}}$ are determined by
+$S$-minimality.  A \cc{OMKYNLT}{This is the triangle case of the main inequality.} shows that
+$\tau(V,E,F)\ge d(r,s)$ in each case.
+\end{proof}
+
+
+
+
+
+\begin{lemma}[flat~exists]\guid{CMBZAOZ}\rating{500}\label{lemma:flat-exists}\label{l:fe}
+Every minimal fan $(V,E,F,S)$ has the feature \case{flat~exists~\ref{l:f}}.
+  That is, if none of $\v,\rho
+\v,\rho^2 \v,\rho^3 \v\in V$ is flat, then $r+s\le 4$ and
+$\norm{\u}{\w}=2$ for all $\{\u,\w\}\in E$.
+%then $r+s=4$. %, and $\norm{\v}{\w}= 2$ for all $\{\v,\w\}\in E$.
+\end{lemma}
+
+\begin{proof} 
+By Lemma~\ref{lemma:triangle-free}, we have $r+s\ge 4$.
+Assume for a contradiction that the property fails for $(V,E,F,S)$.
+There are four
+consecutive nodes $\v_0,\v_1,\v_2,\v_3$ that are not flat.  
+By property \case{extreme~edge}, each edge $\norm{\v_i}{\v_{i+1}}$ is
+$2$ or $2\hm$. Set $y_i = \normo{\v_i}$ and $y_{ij} =
+\norm{\v_i}{\v_j}$.
+We may also
+assume for a contradiction that
+$r+s=4$ implies that $\norm{\u}{\w}=2h_0$ for some $\{\u,\w\}\in E$.
+%By \case{extremal~node}, $y_i$ is $2$ or $2\hm$ for $i=1,2$.   
+
+Shifting $v$ to a different element of $V$ if necessary when $r+s=4$, 
+we may assume without loss of generality that $y_{03}\ge
+2\hm$.
+
+Define a deformation of $(V,E,F,S)$ by fixing $\u\ne \v_1,\v_2$ and
+moving $\v_1,\v_2$ according to the following constraints:
+\begin{enumerate}\wasitemize 
+\item $\norm{\v_0}{\v_1(t)}$, $\norm{\v_1(t)}{\v_2(t)}$, and
+$\norm{\v_2(t)}{\v_3}$ are constant.
+\item $\normo{\v_1(t)}$ and $\normo{\v_2(t)}$ are constant.
+\item $\norm{\v_0}{\v_2(t)} = y_{02} + t$.
+\end{enumerate}\wasitemize 
+These constraints uniquely determine the deformation, the  deformed
+value of which is a special fan for sufficiently small $t$.  In this context,
+by a \cc{2986512815}{}, the function $\tau$ as a function of
+$t$ (with parameters $y_{02},y_0,y_1,y_2,y_3,y_{03}$) does not have a local
+minimum at $t=0$.  This is contrary to the assumed minimality of
+$(V,E,F,S)$.
+\end{proof}
+
+\begin{lemma}[quadrilateral~free]\guid{JNTEFVP}\rating{550}\label{lemma:quadrilateral-free}\label{l:qf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{quadrilateral~free~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}
+For a contradiction, let $(V,E,F,S)$ be a minimal fan with $\card(F)=4$.  
+
+
+If no node is flat, then property \case{flat~exists} shows that
+$S=\emptyset$ and every edge is $\emptyset$-minimal.  The inequality
+$\tau(V,E,F) \ge d(4,0)$ is established by a \cc{JNTEFVP}{There is a
+  diagonal of length at most $\sqrt8$.}.  The space of configurations
+is five-dimensional.
+
+By property \case{flat~count}, one node is flat.  The parameter $s$
+runs over three cases $s=0,1,2$.  A \cc{JNTEFVP}{There is a diagonal
+  of length at most $\sqrt8$.}  gives $\tau(V,E,F)\ge d(4-s,s)$ in
+each case.  The space of configurations is four-dimensional.
+\end{proof}
+
+\begin{lemma}[pentagon~free]\guid{PQFYWHW}\rating{650}\label{lemma:pentagon-free}\label{l:pf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{pentagon~free~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}
+For a contradiction, let $(V,E,F,S)$ be a minimal fan with $\card(F)=5$.  
+
+By a double application of \case{flat~exists}, there are at least two
+flat nodes.  By \case{flat~count}, there are exactly two flat nodes.
+The flat nodes may either be consecutive or not.  The parameter $s$
+may be $0$ or $1$.  A \cc{PQFYWHW}{} in each of
+these cases gives $\tau(V,E,F)\ge d(5-s,s)$.  The space of
+configurations is five-dimensional when the flat nodes are not
+adjacent.  Because of \case{flat~extremal}, the space of
+configurations is only four-dimensional when the flat nodes are
+adjacent.
+\end{proof}
+
+\begin{lemma}[hexagon~free]\guid{GYQVFXJ}\rating{750}
+\label{lemma:hexagon-free}\label{l:hf}
+Every minimal fan $(V,E,F,S)$ has the feature \case{hexagon~free~\ref{l:f}}.
+\end{lemma}
+
+\begin{proof}
+For a contradiction, let $(V,E,F,S)$ be a minimal fan with $\card(F)=6$.
+From \case{card}, it follows that $s=0$, and $S=\emptyset$.
+
+By \case{flat~exists}, there are at least two flat nodes.  By
+\case{flat~count}, there are at most three flat nodes.  By the
+property \case{no~triple~flat}, the possible arrangements of flat
+nodes are as follows:
+\begin{enumerate}\wasitemize 
+\item two flat nodes, opposite to one another: $\v_0,\v_3$.
+\item two flat nodes, not adjacent and not opposite: $\v_0,\v_2$.
+\item three flat nodes, alternating arrangement: $\v_0,\v_2,\v_4$.
+\item three flat nodes, $\v_0,\v_1,\v_i$, $i=3$ (or symmetrically $i=4$).
+\end{enumerate}\wasitemize 
+A \cc{GYQVFXJ}{} in each case give the inequality
+$\tau(V,E,F)\ge d(6,0)$.  The dimension of the configuration spaces
+are seven, seven, six, and five respectively.
+
+  Nongeneric fans can be found in the closure of some of the families of hexagons.
+  Some of the calculations can become singular at these nongeneric fans.  In particular,
+  the dihedral angle formula can contain a term $0/0$.  The cited source gives further
+details about how to estimate hexagons in a small neighborhood of these nongeneric
+fans.
+\end{proof}  
+
+
+\subsection{emptiness}
+
+
+\begin{lemma}[emptiness]\guid{LPQUDGF}\rating{50}\label{lemma:min-empty}  
+The set of minimal fans is empty.
+\end{lemma}
+
+\begin{proof} Let $(V,E,F,S)$ be a minimal fan.  By the long sequence
+  of lemmas in the previous section, it is a special fan that has all
+  the features listed in Lemma~\ref{lemma:feature}.  However, that
+  lemma states that no special fan has all these features.  Hence,
+  $(V,E,F,S)$ does not exist.
+\end{proof}
+
+\begin{lemma}[main estimate -- first form]\guid{JEJTVGB}\rating{400}
+\label{lemma:empty-d}
+We have
+\[ 
+\tau(V,E,F) \ge d (r,s)
+\] 
+for every special fan $(V,E,F,S)$, where $(r,s)$ are the parameters of
+$(V,E,F,S)$.
+\end{lemma}
+
+\begin{proof} 
+The function $\p\mapsto \tau(V(\p),E(\p),F(\p),S(\p,I))$ is
+continuous on the space of fan data of shape $(k_{min},I)$
+
+Assume for a contradiction that the conclusion is false.  Then
+$k_{min}>0$ because it is the cardinality of some nonempty set $V$.
+There exists a sequence of fan data $\p_i$ of varying shapes
+$(k_{min},I_i)$ such that $\tau(V(\p_i),E(\p_i),F(\p_i))-d(r,s)$ tends
+to $\tau_{min}$.  By passing to a subsequence, we may assume without
+loss of generality that $I_i = I$ is independent of $i$.  By passing
+again to a subsequence in the compact metric space of fan data of
+shape $(k_{min},I)$, the sequence $\p_i$ converges to some fan datum
+$(\p,I)$.  It follows that $\tau_{min} = \tau(V,E,F)-d(r,s)$, where
+$(V,E,F,S)=(V(\p),E(\p),F(\p),S(\p,I))$.  This is a minimal fan.
+However, the set of minimal fans is empty.
+%\ifverbose{\footnote{Praise to the emptiness that blanks out existence. --Rumi} %-- Rumi % The essential Rumi page 21.
+%\indy{Index}{Rumi}%
+%}
+\end{proof}
+
+The following secondary estimates are needed in 
+the linear programs that appear in Section~\ref{sec:tsp}.
+The following is a variant of the definition of special fan
+in which there there are two significant lengths ($2\hm$ and $\sqrt8$) rather than the single length $2\hm$.  Note in particular that every diagonal of a secondary fan has length
+at least $\sqrt8$.
+
+\begin{definition}[secondary fan]\guid{TYCXTDF}
+A \newterm{secondary fan} is a tuple 
+\[(V,E,F,S_1,S_2),\] where
+\begin{enumerate}
+\item \case{packing} $V$ is a packing.  That is, for every $\v,\w\in
+V$, if $\norm{\v}{\w}<2$, then $\v=\w$.
+\item \case{annulus} $V\subset \BB$.
+\item \case{local~fan} $(V,E,F)$ is a nonreflexive local fan (Definition~\ref{def:convex-local}).
+\item \case{subset} $S_1\subset E$, $S_2\subset E$, and $S_1\cap S_2=\emptyset$.
+\item \case{s$_1$~norm} If $\{\v,\w\}\in S_1$, then $2\hm\le\norm{\v}{\w}\le \sqrt8$.
+\item \case{s$_2$~norm} If $\{\v,\w\}\in S_2$, then $\norm{\v}{\w}=\sqrt8$.
+\item \case{e~norm} If $\{\v,\w\}\in E\setminus (S_1\cup S_2)$, then $\norm{\v}{\w}\le 2\hm$.
+\item \case{diagonal} For all distinct elements $\v,\w\in V$, if
+$\{\v,\w\}\not\in E$, then \[ \norm{\v}{\w}\ge
+\sqrt8.\] 
+\item \case{card} %$k=\card(F)$,
+Let      $s_1=\card(S_1)$, $s_2=\card(S_2)$, and $r=\card(E) - s_1-s_2$.  Then
+\[ 0\le s_1\le 1,~~ 0\le s_2 \le 2,\textand 3-(s_1+s_2) \le r \le 5 -
+2(s_1+s_2).\] 
+\end{enumerate}
+The constants $r$, $s_1$, and $s_2$ are called the \newterm{parameters} of the secondary fan.
+\end{definition}
+
+
+\begin{lemma}[secondary estimate]\guid{ZHPXLTX}
+Let $(V,E,F,S_1,S_2)$ be a secondary fan with parameters
+$(r,s_1,s_2)=(5,0,0)$.  Then
+\[\tau(V,E,F)\ge 0.696.\] % was 0.751.\]
+Let $(V,E,F,S_1,S_2)$ be a secondary fan with parameters
+$(r,s_1,s_2)=(3,1,0)$.  Then
+\[\tau(V,E,F)\ge 0.477.\] % was 0.492.\]
+\end{lemma}
+
+\begin{proof}
+The proof of the secondary estimate follows exactly the same lines of reasoning as the main estimate.  The following 
+constants are used in the proof:
+% XX use second batch:
+\begin{align*}
+d'(5,0,0) &=0.696\\ % was  0.751~
+d'(3,1,0) &=0.477\\ % was  0.492~
+d'(3,0,1) &=0.568\\ % was  0.623~
+d'(2,0,1) &=0.128\\ % was  0.128~
+d'(1,1,1) &=0.349\\ % was  0.364~
+d'(1,0,2) &=0.440. % was  0.495~
+\end{align*}
+The constants are additive:
+\begin{align*}
+d'(5,0,0) &= d'(3,0,1) + d'(2,0,1)\\
+d'(3,0,1) &= d'(1,0,2) + d'(2,0,1)\\
+d'(3,1,0) &= d'(1,1,1) + d'(2,0,1).
+\end{align*}
+By considering a minimal counterexample, as in the case of special fans, the proof reduces to a secondary fan with the following parameters $(r,s_1,s_2)$ and constraints:
+\begin{enumerate}
+\item parameters $(1,0,2)$,
+\item parameters $(2,0,1)$,
+\item parameters $(1,1,1)$,
+\item parameters $(5,0,0)$ and
+two flat nodes (possibly adjacent),
+\item parameters $(4,1,0)$
+and one flat node.
+\end{enumerate}
+These cases have been checked by a \cc{ZHPXLTX}{}.
+\end{proof}
+
+
+
+\section{Chapter Summary}
+
+This chapter contains the main technical estimate of the book.  It
+has been necessary to introduce substantial technical scaffolding to
+prove Lemma~\ref{lemma:empty-d}.  Now that the estimate has been established, we
+can eliminate the scaffolding and present the answer in a form that
+is useful in the next chapter.
+
+The next chapter completes the proof of the Kepler conjecture.  The
+following definitions are the only ones needed in the next chapter for
+that proof: nonreflexive local fan $(V,E,F)$, special fan $(V,E,F,S)$, the
+parameters $(r,s)$ of a special fan, $d(r,s)$, $\tau(V,E,F)$, and
+perimeter.  Here $(V,E)$ is a fan, $F$ is a face of the hypermap of
+$(V,E)$, and $S$ is a subset of $E$.  Also, $(r,s)$ is an ordered pair
+of natural numbers, and $d(r,s)$ is given as a table of real numbers.
+The function $\tau$ measures the looseness of a packing $V$ around a
+face $F$.  The perimeter is a real number associated with a nonreflexive local fan $(V,E,F)$.
+
+Only two lemmas from this chapter are needed in the next chapter:
+perimeter majorization (Lemma~\ref{lemma:convex-hyp}) and the main
+estimate (Lemma~\ref{lemma:empty-d}).  Perimeter majorization gives
+the upper bound of $2\pi$ for the perimeter of a geodesically convex spherical polygon.  The main estimate is $\tau(V,E,F)\ge d(r,s)$ for
+special fans $(V,E,F,S)$ with parameters $(r,s)$.

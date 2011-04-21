@@ -1,0 +1,39 @@
+% C-u ^-! date .
+Sun Feb 14 10:06:32 EST 2010. 
+  Global rename `voronoi` -> `voronoi_open`.
+  Deleted a needless conjunct from `voronoi_le`
+  Merged TARJJUW's def of packing with Sphere.packing
+  Yesterday, SET_TAC -> ASM_SET_TAC as needed for new release of hol light.
+  rename `saturate` -> `saturated`.
+  rename `voronoi_le` -> `voronoi_closed`, and reversed the argument order.
+Wed Feb 17 08:39:37 EST 2010
+    New in svn 1557.
+    replaced negligible_fun with negligible_fun_p to make the dependence on p explicit.
+    Rewrote JGXZYGW to use negligible_fun_p instead of negligible_fun
+Mon Apr 26 06:58:22 EDT 2010
+    pack_defs.hl, definition of `marchal` corrected, sqrt(&2) inserted,
+    (thanks to Vu Khac Ky)
+Fri May 14 09:18:13 ICT 2010
+    fan.hl broken into introduction.hl, topology.hl, planarity.hl (renaming earlier fan_definitions.hl, etc.)
+    modules renamed so that they don't all have the same identifier "Fan".  Fan in introduction.hl, Topology in topology.hl,
+    file fan_defs.hl added.
+    yfan replaced with yfan_deprecated.  A new yfan definition has been added correcting an error in yfan_deprecated.
+    There are three versions of  inverse_sigma_fan.  They have been renamed so that they have different names.
+    introduction.hl:inverse_sigma_fan renamed as inverse_sigma_fan_alt
+    fan_misc.hl:inverse_sigma_fan renamed as inverse_sigma_fan_bis
+
+Tue Jul  6 14:54:42 ICT 2010
+  changed the definition of sol so that it does not require C to be measurable.  The order of the arguments was also reversed.  Now it is  sol x C
+
+Fri Jul 23 21:54:58 ICT 2010
+    The definition of mcell0,...,mcell4 slightly changes in a way that affects degenerate
+    cases. (Thanks to Ky)
+
+Sun Jul 25 06:48:44 ICT 2010
+    new hypermap file
+    renames lemma_card_inverse_map_eq to lemma_orbit_inverse_map
+    gives a new definition of mAdd.
+
+Fri Jul 30 10:40:40 ICT 2010
+    Definition of weakly_saturated was corrected so that it agrees with
+    flypaper.  This temporarily breaks the proof of TARJJUW.

@@ -1,0 +1,235 @@
+
+
+
+\def\odpcvgh{
+\tikzfig{trig}{\guid{ODPCVGH} Trigonometric and inverse trigonometric
+functions}
+%
+%arctangent function on the domain \leftopen -4,4\rightopen\ 
+%and the $\arccos$ function on $\leftclosed-1,1\rightclosed$.}}
+{
+[scale=0.5]
+\draw (-2*1.57,0) sin (-1.57,-1) cos (0,0) sin (1.57,1) cos (3.14,0) sin (3*1.57,-1);
+\draw   (-2*1.57,-1) cos (-1.57,0) sin  (0,1) cos (1.57,0) sin (2*1.57,-1) cos (3*1.57,0); 
+\draw[help lines,<->] (-3.3,0) -- (3*1.57 + 0.2,0);
+\draw[help lines,<->] (0,-1) -- (0,2.0);
+\draw plot[smooth] file {tikz/tan.table};
+\node at (-0.5,-1.8) {$\tan$};
+\node at (2,0.5) {$\sin$};
+\node at (1.1,-0.3) {$\cos$};
+% GG need axis labels and ticks, base points of labels should be precisely aligned.
+\begin{scope}[xshift=10cm]
+\draw plot[smooth] file {tikz/arctan.table} node[above] {$\arctan$};
+\draw plot[smooth] file {tikz/arccos.table} node[right] {$\arccos$};
+%\draw[gray,->,very thin] (-1.2,0) -- (1.4,0);
+\draw[help lines,<->] (0,-1.6) -- (0,3.2);
+\draw[help lines,<->] (-4,0) -- (4,0);
+\end{scope}
+}}
+
+%
+\def\sample{
+\tikzfig{circle}{\guid{HGMTQFG} Lemma~\ref{lemma:circle} as a special case of the Pythagorean theorem}
+{
+[scale=0.1]
+\draw (0,0)  --(12,0) --  (12,5) --  cycle;
+\draw[very thin] (11,0) -- (11,1) -- (12.0,1);
+\path (5,-1.5) node {$\cos x$};
+\path (16,2.5) node {$\sin x$};
+\path (6,5)  node {$1$};
+}
+}
+
+%
+\def\sample{
+\tikzfig{tan}{\guid{GQQAKYI} 
+The tangent function on $\leftopen-\pi/2,\pi/2\rightopen$}
+{
+[scale=0.2]
+\draw plot[smooth] file {tikz/tan.table};
+\draw[help lines,->] (-1.57,0) -- (1.57,0);
+\draw[help lines,->] (0,-6.0) -- (0,6.0);
+}
+}
+
+\def\sample{
+\tikzfig{arctrig}{\guid{RUJPPWJ} 
+The arctangent function on the domain \leftopen -4,4\rightopen\ 
+and the $\arccos$ function on $\leftclosed-1,1\rightclosed$.}
+{
+[scale=0.4]
+\draw plot[smooth] file {tikz/arctan.table};
+\draw plot[smooth] file {tikz/arccos.table};
+%\draw[gray,->,very thin] (-1.2,0) -- (1.4,0);
+\draw[help lines,->] (0,-0.2) -- (0,3.2);
+\draw[help lines,->] (-4,0) -- (4,0);
+}
+}
+
+\def\sample{
+\tikzfig{atn-polar}{\guid{YOXQFUB} 
+The function $\atn$ gives the polar angle $\theta$ of $(x,y)$.}
+{
+[scale=0.15]
+\draw[gray,->,very thin] (-4,0) -- (14,0);
+\draw[gray,->,very thin] (0,-2) -- (0,5);
+\draw (0,0)  --(12,0) --  (12,5) --  cycle;
+\draw[very thin] (11,0) -- (11,1) -- (12.0,1);
+\path (6,-1.5) node {$x$};
+\draw[very thin] (4,0) arc (0:22.62:4);
+\path (14,2.5) node {$y$};
+\path (2,3) node {$\theta$};
+}
+}
+
+\def\tuligly{
+\tikzfig{M}{\guid{TULIGLY} The quartic polynomial $M$}
+{
+[xscale=10.0,yscale=2.0]
+\draw[help lines,<->] (1.0,0) -- (1.5,0);
+\draw[help lines,<->] (1,-0.2) -- (1,1.2);
+\draw plot[smooth] file {tikz/TULIGLY.table};
+}}
+
+\def\bjliekb{
+\tikzfig{L}{\guid{BJLIEKB} Detail of the quartic $M$ and piecewise linear function $L$ on
+the domain $\leftclosed1.2,1.35\rightclosed$}
+{
+[scale=12.0]
+\draw plot[smooth] file {tikz/BJLIEKB.table};
+\draw[help lines,<->] (1.18,0) -- (1.37,0);
+\draw[help lines,<->] (1.2,-0.01) -- (1.2,0.25);
+\draw[help lines] (1.23175,0.25) -- (1.23175,-0.01) node[anchor=north,black] {$h_-$};
+\draw[help lines] (1.26,0.25) -- (1.26,-0.01) node[anchor=north,black] {$~~\hm$};
+\draw[help lines] (1.3254,0.25) -- (1.3254,-0.01) node[anchor=north,black] {$h_+$};
+\draw (1.2,0.230769 ) -- (1.26,0);  %
+\draw (1.26,0) -- (1.35,0);
+}}
+%
+
+
+\def\jxehxqy{
+\tikzfig{fg}{\guid{JXEHXQY} The functions $g$ takes negative values,
+but the function $f$ remains positive, as predicted by the cell cluster
+inequality.  The nondifferentiability at $2h_0$ is inherited from the
+nondifferentiability of $L$.}
+{
+[xscale=12.0,yscale=100.0]
+\draw plot[smooth] file {tikz/jxehxqy1a.table};
+\draw plot[smooth] file {tikz/jxehxqy1b.table} node[anchor=west,black] {$f$};
+\draw plot[smooth] file {tikz/jxehxqy2a.table};
+\draw plot[smooth] file {tikz/jxehxqy2b.table} node[anchor=west,black]{$g$};
+\draw[help lines,<->] (2.46,0) -- (2.66,0);
+%\draw[help lines] (2.4635,-0.004) -- (2.4635,0.01);
+\draw[help lines] (2.4635,0.01) -- (2.4635,-0.004) node[anchor=north,black] {$2h_-$};
+\draw[help lines] (2.6508,0.01) -- (2.4635,0.01) node[anchor=east,black] {$0.01$};
+\draw[help lines] (2.6508,0.00) -- (2.4635,0.00) node[anchor=east,black] {$0.00$};
+\draw[help lines] (2.52,0.01) -- (2.52,-0.004) node[anchor=north,black] {$2\hm$};
+\draw[help lines] (2.6508,0.01) -- (2.6508,-0.004) node[anchor=north,black] {$2h_+$};
+}}
+%
+
+
+
+\def\pqfexqn{
+\tikzfig{fg}{\guid{PQFEXQN} The functions $\beta_0$}
+{
+[xscale=20.0,yscale=150.0]
+\draw plot[smooth] file {tikz/pqfexqn.table};
+\draw[help lines,<->] (1.23,0) -- (1.33,0);
+%\draw[help lines] (1.2318,-0.004) -- (1.2318,0.01);
+\draw[help lines] (1.2318,0.005) -- (1.2318,-0.002) node[anchor=north,black] {$h_-$};
+\draw[help lines] (1.3254,0.005) -- (1.2318,0.005) node[anchor=east,black] {$0.005$};
+\draw[help lines] (1.3254,0.00) -- (1.2318,0.00) node[anchor=east,black] {$0.000$};
+\draw[help lines] (1.26,0.005) -- (1.26,-0.002) node[anchor=north,black] {$\hm$};
+\draw[help lines] (1.3254,0.005) -- (1.3254,-0.002) node[anchor=north,black] {$h_+$};
+}}
+%
+
+
+
+\def\rrkrgpvjw#1#2{\shade[ball color=gray](#1,#2) circle (1);  }
+\def\KRGPVJW{
+\tikzfig{svdw}
+{\guid{KRGPVJW} The Sch\"utte-van der Waerden contact graph and packing.  
+Four edges that
+belong to the standard graph but not the contact graph are shown in gray.  Twelve
+balls in the packing are centered near the centers of the edges of a cube.}
+{
+{
+\begin{scope}[scale=0.004]
+%Set the coordinates of the points:
+%\tikzstyle{every node}=[draw,shape=circle];
+\path (45:400) coordinate (P0) ;
+\path (135:400)  coordinate (P1) ;
+\path (225:400) coordinate (P2) ;
+\path (315:400) coordinate (P3) ;
+\path (0:200) coordinate (P4) ;
+\path (90:200) coordinate (P5) ;
+\path (180:200) coordinate (P6) ;
+\path (270:200) coordinate (P7) ;
+\path(45:150) coordinate (P8) ;
+\path (135:150) coordinate (P9) ;
+\path (225:150) coordinate (P10) ;
+\path (315:150) coordinate (P11) ; 
+\path (0,0) coordinate (P12) ;
+\foreach \i in {0,...,12}
+{
+  \fill (P\i) circle (15);
+}
+%Draw edges:
+\draw
+  (P12) -- (P8)
+  (P12) -- (P9)
+  (P12) -- (P10)
+  (P12) -- (P11)
+  (P8) -- (P4)
+  (P4) -- (P11)
+  (P11) -- (P7)
+  (P7) -- (P10)
+  (P10) -- (P6)
+  (P6) -- (P9)
+  (P9) -- (P5)
+  (P5) -- (P8)
+%
+  (P0) -- (P1)
+  (P1) -- (P2)
+  (P2) -- (P3)
+  (P3) -- (P0)
+%
+  (P0) -- (P5)
+  (P5) -- (P1)
+  (P1) -- (P6)
+  (P6) -- (P2)
+  (P2) -- (P7)
+  (P7) -- (P3)
+  (P3) -- (P4)
+  (P4) -- (P0);
+\draw[gray,very thin]
+  (P8) -- (P9)
+  (P9) -- (P10)
+  (P10)--(P11)
+  (P11)--(P8);
+\end{scope}
+%
+\begin{scope}[scale=0.5,xshift=8cm]
+\def\rr{\rrkrgpvjw}
+\rr{-0.504725}{0.79793}
+\rr{0.987379}{-0.530059}
+\rr{-0.406371}{-1.76776}
+\rr{-1.8337}{-0.370827}
+\rr{1.68242}{1.01951}
+\rr{0.}{2.0538}
+\rr{1.35457}{-1.58937}
+\rr{0.}{0.}
+\rr{-1.68242}{1.20943}
+\rr{-1.35457}{-1.43645}
+\rr{1.8337}{0.000711695}
+\rr{0.504725}{1.431}
+\rr{0.406371}{-1.25805}
+\rr{-0.987379}{0.159943}
+\end{scope}
+%\shade[ball color=blue] (2,2) circle (1); % color = gray
+%\shade[ball color=blue] (2.5,2) circle (1); % color = gray
+}
+}}

@@ -1,0 +1,222 @@
+%%
+% Author Thomas C. Hales
+% LaTeX Format
+
+
+%!TEX TS-program = latex    
+%% This line is for TexShop. 
+
+% Revision history. See svn.
+% Versions started Jan 2007.
+
+% Revisions Sept 2009: dependency on Tarski removed. 2 enclosed over quad removed. hypermap algorithm rewritten.  
+
+%% XX unable to make the \part command work.
+%% In pdf sidebar table of contents get stray markings in Appendix.
+%% XX unable to get endnotes to work
+
+\documentclass[spanningrule]{cambridge7A}
+%% Cambridge University Press Macros from
+%% https://authornet.cambridge.org/information/productionguide/laTex_files/
+
+% required by CUP
+\usepackage[numbers]{natbib}
+\usepackage{rotating}
+\usepackage{floatpag}
+ \rotfloatpagestyle{empty}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{multind}\ProvidesPackage{multind}
+\usepackage{times}
+
+% my additions
+\usepackage{verbatim}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{crop}
+\usepackage{txfonts}
+\usepackage[hyphens]{url}
+\usepackage{setspace}
+\usepackage{ellipsis} % 
+% http://www.ctan.org/tex-archive/macros/latex/contrib/ellipsis/ellipsis.pdf 
+%\setstretch{2}  % for double spacing
+
+% fonts
+\usepackage[mathscr]{euscript} % powerset.
+\usepackage{pifont} %ding
+\usepackage[displaymath]{lineno}
+
+%%\usepackage{fancyhdr}
+%%\usepackage{mparhack}
+%%\usepackage{edmargin} %endnotes
+
+%% hyperref interferes with the \part macro of cambridge
+\usepackage[letterpaper,colorlinks=true,%
+  citecolor=red,%
+  %breaklinks=true,%
+  %pdftex,
+  ps2pdf,%
+  hyperindex=true]{hyperref}
+
+% Also interferes with \part macro of CUP.
+% http://tug.ctan.org/tex-archive/macros/latex/contrib/pdfcomment/doc/pdfcomment.pdf
+\usepackage{pdfcomment}
+
+%tikz graphics
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{chains,shapes,arrows,trees,matrix,positioning,decorations,backgrounds,fit}
+
+% wrapping graphics
+% http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{wrapfig}
+
+
+
+%\usepackage{tikz}
+
+%
+%\usepackage[paper size={90mm, 120mm},left=2mm,right=2mm,top=2mm,bottom=2mm,nohead]{geometry}
+%\usepackage{amsthm}
+%\usepackage{mathidx}
+%%\usepackage{makeidx}
+%%\usepackage{multicol}
+%\usepackage{pdfsync}  %for TexShop sync.
+%\usepackage{mparhack} %http://www.tex.ac.uk/cgi-bin/texfaq2html?label=marginparside
+%%\usepackage{multind}
+%\usepackage{hanging} creates a memory leak, don't use!
+%\usepackage{zref}
+%\usepackage{xkeyval}
+%\usepackage{ifpdf}
+%\usepackage{ifthen}
+%\usepackage{calc}
+%\usepackage{marginnote}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{flag}
+\input{kepmacros}
+\input{tikz/init}
+
+
+% line numbers
+\def\lll{\resetlinenumber[1]}
+\def\linenumberfont{\normalfont\small\sffamily}
+
+\def\tocpart#1{
+  \addcontentsline{toc}{part}{\Large{#1}}}
+% (or even \LARGE)
+  
+\crop
+%\makeindex
+\makeindex{index/Notation}
+\makeindex{index/Index}
+
+\def\linput#1{\lll\input{#1}}
+
+
+\raggedbottom  % for now.
+%\raggedright  % don't worry for now.
+
+%% \renewcommand{\baselinestretch}{2}  %% turns on double spacking
+
+
+%%% end notes -kill this.
+%%\maketextnotes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% new theorems
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Theorem}
+\newtheorem{lemma}[equation]{Lemma}
+\newtheorem{lemma*}[equation]{Lemma$^*$}
+\newtheorem{background}[equation]{Background}
+\newtheorem{corollary}[equation]{Corollary}
+\newtheorem{example}[equation]{Example}
+%\newtheorem{assumption}[equation]{Assumption}
+%\newtheorem{interpretation}[equation]{Interpretation}
+\newtheorem{conjecture}[equation]{Conjecture}
+%---
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+%---
+\theoremstyle{remark}
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{notation}[equation]{Notation}
+%\newtheorem{note}[equation]{Author's Note}
+%\newtheorem*{note}{Author's Note.}
+%\newtheorem{calculation}[equation]{Calculation}
+%\newtheorem{assertion}[equation]{Assertion}
+\newtheorem{exer}[equation]{Exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\title[a blueprint for formal proofs]
+    {%Flyspeck :
+      Dense Sphere Packings}
+\author{Thomas C. Hales}
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FRONT
+    \frontmatter
+    \maketitle
+    \tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+   \input{frontmatter}
+   \newpage
+   %%\setcounter{chapter}{-1}
+   \input{preface}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \mainmatter
+  \begin{runninglinenumbers*}
+  
+    \tocpart{Overview}
+    \input{fig}
+    \input{fcc}
+    
+    \tocpart{Foundations}
+    \linput{trig}  
+    \linput{volume}
+    \linput{hypermap}
+    \linput{fan}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+
+    \tocpart{The Kepler Conjecture}
+    
+    \linput{packing}
+    \linput{local}
+    \linput{tame}
+
+    
+    \tocpart{And Beyond}
+    \linput{further}
+    \input{formal_proof}    
+    \end{runninglinenumbers*}
+    \appendix
+    \input{numerical}
+    \newpage
+    \input{acknowledgement}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\raggedright
+\bibliographystyle{plainnat}
+\bibliography{../latex/bibliography/all}
+
+%% shell:>makeindex index/Index
+%% shell:>makeindex index/Notation
+\printindex{index/Index}{General index}
+\printindex{index/Notation}{Notation index}
+
+
+\end{document}

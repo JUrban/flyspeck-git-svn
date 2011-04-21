@@ -1,0 +1,1436 @@
+(* ========================================================================== *)
+(* FLYSPECK - BOOK FORMALIZATION                                              *)
+(*                                                                            *)
+(* Chapter: nonlinear inequalities                                            *)
+(* Author:  Thomas Hales     *)
+(* Date: 2010-08-30                                                           *)
+(* ========================================================================== *)
+
+
+(*
+Input is a nonlinear inequality.
+Output is executable interval arithmetic code in C++.
+*)
+
+(* Old bug: early version of process_to_string created a fork that does not get cleaned. *)
+
+flyspeck_needs "general/sphere.hl";;
+flyspeck_needs "nonlinear/ineq.hl";;
+flyspeck_needs "nonlinear/lemma.hl";;
+
+module Optimize = struct
+
+open Lemma;;
+
+let svn_version() = "svn("^
+  (process_to_string ("svnversion -n " ^ flyspeck_dir))^
+  ","^
+  (process_to_string("svnversion -n " ^ hollight_dir))^
+  ")";;
+
+
+let ineq = Sphere.ineq;;
+let all_forall = Sphere.all_forall;;
+let add = Ineq.add;;
+
+let nub = Parse_ineq.nub;;
+
+let join_comma = Parse_ineq.join_comma;;
+let join_space = Parse_ineq.join_space;;
+let join_lines = Parse_ineq.join_lines;;
+
+let string_of_num' = Parse_ineq.string_of_num';;
+let dest_decimal = Parse_ineq.dest_decimal;;
+let strip_let_tm = Parse_ineq.strip_let_tm;;
+let output_filestring = Parse_ineq.output_filestring;;
+
+let NONLIN = new_definition `NONLIN = T`;;
+
+let FROZEN_REWRITE_TAC ths = 
+   if (ths=[]) then REWRITE_TAC [] else
+     let th = end_itlist CONJ ths in
+      FREEZE_THEN (fun t -> REWRITE_TAC[t]) th;;
+
+(* ========================================================================== *)
+(*    SPLITTING INEQUALITIES                                                  *)
+(* ========================================================================== *)
+
+
+
+let split_interval = prove_by_refinement(
+  `! a b (y:real). (a <= y /\ y <= b) ==>
+  ((a <= y /\ y <= m) \/ (m <= y /\ y <= b) )
+   `,
+  (* {{{ proof *)
+  [
+  REAL_ARITH_TAC;
+  ]);;
+  (* }}} *)
+
+let split_2h0 = INST [(`&2 * h0`,`m:real`)] split_interval;;
+
+let SPLIT_H0_TAC pos =  
+ (REPEAT GEN_TAC) THEN
+ (REWRITE_TAC[ineq_expand6]) THEN
+ (REPLICATE_TAC (pos) DISCH_TAC) THEN
+ (DISCH_THEN (fun t -> MP_TAC (MATCH_MP split_2h0 t))) THEN
+ DISCH_THEN DISJ_CASES_TAC    THEN 
+ (REPEAT (POP_ASSUM MP_TAC)) THEN 
+ (REWRITE_TAC[GSYM ineq_expand6]);;
+
+let get_split idq = 
+  let ts = idq.tags in
+  let rec gs = (function
+    | [] -> []
+    | (Split a::_) -> a 
+    | _ :: rs -> gs rs) in
+    gs ts;;
+
+(* let filter_split not_i = filter (fun t -> not(t=not_i));; *)
+
+(* WARNING: This disturbs the goal *)
+
+let split_h0 (ineq,ss) = 
+  let all_goal() = 
+    map (function (_,w) -> w) ((function (_,b,_) -> b) 
+				 (hd (!current_goalstack))) in 
+  let split_h0_term i inq = 
+    let _ = g inq in
+    let _ = e(SPLIT_H0_TAC i) in
+      map all_forall (all_goal()) in 
+  let _ = (List.length ss > 0)  or failwith "empty split" in
+  let ineql = split_h0_term (hd ss) ineq in
+   map (fun t-> (t, tl ss)) ineql;;
+
+let rec split_all_h0 = function
+  | [] -> []
+  | (i,[])::rs -> i :: split_all_h0 rs
+  | r::rs -> split_all_h0 (split_h0 r @ rs);;
+
+
+
+(* ========================================================================== *)
+(*    PARSING INEQUALITIES                                                    *)
+(* ========================================================================== *)
+
+
+let quoted s = let q = "\"" in (q^s^q);;
+
+let paren s = "("^ s ^")";;
+
+let i_mk s = "interval::interval ("^quoted s ^")";;
+
+let x9list =  
+  [`x1:real`;`x2:real`;`x3:real`;`x4:real`;`x5:real`;`x6:real`;`x7:real`;`x8:real`;`x9:real`];;
+
+let x_backlist =
+  [`x7:real`;`x2:real`;`x3:real`;`x4:real`;`x8:real`;`x9:real`];;
+
+let x6list = fst(chop_list 6 x9list);;
+
+let dest_ineq ineq = 
+  let t = snd(strip_forall ((* prep_term *) (ineq))) in
+  let (vs,i) = dest_comb t in
+  let (_,vs) = dest_comb vs in
+  let vs = dest_list vs in
+  let vs = map (fun t -> let (a,b) = dest_pair t in (a,dest_pair b)) vs in
+  let vs = map (fun (a,(b,c)) -> (a, b, c)) vs in
+    (t,vs,disjuncts i);;
+
+let dest_nonlin t = 
+  let (_,r,il) = dest_ineq t in 
+  let p1 (a,_,_) = a in
+  let p2 (_,b,_) = b in
+  let p3 (_,_,c) = c in
+  let dest x = try dest_binop `(real_lt)` x with Failure _ -> dest_binop `(real_le)` x in
+  let (iis,zzs) = unzip( map (dest) il) in
+  let zz = nub zzs in
+  let _ = (zz = [`&0`]) or failwith "zero expected" in
+  let _ = ((map p2 r = x6list) or (map p2 r = x9list)) or failwith "x1..x6 or x1..x9 expected" in
+  (map p1 r, map p3 r,iis);;
+
+
+
+
+
+ (* these names don't change in cpp *)
+
+let idem_assoc = map (fun a -> (a,a)) [
+  "delta_x4";"delta4_squared_x";"x1_delta_x";
+  "halfbump_x1";"halfbump_x4";
+  "dih_x_div_sqrtdelta_posbranch";"dih2_x_div_sqrtdelta_posbranch";
+  "dih3_x_div_sqrtdelta_posbranch";"dih4_x_div_sqrtdelta_posbranch";
+  "dih5_x_div_sqrtdelta_posbranch";"dih6_x_div_sqrtdelta_posbranch";
+  "ldih_x_div_sqrtdelta_posbranch";"ldih2_x_div_sqrtdelta_posbranch";
+  "ldih3_x_div_sqrtdelta_posbranch";"ldih4_x_div_sqrtdelta_posbranch";
+  "ldih5_x_div_sqrtdelta_posbranch";"ldih6_x_div_sqrtdelta_posbranch";
+  "dih_x_126_s2";  "dih2_x_126_s2";  "dih3_x_126_s2"; 
+  "dih4_x_126_s2";  "dih5_x_126_s2";  "dih6_x_126_s2";
+ "ldih_x_126_s2";  "ldih2_x_126_s2";  "ldih6_x_126_s2";
+  "dih_x_135_s2";  "dih2_x_135_s2";  "dih3_x_135_s2"; 
+  "dih4_x_135_s2";  "dih5_x_135_s2";  "dih6_x_135_s2";
+ "ldih_x_135_s2";  "ldih3_x_135_s2";  "ldih5_x_135_s2";
+  "delta_x_126_s2";  "delta_x_135_s2";
+  "vol3_x_sqrt";"vol3_x_135_s2";
+  "sol_euler_x_div_sqrtdelta";"sol_euler345_x_div_sqrtdelta";
+  "sol_euler156_x_div_sqrtdelta";"sol_euler246_x_div_sqrtdelta";
+  "taum_x1";"taum_x2";"taum_x1_x2";"arclength_x1";"arclength_x2";
+  "arclength_x_123";"arclength_x_234";"arclength_x_126";"arclength_x_345";
+  "acs_sqrt_x1_d4";"acs_sqrt_x2_d4";
+  "gchi2_x";"gchi3_x";"gchi4_x";"gchi5_x";"gchi6_x";
+  "ldih_x";"ldih2_x";"ldih3_x";"ldih6_x";
+  "vol3f_x_lfun";  "vol3f_x_sqrt2_lmplus";
+  "gamma23f_126_w1";
+  "gamma23f_red";
+  "asn797k"; "asnFnhk"; "lfun_y1";"surf_x";"surfR126d";
+    "sol";   "vol_x";   "gchi1_x";"eta2_126";"eta2_135";
+  "gamma3f_x_vLR_lfun";  "gamma3f_x_vLR0";
+  "gamma3f_x_vL_lfun";  "gamma3f_x_vL0";
+  "gamma3f_x_v_lfun";  "gamma3f_x_v0";
+  "monomial";
+  "num1";"num2";"num_combo1";
+  "dih_template_B_x";"taum_template_B_x";"delta_template_B_x";
+  "taum_hexall_x";"dih_hexall_x";"dih1_hexall_x";"upper_dih_hexall_x";"delta_hexall_x";"delta4_hexall_x";
+  "eulerA_hexall_x";"factor345_hexall_x";"law_cosines_234_x";"law_cosines_126_x";"delta_126_x";
+  "taum_x";"delta_top_x";
+  "ldih_x_135_n";  "ldih3_x_135_n";  "ldih5_x_135_n";
+  "ldih_x_126_n";    "ldih6_x_126_n";
+  "gamma3f_vLR_x_nlfun";"gamma3f_vL_x_nlfun";
+  "gamma3f_vLR_x_n0";"gamma3f_vL_x_n0";
+  "gamma3f_135_x_s_n";"gamma3f_126_x_s_n";
+ ];;
+
+
+(* these names can change in cpp *)
+
+let cpp_assoc = 
+  let pref = "taylorSimplex::" in
+  let p (a,b) = (a, (pref^b)) in map p 
+  (idem_assoc @ [("unit6","unit");
+  ("proj_x1","x1");("proj_x2","x2");("proj_x3","x3");
+  ("proj_x4","x4");("proj_x5","x5");("proj_x6","x6");
+  ("ldih2_x_126_n_","ldih2_x_126_n");
+   ("sqrt_x1","y1");   ("sqrt_x2","y2");   ("sqrt_x3","y3");  
+   ("sqrt_x4","y4");   ("sqrt_x5","y5");   ("sqrt_x6","y6");
+   ("dih_x","dih"); ("dih2_x","dih2");("dih3_x","dih3");
+   ("dih4_x","dih4"); ("dih5_x","dih5");("dih6_x","dih6");
+   ("upper_dih_x","upper_dih");
+  ("mardih_x","marchalDih");  ("mardih2_x","marchalDih2");  
+  ("mardih3_x","marchalDih3");
+  ("mardih4_x","marchalDih4");  ("mardih5_x","marchalDih5"); 
+  ("mardih6_x","marchalDih6");
+  ("norm2hh_x","norm2hhx");
+  ("rad2_x","rad2");
+   ("delta_x","delta");
+   ("rhazim_x","rhazim");("rhazim2_x","rhazim2");
+  ("rhazim3_x","rhazim3");
+  ("promote_pow2","x1square");
+("promote_pow3","x1cube");
+
+ ]);;
+
+let cpp0_assoc = 
+  [("sqrt8","sqrt8");("pi","pi");("const1","const1");
+   ("hminus","hminus");("sqrt3","sqrt3");
+  ("arc_hhn","arc_hhn");
+  ("adodec","aStrongDodec");
+  ("bdodec","bStrongDodec");
+  ("ydodec","yStrongDodec");
+   ];;
+
+let cpp_of_constant s  = 
+  try (assoc s cpp0_assoc) with 
+      Failure _ -> failwith (s^" find: cpp_of_constant") ;;
+
+let cpp_of_fun to_string xlist s xs = 
+  let (arg,xss) = chop_list (List.length xs - List.length xlist) xs in
+  let _ = (xss = xlist) or failwith ("standard x list expected in "^s) in
+  let hd =  try (assoc s cpp_assoc) with 
+      Failure _ -> failwith (s^" not found in cpp_assoc")  in
+  let arg_s = map (paren o to_string) arg in
+  let p = if (List.length arg > 0) then paren else I in
+    (hd ^ " " ^ p(join_comma arg_s));;
+
+let cpp_string_of_term = 
+let rec ccform t =
+  let soh = ccform in
+  if is_var t then fst (dest_var t) else
+  let (f,xs) = strip_comb t in
+  let ifix i = let [a;b] = xs in paren(soh a ^ " " ^ i ^ " " ^ soh b) in
+  let _  = (is_const f) or failwith ("oracle: " ^ string_of_term f) in
+  match fst (dest_const f) with
+  | "real_add" -> ifix "+"
+  | "real_mul" -> ifix "*"
+  | "real_div" -> ifix "/"
+  | "\\/" -> ifix "\\/"
+  | "real_neg" -> let [a] = xs in "(-" ^ soh a ^ ")"
+  | "real_of_num" -> let [a] = xs in i_mk(soh a)  
+  | "NUMERAL" -> let [a] = xs in string_of_num' (dest_numeral t)
+  | "<" -> let [a;b] = xs in "(" ^ soh a ^ " < " ^ soh b ^ ")"
+  | ">" -> let [a;b] = xs in "(" ^ soh a ^ " > " ^ soh b ^ ")"
+  | "+" -> let [a;b] = xs in "(" ^ soh a ^ " + " ^ soh b ^ ")"
+  | "*" -> let [a;b] = xs in "(" ^ soh a ^ " * " ^ soh b ^ ")"
+  | "DECIMAL" ->  i_mk(string_of_num' (dest_decimal t))
+(*  | "COND" -> let [a;b;c] = xs in paren(soh a ^ " ? " ^ soh b ^ " : " ^ soh c) *)
+  | s -> if (xs = []) then "("^cpp_of_constant s^")"  
+    else "(" ^ cpp_of_fun ccform x6list s xs  ^ ")" in
+  fun t -> try (ccform t) with Failure s -> 
+    failwith (s^" .......   "^string_of_term t);;
+
+(* generation of cpp code *)
+
+let cpp_template_taylor c (i,s) = Printf.sprintf 
+"       taylorFunction F%s%d = %s;" c i s;;
+
+let cpp_template_t c iis = 
+  join_lines 
+    (map (cpp_template_taylor c) (zip (1--(List.length iis)) iis));;
+
+let cpp_template_F c i = Printf.sprintf "&F%s%d" c i;;
+
+let cpp_template_Fc c len = join_comma 
+  (map (cpp_template_F c) (1-- len));;
+
+let rec delta126min = function 
+    | [] -> -1.0
+    | Delta126min t :: _ -> t
+    | _ :: a -> delta126min a;;
+
+let rec widthCut = function
+  | [] -> (false,0.0)
+  | Widthcutoff t::_ -> (true,t)
+  | _:: a -> widthCut a;;
+
+let rec delta126max = function 
+    | [] -> -1.0
+    | Delta126max t :: _ -> t
+    | _ :: a -> delta126max a;;
+
+let rec delta135min = function 
+    | [] -> -1.0
+    | Delta135min t :: _ -> t
+    | _ :: a -> delta135min a;;
+
+let rec delta135max = function 
+    | [] -> -1.0
+    | Delta135max t :: _ -> t
+    | _ :: a -> delta135max a;;
+
+let rec set298 = function
+    | [] -> false
+    | Set298 :: _ -> true
+    | _ :: a -> set298 a;;
+
+
+let cpp_template_gen = Printf.sprintf "
+ char* svn = %s;
+ char* ineq_id = %s;
+
+ int testRun() // autogenerated code
+	{
+	interval tx[6]={%s};
+	interval tz[6]={%s};
+	domain x = domain::lowerD(tx);
+	domain z = domain::upperD(tz);
+        domain x0=x;
+        domain z0=z;
+        %s
+        const taylorFunction* I[%d] = {%s}; // len ...
+        cellOption opt;
+        opt.allowSharp = %d; // sharp
+        opt.onlyCheckDeriv1Negative = %d; // checkderiv
+        %s // other options.
+	return (opt.set298 ? prove::f298() : prove::recursiveVerifier(0,x,z,x0,z0,I,%d,opt)); // len
+	}";;
+
+let mk_cpp_proc t s tags = 
+  let sharp = if  mem Sharp tags then 1 else 0 in
+  let checkderiv = if  mem Onlycheckderiv1negative tags then 1 else 0 in
+  let setrad2 = if mem Set_rad2 tags then "\topt.setRad2 = 1;\n" else "" in
+  let (b,f) = widthCut tags in
+  let sWidth = if b then Printf.sprintf "\topt.widthCutoff = %8.16f;\n" f else "" in
+  let d126min = delta126min tags in
+  let s126min = if (d126min > -1.0) then Printf.sprintf "\topt.delta126Min = %8.16f;\n" d126min else "" in
+  let d126max = delta126max tags in
+  let s126max = if (d126max > -1.0) then Printf.sprintf "\topt.delta126Max = %8.16f;\n" d126max else "" in
+  let d135min = delta135min tags in
+  let s135min = if (d135min > -1.0) then Printf.sprintf "\topt.delta135Min = %8.16f;\n" d135min else "" in
+  let d135max = delta135max tags in
+  let s135max = if (d135max > -1.0) then Printf.sprintf "\topt.delta135Max = %8.16f;\n" d135max else "" in
+  let s206A = if (s="2065952723 A1" ) then Printf.sprintf "\topt.strategy206A=1;\n" else "" in
+  let s298 = if (set298 tags) then Printf.sprintf "\topt.set298=1;\n" else "" in
+  let others = setrad2 ^ s126min ^ s126max ^ s135min ^ s135max ^ sWidth ^ s206A ^ s298 in
+  let c = map cpp_string_of_term in
+  let f (x,y,z) = (c x,c y,c z) in
+  let (aas,bbs,iis) = f (dest_nonlin t) in
+  let len = List.length iis in
+  let sq = quoted s in
+  let svn = (quoted(svn_version())) in
+  let jaas = join_comma aas in
+  let jbbs = join_comma bbs in
+  cpp_template_gen svn sq jaas jbbs (cpp_template_t "" iis) 
+    len (cpp_template_Fc "" len) sharp  checkderiv others len;;
+
+
+(* quad clusters *)
+
+let has_subterm sub tm = 
+  can (find_term ((=) sub)) tm;; 
+
+let has_cross_diag = has_subterm `quad_cross_diag2_x`;;
+
+let has_delta_top = has_subterm `delta_top_x`;;
+
+let is_quad_cluster tags = (can (find (function Quad_cluster _ -> true | _ -> false)) tags);;
+
+let quad_margin tags = (function Quad_cluster t -> t | _ -> 0.0) 
+  (find ((function Quad_cluster _ -> true | _ -> false))  tags);;
+
+let check_quad_partition_term (r,s,t) tm = 
+  let tm2 = list_mk_binop `(+)` (r @ s @ t) in
+  let t = mk_eq (tm ,tm2) in 
+      (REAL_ARITH) t;;
+
+let partition_quad_term tm = 
+  let rec split tm = 
+    if (has_cross_diag tm) then ([],[],[tm]) else
+    if (has_delta_top tm) then ([],[],[tm]) else
+      if (subset (frees tm) x6list) then ([tm],[],[]) else
+	if (subset (frees tm) x_backlist) then ([],[tm],[]) else
+	  let (a1,a2) = dest_binop `(+)` tm in
+	  let  (r1,s1,t1) = split a1 in
+	  let (r2,s2,t2) = split a2  in
+	    (r1 @ r2, s1 @ s2, t1 @ t2) in
+  let (r,s,t) = split tm in
+  let _ = check_quad_partition_term (r,s,t) tm in
+  let v =  vsubst [`x1:real`,`x7:real`;  `x5:real`,`x8:real`; `x6:real`,`x9:real`] in
+  let w = function | [] -> 
+   `unit6 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) * #0.0` | xl -> list_mk_binop `(+)` xl in
+   (w r,w(map v s), t);;
+
+
+let cppq_template_gen = Printf.sprintf "
+ char* svn = %s;
+ char* ineq_id = %s;
+
+ int testRun()  // quad cluster case, autogenerated code
+        {
+	interval txA[6]={%s};
+	interval tzA[6]={%s};
+	domain xA = domain::lowerD(txA);
+	domain zA = domain::upperD(tzA);
+	interval txB[6]={%s};
+	interval tzB[6]={%s};
+	domain xB = domain::lowerD(txB);
+	domain zB = domain::upperD(tzB);
+        // Declare FA, FB...
+        %s
+        %s
+	const taylorFunction* IA[%d] = {%s};
+	const taylorFunction* IB[%d] = {%s};
+	cellOption opt;
+        %s // options.
+	return prove::recursiveVerifierQ(0,xA,xB,zA,zB,IA,IB,%d,opt);
+        }";;
+
+let get_cross_diag_squared is9 =
+  let id9' = filter (fun (_,_,c)-> List.length c >0 && has_cross_diag (hd c)) is9 in
+  let is9'' = (fun (_,_,[c])::_ -> c ) id9' in
+  let tm = term_match x9list `quad_cross_diag2_x x1 x2 x3 x4 x5 x6 x7 x8 x9 +
+    unit6 x1 x2 x3 x4 x5 x6 * t` is9'' in
+  let t =   (fun ([],[(x,_)],[]) -> x) tm in
+    mk_binop `( * )` t t;;  (* t is negative, but it gets squared *)
+
+let get_delta_top_squared is9 =
+  let id9' = filter (fun (_,_,c)-> List.length c >0  && has_delta_top (hd c)) is9 in
+  let is9'' = (fun (_,_,[c])::_ -> c ) id9' in
+  let tm = term_match x9list `delta_top_x t x1 x2 x3 x4 x5 x6 x7 x8 x9` is9'' in
+  let t =   (fun ([],[(x,_)],[]) -> x) tm in
+    mk_binop `( * )` t t;;  (* gets squared *)
+
+let cde_template = 
+  Printf.sprintf "opt.crossDiagMinEnclosed = interMath::inf(%s);\n";;
+
+let cdt_template = 
+  Printf.sprintf "opt.crossDiagMinDelta = interMath::inf(%s);\n";;
+
+
+let mk_cppq_proc t s tags =   
+  let svn = (quoted(svn_version())) in
+  let ineq_id = quoted s in
+  let cpp = cpp_string_of_term in
+  let (x,z,is) = dest_nonlin t  in
+  let is' = map partition_quad_term is in
+  let (is9,is6) = partition (fun (_,_,c) -> List.length c > 0)   is' in
+  let (is6A,is6B) = unzip (map (fun (a,b,_) -> (cpp a,cpp b)) is6) in
+  let len = List.length  is6 in
+  let xs = map cpp x in
+  let zs = map cpp z in
+  let nth = List.nth in
+  let a_part u = [nth u 0;nth u 1;nth u 2;nth u 3; nth u 4;nth u 5] in
+  let b_part u = [nth u 6;nth u 1;nth u 2;nth u 3;nth u 7; nth u 8] in
+  let xA = join_comma(a_part xs) in
+  let xB = join_comma(b_part xs) in
+  let zA = join_comma(a_part zs) in
+  let zB = join_comma(b_part zs) in
+  let opt_cross = try (  cde_template (cpp ( get_cross_diag_squared is9) )) with _ -> "" in
+  let opt_delta_top = try (  cdt_template (cpp ( get_delta_top_squared is9) )) with _ -> "" in
+  let backsym = if (mem Dim_red_backsym tags) then "\topt.dimRedBackSym = 1;\n" else "" in
+  let margin = Printf.sprintf "\topt.margin = %8.16f;\n\n" (quad_margin tags) in
+  let options = opt_cross ^ opt_delta_top ^ backsym^margin in
+  cppq_template_gen svn ineq_id xA zA xB zB (cpp_template_t "A" is6A) (cpp_template_t "B" is6B) 
+      len (cpp_template_Fc "A" len) len (cpp_template_Fc "B" len) options len ;;
+
+(*
+let t = snd(top_goal());;
+let s = "test";;
+let tags = [Quad_cluster 3.0];;
+*)
+
+(*     next: put together header, proc, tail and run *)
+
+let tmpfile = flyspeck_dir^"/../interval_code/test_auto.cc";;
+
+(* from glpk_link.ml *)
+
+let load_and_close_channel_true ic = 
+  let rec lf ichan a = 
+    try
+      lf ic (Pervasives.input_line ic::a)
+    with End_of_file -> a | _ as t -> (Pervasives.close_in ic; raise t) in
+    let rs = lf ic [] in
+    let _ = Pervasives.close_in ic in
+      rev rs;;
+
+let load_file filename = 
+  let ic = Pervasives.open_in filename in load_and_close_channel_true ic;;
+
+let cpp_header() = join_lines (load_file  (flyspeck_dir^"/../interval_code/generic_head.txt"));;
+
+let cpp_tail() = join_lines (load_file  (flyspeck_dir^"/../interval_code/generic_tail.txt"));;
+
+let mkfile_cpp  t s tags  = 
+  output_filestring tmpfile 
+   (join_lines [cpp_header(); (mk_cpp_proc t s tags);cpp_tail()]);;
+
+let mkfile_cppq  t s tags =
+  output_filestring tmpfile 
+   (join_lines [cpp_header(); (mk_cppq_proc t s tags);cpp_tail()]);;
+
+
+let compile_cpp () = 
+  let err = "/tmp/cpp_err.txt" in
+  let e = Sys.command("cd "^flyspeck_dir^"/../interval_code; make test_auto >& "^err) in
+  let _ =   (e=0) or (let _ = Sys.command ("cat "^err) in failwith "compiler error") in
+    ();;
+
+ let execute_interval ex tags s testineq = 
+  let interval_dir = flyspeck_dir^"/../interval_code" in
+  let quad_cluster = is_quad_cluster tags  in
+  let _ = if quad_cluster then
+   mkfile_cppq testineq s tags
+  else 
+      mkfile_cpp testineq s tags in
+  let _ = compile_cpp() in 
+  let _ = (not ex) or (0=  Sys.command(interval_dir^"/test_auto")) or failwith "interval execution error" in
+    ();;
+
+
+
+
+
+(* ========================================================================== *)
+(*    DEFS AND PROOFS                                                    *)
+(* ========================================================================== *)
+
+
+
+(* for big series in ineqdata... *)
+
+
+
+let OR_RULE rule1 rule2 th = try rule1 th with _ -> rule2 th;;
+
+let rec REPEAT_RULE rule =
+  fun t -> if can rule t then REPEAT_RULE rule (rule t) else t;;
+
+
+
+
+let vol3f_lmln = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. (y1 <= &2 * h0) /\ (y2 <= &2 * h0) /\ (y6 <= &2 * h0) ==> (vol3f y1 y2 y6 sqrt2 lmfun = vol3f y1 y2 y6 sqrt2 lfun)`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[Sphere.vol3f];
+  MESON_TAC[lmfun_lfun];
+  ]);;
+  (* }}} *)
+
+(* SOME DEFINITIONS *)
+
+
+let vol3f_sqrt2_lmplus = new_definition 
+  `vol3f_sqrt2_lmplus y1 y2 (y3:real) (y4:real) (y5:real) y6 = 
+    (&2 * mm1 / pi) *
+             (&2 * dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              &2 * dih2_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              &2 * dih6_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              dih3_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              dih4_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              dih5_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - &3 * pi) -
+             (&8 * mm2 / pi) *
+             (
+              lfun (y2 / &2) * dih2_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+              lfun (y6 / &2) * dih6_y y1 y2 sqrt2 sqrt2 sqrt2 y6)`;;
+
+let vol3f_x_sqrt2_lmplus = new_definition
+  `vol3f_x_sqrt2_lmplus x1 x2 x3 x4 x5 x6 =
+   vol3f_sqrt2_lmplus (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)      (sqrt x6)`;;
+
+(*
+let vol3f_sqrt2_lfun = new_definition 
+  `vol3f_sqrt2_lfun y1 y2 (y3:real) (y4:real) (y5:real) y6 = 
+    vol3f y1 y2 y6 sqrt2 lfun`;;
+*)
+
+let vol3f_x_lfun = new_definition 
+ `vol3f_x_lfun x1 x2 (x3:real) (x4:real) (x5:real) x6 = vol3f (sqrt x1) (sqrt x2) (sqrt x6)  sqrt2 lfun `;;
+
+let vol3_x_sqrt = new_definition
+ `vol3_x_sqrt x1 x2 (x3:real) (x4:real) (x5:real) x6  = vol_y sqrt2 sqrt2 sqrt2 (sqrt x1) (sqrt x2) (sqrt x6) `;;
+
+let vol3_vol_x = prove_by_refinement(
+  `!x1 x2 x3 x4 x5 x6.  
+   &0 <= x1 /\ &0 <= x2 /\ &0 <= x6 ==>
+    (vol3_x_sqrt x1 x2 x3 x4 x5 x6 = vol_x x1 x2 (&2) (&2) (&2) x6)`,
+  (* {{{ proof *)
+  [
+   MP_TAC (REAL_ARITH `&0 <= &2`);
+  ONCE_REWRITE_TAC[REAL_ARITH `&0 = &0 pow 2`];
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[vol3_x_sqrt;Sphere.vol_x;Sphere.vol_y;Sphere.y_of_x;Sphere.sqrt2];
+  REPEAT AP_THM_TAC;
+  AP_TERM_TAC ;
+  AP_TERM_TAC;
+  ASM_SIMP_TAC[SPEC `&0` sq_pow2];
+  REWRITE_TAC[Sphere.delta_x];
+  REAL_ARITH_TAC;
+  ]);;
+  (* }}} *)
+
+let spec0 = SPECL [`&0`;`&0`;`&0`;`&0`;`&0`;`&0`;];;
+
+let vol3f_x_lfun_alt = prove_by_refinement(
+  `!x1 x2 x3 x4 x5 x6.  
+   &0 <= x1 /\ &0 <= x2 /\ &0 <= x6 ==>
+   vol3f_x_lfun x1 x2 x3 x4 x5 x6 =   (&2 * mm1 / pi) *
+             (&2 * dih_x x1 x2 (&2) (&2) (&2) x6 +
+              &2 * dih2_x x1 x2 (&2) (&2) (&2) x6 +
+              &2 * dih6_x x1 x2 (&2) (&2) (&2) x6 +
+              dih3_x x1 x2 (&2) (&2) (&2) x6 +
+              dih4_x x1 x2 (&2) (&2) (&2) x6 +
+              dih5_x x1 x2 (&2) (&2) (&2) x6 - &3 * pi) -
+             (&8 * mm2 / pi) *
+             ( ldih_x x1 x2 (&2) (&2) (&2) x6 +
+              ldih2_x x1 x2 (&2) (&2) (&2) x6 +
+              ldih6_x x1 x2 (&2) (&2) (&2) x6)`,
+  (* {{{ proof *)
+  [
+   MP_TAC (REAL_ARITH `&0 <= &2`);
+  ONCE_REWRITE_TAC[REAL_ARITH `&0 = &0 pow 2`];
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[vol3f_x_lfun;];
+  MP_TAC (SPECL [`sqrt x1`;`sqrt x2`;`sqrt2`;`sqrt2`;`sqrt2`;`sqrt x6`;`sqrt2`;`lfun`] vol3f_palt);
+  REWRITE_TAC[];
+  DISCH_THEN (fun t->REWRITE_TAC[t]);
+  REWRITE_TAC[Sphere.sqrt2;Sphere.ldih_x;Sphere.ldih2_x;Sphere.ldih6_x;Sphere.dih4_x;Sphere.dih5_x;Sphere.dih6_x];
+  ASM_SIMP_TAC[spec0 dih_x_y;spec0 dih2_x_y;spec0 dih3_x_y];
+  ]);;
+  (* }}} *)
+
+let spech0 = SPECL [`&2 * h0`;`&0`;`&0`;`&0`;`&0`;`&0`;];;
+
+
+let vol3f_x_sqrt2_lmplus_alt = prove_by_refinement(
+  `!x1 x2 x3 x4 x5 x6.  
+   ((&2 * h0) pow 2 <= x1) /\ &0 <= x2 /\ &0 <= x6 ==>
+   vol3f_x_sqrt2_lmplus x1 x2 x3 x4 x5 x6 =   (&2 * mm1 / pi) *
+             (&2 * dih_x x1 x2 (&2) (&2) (&2) x6 +
+              &2 * dih2_x x1 x2 (&2) (&2) (&2) x6 +
+              &2 * dih6_x x1 x2 (&2) (&2) (&2) x6 +
+              dih3_x x1 x2 (&2) (&2) (&2) x6 +
+              dih4_x x1 x2 (&2) (&2) (&2) x6 +
+              dih5_x x1 x2 (&2) (&2) (&2) x6 - &3 * pi) -
+             (&8 * mm2 / pi) *
+             (
+              ldih2_x x1 x2 (&2) (&2) (&2) x6 +
+              ldih6_x x1 x2 (&2) (&2) (&2) x6)`,
+  (* {{{ proof *)
+  [
+   MP_TAC (REAL_ARITH `&0 <= &2`);
+  ONCE_REWRITE_TAC[REAL_ARITH `&0 = &0 pow 2`];
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[vol3f_x_sqrt2_lmplus;vol3f_sqrt2_lmplus];
+  REWRITE_TAC[Sphere.sqrt2;Sphere.ldih_x;Sphere.ldih2_x;Sphere.ldih6_x;Sphere.dih4_x;Sphere.dih5_x;Sphere.dih6_x];
+  ASM_SIMP_TAC[spech0 dih_x_y;spech0 dih2_x_y;spech0 dih3_x_y];
+  ]);;
+  (* }}} *)
+
+let vol3f_lm0 = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. 
+  ( &2 * h0 <= y1) /\ (y2 <= &2 * h0) /\ (y6 <= &2 * h0) ==>
+  (vol3f y1 y2 y6 sqrt2 lmfun = vol3f_sqrt2_lmplus y1 y2 y3 y4 y5 y6)`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[vol3f_sqrt2_lmplus];
+  MP_TAC (SPECL [`y1:real`;`y2:real`;`sqrt2`;`sqrt2`;`sqrt2`;`y6:real`; `sqrt2`;`lmfun`] vol3f_palt);
+  REWRITE_TAC[];
+  DISCH_THEN (fun t-> REWRITE_TAC[t]);
+  ASM_SIMP_TAC[lmfun_lfun;lmfun0];
+  REWRITE_TAC[REAL_ARITH `&0 * x = &0 /\ &0 + y = y`];
+  ]);;
+  (* }}} *)
+
+(* remaining splits *)
+
+let gamma3f_126 = new_definition 
+ `gamma3f_126 (y1:real) (y2:real) (y3:real) (y4:real) (y5:real) (y6:real) f = 
+   gamma3f y1 y2 y6 sqrt2 f`;;
+
+let gamma3f_135 = new_definition 
+ `gamma3f_135 (y1:real) (y2:real) (y3:real) (y4:real) (y5:real) (y6:real) f  = 
+   gamma3f y1 y3 y5 sqrt2 f`;;
+
+let gamma3f_vLR = new_definition 
+ `gamma3f_vLR (y1:real) (y2:real) (y3:real) (y4:real) (y5:real) (y6:real) f  = 
+  (dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - dih_y y1 y3 sqrt2 sqrt2 sqrt2 y5) * 
+  (vol2r y1 sqrt2 - vol2f y1 sqrt2 f)/(&2 * pi)`;;  
+
+let gamma3f_vL = new_definition 
+ `gamma3f_vL (y1:real) (y2:real) (y3:real) (y4:real) (y5:real) (y6:real) f  = 
+  (dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - #0.03) * (vol2r y1 sqrt2 - vol2f y1 sqrt2 f)/(&2 * pi)`;;
+
+let gamma3f_v = new_definition 
+ `gamma3f_v (y1:real) (y2:real) (y3:real) (y4:real) (y5:real) (y6:real) f  = 
+  (dih_y y1 y2 y3 y4 y5 y6 - &2 * #0.03) * (vol2r y1 sqrt2 - vol2f y1 sqrt2 f)/(&2 * pi)`;;
+
+let gamma23f = new_definition `gamma23f y1 y2 y3 y4 y5 y6 w1 w2 r f =
+      (gamma3f y1 y2 y6 r f / &w1 + gamma3f y1 y3 y5 r f / &w2
+      + (dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 r r r y6 - dih_y y1 y3 r r r y5) * (vol2r y1 r - vol2f y1 r f)/(&2 * pi)) `;;
+
+let gamma23f_126_03 = new_definition `gamma23f_126_03 y1 y2 y3 y4 y5 y6 w1 r f =
+      (gamma3f y1 y2 y6 r f / &w1 
+      + (dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 r r r y6 - #0.03) * (vol2r y1 r - vol2f y1 r f)/(&2 * pi)) `;;
+
+let gamma23f_red_03 = new_definition `gamma23f_red_03 y1 y2 y3 y4 y5 y6 r f =
+       (dih_y y1 y2 y3 y4 y5 y6 - &2 * #0.03) * (vol2r y1 r - vol2f y1 r f)/(&2 * pi)`;;
+
+let gamma23f' = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6 w1 w2 f. gamma23f y1 y2 y3 y4 y5 y6 w1 w2 sqrt2 f =
+     gamma3f_126 y1 y2 y3 y4 y5 y6 f / &w1 + gamma3f_135 y1 y2 y3 y4 y5 y6 f / &w2 +
+     gamma3f_vLR y1 y2 y3 y4 y5 y6 f `,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[gamma23f;gamma3f_126;gamma3f_135;gamma3f_vLR];
+  ]);;
+  (* }}} *)
+
+let gamma23f_126_03' = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6 w1 f. gamma23f_126_03 y1 y2 y3 y4 y5 y6 w1 sqrt2 f =
+     gamma3f_126 y1 y2 y3 y4 y5 y6 f / &w1 +   gamma3f_vL y1 y2 y3 y4 y5 y6 f `,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[gamma23f_126_03;gamma3f_126;gamma3f_vL];
+  ]);;
+  (* }}} *)
+
+let gamma23f_v' = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6 w1 f. gamma23f_red_03 y1 y2 y3 y4 y5 y6 sqrt2 f =
+     gamma3f_v y1 y2 y3 y4 y5 y6 f `,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[gamma23f_red_03;gamma3f_v];
+  ]);;
+  (* }}} *)
+
+let gamma3f_vLR0 = new_definition `gamma3f_vLR0 y1 y2 y3 y4 y5 y6 = 
+   (dih_y y1 y2 y3 y4 y5 y6 -
+  dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 -
+  dih_y y1 y3 sqrt2 sqrt2 sqrt2 y5) *
+ (vol2r y1 sqrt2 - (&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2))) /
+ (&2 * pi)`;;
+
+let gamma3f_vLR0_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. &2 * h0 <= y1 ==> gamma3f_vLR y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_vLR0 y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_vLR;Sphere.vol2f;gamma3f_vLR0];
+  ASM_SIMP_TAC[lmfun0;REAL_MUL_RZERO;REAL_SUB_RZERO];
+  ]);;
+  (* }}} *)
+
+let gamma3f_vLR_lfun = new_definition `gamma3f_vLR_lfun y1 y2 y3 y4 y5 y6 = 
+(dih_y y1 y2 y3 y4 y5 y6 -
+  dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 -
+  dih_y y1 y3 sqrt2 sqrt2 sqrt2 y5) *
+ (vol2r y1 sqrt2 -
+  ((&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2)) -
+   (&8 * mm2 / pi) * &2 * pi * lfun (y1 / &2))) /
+ (&2 * pi) `;;
+
+let gamma3f_vLR_lfun_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. y1 <= &2 * h0 ==> gamma3f_vLR y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_vLR_lfun y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_vLR;Sphere.vol2f;gamma3f_vLR_lfun];
+  ASM_SIMP_TAC[lmfun_lfun];
+  ]);;
+  (* }}} *)
+
+let  gamma3f_vL0 = new_definition `gamma3f_vL0 y1 y2 y3 y4 y5 y6 = 
+(dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - #0.03) *
+ (vol2r y1 sqrt2 - (&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2))) /
+ (&2 * pi)   `;;
+
+let gamma3f_vL0_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. &2 * h0 <= y1 ==> gamma3f_vL y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_vL0 y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_vL;Sphere.vol2f;gamma3f_vL0];
+  ASM_SIMP_TAC[lmfun0;REAL_MUL_RZERO;REAL_SUB_RZERO];
+  ]);;
+  (* }}} *)
+
+let gamma3f_vL_lfun = new_definition `gamma3f_vL_lfun y1 y2 y3 y4 y5 y6 = 
+ (dih_y y1 y2 y3 y4 y5 y6 - dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - #0.03) *
+ (vol2r y1 sqrt2 -
+  ((&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2)) -
+   (&8 * mm2 / pi) * &2 * pi * lfun (y1 / &2))) /
+ (&2 * pi)`;;
+
+let gamma3f_vL_lfun_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. y1 <= &2 * h0 ==> gamma3f_vL y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_vL_lfun y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_vL;Sphere.vol2f;gamma3f_vL_lfun];
+  ASM_SIMP_TAC[lmfun_lfun];
+  ]);;
+  (* }}} *)
+
+let  gamma3f_v0 = new_definition `gamma3f_v0 y1 y2 y3 y4 y5 y6 = 
+  (dih_y y1 y2 y3 y4 y5 y6 - &2 * #0.03) *
+    (vol2r y1 sqrt2 - (&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2))) /
+    (&2 * pi)`;;
+
+let gamma3f_v0_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. &2 * h0 <= y1 ==> gamma3f_v y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_v0 y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_v;Sphere.vol2f;gamma3f_v0];
+  ASM_SIMP_TAC[lmfun0;REAL_MUL_RZERO;REAL_SUB_RZERO];
+  ]);;
+  (* }}} *)
+
+let gamma3f_v_lfun = new_definition `gamma3f_v_lfun y1 y2 y3 y4 y5 y6 = 
+   (dih_y y1 y2 y3 y4 y5 y6 - &2 * #0.03) *
+ (vol2r y1 sqrt2 -
+  ((&2 * mm1 / pi) * &2 * pi * (&1 - y1 / (sqrt2 * &2)) -
+   (&8 * mm2 / pi) * &2 * pi * lfun (y1 / &2))) /
+ (&2 * pi)`;;
+
+let gamma3f_v_lfun_case = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. y1 <= &2 * h0 ==> gamma3f_v y1 y2 y3 y4 y5 y6 lmfun = 
+    gamma3f_v_lfun y1 y2 y3 y4 y5 y6`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_v;Sphere.vol2f;gamma3f_v_lfun];
+  ASM_SIMP_TAC[lmfun_lfun];
+  ]);;
+  (* }}} *)
+
+let gamma3f_126_expand = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. gamma3f_126 y1 y2 y3 y4 y5 y6 f = 
+     vol3r y1 y2 y6 sqrt2 - ((&2 * mm1 / pi) *
+         (&2 * dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 + &2 * dih2_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+          &2 * dih6_y y1 y2 sqrt2 sqrt2 sqrt2 y6 + dih3_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+	  dih4_y y1 y2 sqrt2 sqrt2 sqrt2 y6 + dih5_y y1 y2 sqrt2 sqrt2 sqrt2 y6 - &3 * pi) -
+         (&8 * mm2 / pi) *
+         (f (y1 / &2) * dih_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+          f (y2 / &2) * dih2_y y1 y2 sqrt2 sqrt2 sqrt2 y6 +
+          f (y6 / &2) * dih6_y y1 y2 sqrt2 sqrt2 sqrt2 y6))`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_126;Sphere.gamma3f;];
+  MESON_TAC[vol3f_palt];
+  ]);;
+  (* }}} *)
+
+
+
+
+let gamma3f_135_expand = prove_by_refinement(
+  `!y1 y2 y3 y4 y5 y6. gamma3f_135 y1 y2 y3 y4 y5 y6 f = 
+     vol3r y1 y3 y5 sqrt2 - (  (&2 * mm1 / pi) *
+         (&2 * dih_y y1 sqrt2 y3 sqrt2 y5 sqrt2 + &2 * dih3_y y1 sqrt2 y3 sqrt2 y5 sqrt2 +
+          &2 * dih5_y y1 sqrt2 y3 sqrt2 y5 sqrt2 + dih2_y y1 sqrt2 y3 sqrt2 y5 sqrt2 +
+	  dih4_y y1 sqrt2 y3 sqrt2 y5 sqrt2 + dih6_y y1 sqrt2 y3 sqrt2 y5 sqrt2 - &3 * pi) -
+         (&8 * mm2 / pi) *
+         (f (y1 / &2) * dih_y y1 sqrt2 y3 sqrt2 y5 sqrt2 +
+          f (y3 / &2) * dih3_y y1 sqrt2 y3 sqrt2 y5 sqrt2 +
+          f (y5 / &2) * dih5_y y1 sqrt2 y3 sqrt2 y5 sqrt2))`,
+  (* {{{ proof *)
+  [
+  REPEAT STRIP_TAC;
+  REWRITE_TAC[gamma3f_135;Sphere.gamma3f;];
+  MESON_TAC[vol3f_135_palt];
+  ]);;
+  (* }}} *)
+
+let vol3r_126_x = prove_by_refinement(
+  `vol3r (sqrt x1) (sqrt x2) (sqrt x6) sqrt2 = vol3_x_sqrt x1 x2 (x3:real) (x4:real) (x5:real) x6`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[vol3_x_sqrt;Sphere.vol3r;Sphere.vol_y];
+  ]);;
+  (* }}} *)
+
+let dih_x_126_s2 = new_definition `dih_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let dih2_x_126_s2 = new_definition `dih2_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih2_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let dih3_x_126_s2 = new_definition `dih3_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih3_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let dih4_x_126_s2 = new_definition `dih4_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih4_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let dih5_x_126_s2 = new_definition `dih5_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih5_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let dih6_x_126_s2 = new_definition `dih6_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   dih6_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let ldih_x_126_s2 = new_definition `ldih_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   lfun (sqrt x1 / #2.0) * dih_x_126_s2 x1 x2 x3 x4 x5 x6`;;
+
+let ldih2_x_126_s2 = new_definition `ldih2_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   lfun (sqrt x2 / #2.0) * dih2_x_126_s2 x1 x2 x3 x4 x5 x6`;;
+
+let ldih6_x_126_s2 = new_definition `ldih6_x_126_s2 x1 x2 (x3:real) (x4:real) (x5:real) x6 = 
+   lfun (sqrt x6 / #2.0) * dih6_x_126_s2 x1 x2 x3 x4 x5 x6`;;
+
+let dih_x_135_s2 = new_definition `dih_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let dih2_x_135_s2 = new_definition `dih2_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih2_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let dih3_x_135_s2 = new_definition `dih3_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih3_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let dih4_x_135_s2 = new_definition `dih4_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih4_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let dih5_x_135_s2 = new_definition `dih5_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih5_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let dih6_x_135_s2 = new_definition `dih6_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   dih6_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let ldih_x_135_s2' = new_definition `ldih_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   lfun (sqrt x1/ #2.0) * dih_y (sqrt x1) sqrt2 (sqrt x3) sqrt2  (sqrt x5) sqrt2`;;
+
+let ldih3_x_135_s2 = new_definition `ldih3_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   lfun (sqrt x3/ #2.0) * dih3_x_135_s2 x1 x2 x3 x4 x5 x6 `;;
+
+let ldih5_x_135_s2 = new_definition `ldih5_x_135_s2 x1 (x2:real) x3 (x4:real) x5 (x6:real) = 
+   lfun (sqrt x5/ #2.0) * dih5_x_135_s2 x1 x2 x3 x4 x5 x6 `;;
+
+let ldih_x_135_s2 = prove_by_refinement(
+  `!x1 x2 x3 x4 x5 x6. ldih_x_135_s2 x1 x2 x3 x4 x5 x6 = 
+      lfun (sqrt x1 / #2.0) * dih_x_135_s2 x1 x2 x3 x4 x5 x6`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[ldih_x_135_s2';dih_x_135_s2];
+  ]);;
+  (* }}} *)
+
+let delta_x_126_s2 = new_definition 
+  `delta_x_126_s2 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    delta_y (sqrt x1) (sqrt x2) sqrt2 sqrt2 sqrt2 (sqrt x6)`;;
+
+let delta_x_135_s2 = new_definition 
+  `delta_x_135_s2 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    delta_y (sqrt x1) sqrt2 (sqrt x3) sqrt2 (sqrt x5) sqrt2`;;
+
+let gamma3f_x_vLR_lfun = new_definition
+`gamma3f_x_vLR_lfun (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_vLR_lfun  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+let gamma3f_x_vLR0 = new_definition
+`gamma3f_x_vLR0 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_vLR0  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+let gamma3f_x_vL_lfun = new_definition
+`gamma3f_x_vL_lfun (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_vL_lfun  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+let gamma3f_x_vL0 = new_definition
+`gamma3f_x_vL0 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_vL0  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+let gamma3f_x_v_lfun = new_definition
+`gamma3f_x_v_lfun (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_v_lfun  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+let gamma3f_x_v0 = new_definition
+`gamma3f_x_v0 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+    gamma3f_v0  (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)
+      (sqrt x6)`;;
+
+
+let vol3_x_135_s2 = new_definition
+`vol3_x_135_s2 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = 
+ vol3r (sqrt x1) (sqrt x3) (sqrt x5) sqrt2`;;
+
+let monomial = new_definition `monomial n1 n2 n3 n4 n5 n6 y1 y2 y3 y4 y5 y6 = 
+   (y1 pow n1) * (y2 pow n2) * (y3 pow n3) * (y4 pow n4) * (y5 pow n5) * (y6 pow n6)`;;
+
+let arclength_x_234 = new_definition `arclength_x_234  (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = arclength (sqrt x2) (sqrt x3) (sqrt x4)`;;
+
+let arclength_x_126 = new_definition `arclength_x_126  (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) = arclength (sqrt x1) (sqrt x2) (sqrt x6)`;;
+
+let num1_poly = prove_by_refinement(
+  `! x1 x2 x3 x4 x5 x6. num1 x1 x2 x3 x4 x5 x6 =
+     &64*x1*x4 - &32*x2*x4 - &32*x3*x4 - &4*x1*(x4 pow 2) - &32*x2*x5 + &32*x3*x5 + 
+   &4*x2*x4*x5 + &32*x2*x6 - &32*x3*x6 + &4*x3*x4*x6 `,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[Sphere.num1];
+  REAL_ARITH_TAC;
+  ]);;
+  (* }}} *)
+
+let num_combo1_num1  = prove_by_refinement(
+  `!x1 x2 x3 x4 x5 x6. num_combo1 x1 x2 x3 x4 x5 x6 = 
+      (num1 x1 x2 x3 x4 x5 x6) pow 2 - #0.01 * num2 x1 x2 x3 x4 x5 x6`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[Sphere.num1;Sphere.num2;Sphere.num_combo1];
+  REAL_ARITH_TAC;
+  ]);;
+  (* }}} *)
+
+
+
+
+(* ========================================================================== *)
+(*    MEGA PREP    TACTICS                                                    *)
+(* ========================================================================== *)
+
+
+(* apply at the beginning *)
+
+let macro_expand = (
+   [
+     gamma23f';gamma23f_126_03';gamma23f_v' ;
+     gamma23f_n_alt;gamma23f_126_03_n_alt;
+     gamma3f_135_n_alt;gamma3f_126_n_alt;
+     Sphere.x1_delta_y;Sphere.delta4_squared_y;
+   vol4f_palt;Parse_ineq.y_of_x_e;(* Parse_ineq.vol_y_e; *)
+   (* Oct 20: Sphere.vol3f; *) Sphere.vol3r;Sphere.vol2f;Sphere.gamma4f;
+   Sphere.gamma3f;  GSYM Parse_ineq.quadratic_root_plus_curry;
+   REAL_MUL_LZERO;
+   REAL_MUL_RZERO;FST;SND;Sphere.pathL;Sphere.pathR;
+   Sphere.node2_y;Sphere.node3_y] @ (!Ineq.dart_classes));;
+
+
+let PRELIM_TAC = EVERY[
+  (REWRITE_TAC[GSYM Sphere.rad2_y]) ;
+  (REWRITE_TAC(macro_expand)) ;
+];;
+
+
+(* take care of branching *)
+
+let BRANCH_TAC = EVERY[
+  REWRITE_TAC[REAL_ARITH `x / &1 = x /\ &0 * x = &0 /\ &0 +x = x`];
+  REWRITE_TAC[Sphere.gamma4f;vol4f_lmfun;Sphere.gamma3f;(* vol3f_palt; *)
+              gamma3f_126_expand;gamma3f_135_expand];
+  REWRITE_TAC[ineq_expand6];
+  DISCH_TAC;
+  REPEAT GEN_TAC;
+  REPEAT DISCH_TAC;
+  ASSUM_LIST (let rec r = function | [] -> ALL_TAC | th::ths -> (MP_TAC (REPEAT_RULE (OR_RULE (MATCH_MP pathL_bound) (MATCH_MP pathR_bound)) th)) THEN r ths in r);
+  REWRITE_TAC[];
+  SIMP_TAC[gcy_low;gcy_low_hminus;gcy_high;gcy_high_hplus;
+                   h0_lt_gt;
+                   lmdih3_ldih3;lmdih5_ldih5;lmdih_ldih;lmdih5_0;lmdih3_0;lmdih0;
+                   (* Oct 28, 2010:*) vol3f_lm0;vol3f_lmln;
+           (* nov23 *) lmfun0;lmfun_lfun;hm0;
+	   gamma3f_vLR0_case;gamma3f_vLR_lfun_case;
+	   gamma3f_vL0_case;gamma3f_vL_lfun_case;
+	   gamma3f_v0_case;gamma3f_v_lfun_case;
+          (* dec 29 *) gamma3f_vL_nlfun_case;gamma3f_vL_n0_case;
+         gamma3f_vLR_n0_case;gamma3f_vLR_nlfun_case;
+        lmdih_ldih_n;lmdih2_ldih2_n;lmdih3_ldih3_n;
+	lmdih5_ldih5_n;lmdih6_ldih6_n;
+	lmdih_n0;lmdih2_n0;lmdih3_n0;lmdih5_n0;lmdih6_n0;
+   ];
+  SIMP_TAC[lmfun_lfun;lmfun0];
+  REWRITE_TAC[REAL_ARITH `&0 * x = &0 /\ &0 + x = x`];
+  REPEAT (DISCH_THEN (fun t-> ALL_TAC));
+  REPEAT (POP_ASSUM MP_TAC);
+  REWRITE_TAC[GSYM ineq_expand6];
+  DISCH_TAC;
+  EVERY (map SPEC_TAC [(`y6:real`,`y6:real`);(`y5:real`,`y5:real`);(`y4:real`,`y4:real`);(`y3:real`,`y3:real`);(`y2:real`,`y2:real`);(`y1:real`,`y1:real`)]);
+  POP_ASSUM MP_TAC;
+]
+;;
+
+let ineq6_of_ineq5 = prove_by_refinement(
+  `!a1 a2 a3 a4 a5 y1 y2 y3 y4 y5 b1 b2 b3 b4 b5 P. 
+((!x1 x2 x3 x4 x5 x6. ineq[(a1,x1,b1);(a2,x2,b2);(a3,x3,b3);(a4,x4,b4);(a5,x5,b5);(&1,x6,&1)] 
+   (P x1 x2 x3 x4 x5)) ==> 
+    ineq[(a1,y1,b1);(a2,y2,b2);(a3,y3,b3);(a4,y4,b4);(a5,y5,b5)]
+   (P y1 y2 y3 y4 y5))`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[ineq];
+  MESON_TAC[REAL_ARITH `&1 <= &1`];
+  ]);;
+  (* }}} *)
+
+let ineq6_of_ineq1 = prove_by_refinement(
+  `!a1 y1 b1 P. 
+((!x1 x2 x3 x4 x5 x6. ineq[(a1,x1,b1);(&1,x2,&1);(&1,x3,&1);(&1,x4,&1);(&1,x5,&1);(&1,x6,&1)] 
+   (P x1)) ==> ineq[(a1,y1,b1)]  (P y1))`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[ineq];
+  MESON_TAC[REAL_ARITH `&1 <= &1`];
+  ]);;
+  (* }}} *)
+
+let SERIES3Q1H_5D_TAC = 
+  let instjx = INST_TYPE [(`:real`,`:A`);(`:real`,`:B`);(`:real`,`:C`);
+			  (`:real`,`:D`);(`:real`,`:E`);(`:real`,`:F`)] in
+  let PROJX = map instjx [ proj_x1;proj_x2;proj_x3;proj_x4;proj_x5;proj_x6] in
+  let projx = list_mk_conj (map (concl o GSYM) PROJX ) in
+ (REPEAT STRIP_TAC   THEN MATCH_MP_TAC ineq6_of_ineq5) THEN
+ (REWRITE_TAC[Sphere.pathL;Sphere.pathR;Sphere.hplus;Sphere.h0]) THEN
+ (REWRITE_TAC[ineq_expand6]) THEN
+ (REPEAT GEN_TAC THEN REPEAT DISCH_TAC) THEN
+ (SUBGOAL_THEN projx (fun t -> PURE_ONCE_REWRITE_TAC[t])) THENL
+ [(REWRITE_TAC PROJX);ALL_TAC] THEN
+ (REPEAT (POP_ASSUM MP_TAC)) THEN
+ (REWRITE_TAC[GSYM ineq_expand6]);;
+
+
+let xspec = SPECL [`x1:real`;`x2:real`;`x3:real`;`x4:real`;`x5:real`;`x6:real`];;
+
+let X_OF_Y_DEF =  [REAL_ARITH `&2 = #2.0`;
+ GSYM mardih_x;GSYM mardih2_x;GSYM mardih3_x;
+ GSYM mardih4_x;GSYM mardih5_x;GSYM mardih6_x;beta_bump_force_x;
+ GSYM Sphere.gchi1_x;GSYM Sphere.gchi2_x;GSYM Sphere.gchi3_x;GSYM Sphere.gchi4_x;GSYM Sphere.gchi5_x;GSYM Sphere.gchi6_x;
+ GSYM Sphere.taum_x1_x2;GSYM Sphere.taum_x1;GSYM Sphere.taum_x2;
+ GSYM Sphere.arclength_x1;GSYM Sphere.arclength_x2;GSYM Sphere.surf_x;
+ GSYM Sphere.ldih_x;GSYM Sphere.ldih2_x;GSYM Sphere.ldih3_x;GSYM Sphere.ldih6_x;
+ GSYM Sphere.surfR126d;GSYM Enclosed.quad_cross_diag2_x;tauq_x_y;];;
+
+
+let FROZEN_REWR =(map SPEC_ALL [vol3r_126_x;REAL_ARITH `&2 = #2.0`;
+    (GSYM dih_x_126_s2); (GSYM dih2_x_126_s2);
+    GSYM dih3_x_126_s2; GSYM dih4_x_126_s2; GSYM dih5_x_126_s2; GSYM dih6_x_126_s2;
+    GSYM ldih_x_126_s2; GSYM ldih2_x_126_s2;GSYM ldih6_x_126_s2;
+    (GSYM dih_x_135_s2); (GSYM dih2_x_135_s2);
+    GSYM dih3_x_135_s2; GSYM dih4_x_135_s2; GSYM dih5_x_135_s2; GSYM dih6_x_135_s2;
+    GSYM ldih_x_135_s2; GSYM ldih3_x_135_s2;GSYM ldih5_x_135_s2;
+    GSYM delta_x_126_s2;GSYM delta_x_135_s2;
+    GSYM vol3_x_135_s2;
+    GSYM gamma3f_x_vLR_lfun;GSYM gamma3f_x_vLR0;
+    GSYM gamma3f_x_v_lfun;GSYM gamma3f_x_v0;
+    GSYM gamma3f_x_vL_lfun;GSYM gamma3f_x_vL0;
+    GSYM gamma3f_vLR_x_nlfun;     GSYM gamma3f_vL_x_nlfun; 
+    GSYM gamma3f_vLR_x_n0;     GSYM gamma3f_vL_x_n0; 
+    GSYM gamma3f_135_x_s_n; GSYM gamma3f_126_x_s_n;
+    GSYM ldih_x_126_n;     GSYM ldih2_x_126_n;     GSYM ldih6_x_126_n; 
+    GSYM ldih_x_135_n;GSYM ldih3_x_135_n;GSYM ldih5_x_135_n;
+    GSYM arclength_x_234;
+    GSYM arclength_x_126;
+    ] ) @ [delta_top_x_alt];;
+
+
+let VAR_ORDER_SQRT = 
+[`norm2hh (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+     norm2hh_x x1 x2 x3 x4 x5 x6 `;  
+`rad2_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+     rad2_x x1 x2 x3 x4 x5 x6 `;  
+`delta4_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+     delta_x4 x1 x2 x3 x4 x5 x6 `;  
+`dih2_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+     dih2_x x1 x2 x3 x4 x5 x6 `;  
+`dih3_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+    dih3_x x1 x2 x3 x4 x5 x6 `;  
+`dih_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+     dih_x x1 x2 x3 x4 x5 x6 `;  
+`dih4_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+    dih4_x x1 x2 x3 x4 x5 x6 `;  
+`dih5_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+   dih5_x x1 x2 x3 x4 x5 x6 `;  
+`dih6_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+   dih6_x x1 x2 x3 x4 x5 x6 `;  
+`delta_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+   delta_x x1 x2 x3 x4 x5 x6 `; 
+`upper_dih_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+   upper_dih_x x1 x2 x3 x4 x5 x6 `;  
+`delta_y (sqrt x7) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x8) (sqrt x9) =
+   delta_x x7 x2 x3 x4 x8 x9`;
+`vol_y (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5) (sqrt x6) = 
+   vol_x x1 x2 x3 x4 x5 x6 `;  
+`eta_y (sqrt x1) (sqrt x2) (sqrt x6) pow 2 = eta2_126 x1 x2 x3 x4 x5 x6 `;  
+`eta_y (sqrt x1) (sqrt x3) (sqrt x5) pow 2 = eta2_135 x1 x2 x3 x4 x5 x6 `;  
+`vol3f (sqrt x1) (sqrt x2) (sqrt x6)  sqrt2 lfun = vol3f_x_lfun x1 x2 x3 x4 x5 x6 `;  
+`vol_y sqrt2 sqrt2 sqrt2 (sqrt x1) (sqrt x2) (sqrt x6)  = vol3_x_sqrt x1 x2 x3 x4 x5 x6 `;  
+`vol3f_sqrt2_lmplus (sqrt x1) (sqrt x2) (sqrt x3) (sqrt x4) (sqrt x5)      (sqrt x6) =
+   vol3f_x_sqrt2_lmplus x1 x2 x3 x4 x5 x6`;
+ ];;
+
+  let SQRT_SQRT_TAC = 
+EVERY[
+  REPEAT DISCH_TAC;
+  SUBGOAL_THEN `sqrt x1 * sqrt x1 = x1 /\ sqrt x2 * sqrt x2 = x2 /\ sqrt x3 * sqrt x3 = x3 /\ sqrt x4 * sqrt x4 = x4 /\ sqrt x5 * sqrt x5 = x5 /\ sqrt x6 * sqrt x6 = x6` (fun t-> REWRITE_TAC[t]) THENL[ ASM_MESON_TAC[sq_pow2];ALL_TAC] THEN
+  REPEAT (POP_ASSUM MP_TAC);
+  DISCH_TAC;
+];;
+
+  let VAR_ORDER_SQRT_TAC:tactic = 
+    fun (asl,a) ->
+      let fr = frees a in
+      let vos = filter (fun t -> subset (frees t) fr ) VAR_ORDER_SQRT  in
+    let VAR_ORDER_SQRT_FIL = list_mk_conj vos in
+  (SUBGOAL_THEN  VAR_ORDER_SQRT_FIL  (fun t-> REWRITE_TAC[t;(GSYM Sphere.rhazim_x); (GSYM Sphere.rhazim2_x);xspec (GSYM Sphere.rhazim3_x)]) THENL[ (ASM_MESON_TAC[Sphere.norm2hh_x;rad2_x_y;delta_x4_delta4_y;dih_x_y;dih2_x_y;delta_x_y;upper_dih_x_y;dih3_x_y;tauq_x_y;GSYM Sphere.dih4_x;GSYM Sphere.dih5_x;GSYM Sphere.dih6_x;vol_x_y;Sphere.eta2_126; Sphere.eta2_135;GSYM vol3f_x_lfun;GSYM vol3_x_sqrt;GSYM vol3f_x_sqrt2_lmplus]);ALL_TAC]) (asl,a)
+;;
+
+let X_OF_Y_TAC = 
+  (
+  (DISCH_TAC) THEN
+(* (* move to PREP_TAC *)
+  (REWRITE_TAC[GSYM Sphere.rad2_y]) THEN
+  (REWRITE_TAC(macro_expand)) THEN
+*)
+  TRY (MATCH_MP_TAC ineq_square2) THEN TRY (MATCH_MP_TAC ineq_square2_9) THEN
+  (REWRITE_TAC basic_constants_nn) THEN
+  REWRITE_TAC[GSYM CONJ_ASSOC] THEN
+  (REPEAT (CONJ_TAC THENL[MP_TAC hminus_gt THEN MP_TAC sqrt3_nn THEN REWRITE_TAC[Sphere.h0;Sphere.hplus] THEN REAL_ARITH_TAC;ALL_TAC])) THEN
+  (REPEAT GEN_TAC) THEN
+  (REWRITE_TAC [sol_y_123;taum_123]) THEN
+  (REWRITE_TAC[ineq]) THEN
+  (SQRT_SQRT_TAC) THEN
+(*    SIMP_TAC[sq_pow2] THEN *)
+  (REPEAT DISCH_TAC) THEN
+    VAR_ORDER_SQRT_TAC THEN
+   FROZEN_REWRITE_TAC FROZEN_REWR THEN 
+  REWRITE_TAC X_OF_Y_DEF THEN
+  (REPEAT (FIRST_X_ASSUM MP_TAC)) THEN
+  (REWRITE_TAC[GSYM ineq_expand9]) THEN
+  (REWRITE_TAC[GSYM ineq_expand6]) THEN
+  (REWRITE_TAC[REAL_ARITH `(&2 = #2.0) /\ (x pow 2 = x * x) /\ (#2.0 * #2.0 = #4.0) /\ (#2.18 * #2.18 = #4.7524 ) /\ (#2.52 * #2.52 = #6.3504)`;sqrt8_2;sqrt2_sqrt2;Sphere.h0;Sphere.hplus]) THEN
+  ALL_TAC);;
+
+
+
+let EXPAND_lfun = 
+  (SUBGOAL_THEN `lfun x1 = (#1.26 - proj_x1  (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real))/(#0.26)` (fun t-> REWRITE_TAC[t])) THENL [
+  REWRITE_TAC[Sphere.lfun;proj_x1;Sphere.h0;REAL_ARITH `#1.26 - &1 = #0.26`];ALL_TAC] ;;
+
+let REMOVE_dummy = SUBGOAL_THEN `!(f:bool). (!(dummy:real). ineq [&1,dummy,&1] f) = (!(x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real). ineq[(&1,x1,&1);(&1,x2,&1);(&1,x3,&1);(&1,x4,&1);(&1,x5,&1);(&1,x6,&1)] f)` (fun t-> REWRITE_TAC[t]) THENL[  REWRITE_TAC[ineq] THEN  MESON_TAC[REAL_ARITH `~(&2 <= &1)`]; ALL_TAC];;
+
+let EXPAND_1var = SUBGOAL_THEN `!(f:real->bool) a b. (!(y:real). ineq [a,y,b] (f y)) = (!(x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real). ineq[(a,x1,b);(&1,x2,&1);(&1,x3,&1);(&1,x4,&1);(&1,x5,&1);(&1,x6,&1)] (f x1))` (fun t-> REWRITE_TAC[t]) THENL [REWRITE_TAC[ineq] THEN  MESON_TAC[REAL_ARITH `(&1 <= &1)`];ALL_TAC] ;;
+
+(* XX
+let RENAME_x1_x6 = prove_by_refinement(
+  `(!(z1:real) (z2:real) (z3:real) (z4:real) (z5:real) (z6:real). 
+    ineq[(a,z1,b);(&1,z2,&1);(&1,z3,&1);(&1,z4,&1);(&1,z5,&1);(&1,z6,&1)] (f z1 z2 z3 z4 z5 z6)) =
+    (!x1 x2 x3 x4 x5 x6.
+    ineq[(a,x1,b);(&1,x2,&1);(&1,x3,&1);(&1,x4,&1);(&1,x5,&1);(&1,x6,&1)] (f x1 x2 x3 x4 x5 x6))`,
+  (* {{{ proof *)
+  [
+  REWRITE_TAC[];
+  ]);;
+  (* }}} *)
+*)
+
+
+
+
+let REAL_SIMPLIFY_EXPRESSION =  let
+  arith = REAL_ARITH `!x y z. (&8 = #8) /\ (x - y = x + (-- #1.0) * y) /\ 
+  (x * (y+z) = x * y + x * z) /\ (y+z) * x = y * x + z * x /\ 
+  (x + y) + z = x + y + z /\ (-- x * -- y = x * y) /\ (x * -- y = -- x * y) /\ 
+  (-- x * y = -- (x * y)) /\ (x * y) * z = x * y * z /\ -- #1.0 * x = -- x /\ 
+  -- (x + y) = -- x + (--y) /\ -- (-- x) = x /\ (-- (-- x * y) = x * y) /\
+   #0.0 = &0 /\ #0 = &0 /\ &0 * x = &0 /\ x * &0 = &0 /\ (&0 + x = x) /\ 
+  -- &0 = &0 /\ (x + &0 = x) /\ (&0 + x = x) /\
+  &1 * x = x /\ -- &1 * x = -- x /\ x * sqrt8 = sqrt8 * x    ` in
+  (REWRITE_TAC[REAL_POW_MUL;real_div;REAL_MUL_LZERO; REAL_MUL_RZERO;arith]) ;;
+
+let EXPAND_SQRT = 
+  (SUBGOAL_THEN `sqrt x1 = sqrt_x1 x1 x2 x3 x4 x5 x6 /\ sqrt x2 = sqrt_x2 x1 x2 x3 x4 x5 x6 /\ sqrt x3 = sqrt_x3 x1 x2 x3 x4 x5 x6 /\ sqrt x4 = sqrt_x4 x1 x2 x3 x4 x5 x6 /\ sqrt x5 = sqrt_x5 x1 x2 x3 x4 x5 x6 /\ sqrt x6  = sqrt_x6 x1 x2 x3 x4 x5 x6 /\ sqrt x8 = sqrt_x5 (x7:real) x2 x3 x4 x8 x9 /\ sqrt x9 = sqrt_x6 x7 x2 x3 x4 x8 x9 ` (fun t->REWRITE_TAC[t])  THENL [REWRITE_TAC[sqrt_x1;sqrt_x2; sqrt_x3;sqrt_x4;sqrt_x5;sqrt_x6];ALL_TAC]) ;;
+
+(* for 1d inequality involving vol2f marchal *)
+
+let EXPAND_vol2 = 
+REWRITE_TAC[vol2f_marchal_pow_y;vol2r_y] THEN
+  SUBGOAL_THEN `x1 pow 1 = promote pow1 x1 x2 x3 x4 x5 x6 /\ x1 pow 2 = promote_pow2 x1 x2 x3 x4 x5 x6 /\ x1 pow 3 = promote_pow3 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) /\ x1 pow 4 = promote pow4 x1 x2 x3 x4 x5 x6` (fun t->REWRITE_TAC[t]) THENL[ REWRITE_TAC[promote;pow1;pow2;pow3;pow4;promote_pow2;promote_pow3];REWRITE_TAC[LET_DEF;LET_END_DEF]] ;;
+
+let DEF_expand = [Sphere.a_spine5;Sphere.b_spine5;Sphere.mm1;
+		  Sphere.flat_term;Sphere.beta_bump_lb;REAL_POW_2;
+		  Sphere.h0;
+   Sphere.mm2;GSYM Sphere.sqrt2;GSYM Sphere.sqrt3;GSYM Sphere.sqrt8;sol0_const1;sqrt2_sqrt8;
+   Sphere.mm1;Sphere.mm2;Sphere.tau0;Sphere.hplus;tame_table_d_values;Sphere.vol2f;
+   Sphere.lfun; (* added Oct 17, 2010 *)
+   ];;
+
+(* renames variables as x1,x2,x3,.... *)
+let (X_RENAME_TAC:tactic) = 
+   fun  (asl,w) ->
+     let (_,loc,_) = dest_ineq w in
+     let loc' = map (fun (_,b,_) -> b) loc in
+     let u = fst(chop_list (List.length loc') x9list) in
+       EVERY (map SPEC_TAC (zip loc' u)) (asl,w);;
+
+let STYLIZE_TAC = 
+  REMOVE_dummy  THEN
+  EXPAND_1var THEN
+  DISCH_TAC THEN REPEAT GEN_TAC THEN
+  (* rename added Nov 27, 2010 *)
+  X_RENAME_TAC THEN 
+  REPEAT GEN_TAC THEN
+  EXPAND_vol2 THEN
+ (* prev line added Sep 8 , 2010 *)
+  REWRITE_TAC  DEF_expand THEN
+ (* prev line moved down sep 8 *)
+  EXPAND_lfun THEN
+  REWRITE_TAC[ineq] THEN
+  (REPEAT DISCH_TAC) THEN
+  (ONCE_REWRITE_TAC[REAL_ARITH `(x < y <=> (x- y < &0)) /\ (x <= y <=> (x-y <= &0))`]) THEN
+  (REWRITE_TAC[REAL_ARITH `(x > y <=> (y - x < &0) ) /\ (x >= y <=> (y-x <= &0))`]) THEN
+  EXPAND_SQRT THEN
+  REAL_SIMPLIFY_EXPRESSION THEN
+    SUBGOAL_THEN `!a. x1:real * a = a * x1` (fun t->REWRITE_TAC[t]) THENL[REAL_ARITH_TAC;ALL_TAC] THEN (* added OCt 17, 2010 *)
+  (SUBGOAL_THEN `!x. ((x < &0) <=> (unit0 * x < &0)) /\ ((x <= &0) <=> (unit0 * x <= &0))` (fun t -> ONCE_REWRITE_TAC[t])) THENL [REWRITE_TAC[unit0;REAL_ARITH `&1 * x = x`];ALL_TAC] THEN
+  (REWRITE_TAC[REAL_ARITH `f x1 x2 x3 x4 x5 x6 * (y:real) = y * f x1 x2 x3 x4 x5 x6 /\ ((x * y) * z = x * y * z)`]) THEN
+  (REWRITE_TAC[REAL_ARITH `unit0 * (x + y ) = unit0 * x + unit0 * y /\ unit0 * --x = --(unit0 * x) /\ (unit0 * x  = x  * unit0) /\ (x * y) * z = x * y * z`]) THEN
+  (REWRITE_TAC[REAL_ARITH `unit0 * x = x * unit0`]) THEN
+  (REWRITE_TAC[unit0f]) THEN
+    (SUBGOAL_THEN `x2 * unit0 = proj_x2 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) /\ x1 * unit0 = proj_x1 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real) /\ (x4 * unit0 = proj_x4 x1 x2 x3 x4 x5 x6) /\ (x6 * unit0 = proj_x6 x1 x2 x3 x4 x5 x6)` (fun t-> REWRITE_TAC[t]) THENL[REWRITE_TAC[proj_x4;proj_x6;proj_x2;proj_x1;unit0;REAL_ARITH `x * &1 = x`];ALL_TAC]) THEN
+  (SUBGOAL_THEN `unit0 = unit6 (x1:real) (x2:real) (x3:real) (x4:real) (x5:real) (x6:real)` (fun t-> REWRITE_TAC[t]) THENL [REWRITE_TAC[unit0;unit6];ALL_TAC]) THEN
+  (REPEAT (FIRST_X_ASSUM MP_TAC)) THEN
+  (REWRITE_TAC[GSYM ineq_expand9]) THEN
+  (REWRITE_TAC[GSYM ineq_expand6]) THEN DISCH_TAC;;
+
+let WRAPUP_TAC = 
+(REWRITE_TAC[REAL_ARITH `(x * y * (z:real)) = (x * y) * z`]) THEN
+  (REWRITE_TAC[REAL_ARITH `(y:real) * f x1 x2 x3 x4 x5 x6 =  (f x1 x2 x3 x4 x5 x6) *  y `]) THEN
+ (REWRITE_TAC[REAL_ARITH ` -- (x * y) = x * (-- y) `]) THEN
+ (REWRITE_TAC[REAL_ARITH ` -- (f x1 x2 x3 x4 x5 x6) = f x1 x2 x3 x4 x5 x6 * -- &1`]) THEN
+ (REWRITE_TAC[REAL_ARITH `(x * y) * (z:real) = x * y * z`]) THEN
+  (REWRITE_TAC[REAL_ARITH `inv y = (&1/y)`]);;
+
+(* SHARP CASES *)
+
+let gamma4f_delta0 = prove_by_refinement(
+  mk_imp (`NONLIN:bool`,all_forall `ineq [(sqrt8,y1,sqrt8);
+		    (&2,y2,&2);
+		    (&2,y3,&2);
+		    (sqrt8,y4,sqrt8);
+		    (&2,y5,&2);
+		    (&2,y6,&2)]
+ 		    (gamma4f y1 y2 y3 y4 y5 y6 lmfun = &0)`),
+  (* {{{ proof *)
+  [
+  BRANCH_TAC;
+  X_OF_Y_TAC;
+  REWRITE_TAC[Sphere.ineq];
+  REPEAT STRIP_TAC;
+  SUBGOAL_THEN `x1 = &8 /\ x2 = &4 /\ x3 = &4 /\ x4 = &8 /\ x5 = &4 /\ x6 = &4` (fun t -> REWRITE_TAC[t]);
+  REPEAT (POP_ASSUM MP_TAC);
+  REAL_ARITH_TAC;
+  REPEAT (POP_ASSUM (fun t -> ALL_TAC));
+  REWRITE_TAC[Sphere.vol_x;Sphere.gchi2_x;Sphere.gchi3_x;Sphere.gchi5_x;Sphere.gchi6_x;Sphere.dih_x;Sphere.dih2_x;Sphere.dih3_x;Sphere.dih4_x;Sphere.dih4_y;Sphere.dih5_x;Sphere.dih5_y;Sphere.dih6_x;Sphere.dih6_y;Sphere.dih_y];
+  REWRITE_TAC[LET_DEF;LET_END_DEF];
+  SUBGOAL_THEN `sqrt (&4) * sqrt(&4) = &4 /\ sqrt(&8) *sqrt (&8) = &8` (fun t-> REWRITE_TAC[t]);
+  CONJ_TAC THEN MATCH_MP_TAC sq_pow2 THEN EXISTS_TAC `&0` THEN REAL_ARITH_TAC;
+  REWRITE_TAC[delta_x_eq0;REAL_ARITH `x * &0 = &0 /\ -- -- x = x`;SQRT_0;delta_x4_eq64;atn2_0y];
+  MP_TAC PI_POS;
+  CONV_TAC  REAL_FIELD;    
+  ]);;
+  (* }}} *)
+
+(* ========================================================================== *)
+(*    VERIFYING INEQUALITIES                                                  *)
+(* ========================================================================== *)
+
+let strip_idq idq = (idq.idv,idq.tags,strip_let_tm idq.ineq);;
+
+let is_xconvert tags = mem Xconvert tags;;
+
+let is_branch tags = mem Tprep tags;;
+
+let process_and_exec ex (s,tags,case) = 
+  let _ = report ("process and exec: "^s) in
+  let _ = g (mk_imp (`NONLIN`,case)) in
+  let _ = e(PRELIM_TAC) in 
+  let _ = if (is_branch tags) then e(BRANCH_TAC) else e(ALL_TAC) in
+  let _ = if (is_xconvert tags) then e (X_OF_Y_TAC) else e(ALL_TAC) in
+  let _ =   if (is_branch tags && not(is_xconvert tags)) then
+    e(SERIES3Q1H_5D_TAC) else e(ALL_TAC) in
+  let _ = e (STYLIZE_TAC) in
+  let _ = e (WRAPUP_TAC) in
+  let testineq = snd(top_goal()) in
+    execute_interval ex tags s testineq;;
+
+(*
+
+let get_firstexact s = strip_idq (hd(Ineq.getexact s));;
+
+let process_and_exec_by_id ex s = 
+  let testcase = get_firstexact  s in 
+    process_and_exec ex s testcase;;
+*)
+
+let testsplit_idq ex idq = 
+  let (s,tags,ineq) = strip_idq idq in
+  let ls = get_split idq in
+    if (ls = []) then process_and_exec ex (s,tags,ineq) else
+      let cases = split_all_h0  [(ineq, ls)] in
+      let name_suffix i = Printf.sprintf " split(%d/%d)" i (List.length cases) in
+	for i=0 to (List.length cases - 1) do 
+	  try (process_and_exec ex ((s^name_suffix i),tags,(List.nth cases i)))
+	  with Failure s -> failwith (s ^ " case fail: " ^(string_of_int i))
+	done;;
+
+let testsplit ex s = testsplit_idq ex (hd (Ineq.getexact s));;
+
+end;;

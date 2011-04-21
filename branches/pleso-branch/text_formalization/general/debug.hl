@@ -1,0 +1,111 @@
+(* ========================================================================== *)
+(* FLYSPECK - BOOK FORMALIZATION                                              *)
+(*                                                                            *)
+(* Chapter: General                                                      *)
+(* Author: Thomas C. Hales                                                    *)
+(* Date: 2010-02-13                                                           *)
+(* ========================================================================== *)
+
+(* verbose error messages on definitions and theorems and parsing. *)
+
+
+module Debug = struct
+
+  open Parser_verbose;;
+
+  let silent= ref false;;
+
+  let print_mtm m s = if !silent then () else 
+   (print_string ("\n"^m^"\n"); print_term s; print_string "\n");;
+
+ let print_m f m s = if !silent then () else 
+   (print_string ("\n"^m^"\n"); f s; print_string "\n";);;
+
+ let parse_error_msg msg r s = if !silent then failwith msg else (print_string ("Parse error, cannot create "^r^" from  \""^s^"\"\n"); failwith msg);;
+
+  let verbose_1 p s = 
+    try p s with Failure msg ->
+    print_mtm "Error while processing_1 " s; failwith msg;;
+
+  let verbose_thm p r s = 
+    try p r s with Failure msg ->
+    print_m print_thm "Error while processing_1 " s; failwith msg;;
+
+  let verbose p (s,t) =
+    try p (s,t) with Failure msg -> 
+     print_mtm "Error while processing " s; failwith msg;;
+
+  let very_verbose_1 p s = 
+    print_mtm "VERBOSE MODE (1 argument)" s; p s;;
+
+  let very_verbose p (s,t) = 
+    print_mtm "VERBOSE MODE" s;  p (s,t);;
+
+(*
+Type and Term parsing 
+*)
+
+let rec find_subterms ptm =
+  let r = term_of_preterm o (retypecheck[]) in
+   let m s p = (s,r p,type_of (r p)) in 
+  match ptm with
+    |Varp (s,ty) -> (try (let _ = r ptm in []) with Failure _ -> 
+        failwith ("variable typing error: "^s))
+    | Constp (s,pty) -> (try let _ = r ptm in []
+	with Failure _ -> failwith ("constant typing error: "^s))
+    | Combp (s,t) -> (try let _ = r ptm in [] with Failure _ ->
+			if (can r s) && (can r t) then [m "function head" s; m "function arg" t] 
+			  else  if (can r s) then find_subterms t else find_subterms s)
+    | Absp (s,t) -> (try let _ = r ptm in [] with Failure _ ->
+             if (can r s) && (can r t) then [m "absvar" s; m "absbody" t] 
+			  else  if (can r s) then find_subterms t else find_subterms s)
+    | Typing (s,_) -> (try let _ = r ptm in [] with Failure _ -> 
+             if (can r s) then [m "user type constraint on term" s] else find_subterms s);;
+
+exception Term_of_preterm_error of (string * term * hol_type) list;;
+
+let parse_fail ptm =    let flag = !type_invention_warning in
+   let r = (type_invention_warning := false; find_subterms ptm) in 
+   let _ = type_invention_warning := flag in
+   raise (Term_of_preterm_error r);;
+
+
+
+
+let parse_type_verbose s =
+  let (pty,l) = try ((parse_pretype_verbose o lex o explode) s) with 
+    Failure msg -> parse_error_msg msg "pretype" s in 
+  if l = [] then try (type_of_pretype pty) with
+      Failure msg -> parse_error_msg msg "type" s
+  else failwith ("Unparsed input "^(string_of_lexcodel l)^" following type in string "^s);;
+
+let parse_term_verbose s =
+  let lexstream = try lex ( explode s) with
+    Failure msg -> parse_error_msg msg "lex stream" s in
+  let ptm,l = try (parse_preterm_verbose lexstream) with
+    | Failure msg ->  parse_error_msg msg "preterm " s 
+    | Noparse -> parse_error_msg "preterm" " preterm " (string_of_lexcodel (lex (explode s))) in
+  if l = [] then
+   try (term_of_preterm o (retypecheck [])) ptm 
+   with Failure msg -> (report msg; report ("bad input: "^s); parse_fail ptm)
+  else failwith ("Trailing junk "^(string_of_lexcodel l)^" following preterm in string "^s);;
+
+ let quotexpander_verbose s =
+   if String.sub s 0 1 = ":" then
+    "Debug.parse_type_verbose \""^
+    (String.escaped (String.sub s 1 (String.length s - 1)))^"\""
+  else "Debug.parse_term_verbose \""^(String.escaped s)^"\"";;
+
+
+unset_jrh_lexer
+
+ let set_verbose_parsing() =
+   Quotation.add "tot" (Quotation.ExStr (fun x -> quotexpander_verbose));;
+
+ let restore_parsing() =
+      Quotation.add "tot" (Quotation.ExStr (fun x -> quotexpander));;
+ 
+set_jrh_lexer
+
+
+end;;
