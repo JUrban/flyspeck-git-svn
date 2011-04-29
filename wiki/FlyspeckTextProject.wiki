@@ -25,6 +25,8 @@
   * Tran Nam Trung, work in progress (long chapter)
 
 = Fan Chapter =
+
+(This chapter has been completed by Hoang Le Truong)
   * topology: Hoang Le Truong
   * planarity
   * proof of face attributes
@@ -61,10 +63,10 @@
 
 
 = Special Projects =
-    * Project management software (Nguyen Duc Tam)
+    
 
 
-= nonlinear inequalities (contact Roland) = 
+= nonlinear inequalities = 
 
 There are many [NonlinearInequalities] that occur in the proof.  The list is much shorter in the 2009 proof.  The list requires formal verification.
 
@@ -77,6 +79,8 @@ There are four pieces of nonlinear inequality verification code.
 = linear programming = 
 
 The linear programming part of the proof is given in [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/glpk ocaml linear programming].  This piece of code requires formalization.  Steven Obua has an Isabelle implementation of linear programming.  He has used it to treat over 90% of the cases that arise in the original 1998 proof of the Kepler conjecture.  His work needs to be adapted to the 2009 proof. 
+
+Alexey Solovyev is close to completing the Linear Programming part of the proof.
 
 = graph generator (completed by Bauer-Nipkow) = 
 
@@ -94,4 +98,3 @@ correctness proof that the computer code correctly filters the tame hypermaps.  
   * The definitions of [http://afp.sourceforge.net/browser_info/current/HOL/Flyspeck-Tame/Plane.html planar graph] needs to be translated to HOL Light.  Let's call such a graph K98-planar.
   * The statement of the [http://afp.sourceforge.net/browser_info/current/HOL/Flyspeck-Tame/Completeness.html classification theorem] (which they call the "completeness theorem") needs to be translated to HOL Light.  Their theorem essentially states that a the face dump of every tame K98-planar graph is equivalent to one in the archive (which is a list of list of lists of integers).
   * The flypaper gives an algorithm for the generation of restricted hypermaps.  Every tame hypermap is restricted by definition.  The main point to be shown is that every restricted graph is K98-planar graph.  This should be done by interlacing the algorithm for restricted hypermaps with the iteration in Isabelle for K98-planar graphs.  There is a choice function that comes up in the algorithms (about which faces and edges to build on). It is important for these two choice functions to be compatibly chosen.
-
