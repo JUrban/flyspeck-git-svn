@@ -34,7 +34,7 @@
 = Fan Chapter Polyhedra = 
 
   * polyhedron: (John Harrison)
-  * There are a few odds and ends to be finished in this section.
+  * There are a few odds and ends to be finished in this section: AMHFNXP, WBLARHH, BSXAQBQ and Hoang Le Truong is working on them.
 
 = Packing = 
   * statement (done by Nguyen Tat Thang, John Harrison)
