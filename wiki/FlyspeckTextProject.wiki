@@ -71,13 +71,13 @@
 
 = nonlinear inequalities = 
 
-There are many [NonlinearInequalities] that occur in the proof.  The list is much shorter in the 2009 proof.  The list requires formal verification.
+There are many nonlinear Inequalities that occur in the proof.  The list is much shorter in the 2009 proof.  The list requires formal verification.
 
 There are four pieces of nonlinear inequality verification code.
-  * [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/interval_code Hales's code] from 1998, adapted to the Flyspeck project.  
-  * Ferguson's code from 1997-1998, this has not been updated in several years.
+  * [http://code.google.com/p/flyspeck/source/browse/#svn/trunk/interval_code Hales's code] from 1998, adapted to the Flyspeck project.  This is under active development in 2011.
+  * Ferguson's code from 1997-1998, this has not been updated in many years.
   * [http://code.google.com/p/kepler-code/source/browse/#svn/trunk/src McLaughlin's ML version].  The especially relevant sections are in the directories taylor/ functions/ and seconds/.
-  * [http://code.google.com/p/sergei/ Zumkeller's Berstein] polynomial approach.
+  * [http://code.google.com/p/sergei/ Zumkeller's Berstein] polynomial approach, 2008-2010.
 
 = linear programming = 
 
