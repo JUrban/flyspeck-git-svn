@@ -27,13 +27,9 @@
 = Fan Chapter =
 
 (This chapter has been completed by Hoang Le Truong)
-  * topology: Hoang Le Truong
-  * planarity
-  * proof of face attributes
 
-= Fan Chapter Polyhedra = 
+(John Harrison did the parts on polyhedra.)
 
-  * polyhedron: (John Harrison)
   * There are a few odds and ends to be finished in this section: AMHFNXP, WBLARHH, BSXAQBQ and Hoang Le Truong is working on them.
 
 = Packing = 
@@ -45,16 +41,23 @@
 = Local Fan = 
   * (Nguyen Quang Truong)
   * WRGCVDR (Truong)
-  * polygon perimeter
+  * polygon perimeter, not done
   * polygon area
   * main estimate 
   * CKQOWSA (done by Alexey Solovyev)
   * SDCCMGA (Diep)
 
 = local fan =
+
+
+
+
   * 2158872499  (Diep)
 
 = Tame hypermap =
+
+(Various people made contributions of particular lemmas, and then Alexey Solovyev did almost all of the chapter. Various small things remain to be completed.)
+
   * (Alexey Solovyev)
   *  /PPHEUFG/ A hypermap is tame if and only if its opposite is tame. (done by Trieu Thi Diep)
   *  /FATUGPD/ /FNJLBXS/ /FCDJDOT/  A counterexample can be "improved" by moving spheres inward. (Quyen in progress) 
