@@ -520,7 +520,7 @@ let mkfile_cppq  t s tags =
 
 let compile_cpp () = 
   let err = "/tmp/cpp_err.txt" in
-  let e = Sys.command("cd "^flyspeck_dir^"/../interval_code; make test_auto &> "^err) in
+  let e = Sys.command("cd "^flyspeck_dir^"/../interval_code; make test_auto >& "^err) in
   let _ =   (e=0) or (let _ = Sys.command ("cat "^err) in failwith "compiler error") in
     ();;
 
