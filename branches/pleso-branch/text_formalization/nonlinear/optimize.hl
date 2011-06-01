@@ -518,11 +518,8 @@ let mkfile_cppq  t s tags =
    (join_lines [cpp_header(); (mk_cppq_proc t s tags);cpp_tail()]);;
 
 
-let compile_cpp () = 
-  let err = "/tmp/cpp_err.txt" in
-  let e = Sys.command("cd "^flyspeck_dir^"/../interval_code; make test_auto >& "^err) in
-  let _ =   (e=0) or (let _ = Sys.command ("cat "^err) in failwith "compiler error") in
-    ();;
+let compile_cpp () = process_to_string("cd "^flyspeck_dir^"/../interval_code; make test_auto 2>&1");;
+
 
  let execute_interval ex tags s testineq = 
   let interval_dir = flyspeck_dir^"/../interval_code" in
