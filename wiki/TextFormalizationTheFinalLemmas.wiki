@@ -26,7 +26,7 @@ The following individuals have contributed lemmas to the project:
 = The Last 32 Pages =
 
 As of June 23, 2011, there were 32 pages left of the text formalization project.  This page tracks
-is the status of these final pages.  LP=lines of proof
+is the status of these final pages.  LP=lines of proof in the English text.
 
  * Hypermap Chapter (1 page)
     *
@@ -38,6 +38,22 @@ is the status of these final pages.  LP=lines of proof
     * BSXAQBQ (16 LP)
 
  * Packing Chapter (19 pages)
+    * SLTSTLO (12 LP)
+    * RVFXZBU (14 LP)
+    * URRPHBZ (2 LP)
+    * QZYZMJC (1 LP)
+    * GRUTOTI (10 LP)
+    * KIZHLTL (26 LP)
+    * TSKAJXY (1 LP -- computer calculation)
+    * OXLZLEZ (7 LP)
+    * UPFZBZM (16 LP)
+    * RDWKARC (5 LP)
+    * EUSOTYP (23 LP)
+    * GOTCJAH (30 LP)
+    * DLWCHEM (30 LP)
+    * XULJEPR (14 LP)
+
+
 
  * Local Fan Chapter (8 pages)
 
@@ -52,4 +68,3 @@ is the status of these final pages.  LP=lines of proof
  * The 32 pages does not include the parts of the text (such as remarks, introductory passages, and auxiliary results)  that are not strictly a  part of the proof of the Kepler conjecture.
  * It does not include the parts of the Kepler conjecture that lie outside the text.  That is, it does not include the computer portions of the proof.
  * Also excluded are three specific sections of the text that talk about the relationship between the text and the computer portions of the proof.
-
