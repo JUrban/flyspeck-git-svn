@@ -56,9 +56,19 @@ is the status of these final pages.  LP=lines of proof in the English text.
 
 
  * Local Fan Chapter (8 pages)
+    * EGHNAVX (26 LP)
+    * XRECQNS (15 LP)
+    * MHAEYJN (46 LP)
+    * ZLZTHIC (proof combined with previous lemma)
+    * EJRCFJD (17 LP)
+    * NKEZBFC (7 LP)
+    * BGMIFTE (36 LP)
+    * WSEWPCH (25 LP)
 
  * Tame Hypermap Chapter (2 pages)
-
+    * FNJLBXS (35 LP)
+    * FCDJDOT (10 LP)
+    * KCBLRQC (21 LP)
 
 
 
