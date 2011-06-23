@@ -1,0 +1,30 @@
+#summary The text part of the flyspeck formalization project is nearly complete.
+
+= Introduction =
+
+The text part of the formalization project is now nearly complete.
+The following individuals have contributed lemmas to the project:
+
+  * Dang Tat Dat
+  * Thomas C. Hales
+  * John Harrison
+  * Hoang Le Truong
+  * Nguyen Tat Thang
+  * Nguyen Quang Truong
+  * Jason Rute
+  * Alexey Solovyev
+  * Thi Trieu Diep
+  * Tran Nam Trung
+  * Vu Khac Ky
+  * Vu Thanh
+  * Vuong Anh Quyen
+
+(Please inform T. Hales, if your name was unintentionally left off this list.)
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
