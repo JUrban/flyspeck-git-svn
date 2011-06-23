@@ -31,13 +31,13 @@ is the status of these final pages.  LP=lines of proof in the English text.
  * Hypermap Chapter (1 page)
     *
 
- * Fan Chapter (3 pages)
+ * Fan Chapter (3 pages, 59 LP)
     * JLIGZGS (14 LP)
     * AMHFNXP (26 LP)
     * WBLARHH (3 LP)
     * BSXAQBQ (16 LP)
 
- * Packing Chapter (19 pages)
+ * Packing Chapter (19 pages, 191 LP)
     * SLTSTLO (12 LP)
     * RVFXZBU (14 LP)
     * URRPHBZ (2 LP)
@@ -53,9 +53,7 @@ is the status of these final pages.  LP=lines of proof in the English text.
     * DLWCHEM (30 LP)
     * XULJEPR (14 LP)
 
-
-
- * Local Fan Chapter (8 pages)
+ * Local Fan Chapter (8 pages, 172 LP)
     * EGHNAVX (26 LP)
     * XRECQNS (15 LP)
     * MHAEYJN (46 LP)
@@ -65,7 +63,7 @@ is the status of these final pages.  LP=lines of proof in the English text.
     * BGMIFTE (36 LP)
     * WSEWPCH (25 LP)
 
- * Tame Hypermap Chapter (2 pages)
+ * Tame Hypermap Chapter (2 pages, 66 LP)
     * FNJLBXS (35 LP)
     * FCDJDOT (10 LP)
     * KCBLRQC (21 LP)
