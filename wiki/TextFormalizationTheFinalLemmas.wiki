@@ -4,23 +4,24 @@
 = Introduction =
 
 The text part of the formalization project is now nearly complete.
-The following individuals have contributed lemmas to the project:
+The following individuals have contributed lemmas to the text project:
 
   * Dang Tat Dat
-  * Thomas C. Hales
-  * John Harrison
+  * Hales, Thomas C. 
+  * Harrison, John 
   * Hoang Le Truong
   * Nguyen Tat Thang
   * Nguyen Quang Truong
-  * Jason Rute
-  * Alexey Solovyev
+  * Rute, Jason 
+  * Solovyev, Alexey
   * Thi Trieu Diep
   * Tran Nam Trung
   * Vu Khac Ky
   * Vu Thanh
   * Vuong Anh Quyen
 
-(Please inform T. Hales, if your name was unintentionally left off this list.)
+(Please inform T. Hales, if your name was unintentionally left off this list.  Numerous others
+have made contributions to the code project.)
 
 
 = The Last 32 Pages =
