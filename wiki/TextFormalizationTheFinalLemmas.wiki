@@ -27,19 +27,19 @@ have made contributions to the code project.)
 = The Last 32 Pages =
 
 As of June 23, 2011, there were 32 pages left of the text formalization project.  This page tracks
-is the status of these final pages.  LP=lines of proof in the English text.
+is the status of these final pages.  LP=lines of proof in the English text (488 total).
 
- * Hypermap Chapter (1 page)
-    *
+ * Hypermap Chapter (0 pages)
 
  * Fan Chapter (3 pages, 59 LP)
-    * JLIGZGS (14 LP)
-    * AMHFNXP (26 LP)
-    * WBLARHH (3 LP)
-    * BSXAQBQ (16 LP)
+    * ~~JLIGZGS (14 LP)~~
+    * AMHFNXP (26 LP) -- HLT
+    * WBLARHH (3 LP) -- HLT
+    * BSXAQBQ (1 LP) -- HLT
+    * FLVNSME (15 LP) -- HLT
 
  * Packing Chapter (19 pages, 191 LP)
-    * SLTSTLO (12 LP)
+    * SLTSTLO (12 LP) -- VKK
     * RVFXZBU (14 LP)
     * URRPHBZ (2 LP)
     * QZYZMJC (1 LP)
@@ -49,17 +49,17 @@ is the status of these final pages.  LP=lines of proof in the English text.
     * OXLZLEZ (7 LP)
     * UPFZBZM (16 LP)
     * RDWKARC (5 LP)
-    * EUSOTYP (23 LP)
-    * GOTCJAH (30 LP)
-    * DLWCHEM (30 LP)
-    * XULJEPR (14 LP)
+    * EUSOTYP (23 LP) --TCH
+    * GOTCJAH (30 LP) -- TCH
+    * DLWCHEM (30 LP) -- TCH
+    * XULJEPR (14 LP) -- TCH
 
  * Local Fan Chapter (8 pages, 172 LP)
-    * EGHNAVX (26 LP)
-    * XRECQNS (15 LP)
-    * MHAEYJN (46 LP)
-    * ZLZTHIC (proof combined with previous lemma)
-    * EJRCFJD (17 LP)
+    * ~~EGHNAVX (26 LP)~~
+    * XRECQNS (15 LP) -- NQT
+    * MHAEYJN (46 LP) -- NQT
+    * ZLZTHIC (proof combined with previous lemma) --NQT
+    * EJRCFJD (17 LP) --NQT
     * NKEZBFC (7 LP)
     * BGMIFTE (36 LP)
     * WSEWPCH (25 LP)
