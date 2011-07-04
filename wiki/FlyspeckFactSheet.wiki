@@ -213,7 +213,10 @@ The purpose of the flyspeck project is to produce a value of type `theorem` in H
 == *How large a project is the flyspeck project?*==
 
 
-The project may take as many as 20 work-years to complete.
+A current snapshot of the size of the project is given below.
+
+<wiki:gadget url="http://www.ohloh.net/p/19576/widgets/project_cocomo.xml" height="240" border="0"/>
+
 
 
 ==*How far along is the project?  Here are some recent developments. (Updated October 2005)*==
