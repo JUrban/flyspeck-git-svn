@@ -39,7 +39,8 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * FLVNSME (15 LP) -- HLT
 
  * Packing Chapter (19 pages, 191 LP)
-    * SLTSTLO (12 LP) -- VKK
+    * DUUNHOR (28 LP)  [overlooked earlier]
+    * ~~SLTSTLO (12 LP) ~~-- VKK
     * RVFXZBU (14 LP)
     * URRPHBZ (2 LP)
     * QZYZMJC (1 LP)
