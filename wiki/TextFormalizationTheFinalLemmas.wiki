@@ -29,18 +29,18 @@ have made contributions to the code project.)
 As of June 23, 2011, there were 32 pages left of the text formalization project.  This page tracks
 is the status of these final pages.  LP=lines of proof in the English text (488 total).
 
- * Hypermap Chapter (0 pages)
+ * Hypermap Chapter (0 pages) [but work needs to be uploaded to project]
 
  * Fan Chapter (3 pages, 59 LP)
     * ~~JLIGZGS (14 LP)~~
-    * AMHFNXP (26 LP) -- HLT
-    * WBLARHH (3 LP) -- HLT
-    * BSXAQBQ (1 LP) -- HLT
-    * FLVNSME (15 LP) -- HLT
+    * ~~AMHFNXP (26 LP)~~ -- HLT 7/30/2011
+    * ~~WBLARHH (3 LP)~~ -- HLT 7/30/2011
+    * ~~BSXAQBQ (1 LP)~~ -- HLT 7/30/2011
+    * ~~FLVNSME (15 LP)~~ -- HLT 7/30/2011
 
  * Packing Chapter (19 pages, 191 LP)
     * DUUNHOR (28 LP)  --overlooked earlier
-    * ~~SLTSTLO (12 LP) ~~-- VKK
+    * ~~SLTSTLO (12 LP) ~~-- VKK 7/2011
     * RVFXZBU (14 LP)
     * URRPHBZ (2 LP)
     * QZYZMJC (1 LP)
@@ -62,13 +62,13 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * ZLZTHIC (proof combined with previous lemma) --NQT
     * EJRCFJD (17 LP) -- NQT
     * NKEZBFC (7 LP) -- HLT
-    * BGMIFTE (36 LP)
-    * WSEWPCH (25 LP)
+    * BGMIFTE (36 LP) -- JH
+    * WSEWPCH (25 LP) -- JH
 
  * Tame Hypermap Chapter (2 pages, 66 LP)
-    * FNJLBXS (35 LP)
-    * FCDJDOT (10 LP)
-    * KCBLRQC (21 LP)
+    * FNJLBXS (35 LP) -- AS
+    * FCDJDOT (10 LP) -- AS
+    * KCBLRQC (21 LP) -- AS
 
 
 
