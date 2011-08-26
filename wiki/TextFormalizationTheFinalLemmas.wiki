@@ -31,7 +31,7 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
 
  * Hypermap Chapter (0 pages) (but work needs to be uploaded to project)
 
- * Fan Chapter (3 pages, 59 LP) (This chapter is now complete!)
+ * Fan Chapter (3 pages, 59 LP) 
     * ~~JLIGZGS (14 LP)~~
     * ~~AMHFNXP (26 LP)~~ -- HLT 7/30/2011
     * ~~WBLARHH (3 LP)~~ -- HLT 7/30/2011
