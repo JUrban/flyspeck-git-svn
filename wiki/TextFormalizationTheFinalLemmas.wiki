@@ -40,10 +40,10 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * CFYXFTY (30 LP) -- HLT overlooked in June estimate
 
  * Packing Chapter (19 pages, 191 LP)
-    * DUUNHOR (28 LP)  --overlooked in June estimate
+    * ~~DUUNHOR (28 LP)  --overlooked in June estimate~~-- Solovyev 8/2011
     * ~~SLTSTLO (12 LP) ~~-- VKK 7/2011
-    * RVFXZBU (14 LP)
-    * URRPHBZ (2 LP)
+    * ~~RVFXZBU (14 LP)~~-- VKK 12/2011
+    * ~~URRPHBZ (2 LP)~~-- VKK 12/2011
     * QZYZMJC (1 LP)
     * GRUTOTI (10 LP)
     * KIZHLTL (26 LP)
@@ -55,6 +55,15 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * GOTCJAH (30 LP) -- TCH
     * DLWCHEM (30 LP) -- TCH
     * XULJEPR (14 LP) -- TCH
+
+* Packing Chapter (added Dec 2011 to show that Marchal cells partition space)
+    * ~~HDTFNFZ (8 LP)~~-- VKK 12/2011
+    * NJIUTIU (10 LP)
+    * TEZFFSK (11 LP)
+    * YNHYJIT (9 LP)
+    * QZKSYKG (7 LP)
+    * DDZUPHJ (15 LP)
+    * AJRIPQN (9 LP)
 
  * Local Fan Chapter (8 pages, 172 LP)
     * ~~EGHNAVX (26 LP)~~
