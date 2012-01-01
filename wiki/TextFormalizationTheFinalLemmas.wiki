@@ -58,9 +58,9 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
 
  * Packing Chapter (added Dec 2011 to show that Marchal cells partition space)
     * ~~HDTFNFZ (8 LP)~~-- VKK 12/2011
-    * NJIUTIU (10 LP)
-    * TEZFFSK (11 LP)
-    * YNHYJIT (9 LP)
+    * ~~NJIUTIU (10 LP)~~-- VKK 12/31/2011
+    * ~~TEZFFSK (11 LP)~~-- VKK 12/31/2011
+    * ~~YNHYJIT (9 LP)~~-- VKK 12/31/2011
     * QZKSYKG (7 LP)
     * DDZUPHJ (15 LP)
     * AJRIPQN (9 LP)
