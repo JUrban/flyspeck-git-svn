@@ -61,9 +61,9 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * ~~NJIUTIU (10 LP)~~-- VKK 12/31/2011
     * ~~TEZFFSK (11 LP)~~-- VKK 12/31/2011
     * ~~YNHYJIT (9 LP)~~-- VKK 12/31/2011
-    * QZKSYKG (7 LP)
-    * DDZUPHJ (15 LP)
-    * AJRIPQN (9 LP)
+    * ~~QZKSYKG (7 LP)~~-- VKK 1/9/2012
+    * ~~DDZUPHJ (15 LP)~~-- VKK 1/9/2012
+    * ~~AJRIPQN (9 LP)~~-- VKK 1/9/2012
 
  * Local Fan Chapter (8 pages, 172 LP)
     * ~~EGHNAVX (26 LP)~~
