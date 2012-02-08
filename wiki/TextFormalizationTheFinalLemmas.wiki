@@ -55,7 +55,7 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * OXLZLEZ (7 LP)
     * UPFZBZM (16 LP) -- some supporting lemmas have been supplied by VKK
     * RDWKARC (5 LP) -- VKK (in quarantine because it relies on an axiom UPFZBZM)
-    * EUSOTYP (23 LP) --TCH
+    * ~~EUSOTYP (23 LP) ~~--TCH 2/7/2012
     * GOTCJAH (30 LP) -- TCH
     * DLWCHEM (30 LP) -- TCH
     * XULJEPR (14 LP) -- TCH
