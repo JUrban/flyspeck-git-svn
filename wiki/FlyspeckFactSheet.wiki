@@ -4,9 +4,6 @@
 = The Flyspeck Project Fact Sheet =
 
 
-
-[http://groups-beta.google.com/group/flyspeck Flyspeck Google Group]
-
 [http://code.google.com/p/flyspeck/ Flyspeck Project Home]
 
 
