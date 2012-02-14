@@ -20,9 +20,28 @@ The primary contributors to the computer code verification have been
 
 Bauer and Nipkow have completed the formal verification of  the classification of tame
 hypermaps in Isabelle/HOL.  More recently, Nipkow reworked the formal verification to adapt it to the second generation proof, described in "Dense Sphere Packings: a blueprint" (Fall 2010).
+(One constant has been changed in 2011 in the array d(6), but this is a minor change that
+can be deferred until the very end of the project.)
 
 == Integration with Text ==
 
+The following results in *Section Generation* of *Chapter Hypermap* require formalization.
+ * QRDYXY (19 lines)
+ * AQIUNPP (70 lines)
+ * QZHDZVO (3 lines)
+ * XKABSJX (7 lines)
+ * RFLGXTI (1 line)
+ * PSZUDYT (32 lines)
+ * VHTHIOG (2 lines)
+ * DMFMDYP (32 lines)
+ * CHAKYSS (13 lines)
+
+The formalization of the last few of these will rely on the (import to HOL of the) Bauer-Nipkow results.
+
+== Integration of HOL Light and Isabelle ==
+
+The definitions used to express the classification of tame hypermaps have been imported (by hand) into HOL Light. This makes it possible to express the classification result in HOL Light.  It is possible to complete the formalization in HOL Light by assuming the Bauer-Nipkow result as a postulate.  But
+perhaps there are more satisfactory ways to integrate the parts of the proof into a coherent whole.
 
 
 = Status of the Linear Programming code verification project = 
