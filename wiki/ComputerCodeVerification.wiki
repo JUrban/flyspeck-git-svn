@@ -24,11 +24,10 @@ hypermaps in Isabelle/HOL.  More recently, Nipkow reworked the formal verificati
 == Integration with Text ==
 
 
+
 = Status of the Linear Programming code verification project = 
 
- A. Solovyev has built extremely efficient tools for the verification of linear programs
-inside HOL Light.  It is capable of making a formal verification of a large-scale linear
-program in a matter of seconds.
+A. Solovyev has built extremely efficient tools for the verification of linear programs inside HOL Light.  It is capable of making a formal verification of a large-scale linear program in a matter of seconds.
 
 To complete this part of the project, it is still necessary to run about 50K linear programs
 through Solovyev's verification machine.  To carry this out, 
@@ -46,8 +45,7 @@ verify a single inequality.  There are hundreds of inequalities to be verified i
 
 == Integration with Text ==
 
-The text formalization part of the Kepler conjecture excludes the *Main Estimate Section* of the
-*Local Fan Chapter.*  This section contains the following lemmas that need formal verification.
+The *Main Estimate Section*  of the *Local Fan Chapter* contains the following lemmas that need formal verification.
 
  * JEJTVGB (about 75 computer assisted lines in subsection "computer proof...")
  * HGDRXAN (12 lines, + long computer proof in subsection "computer proof")
