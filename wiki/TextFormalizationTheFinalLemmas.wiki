@@ -35,13 +35,13 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
 
  * Hypermap Chapter (0 pages)
 
- * Fan Chapter (3 pages, 59 LP) 
+ * Fan Chapter (0 pages) 
     * ~~JLIGZGS (14 LP)~~
     * ~~AMHFNXP (26 LP)~~ -- HLT 7/30/2011
     * ~~WBLARHH (3 LP)~~ -- HLT 7/30/2011
     * ~~BSXAQBQ (1 LP)~~ -- HLT 7/30/2011
     * ~~FLVNSME (15 LP)~~ -- HLT 7/30/2011
-    * CFYXFTY (30 LP) -- HLT overlooked in June estimate
+    * ~~CFYXFTY (30 LP) --  overlooked in June estimate ~~ -- HLT 3/5/2012
 
  * Packing Chapter (19 pages, 191 LP)
     * ~~DUUNHOR (28 LP)  --overlooked in June estimate~~-- Solovyev 8/2011
