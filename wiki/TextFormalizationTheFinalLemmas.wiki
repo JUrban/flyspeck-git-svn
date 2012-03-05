@@ -20,7 +20,7 @@ The following individuals have contributed lemmas to the text project:
   * Vu Thanh
   * Vuong Anh Quyen
 
-(Please inform T. Hales, if your name was unintentionally left off this list.  Numerous others
+(Numerous others
 have made contributions to the code project.)
 
 
