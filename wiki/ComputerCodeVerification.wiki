@@ -68,8 +68,8 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
 
  * JEJTVGB (about 75 computer assisted lines in subsection "computer proof...")
  * HGDRXAN (12 lines, + long computer proof in subsection "computer proof")
- * WJSCPRO (36 lines)
- * TECOXBM (9 lines)
+ * ~~WJSCPRO (36 lines)~~ HLT 4/2012
+ * ~~TECOXBM (9 lines)~~ HLT 4/2012
  * HDPLYGY (3 lines)
  * GBYCPXS (10 lines)
  * MTUWLUN (13 lines)
