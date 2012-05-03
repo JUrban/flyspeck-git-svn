@@ -34,6 +34,7 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * 367 (Jan 28 2012)
 
  * Hypermap Chapter (0 pages)
+    * CTJYKFZ (8 LP) -- added 5/3/2012
 
  * Fan Chapter (0 pages) 
     * ~~JLIGZGS (14 LP)~~
