@@ -70,8 +70,8 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * HGDRXAN (12 lines, + long computer proof in subsection "computer proof")
  * ~~WJSCPRO (36 lines)~~ HLT 4/2012
  * ~~TECOXBM (9 lines)~~ HLT 4/2012
- * HDPLYGY (3 lines)
- * GBYCPXS (10 lines)
+ * ~~HDPLYGY (3 lines)~~ HLT 5/2012
+ * ~~GBYCPXS (10 lines)~~ HLT 5/2012
  * MTUWLUN (13 lines)
  * ESMGBKI (4 lines)
  * YPKHQKB (5 lines)
