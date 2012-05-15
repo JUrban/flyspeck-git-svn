@@ -52,10 +52,10 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * ~~QZYZMJC (1 LP)~~-- VKK 1/12/2012
     * ~~GRUTOTI (10 LP)~~-- VKK 3/14/2012
     * ~~KIZHLTL (26 LP)~~-- VKK 5/10/2012
-    * TSKAJXY (1 LP -- computer calculation)
+    * TSKAJXY (1 LP -- computer calculation) -- VKK
     * OXLZLEZ (7 LP)
-    * UPFZBZM (16 LP) -- some supporting lemmas have been supplied by VKK
-    * RDWKARC (5 LP) -- VKK (in quarantine because it relies on an axiom UPFZBZM)
+    * ~~UPFZBZM (16 LP)~~ -- VKK 5/15/2012
+    * ~~RDWKARC (5 LP)~~ -- VKK 5/15/2012
     * ~~EUSOTYP (23 LP) ~~--TCH 2/7/2012
     * GOTCJAH (30 LP) -- TCH
     * DLWCHEM (30 LP) -- TCH
