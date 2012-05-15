@@ -72,7 +72,7 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ~~TECOXBM (9 lines)~~ HLT 4/2012
  * ~~HDPLYGY (3 lines)~~ HLT 5/2012
  * ~~GBYCPXS (10 lines)~~ HLT 5/2012
- * MTUWLUN (13 lines)
+ * ~~MTUWLUN (13 lines)~~ HLT 5/2012
  * ESMGBKI (4 lines)
  * YPKHQKB (5 lines)
  * ODXLSTC (5 lines)
