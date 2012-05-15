@@ -32,6 +32,7 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
  * Lines left
     * 488 (June 23 2011)
     * 367 (Jan 28 2012)
+    * 295 (May 15 2012)
 
  * Hypermap Chapter (0 pages)
     * CTJYKFZ (8 LP) -- added 5/3/2012
