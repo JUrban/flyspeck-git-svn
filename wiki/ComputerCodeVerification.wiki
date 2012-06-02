@@ -73,11 +73,35 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ~~HDPLYGY (3 lines)~~ HLT 5/2012
  * ~~GBYCPXS (10 lines)~~ HLT 5/2012
  * ~~MTUWLUN (13 lines)~~ HLT 5/2012
- * ESMGBKI (4 lines)
- * YPKHQKB (5 lines)
- * ODXLSTC (5 lines)
- * IMJXPHR (9 lines)
- * NUXCOEA (9 lines)
+ * ~~ESMGBKI (4 lines)~~ not formalized and not needed in the formalization
+ * ~~YPKHQKB (5 lines)~~ not formalized and not needed in the formalization
+ * ODXLSTC (5 lines) see (v2) supplement below
+ * IMJXPHR (9 lines) see (v2) supplement below
+ * NUXCOEA (9 lines) see (v2) supplement below
  * VPWSHTO (10 lines)
  * LFJCIXP (4 lines)
  * OWZLKVY (13 lines)
+
+An appendix on the proof of the main estimate gives further details about a computer program
+that runs through the cases.  This appendix was added 5/2012.  It contains the following additional
+material.
+
+ * PCRTTID (1 line)
+ * HDPLYGYv2 (1 line)
+ * JKQEWGV (2 lines)
+ * AYQJTMD (3 lines)
+ * ODXLSTCv2 (8 lines)
+ * IMJXPHRv2 (7 lines)
+ * NUXCOEAv2 (13 lines)
+ * BJOQBJU (25 lines)
+ * QKNVMLB (1 line)
+ * FZIOTEF (4 lines)
+ * IEWZAVH (1 line)
+ * EQTTNZI (3 lines)
+ * UAGHHBM (3 lines)
+ * YXIONXL (8 lines)
+ * LKGRQUI (6 lines)
+ * KEOMGHK (7 lines)
+ * KESHTYS (13 lines)
+
+
