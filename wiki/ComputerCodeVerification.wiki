@@ -75,9 +75,9 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ~~MTUWLUN (13 lines)~~ HLT 5/2012
  * ~~ESMGBKI (4 lines)~~ not formalized and not needed in the formalization
  * ~~YPKHQKB (5 lines)~~ not formalized and not needed in the formalization
- * ODXLSTC (5 lines) see (v2) supplement below
- * IMJXPHR (9 lines) see (v2) supplement below
- * NUXCOEA (9 lines) see (v2) supplement below
+ * ODXLSTC (5 lines) superseded by (v2) below
+ * IMJXPHR (9 lines) superseded by (v2) below
+ * NUXCOEA (9 lines) superseded by (v2) below
  * VPWSHTO (10 lines)
  * LFJCIXP (4 lines)
  * OWZLKVY (13 lines)
@@ -103,5 +103,3 @@ material.
  * LKGRQUI (6 lines)
  * KEOMGHK (7 lines)
  * KESHTYS (13 lines)
-
-
