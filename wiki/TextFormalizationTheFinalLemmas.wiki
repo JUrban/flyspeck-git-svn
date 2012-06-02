@@ -27,7 +27,7 @@ have made contributions to the code project.)
 = The Last 32 Pages =
 
 As of June 23, 2011, there were 32 pages left of the text formalization project.  This page tracks
-is the status of these final pages.  LP=lines of proof in the English text (488 total).
+the status of these final pages.  LP=lines of proof in the English text (488 total).
 
  * Lines left
     * 488 (June 23 2011)
@@ -78,7 +78,7 @@ is the status of these final pages.  LP=lines of proof in the English text (488 
     * ZLZTHIC (proof combined with previous lemma) --NQT
     * EJRCFJD (17 LP) -- NQT
     * ~~NKEZBFC (7 LP)~~ -- HLT 8/2011
-    * BGMIFTE (36 LP) -- JH
+    * ~~BGMIFTE (36 LP)~~ -- JH 6/2012
     * WSEWPCH (25 LP) -- JH
 
  * Tame Hypermap Chapter (2 pages, 66 LP)
