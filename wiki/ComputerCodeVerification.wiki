@@ -78,7 +78,7 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ODXLSTC (5 lines) superseded by (v2) below
  * IMJXPHR (9 lines) superseded by (v2) below
  * NUXCOEA (9 lines) superseded by (v2) below
- * VPWSHTO (10 lines)
+ * ~~VPWSHTO (10 lines)~~ HLT 6/2012
  * LFJCIXP (4 lines)
  * OWZLKVY (13 lines)
 
