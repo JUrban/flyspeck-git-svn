@@ -86,7 +86,7 @@ An appendix on the proof of the main estimate gives further details about a comp
 that runs through the cases.  This appendix was added 5/2012.  It contains the following additional
 material.
 
- * PCRTTID (1 line)
+ * ~~PCRTTID (1 line)~~ HLT 6/2012
  * HDPLYGYv2 (1 line)
  * JKQEWGV (2 lines)
  * AYQJTMD (3 lines)
