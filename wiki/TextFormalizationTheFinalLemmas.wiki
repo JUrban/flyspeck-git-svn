@@ -95,3 +95,5 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
  * It does not include the parts of the Kepler conjecture that lie outside the text.  That is, it does not include the computer portions of the proof.
  * Also excluded are three specific sections of the text that talk about the relationship between the text and the computer portions of the proof.
  * The last chapter of the book, on the strong dodecahedral conjecture and Fejes Toth's contact conjecture, are excluded.
+
+
