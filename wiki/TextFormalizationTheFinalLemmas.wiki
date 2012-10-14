@@ -35,7 +35,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * 295 (May 15 2012)
 
  * Hypermap Chapter (0 pages)
-    * CTJYKFZ (8 LP) -- added 5/3/2012
+    * ~~CTJYKFZ (8 LP) -- added 5/3/2012~~ not needed -- AS proved CRTTXAT without it.
 
  * Fan Chapter (0 pages) 
     * ~~JLIGZGS (14 LP)~~
@@ -46,7 +46,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~CFYXFTY (30 LP) --  overlooked in June estimate ~~ -- HLT 3/5/2012
 
  * Packing Chapter (19 pages, 191 LP)
-    * ~~DUUNHOR (28 LP)  --overlooked in June estimate~~-- Solovyev 8/2011
+    * ~~DUUNHOR (28 LP)  --overlooked in June 2011 estimate~~ -- AS 8/2011
     * ~~SLTSTLO (12 LP) ~~-- VKK 7/2011
     * ~~RVFXZBU (14 LP)~~-- VKK 12/2011
     * ~~URRPHBZ (2 LP)~~-- VKK 12/2011
@@ -54,7 +54,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~GRUTOTI (10 LP)~~-- VKK 3/14/2012
     * ~~KIZHLTL (26 LP)~~-- VKK 5/10/2012
     * TSKAJXY (1 LP -- computer calculation) -- VKK
-    * OXLZLEZ (7 LP)
+    * OXLZLEZ (7 LP -- computer calculation)
     * ~~UPFZBZM (16 LP)~~ -- VKK 5/15/2012
     * ~~RDWKARC (5 LP)~~ -- VKK 5/15/2012
     * ~~EUSOTYP (23 LP) ~~--TCH 2/7/2012
@@ -82,7 +82,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * WSEWPCH (25 LP) -- JH
 
  * Tame Hypermap Chapter (2 pages, 66 LP)
-    * FNJLBXS (35 LP) -- AS
+    * ~~FNJLBXS (35 LP)~~ -- AS 9/2012 (not uploaded?)
     * FCDJDOT (10 LP) -- AS
     * KCBLRQC (21 LP) -- AS
 
@@ -95,5 +95,3 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
  * It does not include the parts of the Kepler conjecture that lie outside the text.  That is, it does not include the computer portions of the proof.
  * Also excluded are three specific sections of the text that talk about the relationship between the text and the computer portions of the proof.
  * The last chapter of the book, on the strong dodecahedral conjecture and Fejes Toth's contact conjecture, are excluded.
-
-
