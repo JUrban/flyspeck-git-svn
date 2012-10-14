@@ -17,7 +17,7 @@ Kissing Number Twelve" by Thomas Hales.
 = Details =
 
 The calculation of constants in Mathematica {{{HFBBNUL}}} and {{{6621965370}}}.
-This relies on initialization file [http://code.google.com/p/flyspeck/source/browse/trunk/mathematica/sphere.m sphere.m] and the notebook [http://code.google.com/p/flyspeck/source/browse/trunk/mathematica/FejesTothKissingConjecture.nb FejesTothKissingConjecture]
+This relies on initialization file [http://code.google.com/p/flyspeck/source/browse/trunk/mathematica/sphere.m sphere.m] and the  [http://code.google.com/p/flyspeck/source/browse/trunk/projects_discrete_geom/fejestoth12/fejestoth12_mathematica.m  file]
 
 There is also graph generation {{{PYWHMHQ}}}.  This is run with the flyspeck project loaded and
 executing the commands:
