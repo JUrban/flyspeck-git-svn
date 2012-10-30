@@ -58,7 +58,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~UPFZBZM (16 LP)~~ -- VKK 5/15/2012
     * ~~RDWKARC (5 LP)~~ -- VKK 5/15/2012
     * ~~EUSOTYP (23 LP) ~~--TCH 2/7/2012
-    * GOTCJAH (30 LP) -- TCH
+    * ~~GOTCJAH (30 LP) ~~-- TCH 10/2012
     * DLWCHEM (30 LP) -- TCH
     * XULJEPR (14 LP) -- TCH
 
