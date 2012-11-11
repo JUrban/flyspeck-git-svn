@@ -59,8 +59,8 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~RDWKARC (5 LP)~~ -- VKK 5/15/2012
     * ~~EUSOTYP (23 LP) ~~--TCH 2/7/2012
     * ~~GOTCJAH (30 LP) ~~-- TCH 10/2012
-    * DLWCHEM (30 LP) -- TCH
-    * XULJEPR (14 LP) -- TCH
+    * ~~DLWCHEM (30 LP) ~~-- TCH 11/2012
+    * ~~XULJEPR (14 LP) ~~-- TCH 11/2012
 
  * Packing Chapter (added Dec 2011 to show that Marchal cells partition space)
     * ~~HDTFNFZ (8 LP)~~-- VKK 12/2011
