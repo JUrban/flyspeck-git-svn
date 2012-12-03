@@ -1,0 +1,9 @@
+#summary Errata for "Dense Sphere Packings: a blueprint for formal proofs"
+
+= Introduction =
+
+This page will list errata for the book "Dense Sphere Packings"
+
+
+= Details =
+
