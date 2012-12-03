@@ -1,5 +1,4 @@
 #summary Instructions on getting HOL-Light installed and running, especially for Windows. SVN instructions.
-#labels Featured
 = This page is to help new users to get HOL-Light installed and running =
 
 HOL-Light will run on almost any operation system (Windows, Linux, OSX,...).  The download page is [http://www.cl.cam.ac.uk/~jrh13/hol-light/index.html HOL-Light].  Detailed installation instructions can be found in [http://www.cl.cam.ac.uk/~jrh13/hol-light/tutorial_220.pdf Harrison's tutorial] on page 5.  Cygwin is not needed to run HOL-Light on Windows.
