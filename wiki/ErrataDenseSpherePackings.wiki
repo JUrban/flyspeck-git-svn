@@ -4,8 +4,10 @@
 
 This page will list errata for the book "Dense Sphere Packings"
 
-|| *Page* || *Location* || *Change* ||
+|| *Page* || *Location* || *Date* || *Change* ||
 || 1 || OXL || Text here. ||
 
 
-= Details =
+= Other post-publication comments =
+
+Two appendices have been added giving further details about some calculations.
