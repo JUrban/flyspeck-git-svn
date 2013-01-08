@@ -15,3 +15,5 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 = Other post-publication comments =
 
 Two appendices have been added giving further details about some calculations.
+
+= Major differences between the book and the formalization =
