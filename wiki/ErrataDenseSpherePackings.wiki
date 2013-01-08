@@ -7,7 +7,7 @@ This page will list errata for the book "Dense Sphere Packings"
 || *Page* || *Location* || *Date* || *Issue* || *Reported by* || *Status* || 
 
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed
-|| * || Def 3.1 || 2013-01-08 || Lebesgue measurable subset~~s~~ || T. Hales || TeX fixed.
+|| * || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~s~~ || T. Hales || TeX fixed.
 
 
 = Other post-publication comments =
