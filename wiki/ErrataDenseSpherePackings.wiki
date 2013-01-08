@@ -2,7 +2,9 @@
 
 = Introduction =
 
-This page will list errata for the book "Dense Sphere Packings"
+This page lists errata for the book "Dense Sphere Packings."
+Please report further corrections to Thomas Hales: hales@pitt.edu
+
 
 || *Page* || *Location* || *Date* || *Issue* || *Reported by* || *Status* || 
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed ||
