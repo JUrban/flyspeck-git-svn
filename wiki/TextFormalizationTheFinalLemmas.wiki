@@ -82,7 +82,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * WSEWPCH (25 LP) -- JH
 
  * Tame Hypermap Chapter (2 pages, 66 LP)
-    * ~~FNJLBXS (35 LP)~~ -- AS 9/2012 (renamed FJLBXS)
+    * ~~FNJLBXS (35 LP)~~ -- AS 9/2012
     * ~~FCDJDOT (10 LP)~~ -- AS 9/2012
     * KCBLRQC (21 LP) -- AS
 
