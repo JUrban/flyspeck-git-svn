@@ -29,6 +29,6 @@ Graph_control.run(Graph_control.fejes_toth_contact_conjecture_properties);;
 Finally, there are some linear programs {{{JKJNYAA}}}.  This is executed with the flyspeck project loaded and executing the commands:
 {{{
 flyspeck_needs "../glpk/glpk_link.ml";;
-flyspeck_needs ("../glpk/fejestoth_contact/lipstick_ft.ml");;
+flyspeck_needs ("../projects_discrete_geom/fejestoth_contact/lipstick_ft.ml");;
 Lipstick_ft.exec();;
 }}}
