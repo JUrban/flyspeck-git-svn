@@ -91,7 +91,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
 
 = The Fine Print =
 
- * The 32 pages does not include the parts of the text (such as remarks, introductory passages, and auxiliary results)  that are not strictly a  part of the proof of the Kepler conjecture.
+ * The 32 pages do not include the parts of the text (such as remarks, introductory passages, and auxiliary results)  that are not strictly a  part of the proof of the Kepler conjecture.
  * It does not include the parts of the Kepler conjecture that lie outside the text.  That is, it does not include the computer portions of the proof.
  * Also excluded are three specific sections of the text that give the relationship between the text and the computer portions of the proof.
  * The section on the strong dodecahedral conjecture is excluded.
