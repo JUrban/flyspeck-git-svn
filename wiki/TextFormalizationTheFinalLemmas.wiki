@@ -34,10 +34,10 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * 367 (Jan 28 2012)
     * 295 (May 15 2012)
 
- * Hypermap Chapter (0 pages)
+ * ~~Hypermap Chapter (0 pages)~~
     * ~~CTJYKFZ (8 LP) -- added 5/3/2012~~ not needed -- AS proved CRTTXAT without it.
 
- * Fan Chapter (0 pages) 
+ * ~~Fan Chapter (0 pages)~~
     * ~~JLIGZGS (14 LP)~~
     * ~~AMHFNXP (26 LP)~~ -- HLT 7/30/2011
     * ~~WBLARHH (3 LP)~~ -- HLT 7/30/2011
@@ -62,7 +62,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~DLWCHEM (30 LP) ~~-- TCH 11/2012
     * ~~XULJEPR (14 LP) ~~-- TCH 11/2012
 
- * Packing Chapter (added Dec 2011 to show that Marchal cells partition space)
+ * ~~Packing Chapter (added Dec 2011 to show that Marchal cells partition space)~~
     * ~~HDTFNFZ (8 LP)~~-- VKK 12/2011
     * ~~NJIUTIU (10 LP)~~-- VKK 12/31/2011
     * ~~TEZFFSK (11 LP)~~-- VKK 12/31/2011
