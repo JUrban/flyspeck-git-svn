@@ -10,6 +10,7 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed ||
 || * || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
 || * || preface || 2013-01-08 || we ~~we~~ learn || J. Beckham || TeX fixed ||
+|| * || Def 6.51 QEEHXUB || 2013-01-25 || set ~~term~~ rcone || T. Hales || TeX fixed ||
 
 
 = Other post-publication comments =
