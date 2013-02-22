@@ -7,10 +7,10 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 
 
 || *Page* || *Location* || *Date* || *Issue* || *Reported by* || *Status* || 
+|| viii || preface || 2013-01-08 || we ~~we~~ learn || J. Beckham || TeX fixed ||
+|| 61 || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed ||
-|| * || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
-|| * || preface || 2013-01-08 || we ~~we~~ learn || J. Beckham || TeX fixed ||
-|| * || Def 6.51 QEEHXUB || 2013-01-25 || _set_ ~~term~~ rcone || T. Hales || TeX fixed ||
+|| 168 || Def 6.51 QEEHXUB || 2013-01-25 || _set_ ~~term~~ rcone || T. Hales || TeX fixed ||
 || 259 || L+20 || 2013-02-22 || _a_ large-scale project || T. Hales || TeX fixed ||
 || 259 || L+20 || 2013-02-22 || _the_ Flyspeck || T. Hales || TeX fixed ||
 
