@@ -11,6 +11,8 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || * || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
 || * || preface || 2013-01-08 || we ~~we~~ learn || J. Beckham || TeX fixed ||
 || * || Def 6.51 QEEHXUB || 2013-01-25 || set ~~term~~ rcone || T. Hales || TeX fixed ||
+|| 259 || L+20 || 2013-02-22 || *a* large-scale project || T. Hales || TeX fixed ||
+|| 259 || L+20 || 2013-02-22 || *the* Flyspeck || T. Hales || TeX fixed ||
 
 
 = Other post-publication comments =
