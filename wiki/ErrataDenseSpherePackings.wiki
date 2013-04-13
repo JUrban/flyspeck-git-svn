@@ -11,7 +11,7 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || 61 || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
 || 74 || Remark 4.3 || 2013-04-13 || ~~have~~ are || T. Hales || TeX fixed ||
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed ||
-|| 152 || footnote 3 || aa -> a || T. Hales || TeX fixed ||
+|| 152 || footnote 3 || 2013-04-13 || aa -> a || T. Hales || TeX fixed ||
 || 160 || L+6 || 2013-04-08 || bound ~~bound~~ || N.J.A. Sloane || TeX fixed ||
 || 168 || Def 6.51 QEEHXUB || 2013-01-25 || _set_ ~~term~~ rcone || T. Hales || TeX fixed ||
 || 197 || L+11, display || 2013-02-22 || (0,v,w,sigma) >> (v,w) || T. Hales || TeX fixed ||
