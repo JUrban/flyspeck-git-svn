@@ -14,6 +14,7 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || 152 || footnote 3 || 2013-04-13 || aa >> a || T. Hales || TeX fixed ||
 || 160 || L+6 || 2013-04-08 || bound ~~bound~~ || N.J.A. Sloane || TeX fixed ||
 || 168 || Def 6.51 QEEHXUB || 2013-01-25 || _set_ ~~term~~ rcone || T. Hales || TeX fixed ||
+|| 194 || L+13 || 2013-04-17 || well-known || N.J.A. Sloane || TeX fixed ||
 || 197 || L+11, display || 2013-02-22 || (0,v,w,sigma) >> (v,w) || T. Hales || TeX fixed ||
 || 205 || L-12 || 2013-02-25 || w_i >> w_i(t)  (4 times) || T. Hales || TeX fixed ||
 || 233 || Lemma 7.84 proof line 3 || 2013-04-17 || The _proof_ does not ... || T. Hales || TeX fixed ||
