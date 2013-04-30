@@ -17,7 +17,7 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || 194 || L+13 || 2013-04-17 || well-known || N.J.A. Sloane || TeX fixed ||
 || 197 || L+11, display || 2013-02-22 || (0,v,w,sigma) >> (v,w) || T. Hales || TeX fixed ||
 || 205 || L-12 || 2013-02-25 || w_i >> w_i(t)  (4 times) || T. Hales || TeX fixed ||
-|| 214 || Lemma 7.44 || 2013-04-30 || Assume that every edge of E is standard. || A. Solovyev || TeX fixed ||
+|| 214 || Lemma 7.44.1 || 2013-04-30 || Assume that every edge of E is standard. || A. Solovyev || TeX fixed ||
 || 233 || Lemma 7.84 proof line 3 || 2013-04-17 || The _proof_ does not ... || T. Hales || TeX fixed ||
 || 259 || L+20 || 2013-02-22 || _a_ large-scale project || T. Hales || TeX fixed ||
 || 259 || L+20 || 2013-02-22 || _the_ Flyspeck || T. Hales || TeX fixed ||
