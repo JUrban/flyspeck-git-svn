@@ -73,7 +73,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
 
  * Local Fan Chapter (8 pages, 172 LP)
     * ~~EGHNAVX (26 LP)~~
-    * RNSYJXM (6 LP) -- (late addition)
+    * ~~RNSYJXM (6 LP)~~ -- AS 5/7/2013
     * ~~XRECQNS (15 LP)~~ -- NQT, JH 9/2012
     * MHAEYJN (46 LP) -- 
     * ZLZTHIC (proof combined with previous lemma) --
