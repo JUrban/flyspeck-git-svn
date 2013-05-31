@@ -10,7 +10,7 @@ Please report further corrections to Thomas Hales: hales@pitt.edu
 || viii || preface || 2013-01-08 || we ~~we~~ learn || J. Beckham || TeX fixed ||
 || 61 || Def 3.1 || 2013-01-08 || Lebesgue measurable subset ~~ s ~~ || T. Hales || TeX fixed ||
 || 74 || Remark 4.3 || 2013-04-13 || ~~have~~ are || T. Hales || TeX fixed ||
-|| 75 || Def. 4.5 || 2013-05-31 || delete repeated x_{i+1} || R. Chapman || TeX fixed ||
+|| 75 || Def. 4.5, sublist def || 2013-05-31 || delete repeated x_{i+1} || R. Chapman || TeX fixed ||
 || 115 || Sec 5.1.2 hypermap, second sentence || 2013-01-07 || Next we associate a hypermap ~~can be associated~~ with a fan." || W. Kusner || TeX fixed ||
 || 152 || footnote 3 || 2013-04-13 || aa >> a || T. Hales || TeX fixed ||
 || 160 || L+6 || 2013-04-08 || bound ~~bound~~ || N.J.A. Sloane || TeX fixed ||
