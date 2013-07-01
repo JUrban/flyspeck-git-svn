@@ -71,18 +71,17 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~DDZUPHJ (15 LP)~~-- VKK 1/9/2012
     * ~~AJRIPQN (9 LP)~~-- VKK 1/9/2012
 
- * Local Fan Chapter (8 pages, 172 LP)
+ * ~~Local Fan Chapter (8 pages, 172 LP)~~
     * ~~EGHNAVX (26 LP)~~
     * ~~RNSYJXM (6 LP)~~ -- AS 5/7/2013
     * ~~XRECQNS (15 LP)~~ -- NQT, JH 9/2012
     * ~~MHAEYJN (46 LP)~~ -- NQT, 7/1/2013
-    * ZLZTHIC  --
     * ~~EJRCFJD (17 LP)~~ -- NQT 6/2012
     * ~~NKEZBFC (7 LP)~~ -- HLT 8/2011
     * ~~BGMIFTE (36 LP)~~ -- JH 6/2012
     * ~~WSEWPCH (25 LP)~~ -- JH 5/2013
 
- * Tame Hypermap Chapter (2 pages, 66 LP)
+ * ~~Tame Hypermap Chapter (2 pages, 66 LP)~~
     * ~~FNJLBXS (35 LP)~~ -- AS 9/2012
     * ~~FCDJDOT (10 LP)~~ -- AS 9/2012
     * ~~KCBLRQC (21 LP)~~ -- AS 6/26/2013
@@ -101,6 +100,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~MKIFWJT~~ (HLT Fan.sum3 azim fan)
     * ~~XIVPHKS~~ JH 6/2013
     * ITNZZRD (22 lines)
+    * ZLZTHIC  --
 
  * Local Fan Chapter -- Main estimate
 
@@ -118,88 +118,86 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~LFJCIXP (4 lines)~~ HLT 6/2012
     * ~~OWZLKVY (13 lines)~~ TCH 4/2013
 
-An appendix on the proof of the main estimate gives further details about a computer program
-that runs through the cases.  This appendix was added 5/2012 and expanded 7/1/2013.  
-It contains the following additional material.
 
- * ~~PCRTTID (1 line)~~ HLT 6/2012
- * ~~HDPLYGYv2 (1 line)~~ HLT
- * ~~AYQJTMD (3 lines)~~ HLT 
- * ~~BJOQBJU (25 lines)~~ not needed, not formalized
- * ~~UAGHHBM (3 lines)~~ HLT
+ * Local Fan Chapter -- Main Estimate -- Appendix (added 5/2012, expanded 7/2013)
 
- * ~~GKFMJLC~~ HLT 6/2013
- * ~~SGTRNAF~~ HLT 6/2013
- * ~~EAPGLEJ~~ HLT 6/2013
- * ~~JKQEWGV~~ HLT 6/2013
- * ~~QKNVMLB~~ HLT 6/2013
- * ~~FZIOTEF~~ TCH 5/2013
- * ~~EQTTNZI~~ HLT 6/2013
- * ~~UAGHHBM~~ HLT 6/2013
- * ~~YXIONXL~~ HLT 6/26/2013
- * ~~LKGRQUI~~ HLT 6/2013
- * ~~ODXLSTCv2~~ HLT 6/2013
- * IMJXPHRv2 (11 lines)
- * NUXCOEAv2 (13 lines)
- * ~~TECOXBM~~ HLT 6/2013
- * ~~KPIDBQH~~ TCH 6/2013
- * ~~DRNDRDV~~ TCH 6/2013
- * ~~TBRMXRZ~~ TCH 6/2013
- * PQCSXWG (35 lines)
- * ~~EYYPQDW~~ HLT 6/27/2013
+    * ~~PCRTTID (1 line)~~ HLT 6/2012
+    * ~~HDPLYGYv2 (1 line)~~ HLT
+    * ~~AYQJTMD (3 lines)~~ HLT 
+    * ~~BJOQBJU (25 lines)~~ not needed, not formalized
+    * ~~UAGHHBM (3 lines)~~ HLT
+    * ~~GKFMJLC~~ HLT 6/2013
+    * ~~SGTRNAF~~ HLT 6/2013
+    * ~~EAPGLEJ~~ HLT 6/2013
+    * ~~JKQEWGV~~ HLT 6/2013
+    * ~~QKNVMLB~~ HLT 6/2013
+    * ~~FZIOTEF~~ TCH 5/2013
+    * ~~EQTTNZI~~ HLT 6/2013
+    * ~~UAGHHBM~~ HLT 6/2013
+    * ~~YXIONXL~~ HLT 6/26/2013
+    * ~~LKGRQUI~~ HLT 6/2013
+    * ~~ODXLSTCv2~~ HLT 6/2013
+    * IMJXPHRv2 (11 lines)
+    * NUXCOEAv2 (13 lines)
+    * ~~TECOXBM~~ HLT 6/2013
+    * ~~KPIDBQH~~ TCH 6/2013
+    * ~~DRNDRDV~~ TCH 6/2013
+    * ~~TBRMXRZ~~ TCH 6/2013
+    * PQCSXWG (35 lines)
+    * ~~EYYPQDW~~ HLT 6/27/2013
  
-Results from Check completeness added 6/2013.
+ * Local Fan Chapter -- Results from Check completeness (added 6/2013)
 
- * FEKTYIY (4 lines)
- * AURSIPD (7 lines)
- * PPBTYDQ (10 lines)
- * MXQTIED (4 lines)
- * XWNHLMD (2 lines)
- * ~~SYNQIWN~~ TCH 6/2013
- * OIQKKEP (3 lines)
- * AXJRPNC (15 lines)
- * RRCWNS (11 lines) weak version complete
- * JCYFMRP (8 lines)
- * TFITSKC (10 lines)
- * CQAOQLR (2 lines)
- * JLXFDM (4 lines)
- * WKEIDFT (2 lines)
- * PEDSLGV (1 line)
- * AQICLXA (1 line)
- * FUNOUYH (2 lines)
- * OEHDBEN (15 lines)
- * OTMTOTJ (8 lines)
- * HIJQAHA (14 lines)
- * CNICGSF (3 lines)
- * ARDBZYE (17 lines)
- * FYSSVEV (4 lines)
- * AUEAHEH (1 line)
- * ZNLLLDL (1 line)
- * VQFYMZY (4 lines)
- * CNFNTYP (2 lines)
- * BNAWVNH (3 lines)
- * RAWZDIB (3 lines)
- * MFKLVDK (3 lines)
- * RYPDIXT (3 lines)
- * GSXRFWM (4 lines)
- * WGDHPPI (2 lines)
- * ASSWPOW (9 lines)
- * TUAPYYU (4 lines)
- * UFGHLP (1 line)
- * DSZPJSK (14 lines)
- * WKZZEEH ( 4 lines)
- * RDLGWIE (7 lines)
- * LFYPZPI (13 lines)
- * NZBSJXG ( 2 lines)
- * NWDGKXH (9 lines)
- * EFLYGAU (4 lines)
- * YOBIMPP (5 lines)
- * BJTDWPS (7 lines)
- * MIQMCSN (2 lines)
- * LFLACKU (5 lines)
- * OCBICBY (5 lines)
- * JEJTVGB (11 lines)
- * HGDRXAN (combined with JEJTVGB)
+    * FEKTYIY (4 lines)
+    * AURSIPD (7 lines)
+    * PPBTYDQ (10 lines)
+    * MXQTIED (4 lines)
+    * XWNHLMD (2 lines)
+    * ~~SYNQIWN~~ TCH 6/2013
+    * OIQKKEP (3 lines)
+    * AXJRPNC (15 lines)
+    * RRCWNS (11 lines) weak version complete
+    * JCYFMRP (8 lines)
+    * TFITSKC (10 lines)
+    * CQAOQLR (2 lines)
+    * JLXFDM (4 lines)
+    * WKEIDFT (2 lines)
+    * PEDSLGV (1 line)
+    * AQICLXA (1 line)
+    * FUNOUYH (2 lines)
+    * OEHDBEN (15 lines)
+    * OTMTOTJ (8 lines)
+    * HIJQAHA (14 lines)
+    * CNICGSF (3 lines)
+    * ARDBZYE (17 lines)
+    * FYSSVEV (4 lines)
+    * AUEAHEH (1 line)
+    * ZNLLLDL (1 line)
+    * VQFYMZY (4 lines)
+    * CNFNTYP (2 lines)
+    * BNAWVNH (3 lines)
+    * RAWZDIB (3 lines)
+    * MFKLVDK (3 lines)
+    * RYPDIXT (3 lines)
+    * GSXRFWM (4 lines)
+    * WGDHPPI (2 lines)
+    * ASSWPOW (9 lines)
+    * TUAPYYU (4 lines)
+    * UFGHLP (1 line)
+    * DSZPJSK (14 lines)
+    * WKZZEEH ( 4 lines)
+    * RDLGWIE (7 lines)
+    * LFYPZPI (13 lines)
+    * NZBSJXG ( 2 lines)
+    * NWDGKXH (9 lines)
+    * EFLYGAU (4 lines)
+    * YOBIMPP (5 lines)
+    * BJTDWPS (7 lines)
+    * MIQMCSN (2 lines)
+    * LFLACKU (5 lines)
+    * OCBICBY (5 lines)
+    * JEJTVGB (11 lines)
+    * HGDRXAN (combined with JEJTVGB)
 
 
 
@@ -207,5 +205,5 @@ Results from Check completeness added 6/2013.
 
  * The 32 pages do not include the parts of the text (such as remarks, introductory passages, and auxiliary results)  that are not strictly a  part of the proof of the Kepler conjecture.
  * It does not include the parts of the Kepler conjecture that lie outside the text.  That is, it does not include the computer portions of the proof.
- * Also excluded are three specific sections of the text that give the relationship between the text and the computer portions of the proof.
+ * Also excluded is the section of the hypermap chapter that give the relationship between the text and the computer portions of the proof.
  * The section on the strong dodecahedral conjecture is excluded.
