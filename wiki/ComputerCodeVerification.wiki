@@ -64,6 +64,21 @@ verify a single inequality.  There are hundreds of inequalities to be verified i
 
 == Integration with Text ==
 
+Results from appendix on Deformations of local fans
+
+ * ~~WEECNNS~~ JH 6/30/2013
+ * IHWVUIZ 
+ * NHCXLRV
+ * WNWSHJT
+ * ~~CREUXCQ~~ not needed, not formalized
+ * ~~VUYCADE~~ TCH 6/2013
+ * ~~YBTASCZ~~ TCH 6/2013
+ * ~~KCZXLLE~ TCH 6/2013
+ * ~~FSQKWKK~ TCH 6/2013
+ * ~~MKIFWJT~~ (= Fan.sum3 azim fan)
+ * ~~XIVPHKS~~ JH 6/2013
+ * ITNZZRD (22 lines)
+
 The *Main Estimate Section*  of the *Local Fan Chapter* contains the following lemmas that need formal verification.
 
  * JEJTVGB (about 75 computer assisted lines in subsection "computer proof...")
@@ -75,31 +90,43 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ~~MTUWLUN (13 lines)~~ HLT 5/2012
  * ~~ESMGBKI (4 lines)~~ not formalized and not needed in the formalization
  * ~~YPKHQKB (5 lines)~~ not formalized and not needed in the formalization
- * ODXLSTC (5 lines) superseded by (v2) below
- * IMJXPHR (9 lines) superseded by (v2) below
- * NUXCOEA (9 lines) superseded by (v2) below
+ * ~~ODXLSTC (5 lines) superseded by (v2) below~~ not formalized, not needed
+ * ~~IMJXPHR (9 lines) superseded by (v2) below~~ not needed, not formalized
+ * ~~NUXCOEA (9 lines) superseded by (v2) below~~ not needed, not formalized
  * ~~VPWSHTO (10 lines)~~ HLT 6/2012
  * ~~LFJCIXP (4 lines)~~ HLT 6/2012
  * ~~OWZLKVY (13 lines)~~ TCH 4/2013
 
+
 An appendix on the proof of the main estimate gives further details about a computer program
-that runs through the cases.  This appendix was added 5/2012.  It contains the following additional
-material.
+that runs through the cases.  This appendix was added 5/2012 and expanded 7/1/2013.  
+It contains the following additional material.
 
  * ~~PCRTTID (1 line)~~ HLT 6/2012
- * HDPLYGYv2 (1 line)
- * JKQEWGV (2 lines)
- * AYQJTMD (3 lines)
- * ODXLSTCv2 (8 lines)
- * IMJXPHRv2 (7 lines)
+ * ~~HDPLYGYv2 (1 line)~~ HLT
+ * ~~AYQJTMD (3 lines)~~ HLT 
+ * ~~BJOQBJU (25 lines)~~ not needed, not formalized
+ * ~~UAGHHBM (3 lines)~~ HLT
+
+
+ * ~~GKFMJLC~~ HLT 6/2013
+ * ~~SGTRNAF~~ HLT 6/2013
+ * ~~EAPGLEJ~~ HLT 6/2013
+ * ~~JKQEWGV~~ HLT 6/2013
+ * ~~QKNVMLB~~ HLT 6/2013
+ * ~~FZIOTEF~~ TCH 5/2013
+ * ~~EQTTNZI~~ HLT 6/2013
+ * ~~UAGHHBM~~ HLT 6/2013
+ * ~~YXIONXL~~ HLT 6/26/2013
+ * ~~LKGRQUI~~ HLT 6/2013
+ * ~~ODXLSTCv2~~ HLT 6/2013
+ * IMJXPHRv2 (11 lines)
  * NUXCOEAv2 (13 lines)
- * BJOQBJU (25 lines)
- * QKNVMLB (1 line)
- * FZIOTEF (4 lines)
- * IEWZAVH (1 line)
- * EQTTNZI (3 lines)
- * UAGHHBM (3 lines)
- * YXIONXL (8 lines)
- * LKGRQUI (6 lines)
- * KEOMGHK (7 lines)
- * KESHTYS (13 lines)
+ * ~~TECOXBM~~ HLT 6/2013
+ * ~~KPIDBQH~~ TCH 6/2013
+ * ~~DRNDRDV~~ TCH 6/2013
+ * ~~TBRMXRZ~~ TCH 6/2013
+ * PQCSXWG (35 lines)
+ * ~~EYYPQDW~~ HLT 6/27/2013
+ 
+Results from Check completeness:
