@@ -87,7 +87,6 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~KCBLRQC (21 LP)~~ -- AS 6/26/2013
 
  * Local Fan Chapter added 6/2013.
-
     * ~~WEECNNS~~ JH 6/30/2013
     * IHWVUIZ 
     * NHCXLRV
@@ -103,7 +102,6 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ZLZTHIC  --
 
  * Local Fan Chapter -- Main estimate
-
     * ~~WJSCPRO (36 lines)~~ HLT 4/2012
     * ~~TECOXBM (9 lines)~~ HLT 4/2012
     * ~~HDPLYGY (3 lines)~~ HLT 5/2012
@@ -120,7 +118,6 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
 
 
  * Local Fan Chapter -- Main Estimate -- Appendix (added 5/2012, expanded 7/2013)
-
     * ~~PCRTTID (1 line)~~ HLT 6/2012
     * ~~HDPLYGYv2 (1 line)~~ HLT
     * ~~AYQJTMD (3 lines)~~ HLT 
@@ -147,7 +144,6 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~EYYPQDW~~ HLT 6/27/2013
  
  * Local Fan Chapter -- Results from Check completeness (added 6/2013)
-
     * FEKTYIY (4 lines)
     * AURSIPD (7 lines)
     * PPBTYDQ (10 lines)
