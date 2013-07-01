@@ -75,8 +75,8 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~EGHNAVX (26 LP)~~
     * ~~RNSYJXM (6 LP)~~ -- AS 5/7/2013
     * ~~XRECQNS (15 LP)~~ -- NQT, JH 9/2012
-    * MHAEYJN (46 LP) -- 
-    * ZLZTHIC (proof combined with previous lemma) --
+    * ~~MHAEYJN (46 LP)~~ -- NQT, 7/1/2013
+    * ZLZTHIC  --
     * ~~EJRCFJD (17 LP)~~ -- NQT 6/2012
     * ~~NKEZBFC (7 LP)~~ -- HLT 8/2011
     * ~~BGMIFTE (36 LP)~~ -- JH 6/2012
