@@ -46,21 +46,16 @@ perhaps there are more satisfactory ways to integrate the parts of the proof int
 
 = Status of the Linear Programming code verification project = 
 
-A. Solovyev has built extremely efficient tools for the verification of linear programs inside HOL Light.  It is capable of making a formal verification of a large-scale linear program in a matter of seconds.
+A. Solovyev has completed the linear programming part of the project (6/2013).
 
-To complete this part of the project, it is still necessary to run about 50K linear programs
-through Solovyev's verification machine.  To carry this out, 
-some theorems need to be proved in HOL Light
-related to the subdivision of hypermaps and related facts that come up in the branch and
-bound process of the linear programming verification.
 
 = Status of the Nonlinear Multivariate inequality code verification project = 
 
-This is the largest remaining component of the Flyspeck project.
-
 Alexey Solovyev has tools up and running that are capable of verifying multivariate
-nonlinear inequalities in HOL Light (Feb 2012).  It requires major computational resources to
-verify a single inequality.  There are hundreds of inequalities to be verified in this way.
+nonlinear inequalities in HOL Light (Feb 2012). 
+There are hundreds of inequalities to be verified in this way.
+It is estimated to be a 20,000 hour computer calculation.
+
 
 == Integration with Text ==
 
@@ -73,16 +68,14 @@ Results from appendix on Deformations of local fans
  * ~~CREUXCQ~~ not needed, not formalized
  * ~~VUYCADE~~ TCH 6/2013
  * ~~YBTASCZ~~ TCH 6/2013
- * ~~KCZXLLE~ TCH 6/2013
- * ~~FSQKWKK~ TCH 6/2013
- * ~~MKIFWJT~~ (= Fan.sum3 azim fan)
+ * ~~KCZXLLE~~ TCH 6/2013
+ * ~~FSQKWKK~~ TCH 6/2013
+ * ~~MKIFWJT~~ (HLT Fan.sum3 azim fan)
  * ~~XIVPHKS~~ JH 6/2013
  * ITNZZRD (22 lines)
 
 The *Main Estimate Section*  of the *Local Fan Chapter* contains the following lemmas that need formal verification.
 
- * JEJTVGB (about 75 computer assisted lines in subsection "computer proof...")
- * HGDRXAN (12 lines, + long computer proof in subsection "computer proof")
  * ~~WJSCPRO (36 lines)~~ HLT 4/2012
  * ~~TECOXBM (9 lines)~~ HLT 4/2012
  * ~~HDPLYGY (3 lines)~~ HLT 5/2012
@@ -97,7 +90,6 @@ The *Main Estimate Section*  of the *Local Fan Chapter* contains the following l
  * ~~LFJCIXP (4 lines)~~ HLT 6/2012
  * ~~OWZLKVY (13 lines)~~ TCH 4/2013
 
-
 An appendix on the proof of the main estimate gives further details about a computer program
 that runs through the cases.  This appendix was added 5/2012 and expanded 7/1/2013.  
 It contains the following additional material.
@@ -107,7 +99,6 @@ It contains the following additional material.
  * ~~AYQJTMD (3 lines)~~ HLT 
  * ~~BJOQBJU (25 lines)~~ not needed, not formalized
  * ~~UAGHHBM (3 lines)~~ HLT
-
 
  * ~~GKFMJLC~~ HLT 6/2013
  * ~~SGTRNAF~~ HLT 6/2013
@@ -130,3 +121,56 @@ It contains the following additional material.
  * ~~EYYPQDW~~ HLT 6/27/2013
  
 Results from Check completeness:
+
+ * FEKTYIY (4 lines)
+ * AURSIPD (7 lines)
+ * PPBTYDQ (10 lines)
+ * MXQTIED (4 lines)
+ * XWNHLMD (2 lines)
+ * ~~SYNQIWN~~ TCH 6/2013
+ * OIQKKEP (3 lines)
+ * AXJRPNC (15 lines)
+ * RRCWNS (11 lines) weak version complete
+ * JCYFMRP (8 lines)
+ * TFITSKC (10 lines)
+ * CQAOQLR (2 lines)
+ * JLXFDM (4 lines)
+ * WKEIDFT (2 lines)
+ * PEDSLGV (1 line)
+ * AQICLXA (1 line)
+ * FUNOUYH (2 lines)
+ * OEHDBEN (15 lines)
+ * OTMTOTJ (8 lines)
+ * HIJQAHA (14 lines)
+ * CNICGSF (3 lines)
+ * ARDBZYE (17 lines)
+ * FYSSVEV (4 lines)
+ * AUEAHEH (1 line)
+ * ZNLLLDL (1 line)
+ * VQFYMZY (4 lines)
+ * CNFNTYP (2 lines)
+ * BNAWVNH (3 lines)
+ * RAWZDIB (3 lines)
+ * MFKLVDK (3 lines)
+ * RYPDIXT (3 lines)
+ * GSXRFWM (4 lines)
+ * WGDHPPI (2 lines)
+ * ASSWPOW (9 lines)
+ * TUAPYYU (4 lines)
+ * UFGHLP (1 line)
+ * DSZPJSK (14 lines)
+ * WKZZEEH ( 4 lines)
+ * RDLGWIE (7 lines)
+ * LFYPZPI (13 lines)
+ * NZBSJXG ( 2 lines)
+ * NWDGKXH (9 lines)
+ * EFLYGAU (4 lines)
+ * YOBIMPP (5 lines)
+ * BJTDWPS (7 lines)
+ * MIQMCSN (2 lines)
+ * LFLACKU (5 lines)
+ * OCBICBY (5 lines)
+ * JEJTVGB (11 lines)
+ * HGDRXAN (combined with JEJTVGB)
+
+End of main estimate.
