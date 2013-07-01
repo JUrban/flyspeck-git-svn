@@ -46,7 +46,8 @@ perhaps there are more satisfactory ways to integrate the parts of the proof int
 
 = Status of the Linear Programming code verification project = 
 
-A. Solovyev has completed the linear programming part of the project (6/2013).
+A. Solovyev has completed the [http://code.google.com/p/flyspeck/source/browse/trunk/formal_lp/README.txt linear programming part] of the project (6/2013).
+
 
 
 = Status of the Nonlinear Multivariate inequality code verification project = 
@@ -55,4 +56,3 @@ Alexey Solovyev has tools up and running that are capable of verifying multivari
 nonlinear inequalities in HOL Light (Feb 2012). 
 There are hundreds of inequalities to be verified in this way.
 It is estimated to be a 20,000 hour computer calculation.
-
