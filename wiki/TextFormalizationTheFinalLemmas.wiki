@@ -101,7 +101,7 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ITNZZRD (22 lines)
     * ZLZTHIC  --
 
- * Local Fan Chapter -- Main estimate
+ * ~~Local Fan Chapter -- Main estimate~~
     * ~~WJSCPRO (36 lines)~~ HLT 4/2012
     * ~~TECOXBM (9 lines)~~ HLT 4/2012
     * ~~HDPLYGY (3 lines)~~ HLT 5/2012
