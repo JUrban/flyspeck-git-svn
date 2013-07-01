@@ -87,6 +87,119 @@ the status of these final pages.  LP=lines of proof in the English text (488 tot
     * ~~FCDJDOT (10 LP)~~ -- AS 9/2012
     * ~~KCBLRQC (21 LP)~~ -- AS 6/26/2013
 
+ * Local Fan Chapter added 6/2013.
+
+    * ~~WEECNNS~~ JH 6/30/2013
+    * IHWVUIZ 
+    * NHCXLRV
+    * WNWSHJT
+    * ~~CREUXCQ~~ not needed, not formalized
+    * ~~VUYCADE~~ TCH 6/2013
+    * ~~YBTASCZ~~ TCH 6/2013
+    * ~~KCZXLLE~~ TCH 6/2013
+    * ~~FSQKWKK~~ TCH 6/2013
+    * ~~MKIFWJT~~ (HLT Fan.sum3 azim fan)
+    * ~~XIVPHKS~~ JH 6/2013
+    * ITNZZRD (22 lines)
+
+ * Local Fan Chapter -- Main estimate
+
+    * ~~WJSCPRO (36 lines)~~ HLT 4/2012
+    * ~~TECOXBM (9 lines)~~ HLT 4/2012
+    * ~~HDPLYGY (3 lines)~~ HLT 5/2012
+    * ~~GBYCPXS (10 lines)~~ HLT 5/2012
+    * ~~MTUWLUN (13 lines)~~ HLT 5/2012
+    * ~~ESMGBKI (4 lines)~~ not formalized and not needed in the formalization
+    * ~~YPKHQKB (5 lines)~~ not formalized and not needed in the formalization
+    * ~~ODXLSTC (5 lines) superseded by (v2) below~~ not formalized, not needed
+    * ~~IMJXPHR (9 lines) superseded by (v2) below~~ not needed, not formalized
+    * ~~NUXCOEA (9 lines) superseded by (v2) below~~ not needed, not formalized
+    * ~~VPWSHTO (10 lines)~~ HLT 6/2012
+    * ~~LFJCIXP (4 lines)~~ HLT 6/2012
+    * ~~OWZLKVY (13 lines)~~ TCH 4/2013
+
+An appendix on the proof of the main estimate gives further details about a computer program
+that runs through the cases.  This appendix was added 5/2012 and expanded 7/1/2013.  
+It contains the following additional material.
+
+ * ~~PCRTTID (1 line)~~ HLT 6/2012
+ * ~~HDPLYGYv2 (1 line)~~ HLT
+ * ~~AYQJTMD (3 lines)~~ HLT 
+ * ~~BJOQBJU (25 lines)~~ not needed, not formalized
+ * ~~UAGHHBM (3 lines)~~ HLT
+
+ * ~~GKFMJLC~~ HLT 6/2013
+ * ~~SGTRNAF~~ HLT 6/2013
+ * ~~EAPGLEJ~~ HLT 6/2013
+ * ~~JKQEWGV~~ HLT 6/2013
+ * ~~QKNVMLB~~ HLT 6/2013
+ * ~~FZIOTEF~~ TCH 5/2013
+ * ~~EQTTNZI~~ HLT 6/2013
+ * ~~UAGHHBM~~ HLT 6/2013
+ * ~~YXIONXL~~ HLT 6/26/2013
+ * ~~LKGRQUI~~ HLT 6/2013
+ * ~~ODXLSTCv2~~ HLT 6/2013
+ * IMJXPHRv2 (11 lines)
+ * NUXCOEAv2 (13 lines)
+ * ~~TECOXBM~~ HLT 6/2013
+ * ~~KPIDBQH~~ TCH 6/2013
+ * ~~DRNDRDV~~ TCH 6/2013
+ * ~~TBRMXRZ~~ TCH 6/2013
+ * PQCSXWG (35 lines)
+ * ~~EYYPQDW~~ HLT 6/27/2013
+ 
+Results from Check completeness added 6/2013.
+
+ * FEKTYIY (4 lines)
+ * AURSIPD (7 lines)
+ * PPBTYDQ (10 lines)
+ * MXQTIED (4 lines)
+ * XWNHLMD (2 lines)
+ * ~~SYNQIWN~~ TCH 6/2013
+ * OIQKKEP (3 lines)
+ * AXJRPNC (15 lines)
+ * RRCWNS (11 lines) weak version complete
+ * JCYFMRP (8 lines)
+ * TFITSKC (10 lines)
+ * CQAOQLR (2 lines)
+ * JLXFDM (4 lines)
+ * WKEIDFT (2 lines)
+ * PEDSLGV (1 line)
+ * AQICLXA (1 line)
+ * FUNOUYH (2 lines)
+ * OEHDBEN (15 lines)
+ * OTMTOTJ (8 lines)
+ * HIJQAHA (14 lines)
+ * CNICGSF (3 lines)
+ * ARDBZYE (17 lines)
+ * FYSSVEV (4 lines)
+ * AUEAHEH (1 line)
+ * ZNLLLDL (1 line)
+ * VQFYMZY (4 lines)
+ * CNFNTYP (2 lines)
+ * BNAWVNH (3 lines)
+ * RAWZDIB (3 lines)
+ * MFKLVDK (3 lines)
+ * RYPDIXT (3 lines)
+ * GSXRFWM (4 lines)
+ * WGDHPPI (2 lines)
+ * ASSWPOW (9 lines)
+ * TUAPYYU (4 lines)
+ * UFGHLP (1 line)
+ * DSZPJSK (14 lines)
+ * WKZZEEH ( 4 lines)
+ * RDLGWIE (7 lines)
+ * LFYPZPI (13 lines)
+ * NZBSJXG ( 2 lines)
+ * NWDGKXH (9 lines)
+ * EFLYGAU (4 lines)
+ * YOBIMPP (5 lines)
+ * BJTDWPS (7 lines)
+ * MIQMCSN (2 lines)
+ * LFLACKU (5 lines)
+ * OCBICBY (5 lines)
+ * JEJTVGB (11 lines)
+ * HGDRXAN (combined with JEJTVGB)
 
 
 
